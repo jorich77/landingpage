@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jo | Kangen Water & Enagic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #faf9f7;
+    --soft-white: #ffffff;
+    --blush: #f5f3ef;
+    --rose: #e8e4dc;
+    --dusty-rose: #c9a961;
+    --mauve: #b8935a;
+    --deep-rose: #9d7d43;
+    --sage: #d4af6a;
+    --soft-sage: #e5d4a8;
+    --mint: #f0ece4;
+    --aqua: #d9ceb3;
+    --teal: #1a3a52;
+    --deep-teal: #0f2738;
+    --charcoal: #1a1a2e;
+    --warm-grey: #5a5a6e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    align-items: center;
+    padding: 5rem 4rem;
+    background: linear-gradient(135deg, #f4e8e3 0%, #e8f3f1 50%, #c9d5c8 100%);
+    position: relative; 
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; 
+    position: absolute; 
+    top: -150px; 
+    right: -150px;
+    width: 700px; 
+    height: 700px; 
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,165,165,0.2) 0%, transparent 70%);
+  }
+  .hero::after {
+    content: ''; 
+    position: absolute; 
+    bottom: -120px; 
+    left: 5%;
+    width: 500px; 
+    height: 500px; 
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,216,216,0.15) 0%, transparent 70%);
+  }
+  .hero-text { 
+    position: relative; 
+    z-index: 2; 
+    padding-right: 3rem; 
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem; 
+    font-weight: 500; 
+    letter-spacing: 0.25em;
+    text-transform: uppercase; 
+    color: var(--deep-rose);
+    border-bottom: 1px solid var(--dusty-rose); 
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 1.15; 
+    color: var(--charcoal);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .hero h1 em { 
+    color: var(--deep-rose); 
+    font-style: italic; 
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-size: 1.05rem; 
+    line-height: 1.9; 
+    color: var(--warm-grey);
+    font-weight: 300; 
+    max-width: 520px; 
+    margin-bottom: 3rem;
+  }
+  .hero-cta-group { 
+    display: flex; 
+    gap: 1.2rem; 
+    flex-wrap: wrap; 
+  }
+  .btn-primary {
+    background: var(--dusty-rose); 
+    color: #fff;
+    padding: 1rem 2.5rem; 
+    border-radius: 30px;
+    font-size: 0.8rem; 
+    letter-spacing: 0.12em; 
+    text-transform: uppercase;
+    font-weight: 500; 
+    text-decoration: none; 
+    transition: all 0.3s;
+    border: 2px solid var(--dusty-rose);
+    box-shadow: 0 4px 15px rgba(212,165,165,0.3);
+  }
+  .btn-primary:hover { 
+    background: var(--deep-rose); 
+    border-color: var(--deep-rose); 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(157,113,113,0.4);
+  }
+  .btn-outline {
+    background: transparent; 
+    color: var(--charcoal);
+    padding: 1rem 2.5rem; 
+    border-radius: 30px;
+    font-size: 0.8rem; 
+    letter-spacing: 0.12em; 
+    text-transform: uppercase;
+    font-weight: 500; 
+    text-decoration: none; 
+    transition: all 0.3s;
+    border: 2px solid var(--dusty-rose);
+  }
+  .btn-outline:hover { 
+    background: var(--dusty-rose);
+    color: #fff;
+    transform: translateY(-2px); 
+  }
+
+  .hero-image-wrap {
+    position: relative; 
+    z-index: 2;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+  }
+  .hero-img-frame {
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 460 / 560;
+    position: relative;
+    border-radius: 200px 200px 20px 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--aqua) 100%);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .hero-img-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 200px 200px 20px 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--dusty-rose), var(--sage));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.3;
+  }
+  .hero-img-frame img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    border-radius: 200px 200px 20px 20px;
+    position: relative; 
+    z-index: 1;
+    filter: saturate(1.1) contrast(1.05);
+  }
+  .hero-badge {
+    position: absolute; 
+    bottom: -30px; 
+    right: -25px; 
+    z-index: 3;
+    background: linear-gradient(135deg, var(--dusty-rose), var(--deep-rose));
+    color: #fff;
+    padding: 1.5rem 2rem; 
+    border-radius: 20px;
+    text-align: center; 
+    box-shadow: 0 12px 30px rgba(157,113,113,0.4);
+  }
+  .hero-badge strong { 
+    display: block; 
+    font-size: 1.8rem; 
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .hero-badge span { 
+    font-size: 0.65rem; 
+    letter-spacing: 0.15em; 
+    text-transform: uppercase; 
+    opacity: 0.9; 
+  }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.65rem; 
+    letter-spacing: 0.3em; 
+    text-transform: uppercase;
+    color: var(--deep-rose); 
+    font-weight: 500; 
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    color: var(--charcoal); 
+    margin-bottom: 1.5rem; 
+    line-height: 1.3;
+    font-weight: 300;
+  }
+  .section-title em { 
+    color: var(--deep-rose); 
+    font-style: italic;
+    font-weight: 400;
+  }
+  .section-body {
+    font-size: 1rem; 
+    line-height: 2; 
+    color: var(--warm-grey);
+    font-weight: 300; 
+    max-width: 900px;
+  }
+  .divider {
+    width: 80px; 
+    height: 1px;
+    background: linear-gradient(to right, var(--dusty-rose), var(--sage));
+    margin: 2rem 0 2.5rem;
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: var(--soft-white);
+  }
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; 
+    font-style: italic;
+    color: var(--deep-rose); 
+    line-height: 1.7;
+    border-left: 2px solid var(--dusty-rose); 
+    padding-left: 2rem;
+    margin: 2.5rem 0;
+    font-weight: 300;
+  }
+  .about-stats { 
+    display: flex; 
+    gap: 3rem; 
+    margin-top: 3rem; 
+  }
+  .stat { text-align: left; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; 
+    color: var(--deep-rose);
+    font-weight: 300;
+    font-style: italic;
+  }
+  .stat-label { 
+    font-size: 0.7rem; 
+    color: var(--warm-grey); 
+    letter-spacing: 0.12em; 
+    text-transform: uppercase; 
+  }
+
+  .about-story-grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 2rem; 
+  }
+  .story-card {
+    background: var(--cream);
+    border-radius: 15px; 
+    padding: 2.5rem;
+    border-left: 2px solid var(--dusty-rose);
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  }
+  .story-card:hover { 
+    border-color: var(--deep-rose); 
+    transform: translateX(8px);
+    box-shadow: 0 8px 30px rgba(157,113,113,0.15);
+  }
+  .story-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; 
+    margin-bottom: 0.8rem; 
+    color: var(--charcoal);
+    font-weight: 400;
+  }
+  .story-card p { 
+    font-size: 0.95rem; 
+    color: var(--warm-grey); 
+    line-height: 1.9; 
+    font-weight: 300; 
+  }
+
+  /* ─── PRODUCTS ─── */
+  #products { 
+    background: linear-gradient(135deg, var(--sage) 0%, var(--teal) 100%);
+  }
+  #products .section-label { color: var(--mint); }
+  #products .section-title { color: #fff; }
+  #products .section-title em { color: var(--mint); }
+  #products .section-body { color: rgba(255,255,255,0.85); }
+  #products .divider { 
+    background: linear-gradient(to right, var(--mint), rgba(255,255,255,0.3)); 
+  }
+  .products-intro { 
+    max-width: 650px; 
+    margin-bottom: 4rem; 
+  }
+
+  /* ─── PRODUCT ROWS ─── */
+  .product-row {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px; 
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 2.5rem; 
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .product-row:hover { 
+    background: rgba(255,255,255,0.15); 
+    box-shadow: 0 15px 45px rgba(0,0,0,0.2); 
+  }
+
+  .product-row-header {
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .product-row-icon { font-size: 2.5rem; }
+  .product-row-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; 
+    color: #fff; 
+    margin-top: 0.3rem;
+    font-weight: 300;
+  }
+
+  .product-tag {
+    display: inline-block; 
+    font-size: 0.65rem; 
+    letter-spacing: 0.15em;
+    text-transform: uppercase; 
+    padding: 0.3rem 0.8rem;
+    background: rgba(255,255,255,0.2); 
+    color: #fff; 
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .product-row-body {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 3rem; 
+    align-items: start;
+  }
+  .product-row-text p {
+    font-size: 0.95rem; 
+    color: rgba(255,255,255,0.85); 
+    line-height: 2; 
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .product-benefits {
+    list-style: none;
+    margin-top: 1rem;
+  }
+  .product-benefits li {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.8);
+    padding: 0.4rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    font-weight: 300;
+  }
+  .product-benefits li::before {
+    content: '✧';
+    position: absolute;
+    left: 0;
+    color: var(--mint);
+    font-size: 0.7rem;
+    top: 0.6rem;
+  }
+
+  /* ─── DOWNLOADS ─── */
+  #downloads {
+    background: var(--cream);
+  }
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .download-card {
+    background: var(--soft-white);
+    border-radius: 15px;
+    padding: 2.5rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid var(--rose);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  }
+  .download-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 35px rgba(157,113,113,0.15);
+    border-color: var(--dusty-rose);
+  }
+  .download-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1.2rem;
+  }
+  .download-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--charcoal);
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+  }
+  .download-card p {
+    font-size: 0.85rem;
+    color: var(--warm-grey);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+  .download-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    font-weight: 500;
+  }
+
+  /* ─── BUSINESS ─── */
+  #business {
+    background: linear-gradient(135deg, var(--deep-teal) 0%, var(--sage) 100%);
+    color: #fff;
+  }
+  #business .section-label { color: var(--mint); }
+  #business .section-title { color: #fff; }
+  #business .section-title em { color: var(--mint); }
+  #business .section-body { color: rgba(255,255,255,0.85); }
+  #business .divider { 
+    background: linear-gradient(to right, var(--mint), rgba(255,255,255,0.3)); 
+  }
+
+  .business-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .business-card {
+    text-align: center;
+    padding: 3rem 2.5rem;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .business-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  }
+  .business-card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .business-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-weight: 400;
+  }
+  .business-card p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  .commission-strip {
+    background: linear-gradient(135deg, var(--dusty-rose), var(--deep-rose));
+    color: #fff;
+    border-radius: 20px;
+    padding: 3.5rem;
+    margin-top: 4rem;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+  }
+  .commission-strip h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+  .commission-strip p {
+    font-size: 0.95rem;
+    opacity: 0.95;
+    font-weight: 300;
+    line-height: 1.9;
+    max-width: 600px;
+  }
+  .btn-white {
+    background: #fff;
+    color: var(--deep-rose);
+    padding: 1.2rem 2.8rem;
+    border-radius: 30px;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover {
+    background: var(--cream);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+
+  /* ─── CTA ─── */
+  #contact {
+    background: var(--blush);
+    text-align: center;
+    padding: 7rem 4rem;
+  }
+  #contact .section-label { color: var(--deep-rose); }
+  #contact .section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--charcoal);
+  }
+  #contact .section-title em { color: var(--deep-rose); }
+  #contact .section-body {
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+  .cta-options {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #contact .btn-outline {
+    background: transparent;
+    color: var(--charcoal);
+    border-color: var(--dusty-rose);
+  }
+  #contact .btn-outline:hover {
+    background: var(--dusty-rose);
+    color: #fff;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 3rem 4rem;
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+  footer span {
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+  }
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* ─── MOBILE RESPONSIVE STYLES ─── */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  /* Large tablets and laptops */
+  @media (max-width: 1200px) {
+    .download-grid { 
+      grid-template-columns: repeat(2, 1fr); 
+    }
+  }
+
+  /* Tablet and below (≤ 968px) */
+  @media (max-width: 968px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 3rem 2rem;
+      gap: 3rem;
+      min-height: auto;
+    }
+    
+    .hero-text {
+      padding-right: 0;
+      text-align: center;
+    }
+    
+    .hero-sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-cta-group {
+      justify-content: center;
+    }
+    
+    .hero::before {
+      width: 500px;
+      height: 500px;
+      top: -100px;
+      right: -100px;
+    }
+    
+    .hero::after {
+      width: 350px;
+      height: 350px;
+      bottom: -80px;
+    }
+    
+    section {
+      padding: 4rem 2rem;
+    }
+    
+    .product-row-body {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .product-row-text p {
+      text-align: center;
+    }
+    
+    #other-products {
+      padding: 4rem 2rem 6rem !important;
+    }
+    
+    #about { 
+      grid-template-columns: 1fr; 
+      gap: 3rem; 
+    }
+    
+    .about-stats { 
+      flex-direction: column; 
+      gap: 2rem; 
+    }
+  }
+
+  /* Mobile (≤ 640px) */
+  @media (max-width: 640px) {
+    .hero {
+      padding: 2rem 1.5rem;
+      gap: 2rem;
+    }
+    
+    .hero h1 {
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-eyebrow {
+      font-size: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-sub {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    
+    .hero-cta-group {
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+    
+    .btn-primary,
+    .btn-outline {
+      width: 100%;
+      text-align: center;
+      padding: 0.9rem 2rem;
+      font-size: 0.75rem;
+    }
+    
+    .hero-img-frame {
+      max-width: 320px;
+      border-radius: 150px 150px 15px 15px;
+    }
+    
+    section {
+      padding: 3rem 1.5rem;
+    }
+    
+    .section-body {
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+    
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .download-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .business-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .product-row {
+      padding: 2rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    
+    .product-row-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+    
+    .machine-image {
+      margin-bottom: 2rem;
+    }
+    
+    #other-products {
+      padding: 3rem 1.5rem 4rem !important;
+    }
+    
+    #business div[style*="max-width: 720px"] {
+      margin: 2rem 0 2.5rem !important;
+    }
+    
+    #business h3 {
+      font-size: 1.5rem !important;
+      padding-left: 1rem !important;
+    }
+    
+    footer {
+      padding: 2rem 1.5rem 2rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  /* Small mobile (≤ 400px) */
+  @media (max-width: 400px) {
+    .btn-primary,
+    .btn-outline {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.7rem;
+    }
+    
+    .product-card {
+      padding: 2rem 1.5rem;
+    }
+    
+    .download-card {
+      padding: 2rem 1.5rem;
+    }
+    
+    .business-card {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-eyebrow">Create Your Freedom Lifestyle</span>
+    <h1>Break Free from the <em>9 to 5</em> Grind</h1>
+    <p class="hero-sub">Hi, I'm Jo. After years of feeling drained and uninspired in the 9–5, I discovered a way to create real time and financial freedom while supporting my family's health. Now I help other moms design a life that feels as good as it looks.</p>
+    <div class="hero-cta-group">
+      <a href="#products" class="btn-primary">Discover the Products</a>
+      <a href="#business" class="btn-outline">Discover the Business Opportunity</a>
+    </div>
+  </div>
+  <div class="hero-image-wrap">
+    <div class="hero-img-frame">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69bbf3eab5cb08.20824111_ALLESSANDIAMONTANA-7402288.jpg" alt="Jo">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">My Story</p>
+  <h2 class="section-title">From Burnout to <em>Freedom</em></h2>
+  <div class="divider"></div>
+  <p class="section-body">Years in the 9–5 grind left me feeling drained, uninspired, and constantly on the edge of burnout. I was tired of trading time for money, missing out on quality moments with my family, and juggling the never-ending demands of motherhood and full-time working.</p>
+  <blockquote class="about-quote">"It felt like I was sleepwalking through life — functioning, but not truly living."</blockquote>
+  <p class="section-body">As a couple, we wanted time to do what we love, be present with our kids, and prioritize our family's wellbeing over busyness. Can you relate?</p>
+  <p class="section-body" style="margin-top: 1rem;">That desire sparked a big change. We started an online wellbeing business that supports our family's health and gives us the freedom to travel full-time.</p>
+  <p class="section-body" style="margin-top: 1rem;">Now, I help other moms create real time and financial freedom — without sacrificing what matters most.</p>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-intro">
+    <p class="section-label">The Wellbeing Solution</p>
+    <h2 class="section-title">The Product That <em>Changed Everything</em></h2>
+    <div class="divider"></div>
+    <p class="section-body">Our online wellbeing business centers around Enagic's Kangen Water systems — medical-grade water ionizers built in Japan with the highest standards of quality. This is what transformed our health and gave us the vehicle to create the freedom lifestyle we now live.</p>
+  </div>
+
+  <!-- K8 -->
+  <div class="product-row">
+    <div class="product-row-header">
+      <span class="product-row-icon">💧</span>
+      <div>
+        <span class="product-tag">Flagship Product</span>
+        <h3 class="product-row-title">K8 Water Ionizer</h3>
+      </div>
+    </div>
+    <div class="product-row-body">
+      <div class="product-row-text">
+        <p>A revolutionary device that transforms ordinary tap water into alkaline, antioxidant-rich, and hydrogen-rich drinking water. This unique water hydrates, balances the body's pH levels, detoxifies, and promotes overall wellness.</p>
+        <ul class="product-benefits">
+          <li>Improved digestion & enhanced energy levels</li>
+          <li>Better absorption of nutrients</li>
+          <li>Supports the body's natural detoxification</li>
+          <li>Contributes to healthier skin</li>
+          <li>Versatile: drinking, cooking, cleaning, beauty care</li>
+          <li>68+ documented uses</li>
+        </ul>
+      </div>
+      <div style="border-radius: 15px; overflow: hidden; position: relative;">
+        <div onclick="this.style.display='none'; this.nextElementSibling.style.display='block'; this.nextElementSibling.play();" style="background: linear-gradient(135deg, rgba(123,167,162,0.4) 0%, rgba(90,137,133,0.6) 60%, rgba(168,181,167,0.5) 100%); border-radius: 15px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; gap: 0.8rem; backdrop-filter: blur(10px); position: relative;">
+          <span style="font-size: 4.5rem;">💧</span>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #fff; margin: 0; font-weight: 300;">K8 Water Ionizer Product Video</p>
+          <p style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin: 0;">▶ &nbsp;Click to watch</p>
+        </div>
+        <video controls style="width:100%; border-radius:15px; display:none;">
+          <source src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69316b0658bae_TheLevelukK8WaterIonizerfromEnagic1.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div style="margin-top: 2.5rem;">
+      <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: #fff; margin-bottom: 1.2rem; font-weight: 300;">Why Kangen Water?</h3>
+      <div style="border-radius: 15px; overflow: hidden; max-width: 720px;">
+        <video controls style="width:100%; border-radius:15px; display:block;">
+          <source src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69316b43c457c_7MINHowKangenWaterWorks1.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOADS -->
+<section id="downloads">
+  <p class="section-label">Resources</p>
+  <h2 class="section-title">Download & <em>Learn More</em></h2>
+  <div class="divider"></div>
+  <p class="section-body">I've curated a collection of guides, research, and testimonials to help you make an informed decision about what Kangen Water can do for you.</p>
+
+  <div class="download-grid">
+    <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/692a3a7e31f45_68UsesofKangenEbooks-16982839072042.pdf" target="_blank" class="download-card">
+      <span class="download-icon">📖</span>
+      <h4>68 Uses of Kangen Water</h4>
+      <p>A comprehensive guide to all the ways you can use Kangen Water in your home — from cooking to cleaning to beauty.</p>
+      <span class="download-label">↓ Download PDF</span>
+    </a>
+    <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/692a3c1cd9f09_BenefitsofKangenWater11.pdf" target="_blank" class="download-card">
+      <span class="download-icon">⭐</span>
+      <h4>Benefits & Testimonials</h4>
+      <p>Real stories from real people sharing their experiences with Kangen Water and how it's changed their lives.</p>
+      <span class="download-label">↓ Download PDF</span>
+    </a>
+    <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/69bc01ec025318.98369029_Doctors-Scientists-and-Nutritionists-on-Kangen-Water.pdf1.pdf" target="_blank" class="download-card">
+      <span class="download-icon">🔬</span>
+      <h4>Medical & Scientific Research</h4>
+      <p>What doctors, scientists, and nutritionists say about alkaline hydrogen-rich water and its health benefits.</p>
+      <span class="download-label">↓ Download PDF</span>
+    </a>
+    <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/69babe62dee8c6.97880467_kangenpeerreviewstudies.pdf" target="_blank" class="download-card">
+      <span class="download-icon">📄</span>
+      <h4>Peer Review Studies</h4>
+      <p>Peer-reviewed scientific studies on the effects of alkaline hydrogen-rich water on health and wellness.</p>
+      <span class="download-label">↓ Download PDF</span>
+    </a>
+    <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/69bc038fcf0093.44565169_KANGENWATER_AthletesBooklet-1733724377316.pdf" target="_blank" class="download-card">
+      <span class="download-icon">🏃</span>
+      <h4>Kangen Water & Athletes</h4>
+      <p>How Kangen Water supports athletic performance, recovery, and optimal hydration for active lifestyles.</p>
+      <span class="download-label">↓ Download PDF</span>
+    </a>
+    <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/69bc02457e6491.69573446_WhatisERW.pdf" target="_blank" class="download-card">
+      <span class="download-icon">💧</span>
+      <h4>Why Electrolysed Reduced Water</h4>
+      <p>The science behind what makes electrolysed reduced water uniquely beneficial compared to regular alkaline water.</p>
+      <span class="download-label">↓ Download PDF</span>
+    </a>
+  </div>
+</section>
+
+<!-- OTHER PRODUCTS -->
+<section id="other-products" style="background: linear-gradient(135deg, var(--teal) 0%, var(--deep-teal) 100%); padding: 4rem 4rem 6rem;">
+  <!-- Anespa -->
+  <div class="product-row">
+    <div class="product-row-header">
+      <span class="product-row-icon">🚿</span>
+      <div>
+        <span class="product-tag">Home Spa</span>
+        <h3 class="product-row-title">Anespa Shower Filter</h3>
+      </div>
+    </div>
+    <div class="product-row-body">
+      <div class="product-row-text">
+        <p>Transform your daily shower into a spa experience. The Anespa remineralises water through an active charcoal ceramic filter while removing chlorine and bacteria — protecting your skin and hair with every wash.</p>
+      </div>
+      <div style="border-radius: 15px; overflow: hidden; position: relative;">
+        <div onclick="this.style.display='none'; this.nextElementSibling.style.display='block'; this.nextElementSibling.play();" style="background: linear-gradient(135deg, rgba(212,165,165,0.3) 0%, rgba(123,167,162,0.5) 60%, rgba(168,181,167,0.4) 100%); border-radius: 15px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; gap: 0.5rem; backdrop-filter: blur(10px);">
+          <span style="font-size: 3.5rem;">🚿</span>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #fff; margin: 0; font-weight: 300;">Anespa Shower Filter Product Video</p>
+          <p style="font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin: 0;">▶ &nbsp;Click to watch</p>
+        </div>
+        <video controls style="width:100%; border-radius:15px; display:none;">
+          <source src="https://d1yei2z3i6k35z.cloudfront.net/5678010/692d652cd1e34_AnespaIntro1.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emguarde -->
+  <div class="product-row">
+    <div class="product-row-header">
+      <span class="product-row-icon">🛡️</span>
+      <div>
+        <span class="product-tag">EMF Protection</span>
+        <h3 class="product-row-title">Emguarde Environmental Harmoniser</h3>
+      </div>
+    </div>
+    <div class="product-row-body">
+      <div class="product-row-text">
+        <p>Your invisible shield against electromagnetic noise. The Emguarde targets high-frequency electromagnetic radiation up to 1 GHz — creating a more harmonious environment for you and your loved ones.</p>
+      </div>
+      <div style="border-radius: 15px; overflow: hidden; position: relative;">
+        <div onclick="this.style.display='none'; this.nextElementSibling.style.display='block'; this.nextElementSibling.play();" style="background: linear-gradient(135deg, rgba(90,137,133,0.5) 0%, rgba(123,167,162,0.6) 60%, rgba(168,181,167,0.4) 100%); border-radius: 15px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; gap: 0.5rem; backdrop-filter: blur(10px);">
+          <span style="font-size: 3.5rem;">🛡️</span>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #fff; margin: 0; font-weight: 300;">Emguarde Product Video</p>
+          <p style="font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin: 0;">▶ &nbsp;Click to watch</p>
+        </div>
+        <video controls style="width:100%; border-radius:15px; display:none;">
+          <source src="https://d1yei2z3i6k35z.cloudfront.net/5678010/692d6bf7b4a78_TheDangersofEMFRadiationHowYouCanProtectYourselfwithemGuardebySimonLoh.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ukon -->
+  <div class="product-row">
+    <div class="product-row-header">
+      <span class="product-row-icon">🌿</span>
+      <div>
+        <span class="product-tag">Supplement</span>
+        <h3 class="product-row-title">Ukon Turmeric</h3>
+      </div>
+    </div>
+    <div class="product-row-body">
+      <div class="product-row-text">
+        <p>Pure wild turmeric from Enagic's farm in Okinawa, Japan. A powerful natural anti-inflammatory supplement — traceable, authentic, and unlike anything you'll find on a supermarket shelf.</p>
+      </div>
+      <div style="border-radius: 15px; overflow: hidden; position: relative;">
+        <div onclick="this.style.display='none'; this.nextElementSibling.style.display='block'; this.nextElementSibling.play();" style="background: linear-gradient(135deg, rgba(212,165,165,0.4) 0%, rgba(157,113,113,0.5) 60%, rgba(138,130,128,0.4) 100%); border-radius: 15px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; gap: 0.5rem; backdrop-filter: blur(10px);">
+          <span style="font-size: 3.5rem;">🌿</span>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #fff; margin: 0; font-weight: 300;">Ukon Product Video</p>
+          <p style="font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin: 0;">▶ &nbsp;Click to watch</p>
+        </div>
+        <video controls style="width:100%; border-radius:15px; display:none;">
+          <source src="https://d1yei2z3i6k35z.cloudfront.net/5678010/692d6dd75837b_KangenUkonfromEnagic21.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section id="business">
+  <p class="section-label">The Opportunity</p>
+  <h2 class="section-title">Build a life <em>on your terms</em></h2>
+  <div class="divider"></div>
+  <p class="section-body">Enagic isn't just about great products — it's a genuine business opportunity that can create real financial and time freedom. When you purchase an Enagic product, you have the option to become a distributor for life — no extra fees, no hidden costs. One purchase = lifetime distribution rights and the potential to earn thousands of $ per sale.</p>
+
+  <div style="max-width: 720px; margin: 2.5rem 0 3rem; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 45px rgba(0,0,0,0.2);">
+    <div onclick="this.style.display='none'; this.nextElementSibling.style.display='block'; this.nextElementSibling.play();" style="background: linear-gradient(135deg, rgba(212,165,165,0.4) 0%, rgba(123,167,162,0.5) 60%, rgba(168,181,167,0.4) 100%); border-radius: 20px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; gap: 0.5rem; backdrop-filter: blur(10px);">
+      <span style="font-size: 3.5rem;">💼</span>
+      <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #fff; margin: 0; font-weight: 300;">All about the business opportunity</p>
+      <p style="font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin: 0;">▶ &nbsp;Click to watch</p>
+    </div>
+    <video controls style="width:100%; border-radius:20px; display:none;">
+      <source src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69ba5d92b3d8d5.07716954_YourQuadFastTrackStrategy.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: #fff; margin-bottom: 2rem; border-left: 2px solid var(--dusty-rose); padding-left: 1.5rem; font-style: italic;">Four Reasons to Jump on-board</h3>
+
+  <div class="business-grid">
+    <div class="business-card">
+      <div class="business-card-icon">🌿</div>
+      <h3>Health & Wellness First</h3>
+      <p>Start with products that genuinely support your family's wellbeing. When you believe in what you share, everything else flows naturally — and you'll never feel like you're "selling."</p>
+    </div>
+    <div class="business-card">
+      <div class="business-card-icon">🤝</div>
+      <h3>Supportive Community</h3>
+      <p>Become part of a community of passionate entrepreneurs who will help and support you to achieve your goals and dreams every step of the way.</p>
+    </div>
+    <div class="business-card">
+      <div class="business-card-icon">✈️</div>
+      <h3>Time & Location Freedom</h3>
+      <p>Build a business that supports you to live wherever you want, whenever you want- all you need is a laptop and internet connection.</p>
+    </div>
+    <div class="business-card">
+      <div class="business-card-icon">🎓</div>
+      <h3>Training & Automated Systems</h3>
+      <p>Gain access to world-class training & proven automated systems designed to simplify and accelerate your growth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact">
+  <p class="section-label">Let's Connect</p>
+  <h2 class="section-title">Ready to Explore <em>Your Freedom?</em></h2>
+  <div class="divider" style="margin: 1.5rem auto 2rem;"></div>
+  <p class="section-body">Whether you're curious about the products, the business, or both — I'd love to have a no-pressure conversation and answer any questions you have.</p>
+  <div class="cta-options">
+    <a href="/cdn-cgi/l/email-protection#05776c766067607c6a6b61716d603c716a30456268646c692b666a68" class="btn-primary">Send Me a Message</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Jo · <span>Create Your Freedom Lifestyle</span> · Independent Enagic Distributor</p>
+  <p style="margin-top: 0.5rem; font-size: 0.72rem; opacity: 0.5;">Enagic® and Kangen Water® are registered trademarks of Enagic Co., Ltd.</p>
+  <p style="margin-top: 1.2rem; font-size: 0.68rem; opacity: 0.45; max-width: 860px; margin-left: auto; margin-right: auto; line-height: 1.7;"><strong>DISCLAIMER:</strong> The information provided in this presentation is for educational and informational purposes only. It is not intended to diagnose, treat, cure, or prevent any disease or medical condition. The content is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read or heard in this presentation. Individual results may vary, and the success of any health regimen depends on various factors, including but not limited to, genetics, lifestyle, diet, and overall health status. By accessing or using this presentation, you acknowledge and agree to these disclaimers and terms of use.</p>
+  <p style="margin-top: 0.8rem; font-size: 0.68rem; opacity: 0.45; letter-spacing: 0.05em;"><strong>THIS WEBPAGE IS NOT AFFILIATED WITH ENAGIC INC.®</strong></p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+<script>
+// Email popup functionality
+function openEmailPopup(event) {
+  event.preventDefault();
+  
+  const email = 'risebeyondthe9to5@gmail.com';
+  const subject = 'Inquiry about Kangen Water & Enagic';
+  const body = 'Hi Jo,\n\nI\'m interested in learning more about ';
+  
+  // Create mailto link
+  const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  
+  // Open email client
+  window.location.href = mailtoLink;
+}
+
+// Add event listener to the Send Me a Message button
+document.addEventListener('DOMContentLoaded', function() {
+  const contactButton = document.queryS
