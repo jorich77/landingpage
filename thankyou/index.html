@@ -146,7 +146,8 @@ input[type="tel"] {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="tel"]:focus {
+input[type="tel"]:focus,
+textarea:focus {
   outline: none;
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(184, 147, 90, 0.1);
@@ -325,7 +326,7 @@ input[type="tel"]:focus {
         </div>
 
         <div class="form-group">
-          <label>Best Way to Contact You *</label>
+          <label>We will contact you to finalise the details for your page. What's the best way to contact you? *</label>
           <div class="colour-options" style="grid-template-columns: 1fr 1fr;">
             <label class="colour-option">
               <input type="radio" name="contact" value="Email" required>
@@ -374,6 +375,11 @@ input[type="tel"]:focus {
           </div>
         </div>
 
+        <div class="form-group">
+          <label for="notes">Any other important notes or requests</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Let us know if you have any specific requirements or questions..." style="width: 100%; padding: 1rem 1.2rem; border: 2px solid rgba(61, 90, 128, 0.2); border-radius: 10px; font-size: 1rem; font-family: 'Inter', sans-serif; resize: vertical; background: var(--soft-white);"></textarea>
+        </div>
+
         <button type="submit" class="submit-button" id="submitBtn">
           Submit Details
         </button>
@@ -410,7 +416,8 @@ document.getElementById('customizationForm').addEventListener('submit', async fu
     email: document.getElementById('email').value,
     phone: document.getElementById('phone').value,
     contact: document.querySelector('input[name="contact"]:checked').value,
-    colour: document.querySelector('input[name="colour"]:checked').value
+    colour: document.querySelector('input[name="colour"]:checked').value,
+    notes: document.getElementById('notes').value
   };
   
   try {
