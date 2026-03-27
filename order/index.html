@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Prospect Page - Professional Landing Pages for Enagic Distributors</title>
-<meta name="description" content="Create your own professional landing page to showcase Kangen Water products and business opportunities. Everything your prospects need in one place.">
+<title>Checkout - My Prospect Page | $247</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * {
   margin: 0;
@@ -16,1098 +15,482 @@
 }
 
 :root {
-  --cream: #f5f0e8;
+  --cream: #faf8f5;
   --gold: #b8935a;
   --navy: #3d5a80;
   --charcoal: #2b2b2b;
   --light-gold: #d4af6a;
-}
-
-html {
-  scroll-behavior: smooth;
+  --soft-white: #ffffff;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #f5f5f5;
-  overflow-x: hidden;
-}
-
-/* Sticky CTA Button */
-.sticky-cta {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 1000;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-.cta-button {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--gold), var(--light-gold));
-  color: white;
-  padding: 1.2rem 2.5rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 50px;
-  box-shadow: 0 8px 25px rgba(184, 147, 90, 0.4);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: none;
-  cursor: pointer;
-}
-
-.cta-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(184, 147, 90, 0.5);
-  background: linear-gradient(135deg, var(--light-gold), var(--gold));
-}
-
-.section {
+  background: linear-gradient(135deg, var(--cream) 0%, #f0ede8 100%);
+  color: var(--charcoal);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem 2rem;
-  position: relative;
-  margin-bottom: 4rem;
+  padding: 2rem 1rem;
 }
 
-.section-content {
-  max-width: 1200px;
-  width: 100%;
-}
-
-/* Hero Section */
-.hero {
-  background: var(--cream);
-  text-align: center;
-}
-
-.hero .big-text {
-  font-size: clamp(3.5rem, 10vw, 7rem);
-  font-weight: 700;
-  color: var(--gold);
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  font-family: 'DM Serif Display', serif;
-  font-weight: 400;
-}
-
-.hero .subtext {
-  font-size: clamp(1.3rem, 3.5vw, 2rem);
-  color: var(--navy);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  margin-bottom: 0.5rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero .small-caps {
-  font-size: clamp(0.95rem, 2vw, 1.2rem);
-  color: var(--charcoal);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin-top: 1rem;
-}
-
-.hero-mockup {
-  max-width: 500px;
-  margin: 2rem auto 0;
-}
-
-.hero-mockup img {
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-}
-
-.hero .cta-button {
-  margin-top: 1.5rem;
-}
-
-/* Problem Section */
-.problem {
-  background: white;
-}
-
-.problem h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  color: var(--gold);
-  margin-bottom: 2rem;
-  text-align: center;
-  font-weight: 400;
-}
-
-.problem-list {
-  max-width: 700px;
-  margin: 0 auto 2rem;
-}
-
-.problem-item {
-  font-size: 1.2rem;
-  color: var(--charcoal);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  padding-left: 2.5rem;
-  position: relative;
-}
-
-.problem-item::before {
-  content: '✗';
-  position: absolute;
-  left: 0;
-  color: var(--gold);
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-.impact {
-  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-  color: var(--navy);
-  font-weight: 700;
-  text-align: center;
-  padding: 2rem;
-  background: rgba(61, 90, 128, 0.08);
-  border-left: 5px solid var(--gold);
-  border-radius: 10px;
-  max-width: 700px;
+.container {
+  max-width: 900px;
   margin: 0 auto;
 }
 
-/* Solution Section */
-.solution {
-  background: var(--cream);
+/* Header */
+.header {
   text-align: center;
+  margin-bottom: 3rem;
 }
 
-.solution .big-text {
+.logo {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-  font-weight: 400;
-}
-
-.solution .big-text .gold { color: var(--gold); }
-.solution .big-text .navy { color: var(--navy); }
-
-.solution .question {
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
-  color: var(--charcoal);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  margin-top: 1.5rem;
-  line-height: 1.5;
-}
-
-/* Features Section */
-.features {
-  background: white;
-}
-
-.features h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: 2.5rem;
   color: var(--navy);
-  margin-bottom: 2.5rem;
-  text-align: center;
+  margin-bottom: 0.5rem;
   font-weight: 400;
+}
+
+.logo .gold {
+  color: var(--gold);
+}
+
+.tagline {
+  color: var(--charcoal);
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+/* Main Layout */
+.checkout-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  background: var(--soft-white);
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+/* Left Column - Order Summary */
+.order-summary {
+  border-right: 1px solid rgba(61, 90, 128, 0.1);
+  padding-right: 2rem;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--navy);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.product-card {
+  background: linear-gradient(135deg, rgba(61, 90, 128, 0.03) 0%, rgba(184, 147, 90, 0.03) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(184, 147, 90, 0.2);
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.product-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+
+.product-subtitle {
+  font-size: 0.9rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.product-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.includes-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.includes-list li {
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.9rem;
+  color: var(--charcoal);
+}
+
+.includes-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
 }
 
-.feature-card {
-  text-align: left;
-  padding: 2rem;
-  background: rgba(184, 147, 90, 0.06);
-  border-radius: 15px;
-  border-left: 5px solid var(--gold);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(184, 147, 90, 0.15);
-}
-
-.feature-card .benefit {
-  font-size: 0.85rem;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.feature-card h3 {
-  font-size: 1.4rem;
-  color: var(--navy);
-  margin-bottom: 0.8rem;
-  font-weight: 700;
-}
-
-.feature-card p {
-  font-size: 1rem;
-  color: var(--charcoal);
-  line-height: 1.7;
-}
-
-/* Benefits Section */
-.benefits {
-  background: var(--cream);
-}
-
-.benefits h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(3rem, 7vw, 5rem);
-  margin-bottom: 2rem;
-  text-align: center;
-  line-height: 1.2;
-  font-weight: 400;
-}
-
-.benefits h2 .navy { color: var(--navy); }
-.benefits h2 .gold { color: var(--gold); }
-
-.benefits-box {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 15px;
-  max-width: 800px;
-  margin: 0 auto;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-}
-
-.benefit-item {
-  font-size: 1.2rem;
-  color: var(--charcoal);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  padding-left: 2.5rem;
-  position: relative;
-}
-
-.benefit-item::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--gold);
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-.benefit-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Customization Section */
-.customization {
-  background: white;
-  text-align: center;
-}
-
-.customization h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  margin-bottom: 1.5rem;
-  font-weight: 400;
-}
-
-.customization h2 .gold { color: var(--gold); }
-.customization h2 .navy { color: var(--navy); }
-
-.customization .subtitle {
-  font-size: 1.3rem;
-  color: var(--navy);
-  margin-bottom: 2rem;
-  font-weight: 500;
-}
-
-.customization-list {
-  max-width: 600px;
-  margin: 0 auto 2rem;
-}
-
-.customization-item {
-  font-size: 1.15rem;
-  color: var(--charcoal);
-  margin-bottom: 1.2rem;
-  padding-left: 2rem;
-  position: relative;
-  text-align: left;
-}
-
-.customization-item::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--gold);
-  font-weight: 700;
-}
-
-.color-preview {
-  max-width: 700px;
-  margin: 0 auto;
-  background: rgba(245, 240, 232, 0.5);
-  padding: 2rem;
-  border-radius: 15px;
-}
-
-.color-preview > p {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.color-schemes-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.color-scheme {
-  background: white;
-  padding: 1rem;
-  border-radius: 10px;
-  border-left: 4px solid;
-  text-align: left;
-}
-
-.color-scheme.rose-cream {
-  grid-column: 1 / -1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-.color-scheme.navy-gold { border-left-color: #1a3a52; }
-.color-scheme.teal-aqua { border-left-color: #26a69a; }
-.color-scheme.rose-cream { border-left-color: #d4a5a5; }
-
-.color-scheme p {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.swatches {
-  display: flex;
-  gap: 0.6rem;
-}
-
-.swatch {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Preview Section */
-.preview {
-  background: var(--cream);
-}
-
-.preview h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  color: var(--navy);
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 400;
-}
-
-.preview .subtitle {
-  font-size: 1.2rem;
-  color: var(--gold);
-  text-align: center;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.click-instruction {
-  font-size: 0.95rem;
-  color: var(--charcoal);
-  text-align: center;
-  margin-bottom: 2rem;
-  font-style: italic;
-}
-
-.preview-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  overflow: visible;
-}
-
-.preview-item {
-  text-align: left;
-  overflow: visible;
-}
-
-.preview-label {
-  font-size: 0.75rem;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 0.6rem;
-  font-weight: 700;
-}
-
-.preview-item img {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-  border: 3px solid var(--gold);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.preview-item img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-  z-index: 10;
-  position: relative;
-}
-
-/* Sharing Section */
-.sharing {
-  background: white;
-  text-align: center;
-}
-
-.sharing h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  margin-bottom: 2rem;
-  font-weight: 400;
-}
-
-.sharing h2 .gold { color: var(--gold); }
-.sharing h2 .navy { color: var(--navy); }
-
-.device-mockup {
-  max-width: 600px;
-  margin: 0 auto 2rem;
-}
-
-.device-mockup img {
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-}
-
-.sharing-benefits {
-  max-width: 650px;
-  margin: 0 auto 1.5rem;
-}
-
-.sharing-benefit {
-  font-size: 1.15rem;
-  color: var(--charcoal);
-  margin-bottom: 1.2rem;
-  padding-left: 2rem;
-  position: relative;
-  text-align: left;
-}
-
-.sharing-benefit::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--gold);
-  font-weight: 700;
-  font-size: 1.4rem;
-}
-
-.stat-highlight {
-  background: rgba(61, 90, 128, 0.08);
-  padding: 1.5rem 2rem;
-  border-radius: 10px;
-  max-width: 650px;
-  margin: 2rem auto 0;
-  border-left: 5px solid var(--gold);
-}
-
-.stat-highlight p {
-  font-size: 1.4rem;
-  color: var(--navy);
-  font-weight: 700;
-}
-
-/* Final CTA Section */
-.final-cta {
-  background: var(--cream);
-  text-align: center;
-}
-
-.final-cta h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  color: var(--navy);
-  margin-bottom: 1.5rem;
-  font-weight: 400;
-}
-
-.final-cta .highlight {
-  color: var(--gold);
-}
-
-.final-cta .tagline {
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-  color: var(--charcoal);
-  margin-bottom: 2rem;
-  font-weight: 500;
-}
-
-.price-box {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 15px;
-  max-width: 500px;
-  margin: 0 auto 2rem;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-}
-
-.limited-offer {
-  font-size: 0.9rem;
-  color: var(--gold);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
+.feature-badge {
   background: rgba(184, 147, 90, 0.1);
-  border-radius: 5px;
-  display: inline-block;
-}
-
-.original-price {
-  font-size: 2rem;
-  color: #999;
-  text-decoration: line-through;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
-.price {
-  font-size: 4rem;
-  color: var(--gold);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  font-family: 'DM Serif Display', serif;
-}
-
-.price-note {
-  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
   color: var(--navy);
+  font-weight: 500;
+  text-align: center;
+}
+
+.price-breakdown {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid rgba(61, 90, 128, 0.1);
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+}
+
+.price-row.total {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+  padding-top: 1rem;
+  border-top: 2px solid var(--gold);
+  margin-top: 1rem;
+}
+
+.price-row.total .amount {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+}
+
+/* Right Column - Payment */
+.payment-section {
+  padding-left: 2rem;
+}
+
+.payment-methods {
   margin-bottom: 2rem;
 }
 
-.final-cta .cta-button {
-  font-size: 1.3rem;
-  padding: 1.5rem 3rem;
+.payment-option {
+  background: linear-gradient(135deg, rgba(61, 90, 128, 0.05) 0%, rgba(184, 147, 90, 0.05) 100%);
+  border: 2px solid rgba(61, 90, 128, 0.2);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Section Numbers */
-.section-number {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  background: var(--gold);
-  color: white;
+.payment-option:hover {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(184, 147, 90, 0.08) 0%, rgba(61, 90, 128, 0.08) 100%);
+}
+
+.payment-option.active {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(184, 147, 90, 0.1) 0%, rgba(61, 90, 128, 0.1) 100%);
+  box-shadow: 0 4px 15px rgba(184, 147, 90, 0.2);
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--navy);
   border-radius: 50%;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 50px;
+  position: relative;
+}
+
+.payment-option.active .radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.payment-info {
+  flex: 1;
+}
+
+.payment-name {
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.2rem;
+}
+
+.payment-desc {
+  font-size: 0.85rem;
+  color: var(--charcoal);
+  opacity: 0.7;
+}
+
+.paypal-button-container {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(61, 90, 128, 0.03) 0%, rgba(184, 147, 90, 0.03) 100%);
+  border-radius: 12px;
   text-align: center;
+}
+
+.checkout-button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+  color: white;
+  border: none;
+  padding: 1.2rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(184, 147, 90, 0.3);
   margin-bottom: 1rem;
 }
 
-/* Section Arrow Dividers */
-.section-arrow {
-  position: absolute;
-  bottom: -3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 40px solid transparent;
-  border-right: 40px solid transparent;
-  border-top: 50px solid;
-  z-index: 10;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+.checkout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(184, 147, 90, 0.4);
 }
 
-.hero .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.problem .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.solution .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.features .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.benefits .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.customization .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.preview .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.sharing .section-arrow {
-  border-top-color: var(--gold);
-}
-
-/* Scroll Indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  40% {
-    transform: translateX(-50%) translateY(-10px);
-  }
-  60% {
-    transform: translateX(-50%) translateY(-5px);
-  }
-}
-
-.scroll-indicator::after {
-  content: '↓';
-  font-size: 2rem;
-  color: var(--gold);
-  font-weight: 700;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .section {
-    padding: 3rem 1.5rem;
-  }
-  
-  .sticky-cta {
-    bottom: 1rem;
-    right: 1rem;
-    left: 1rem;
-    text-align: center;
-  }
-  
-  .cta-button {
-    width: 100%;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-  }
-  
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .preview-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .color-schemes-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .color-scheme.rose-cream {
-    max-width: 100%;
-  }
-  
-  .swatches {
-    gap: 0.4rem;
-  }
-  
-  .swatch {
-    width: 35px;
-    height: 35px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .features-grid {
-    gap: 2rem;
-  }
-  
-  .feature-card {
-    padding: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .original-price {
-    font-size: 1.5rem;
-  }
-  
-  .price {
-    font-size: 3rem;
-  }
-  
-  .price-box {
-    padding: 2rem;
-  }
-}
-
-/* Lightbox Styles */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
-  justify-content: center;
+.security-note {
+  font-size: 0.85rem;
+  color: var(--charcoal);
+  opacity: 0.6;
+  margin-top: 1rem;
+  display: flex;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.lightbox-content {
-  max-width: 90%;
-  max-height: 85%;
-  object-fit: contain;
-  border-radius: 10px;
-  box-shadow: 0 10px 50px rgba(255, 255, 255, 0.1);
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 30px;
-  right: 50px;
+.guarantee-box {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--navy) 0%, #2d4866 100%);
   color: white;
-  font-size: 50px;
-  font-weight: 300;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  z-index: 10000;
-}
-
-.lightbox-close:hover {
-  color: var(--gold);
-}
-
-.lightbox-caption {
-  color: white;
+  border-radius: 12px;
   text-align: center;
-  padding: 20px;
-  font-size: 1.1rem;
-  max-width: 800px;
 }
 
+.guarantee-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.guarantee-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Trust Badges */
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(61, 90, 128, 0.1);
+}
+
+.badge {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--charcoal);
+}
+
+.badge-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .lightbox-close {
-    top: 20px;
-    right: 20px;
-    font-size: 40px;
+  .checkout-wrapper {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
   }
   
-  .lightbox-content {
-    max-width: 95%;
-    max-height: 80%;
+  .order-summary {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid rgba(61, 90, 128, 0.1);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .payment-section {
+    padding-left: 0;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
 </head>
 <body>
 
-<!-- Sticky CTA Button -->
-<div class="sticky-cta">
-  <a href="https://www.myprospectpage.com/order" class="cta-button">Get Your Page Now</a>
-</div>
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1 class="logo">My Prospect <span class="gold">Page</span></h1>
+    <p class="tagline">Complete Your Order</p>
+  </div>
 
-<!-- Hero Section -->
-<section class="section hero">
-  <div class="section-content">
-    <div class="big-text">My Prospect Page</div>
-    <div class="subtext">Your Professional Landing Page</div>
-    <div class="small-caps">For Enagic Distributors Who Want to Stand Out</div>
+  <!-- Checkout Wrapper -->
+  <div class="checkout-wrapper">
     
-    <div class="hero-mockup">
-      <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c5343cec6ed9.41888297_Beige_and_Brown_Simple_Clean_Professional_Personal_Brand_Informational_Tips_Instagram_Carousel_Post-removebg-preview.png" alt="Landing Page on Multiple Devices">
-    </div>
-  </div>
-  <div class="section-arrow"></div>
-</section>
-
-<!-- Problem Section -->
-<section class="section problem">
-  <div class="section-content">
-    <h2>Ever done this?</h2>
-    <div class="problem-list">
-      <div class="problem-item">Sent multiple links to your leads from multiple sources... PDFs, Google Drive links, YouTube videos, PowerPoint slides, Voice notes, etc.</div>
-      <div class="problem-item">Leads get confused and overwhelmed</div>
-      <div class="problem-item">It's time consuming and disjointed for you</div>
-    </div>
-    <div class="impact">And you lose sales because of it.</div>
-  </div>
-  <div class="section-arrow"></div>
-</section>
-
-<!-- Solution Tease Section -->
-<section class="section solution">
-  <div class="section-content">
-    <div class="big-text">
-      Imagine<br>sending just<br><span class="navy">ONE</span> <span class="gold">link...</span>
-    </div>
-    <div class="question">ONE LANDING PAGE WITH<br>ALL THE LINKS AND<br>RESOURCES IN ONE PLACE?</div>
-  </div>
-  <div class="section-arrow"></div>
-</section>
-
-<!-- Features Section -->
-<section class="section features">
-  <div class="section-content">
-    <h2>What's Inside Your Prospect Page</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="benefit">Make It Personal</div>
-        <h3>Your Story</h3>
-        <p>Your photo, headline, and journey in your own words.</p>
+    <!-- Left: Order Summary -->
+    <div class="order-summary">
+      <h2 class="section-title">Order Summary</h2>
+      
+      <!-- Device Mockup Image -->
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c5343cec6ed9.41888297_Beige_and_Brown_Simple_Clean_Professional_Personal_Brand_Informational_Tips_Instagram_Carousel_Post-removebg-preview.png" style="max-width: 100%; border-radius: 12px;" alt="myprospectpage Preview">
       </div>
       
-      <div class="feature-card">
-        <div class="benefit">Everything They Need</div>
-        <h3>Product Info & Videos</h3>
-        <p>All Enagic products and Kangen Water benefits in one place.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="benefit">Build Trust Instantly</div>
-        <h3>Resource Downloads</h3>
-        <p>6 resources to download including 68 uses guide, peer-review studies, and scientific research.</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="benefit">Show the Lifestyle</div>
-        <h3>Business Opportunity</h3>
-        <p>Video explaining the compensation plan and content around the lifestyle benefits.</p>
-      </div>
-    </div>
-  </div>
-  <div class="section-arrow"></div>
-</section>
-
-<!-- Benefits Section -->
-<section class="section benefits">
-  <div class="section-content">
-    <h2><span class="navy">Everything</span> <span class="gold">in<br>one place</span></h2>
-    <div class="benefits-box">
-      <div class="benefit-item">Your serious prospects can explore deeper in their own time</div>
-      <div class="benefit-item">You don't need to be available 24/7 sending information to your leads</div>
-      <div class="benefit-item">Save hours every week - no more digging through files to send information</div>
-      <div class="benefit-item">You look professional and trustworthy</div>
-    </div>
-  </div>
-  <div class="section-arrow"></div>
-</section>
-
-<!-- Customization Section -->
-<section class="section customization">
-  <div class="section-content">
-    <h2><span class="gold">Make it</span> <span class="navy">yours</span></h2>
-    <p class="subtitle">We handle the tech. You provide your story.</p>
-    <div class="customization-list">
-      <div class="customization-item">Add your headline, story & image</div>
-      <div class="customization-item">Enable contacts to message you</div>
-      <div class="customization-item">Choose from 3 colour palettes</div>
-      <div class="customization-item">Send to concrete leads only</div>
-      <div class="customization-item">Link to your own domain name or we host for you</div>
-      <div class="customization-item">Optimized for mobile + desktop</div>
-      <div class="customization-item">Share via web link or QR code</div>
-    </div>
-    <div class="color-preview">
-      <p>Choose Your Colour Scheme:</p>
-      
-      <div class="color-schemes-grid">
-        <!-- Navy & Gold -->
-        <div class="color-scheme navy-gold">
-          <p>Navy & Gold</p>
-          <div class="swatches">
-            <div class="swatch" style="background: #1a3a52;"></div>
-            <div class="swatch" style="background: #0f2738;"></div>
-            <div class="swatch" style="background: #c9a961;"></div>
-            <div class="swatch" style="background: #d4af6a;"></div>
-            <div class="swatch" style="background: #faf9f7;"></div>
+      <div class="product-card">
+        <div class="product-header">
+          <div>
+            <h3 class="product-title">Professional Landing Page</h3>
+          </div>
+          <div>
+            <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 0.2rem;">$499</div>
+            <div class="product-price">$247</div>
           </div>
         </div>
         
-        <!-- Teal & Aqua -->
-        <div class="color-scheme teal-aqua">
-          <p>Teal & Aqua</p>
-          <div class="swatches">
-            <div class="swatch" style="background: #26a69a;"></div>
-            <div class="swatch" style="background: #00897b;"></div>
-            <div class="swatch" style="background: #4db6ac;"></div>
-            <div class="swatch" style="background: #80cbc4;"></div>
-            <div class="swatch" style="background: #e0f2f1;"></div>
+        <ul class="includes-list">
+          <li>Custom prospect page with your branding</li>
+          <li>3 professional colour schemes to choose from</li>
+          <li>12 months hosting included on our platform</li>
+          <li>Mobile optimized</li>
+          <li>SEO optimized</li>
+        </ul>
+        
+        <div class="features-grid" style="grid-template-columns: 1fr;">
+          <div class="feature-badge" style="font-size: 1rem; font-weight: 700; padding: 0.8rem 1rem;">No Monthly Fees - One Simple Payment</div>
+        </div>
+      </div>
+      
+      <div class="price-breakdown">
+        <div class="price-row">
+          <span>Subtotal</span>
+          <span class="amount">$499.00</span>
+        </div>
+        <div class="price-row">
+          <span>Discount</span>
+          <span class="amount" style="color: #b8935a;">-$252.00</span>
+        </div>
+        <div class="price-row total">
+          <span>Total</span>
+          <span class="amount">$247</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Payment -->
+    <div class="payment-section">
+      <h2 class="section-title">Payment Method</h2>
+      
+      <div class="payment-methods">
+        <div class="payment-option active" onclick="selectPayment(this)">
+          <div class="radio"></div>
+          <div class="payment-info">
+            <div class="payment-name">PayPal</div>
+            <div class="payment-desc">Safe & secure payment</div>
           </div>
         </div>
         
-        <!-- Rose & Cream -->
-        <div class="color-scheme rose-cream">
-          <p>Rose & Cream</p>
-          <div class="swatches">
-            <div class="swatch" style="background: #d4a5a5;"></div>
-            <div class="swatch" style="background: #c89393;"></div>
-            <div class="swatch" style="background: #e5b5b5;"></div>
-            <div class="swatch" style="background: #faf8f5;"></div>
-            <div class="swatch" style="background: #f5f1ed;"></div>
+        <div class="payment-option" onclick="selectPayment(this)">
+          <div class="radio"></div>
+          <div class="payment-info">
+            <div class="payment-name">Credit/Debit Card</div>
+            <div class="payment-desc">Via PayPal (no account needed)</div>
           </div>
         </div>
       </div>
-    </div>
-    
-    <div class="stat-highlight">
-      <p>Looks professional. Builds trust. Closes deals.</p>
-    </div>
-  </div>
-  <div class="section-arrow"></div>
-</section>
-
-<!-- Preview Section -->
-<section class="section preview">
-  <div class="section-content">
-    <h2>See It In Action</h2>
-    <p class="subtitle">Real Landing Page Examples</p>
-    <p class="click-instruction">Click on each image to view a larger image. Note, these are just snapshots of the landing page and not the entire landing page.</p>
-    <div class="preview-grid">
-      <div class="preview-item">
-        <div class="preview-label">Hero Section - Your Story</div>
-        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c3a9885ad349.81537375_landingpagehero.png" alt="Hero Section Example">
-      </div>
       
-      <div class="preview-item">
-        <div class="preview-label">Product Section - Kangen Machines</div>
-        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c3a99c16d7f2.49526056_kangensection.png" alt="Product Section Example">
-      </div>
-      
-      <div class="preview-item">
-        <div class="preview-label">Resources Section - Downloads & Guides</div>
-        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c3a9ab038e20.17987987_downloadssection.png" alt="Downloads Section Example">
-      </div>
-      
-      <div class="preview-item">
-        <div class="preview-label">Business Section - The Opportunity</div>
-        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c3a9b777b001.10738484_businesssection.png" alt="Business Section Example">
+      <div class="paypal-button-container">
+        <!-- PayPal Form -->
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <input type="hidden" name="cmd" value="_xclick">
+          <input type="hidden" name="business" value="risebeyondthe9to5@gmail.com">
+          <input type="hidden" name="item_name" value="My Prospect Page - Professional Landing Page">
+          <input type="hidden" name="amount" value="247.00">
+          <input type="hidden" name="currency_code" value="USD">
+          <input type="hidden" name="return" value="https://www.myprospectpage.com/thank-you">
+          <input type="hidden" name="cancel_return" value="https://www.myprospectpage.com/order">
+          <input type="hidden" name="no_shipping" value="1">
+          
+          <button type="submit" class="checkout-button">
+            Complete Payment - $247
+          </button>
+        </form>
+        
+        <p class="security-note">
+          🔒 Secure payment via PayPal
+        </p>
       </div>
     </div>
   </div>
-  <div class="section-arrow"></div>
-</section>
-
-<!-- Final CTA Section -->
-<section class="section final-cta">
-  <div class="section-content">
-    <h2>Ready to <span class="highlight">stand out?</span></h2>
-    <p class="tagline">Get your professional landing page today</p>
-    
-    <div class="price-box">
-      <div class="limited-offer">Special offer for limited time only</div>
-      <div class="original-price">$499</div>
-      <div class="price">$247</div>
-      <div class="price-note">One-time payment. 12 months hosting.</div>
-      <a href="https://www.myprospectpage.com/order" class="cta-button">Get Your Page Now</a>
+  
+  <!-- Trust Badges -->
+  <div class="trust-badges">
+    <div class="badge">
+      <div class="badge-icon">🔒</div>
+      <div>Secure<br>Payment</div>
+    </div>
+    <div class="badge">
+      <div class="badge-icon">⚡</div>
+      <div>Quick<br>Delivery</div>
     </div>
   </div>
-</section>
-
-<!-- Lightbox Modal -->
-<div id="lightbox" class="lightbox">
-  <span class="lightbox-close">&times;</span>
-  <img class="lightbox-content" id="lightbox-img">
-  <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
 <script>
-// Lightbox functionality
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxCaption = document.getElementById('lightbox-caption');
-const closeBtn = document.querySelector('.lightbox-close');
-
-// Add click event to all preview images
-document.querySelectorAll('.preview-item img').forEach(img => {
-  img.addEventListener('click', function() {
-    lightbox.style.display = 'flex';
-    lightboxImg.src = this.src;
-    lightboxCaption.textContent = this.alt;
-    document.body.style.overflow = 'hidden';
+function selectPayment(element) {
+  // Remove active from all
+  document.querySelectorAll('.payment-option').forEach(option => {
+    option.classList.remove('active');
   });
-});
-
-// Close lightbox
-closeBtn.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', function(e) {
-  if (e.target === lightbox) {
-    closeLightbox();
-  }
-});
-
-function closeLightbox() {
-  lightbox.style.display = 'none';
-  document.body.style.overflow = 'auto';
+  
+  // Add active to clicked
+  element.classList.add('active');
 }
-
-// Close on escape key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeLightbox();
-  }
-});
 </script>
 
 </body>
