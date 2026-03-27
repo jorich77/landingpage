@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout - My Prospect Page | $247</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cream: #faf8f5;
+  --gold: #b8935a;
+  --navy: #3d5a80;
+  --charcoal: #2b2b2b;
+  --light-gold: #d4af6a;
+  --soft-white: #ffffff;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, var(--cream) 0%, #f0ede8 100%);
+  color: var(--charcoal);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.logo .gold {
+  color: var(--gold);
+}
+
+.tagline {
+  color: var(--charcoal);
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+/* Main Layout */
+.checkout-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  background: var(--soft-white);
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+/* Left Column - Order Summary */
+.order-summary {
+  border-right: 1px solid rgba(61, 90, 128, 0.1);
+  padding-right: 2rem;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--navy);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.product-card {
+  background: linear-gradient(135deg, rgba(61, 90, 128, 0.03) 0%, rgba(184, 147, 90, 0.03) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(184, 147, 90, 0.2);
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.product-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+
+.product-subtitle {
+  font-size: 0.9rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.product-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.includes-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.includes-list li {
+  padding: 0.4rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.9rem;
+  color: var(--charcoal);
+}
+
+.includes-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.feature-badge {
+  background: rgba(184, 147, 90, 0.1);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--navy);
+  font-weight: 500;
+  text-align: center;
+}
+
+.price-breakdown {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid rgba(61, 90, 128, 0.1);
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+}
+
+.price-row.total {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+  padding-top: 1rem;
+  border-top: 2px solid var(--gold);
+  margin-top: 1rem;
+}
+
+.price-row.total .amount {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+}
+
+/* Right Column - Payment */
+.payment-section {
+  padding-left: 2rem;
+}
+
+.payment-methods {
+  margin-bottom: 2rem;
+}
+
+.payment-option {
+  background: linear-gradient(135deg, rgba(61, 90, 128, 0.05) 0%, rgba(184, 147, 90, 0.05) 100%);
+  border: 2px solid rgba(61, 90, 128, 0.2);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.payment-option:hover {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(184, 147, 90, 0.08) 0%, rgba(61, 90, 128, 0.08) 100%);
+}
+
+.payment-option.active {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(184, 147, 90, 0.1) 0%, rgba(61, 90, 128, 0.1) 100%);
+  box-shadow: 0 4px 15px rgba(184, 147, 90, 0.2);
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--navy);
+  border-radius: 50%;
+  position: relative;
+}
+
+.payment-option.active .radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.payment-info {
+  flex: 1;
+}
+
+.payment-name {
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.2rem;
+}
+
+.payment-desc {
+  font-size: 0.85rem;
+  color: var(--charcoal);
+  opacity: 0.7;
+}
+
+.paypal-button-container {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(61, 90, 128, 0.03) 0%, rgba(184, 147, 90, 0.03) 100%);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.checkout-button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+  color: white;
+  border: none;
+  padding: 1.2rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(184, 147, 90, 0.3);
+  margin-bottom: 1rem;
+}
+
+.checkout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(184, 147, 90, 0.4);
+}
+
+.security-note {
+  font-size: 0.85rem;
+  color: var(--charcoal);
+  opacity: 0.6;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.guarantee-box {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--navy) 0%, #2d4866 100%);
+  color: white;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.guarantee-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.guarantee-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Trust Badges */
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(61, 90, 128, 0.1);
+}
+
+.badge {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--charcoal);
+}
+
+.badge-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checkout-wrapper {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+  
+  .order-summary {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid rgba(61, 90, 128, 0.1);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .payment-section {
+    padding-left: 0;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1 class="logo">My Prospect <span class="gold">Page</span></h1>
+    <p class="tagline">Complete Your Order</p>
+  </div>
+
+  <!-- Checkout Wrapper -->
+  <div class="checkout-wrapper">
+    
+    <!-- Left: Order Summary -->
+    <div class="order-summary">
+      <h2 class="section-title">Order Summary</h2>
+      
+      <!-- Device Mockup Image -->
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c5343cec6ed9.41888297_Beige_and_Brown_Simple_Clean_Professional_Personal_Brand_Informational_Tips_Instagram_Carousel_Post-removebg-preview.png" style="max-width: 100%; border-radius: 12px;" alt="myprospectpage Preview">
+      </div>
+      
+      <div class="product-card">
+        <div class="product-header">
+          <div>
+            <h3 class="product-title">Professional Landing Page</h3>
+          </div>
+          <div>
+            <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 0.2rem;">$499</div>
+            <div class="product-price">$247</div>
+          </div>
+        </div>
+        
+        <ul class="includes-list">
+          <li>Custom prospect page with your branding</li>
+          <li>3 professional colour schemes to choose from</li>
+          <li>12 months hosting included on our platform</li>
+          <li>Mobile optimized</li>
+          <li>SEO optimized</li>
+        </ul>
+        
+        <div class="features-grid" style="grid-template-columns: 1fr;">
+          <div class="feature-badge" style="font-size: 1rem; font-weight: 700; padding: 0.8rem 1rem;">No Monthly Fees - One Simple Payment</div>
+        </div>
+      </div>
+      
+      <div class="price-breakdown">
+        <div class="price-row">
+          <span>Subtotal</span>
+          <span class="amount">$499.00</span>
+        </div>
+        <div class="price-row">
+          <span>Discount</span>
+          <span class="amount" style="color: #b8935a;">-$252.00</span>
+        </div>
+        <div class="price-row total">
+          <span>Total</span>
+          <span class="amount">$247</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Payment -->
+    <div class="payment-section">
+      <h2 class="section-title">Payment Method</h2>
+      
+      <div class="payment-methods">
+        <div class="payment-option active" onclick="selectPayment(this)">
+          <div class="radio"></div>
+          <div class="payment-info">
+            <div class="payment-name">PayPal</div>
+            <div class="payment-desc">Safe & secure payment</div>
+          </div>
+        </div>
+        
+        <div class="payment-option" onclick="selectPayment(this)">
+          <div class="radio"></div>
+          <div class="payment-info">
+            <div class="payment-name">Credit/Debit Card</div>
+            <div class="payment-desc">Via PayPal (no account needed)</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="paypal-button-container">
+        <!-- PayPal Form -->
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <input type="hidden" name="cmd" value="_xclick">
+          <input type="hidden" name="business" value="risebeyondthe9to5@gmail.com">
+          <input type="hidden" name="item_name" value="My Prospect Page - Professional Landing Page">
+          <input type="hidden" name="amount" value="247.00">
+          <input type="hidden" name="currency_code" value="USD">
+          <input type="hidden" name="return" value="https://yourwebsite.com/thank-you">
+          <input type="hidden" name="cancel_return" value="https://yourwebsite.com/checkout">
+          <input type="hidden" name="no_shipping" value="1">
+          
+          <button type="submit" class="checkout-button">
+            Complete Payment - $247
+          </button>
+        </form>
+        
+        <p class="security-note">
+          🔒 Secure payment via PayPal
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Trust Badges -->
+  <div class="trust-badges">
+    <div class="badge">
+      <div class="badge-icon">🔒</div>
+      <div>Secure<br>Payment</div>
+    </div>
+    <div class="badge">
+      <div class="badge-icon">⚡</div>
+      <div>Quick<br>Delivery</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function selectPayment(element) {
+  // Remove active from all
+  document.querySelectorAll('.payment-option').forEach(option => {
+    option.classList.remove('active');
+  });
+  
+  // Add active to clicked
+  element.classList.add('active');
+}
+</script>
+
+</body>
+</html>
