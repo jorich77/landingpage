@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You - My Prospect Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cream: #faf8f5;
+  --gold: #b8935a;
+  --navy: #3d5a80;
+  --charcoal: #2b2b2b;
+  --light-gold: #d4af6a;
+  --soft-white: #ffffff;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, var(--cream) 0%, #f0ede8 100%);
+  color: var(--charcoal);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.logo .gold {
+  color: var(--gold);
+}
+
+/* Success Message */
+.success-box {
+  background: var(--soft-white);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.checkmark {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 3rem;
+  color: white;
+}
+
+.success-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.2rem;
+  color: var(--navy);
+  margin-bottom: 0.8rem;
+  font-weight: 400;
+}
+
+.success-text {
+  color: var(--charcoal);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+/* Form Section */
+.form-box {
+  background: var(--soft-white);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.form-subtitle {
+  text-align: center;
+  color: var(--charcoal);
+  opacity: 0.7;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 2px solid rgba(61, 90, 128, 0.2);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s;
+  background: var(--soft-white);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184, 147, 90, 0.1);
+}
+
+/* Colour Choice */
+.colour-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.colour-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.colour-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.colour-card {
+  border: 3px solid rgba(61, 90, 128, 0.2);
+  border-radius: 12px;
+  padding: 1.2rem 0.8rem;
+  text-align: center;
+  transition: all 0.3s;
+  background: var(--soft-white);
+}
+
+.colour-option input[type="radio"]:checked + .colour-card {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(184, 147, 90, 0.08) 0%, rgba(61, 90, 128, 0.08) 100%);
+  box-shadow: 0 4px 15px rgba(184, 147, 90, 0.2);
+}
+
+.colour-preview {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  margin: 0 auto 0.8rem;
+}
+
+.colour-name {
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 0.9rem;
+}
+
+/* Colour Previews */
+.mint-preview {
+  background: linear-gradient(135deg, #8dd3bb 0%, #6fb89d 100%);
+}
+
+.navy-preview {
+  background: linear-gradient(135deg, #3d5a80 0%, #2d4866 100%);
+}
+
+.rose-preview {
+  background: linear-gradient(135deg, #d4a5a5 0%, #b88888 100%);
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+  color: white;
+  border: none;
+  padding: 1.2rem 2rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(184, 147, 90, 0.3);
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(184, 147, 90, 0.4);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success State */
+.submission-success {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+}
+
+.submission-success.show {
+  display: block;
+}
+
+.submission-success h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+.submission-success p {
+  color: var(--charcoal);
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--charcoal);
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .colour-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .success-box,
+  .form-box {
+    padding: 2rem 1.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1 class="logo">My Prospect <span class="gold">Page</span></h1>
+  </div>
+
+  <!-- Success Message -->
+  <div class="success-box">
+    <div class="checkmark">✓</div>
+    <h2 class="success-title">Payment Successful!</h2>
+    <p class="success-text">
+      Thank you for your purchase! Your payment of $247 has been received.<br>
+      We're excited to build your professional prospect page.
+    </p>
+  </div>
+
+  <!-- Form Section -->
+  <div class="form-box">
+    <div id="form-content">
+      <h3 class="form-title">Let's Customize Your Page</h3>
+      <p class="form-subtitle">Please provide the following details so we can get started on your page</p>
+      
+      <form id="customizationForm">
+        <div class="form-group">
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="name" required placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" required placeholder="+1 (555) 123-4567">
+        </div>
+
+        <div class="form-group">
+          <label>Best Way to Contact You *</label>
+          <div class="colour-options" style="grid-template-columns: 1fr 1fr;">
+            <label class="colour-option">
+              <input type="radio" name="contact" value="Email" required>
+              <div class="colour-card">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📧</div>
+                <div class="colour-name">Email</div>
+              </div>
+            </label>
+
+            <label class="colour-option">
+              <input type="radio" name="contact" value="WhatsApp" required>
+              <div class="colour-card">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">💬</div>
+                <div class="colour-name">WhatsApp</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Choose Your Colour Scheme *</label>
+          <div class="colour-options">
+            <label class="colour-option">
+              <input type="radio" name="colour" value="Mint/Teal" required>
+              <div class="colour-card">
+                <div class="colour-preview mint-preview"></div>
+                <div class="colour-name">Mint/Teal</div>
+              </div>
+            </label>
+
+            <label class="colour-option">
+              <input type="radio" name="colour" value="Navy/Gold" required>
+              <div class="colour-card">
+                <div class="colour-preview navy-preview"></div>
+                <div class="colour-name">Navy/Gold</div>
+              </div>
+            </label>
+
+            <label class="colour-option">
+              <input type="radio" name="colour" value="Rose/Blush" required>
+              <div class="colour-card">
+                <div class="colour-preview rose-preview"></div>
+                <div class="colour-name">Rose/Blush</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-button" id="submitBtn">
+          Submit Details
+        </button>
+      </form>
+    </div>
+
+    <div class="submission-success" id="successMessage">
+      <div class="checkmark" style="width: 60px; height: 60px; font-size: 2rem; margin-bottom: 1rem;">✓</div>
+      <h3>All Set!</h3>
+      <p>
+        Thank you! We've received your customization details.<br><br>
+        We'll start building your page right away and email you at the address provided within 24-48 hours with your personalized prospect page URL.<br><br>
+        <strong>Questions?</strong> Email us at risebeyondthe9to5@gmail.com
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Need help? Contact us at risebeyondthe9to5@gmail.com</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('customizationForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
+  
+  const formData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    contact: document.querySelector('input[name="contact"]:checked').value,
+    colour: document.querySelector('input[name="colour"]:checked').value
+  };
+  
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzMKXTTeO-wWKmhlDWNuHlkbB0CUI7fL_kM1Co_YH54ulGPDtP_knaIRisjzVWoT0Os1A/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+    
+    // Show success message
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('successMessage').classList.add('show');
+    
+  } catch (error) {
+    console.error('Error:', error);
+    alert('There was an error submitting your details. Please email us directly at risebeyondthe9to5@gmail.com');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit Details';
+  }
+});
+</script>
+
+</body>
+</html>
