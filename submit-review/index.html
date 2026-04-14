@@ -500,9 +500,9 @@ function sendToGoogleSheets(data) {
     date: new Date(data.date).toLocaleString()
   });
   
-  // Send to Google Sheets using POST
+  // Send to Google Sheets using GET method (more reliable)
   fetch(`${scriptURL}?${params.toString()}`, {
-    method: 'POST',
+    method: 'GET',
     mode: 'no-cors'
   })
   .then(response => {
