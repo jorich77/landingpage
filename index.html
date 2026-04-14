@@ -289,23 +289,28 @@ body {
   font-weight: 400;
 }
 
-.benefits h2 .navy { color: var(--navy); }
-.benefits h2 .gold { color: var(--gold); }
+.benefits h2 .navy {
+  color: var(--navy);
+}
+
+.benefits h2 .gold {
+  color: var(--gold);
+}
 
 .benefits-box {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 15px;
   max-width: 800px;
   margin: 0 auto;
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.08);
 }
 
 .benefit-item {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: var(--charcoal);
   margin-bottom: 1.5rem;
-  line-height: 1.6;
+  line-height: 1.7;
   padding-left: 2.5rem;
   position: relative;
 }
@@ -315,121 +320,120 @@ body {
   position: absolute;
   left: 0;
   color: var(--gold);
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 700;
-}
-
-.benefit-item:last-child {
-  margin-bottom: 0;
 }
 
 /* Customization Section */
 .customization {
   background: white;
-  text-align: center;
 }
 
 .customization h2 {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  margin-bottom: 1.5rem;
+  font-size: clamp(3rem, 7vw, 5rem);
+  margin-bottom: 1rem;
+  text-align: center;
+  line-height: 1.2;
   font-weight: 400;
 }
 
-.customization h2 .gold { color: var(--gold); }
-.customization h2 .navy { color: var(--navy); }
+.customization h2 .gold {
+  color: var(--gold);
+}
+
+.customization h2 .navy {
+  color: var(--navy);
+}
 
 .customization .subtitle {
-  font-size: 1.3rem;
-  color: var(--navy);
-  margin-bottom: 2rem;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  color: var(--charcoal);
+  text-align: center;
+  margin-bottom: 3rem;
   font-weight: 500;
 }
 
 .customization-list {
-  max-width: 600px;
-  margin: 0 auto 2rem;
+  max-width: 750px;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem;
 }
 
 .customization-item {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--charcoal);
-  margin-bottom: 1.2rem;
-  padding-left: 2rem;
-  position: relative;
-  text-align: left;
-}
-
-.customization-item::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--gold);
-  font-weight: 700;
+  padding: 1.2rem 1.5rem;
+  background: rgba(184, 147, 90, 0.06);
+  border-radius: 10px;
+  border-left: 4px solid var(--gold);
+  line-height: 1.5;
+  font-weight: 500;
 }
 
 .color-preview {
-  max-width: 700px;
-  margin: 0 auto;
-  background: rgba(245, 240, 232, 0.5);
-  padding: 2rem;
-  border-radius: 15px;
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  text-align: center;
 }
 
 .color-preview > p {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.3rem;
   color: var(--navy);
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
 .color-schemes-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  max-width: 600px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
 }
 
 .color-scheme {
   background: white;
-  padding: 1rem;
-  border-radius: 10px;
-  border-left: 4px solid;
-  text-align: left;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
-
-.color-scheme.rose-cream {
-  grid-column: 1 / -1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-
-.color-scheme.navy-gold { border-left-color: #1a3a52; }
-.color-scheme.teal-aqua { border-left-color: #26a69a; }
-.color-scheme.rose-cream { border-left-color: #d4a5a5; }
 
 .color-scheme p {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
 .swatches {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
 .swatch {
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.stat-highlight {
+  text-align: center;
+  max-width: 600px;
+  margin: 3rem auto 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(184, 147, 90, 0.1), rgba(61, 90, 128, 0.08));
+  border-radius: 15px;
+  border: 2px solid var(--gold);
+}
+
+.stat-highlight p {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--navy);
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 /* Preview Section */
@@ -441,129 +445,256 @@ body {
   font-family: 'DM Serif Display', serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
   color: var(--navy);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
   font-weight: 400;
 }
 
 .preview .subtitle {
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
   color: var(--gold);
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
 }
 
-.click-instruction {
-  font-size: 0.95rem;
+.preview .click-instruction {
+  font-size: 1rem;
   color: var(--charcoal);
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   font-style: italic;
 }
 
 .preview-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  max-width: 1000px;
+  gap: 2rem;
+  max-width: 1100px;
   margin: 0 auto;
-  overflow: visible;
 }
 
 .preview-item {
-  text-align: left;
-  overflow: visible;
+  background: white;
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.preview-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .preview-label {
-  font-size: 0.75rem;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 0.6rem;
   font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  text-align: center;
 }
 
 .preview-item img {
   width: 100%;
   border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-  border: 3px solid var(--gold);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  display: block;
 }
 
-.preview-item img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-  z-index: 10;
-  position: relative;
-}
-
-/* Sharing Section */
-.sharing {
+/* Reviews Section */
+.reviews {
   background: white;
-  text-align: center;
 }
 
-.sharing h2 {
+.reviews h2 {
   font-family: 'DM Serif Display', serif;
   font-size: clamp(2.5rem, 6vw, 4rem);
-  margin-bottom: 2rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  text-align: center;
   font-weight: 400;
 }
 
-.sharing h2 .gold { color: var(--gold); }
-.sharing h2 .navy { color: var(--navy); }
-
-.device-mockup {
-  max-width: 600px;
-  margin: 0 auto 2rem;
-}
-
-.device-mockup img {
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-}
-
-.sharing-benefits {
-  max-width: 650px;
-  margin: 0 auto 1.5rem;
-}
-
-.sharing-benefit {
-  font-size: 1.15rem;
-  color: var(--charcoal);
-  margin-bottom: 1.2rem;
-  padding-left: 2rem;
-  position: relative;
-  text-align: left;
-}
-
-.sharing-benefit::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
+.reviews .subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   color: var(--gold);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 600;
+}
+
+.reviews-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.review-card {
+  background: rgba(184, 147, 90, 0.04);
+  padding: 2rem;
+  border-radius: 15px;
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.review-author {
   font-weight: 700;
-  font-size: 1.4rem;
-}
-
-.stat-highlight {
-  background: rgba(61, 90, 128, 0.08);
-  padding: 1.5rem 2rem;
-  border-radius: 10px;
-  max-width: 650px;
-  margin: 2rem auto 0;
-  border-left: 5px solid var(--gold);
-}
-
-.stat-highlight p {
-  font-size: 1.4rem;
   color: var(--navy);
+  font-size: 1.1rem;
+}
+
+.review-stars {
+  color: var(--gold);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.review-text {
+  color: var(--charcoal);
+  line-height: 1.7;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.review-date {
+  color: #888;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.no-reviews {
+  text-align: center;
+  padding: 3rem;
+  color: var(--charcoal);
+  font-size: 1.1rem;
+}
+
+/* Review Form */
+.review-form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--cream);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.review-form-container h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--navy);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.9rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.star-rating {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  font-size: 2rem;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  cursor: pointer;
+  color: #ddd;
+  transition: color 0.2s ease;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: var(--gold);
+}
+
+.submit-review-btn {
+  width: 100%;
+  padding: 1.2rem;
+  background: linear-gradient(135deg, var(--gold), var(--light-gold));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
   font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(184, 147, 90, 0.3);
+}
+
+.submit-review-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(184, 147, 90, 0.4);
+}
+
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  text-align: center;
+  display: none;
 }
 
 /* Final CTA Section */
@@ -574,234 +705,81 @@ body {
 
 .final-cta h2 {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(3rem, 7vw, 5rem);
   color: var(--navy);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 400;
 }
 
-.final-cta .highlight {
+.final-cta h2 .highlight {
   color: var(--gold);
 }
 
 .final-cta .tagline {
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
   color: var(--charcoal);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   font-weight: 500;
 }
 
 .price-box {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 15px;
   max-width: 500px;
-  margin: 0 auto 2rem;
+  margin: 0 auto;
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
 .limited-offer {
+  background: var(--gold);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
   font-size: 0.9rem;
-  color: var(--gold);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
-  background: rgba(184, 147, 90, 0.1);
-  border-radius: 5px;
+  letter-spacing: 0.05em;
   display: inline-block;
+  margin-bottom: 1.5rem;
 }
 
 .original-price {
-  font-size: 2rem;
   color: #999;
+  font-size: 1.8rem;
   text-decoration: line-through;
-  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
 .price {
-  font-size: 4rem;
-  color: var(--gold);
+  font-size: clamp(3.5rem, 8vw, 5rem);
+  color: var(--navy);
   font-weight: 700;
   margin-bottom: 1rem;
-  font-family: 'DM Serif Display', serif;
+  line-height: 1;
 }
 
 .price-note {
+  color: var(--charcoal);
   font-size: 1rem;
-  color: var(--navy);
   margin-bottom: 2rem;
 }
 
-.final-cta .cta-button {
-  font-size: 1.3rem;
-  padding: 1.5rem 3rem;
-}
-
-/* Section Numbers */
-.section-number {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  background: var(--gold);
-  color: white;
-  border-radius: 50%;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 50px;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-/* Section Arrow Dividers */
 .section-arrow {
-  position: absolute;
-  bottom: -3rem;
-  left: 50%;
-  transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 40px solid transparent;
-  border-right: 40px solid transparent;
-  border-top: 50px solid;
-  z-index: 10;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
-}
-
-.hero .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.problem .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.solution .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.features .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.benefits .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.customization .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.preview .section-arrow {
-  border-top-color: var(--gold);
-}
-
-.sharing .section-arrow {
-  border-top-color: var(--gold);
-}
-
-/* Scroll Indicator */
-.scroll-indicator {
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 25px solid currentColor;
   position: absolute;
-  bottom: 3rem;
+  bottom: -25px;
   left: 50%;
   transform: translateX(-50%);
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  40% {
-    transform: translateX(-50%) translateY(-10px);
-  }
-  60% {
-    transform: translateX(-50%) translateY(-5px);
-  }
-}
-
-.scroll-indicator::after {
-  content: '↓';
-  font-size: 2rem;
+  opacity: 0.3;
   color: var(--gold);
-  font-weight: 700;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .section {
-    padding: 3rem 1.5rem;
-  }
-  
-  .sticky-cta {
-    bottom: 1rem;
-    right: 1rem;
-    left: 1rem;
-    text-align: center;
-  }
-  
-  .cta-button {
-    width: 100%;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-  }
-  
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .preview-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .color-schemes-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .color-scheme.rose-cream {
-    max-width: 100%;
-  }
-  
-  .swatches {
-    gap: 0.4rem;
-  }
-  
-  .swatch {
-    width: 35px;
-    height: 35px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .features-grid {
-    gap: 2rem;
-  }
-  
-  .feature-card {
-    padding: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .original-price {
-    font-size: 1.5rem;
-  }
-  
-  .price {
-    font-size: 3rem;
-  }
-  
-  .price-box {
-    padding: 2rem;
-  }
-}
-
-/* Lightbox Styles */
+/* Lightbox */
 .lightbox {
   display: none;
   position: fixed;
@@ -821,7 +799,6 @@ body {
   max-height: 85%;
   object-fit: contain;
   border-radius: 10px;
-  box-shadow: 0 10px 50px rgba(255, 255, 255, 0.1);
 }
 
 .lightbox-close {
@@ -848,7 +825,17 @@ body {
   max-width: 800px;
 }
 
+/* Mobile Responsive */
 @media (max-width: 768px) {
+  .features-grid,
+  .preview-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .customization-list {
+    grid-template-columns: 1fr;
+  }
+  
   .lightbox-close {
     top: 20px;
     right: 20px;
@@ -858,6 +845,19 @@ body {
   .lightbox-content {
     max-width: 95%;
     max-height: 80%;
+  }
+  
+  .sticky-cta {
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
+  .review-form-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .reviews-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
@@ -1049,6 +1049,32 @@ body {
   <div class="section-arrow"></div>
 </section>
 
+<!-- Reviews Section -->
+<section class="section reviews">
+  <div class="section-content">
+    <h2>What Our Users Say</h2>
+    <p class="subtitle">Real success stories from Enagic distributors</p>
+    
+    <div class="reviews-container">
+      <div class="reviews-grid" id="reviewsGrid">
+        <!-- Reviews will be loaded here -->
+      </div>
+      
+      <!-- Review Form CTA -->
+      <div class="review-form-container">
+        <h3>Share Your Experience</h3>
+        <p style="text-align: center; margin-bottom: 2rem; color: var(--charcoal); font-size: 1.1rem; line-height: 1.6;">
+          Have you used My Prospect Page? We'd love to hear about your experience!
+        </p>
+        <a href="submit-review.html" class="cta-button" style="display: block; text-align: center; text-decoration: none;">
+          Write a Review
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="section-arrow"></div>
+</section>
+
 <!-- Final CTA Section -->
 <section class="section final-cta">
   <div class="section-content">
@@ -1108,6 +1134,89 @@ document.addEventListener('keydown', function(e) {
     closeLightbox();
   }
 });
+
+// Reviews functionality
+class ReviewManager {
+  constructor() {
+    this.reviews = this.loadReviews();
+    this.renderReviews();
+  }
+  
+  loadReviews() {
+    const stored = localStorage.getItem('myProspectPageReviews');
+    if (stored) {
+      return JSON.parse(stored);
+    }
+    
+    // Sample reviews to show how it looks (you can remove these later)
+    return [
+      {
+        name: "Sarah",
+        rating: 5,
+        text: "This landing page has transformed my business! My prospects love having everything in one place.",
+        date: "10/04/2026"
+      },
+      {
+        name: "Michael",
+        rating: 5,
+        text: "Professional, easy to share. Best investment I've made for my Enagic business. Highly recommend to all distributors!",
+        date: "05/04/2026"
+      },
+      {
+        name: "Emma",
+        rating: 5,
+        text: "Finally, a solution that makes me look professional! No more scrambling to send different links. My prospects take me more seriously now, and it shows in my sales.",
+        date: "28/03/2026"
+      }
+    ];
+  }
+  
+  saveReviews() {
+    localStorage.setItem('myProspectPageReviews', JSON.stringify(this.reviews));
+  }
+  
+  addReview(name, rating, text) {
+    const review = {
+      name,
+      rating: parseInt(rating),
+      text,
+      date: new Date().toLocaleDateString()
+    };
+    
+    this.reviews.unshift(review);
+    this.saveReviews();
+    this.renderReviews();
+  }
+  
+  renderReviews() {
+    const grid = document.getElementById('reviewsGrid');
+    
+    if (this.reviews.length === 0) {
+      grid.innerHTML = '<div class="no-reviews">No reviews yet. Be the first to share your experience!</div>';
+      return;
+    }
+    
+    grid.innerHTML = this.reviews.map(review => `
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-author">${this.escapeHtml(review.name)}</div>
+          <div class="review-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+        </div>
+        <div class="review-text">${this.escapeHtml(review.text)}</div>
+        <div class="review-date">${review.date}</div>
+      </div>
+    `).join('');
+  }
+  
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+}
+
+// Initialize review manager
+const reviewManager = new ReviewManager();
 </script>
 
 </body>
