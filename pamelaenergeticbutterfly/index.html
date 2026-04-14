@@ -882,6 +882,26 @@
       padding: 2rem 1.5rem;
     }
   }
+
+  /* Fix for circular images in video thumbnails on mobile */
+  @media (max-width: 640px) {
+    .product-row-body > div[style*="border-radius: 15px"] {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    
+    .product-row-body img[style*="object-fit: cover"] {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+    
+    #business > div[style*="max-width: 720px"] {
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 0 !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1307,7 +1327,7 @@
   <div class="divider" style="margin: 1.5rem auto 2rem;"></div>
   <p class="section-body">Whether you’re curious about the water, the products, or just want to understand more, I’d love to have a relaxed, no-pressure chat and answer any questions you have.</p>
   <div class="cta-options">
-    <a href="mailto:pamela.energeticbutterfly@outlook.com" class="btn-primary" onclick="openEmailPopup(event)">Send Me a Message</a>
+    <a href="/cdn-cgi/l/email-protection#d7a7b6bab2bbb6f9b2b9b2a5b0b2a3beb4b5a2a3a3b2a5b1bbae97b8a2a3bbb8b8bcf9b4b8ba" class="btn-primary" onclick="openEmailPopup(event)">Send Me a Message</a>
   </div>
 </section>
 
@@ -1319,7 +1339,7 @@
   <p style="margin-top: 0.8rem; font-size: 0.68rem; opacity: 0.45; letter-spacing: 0.05em;"><strong>THIS WEBPAGE IS NOT AFFILIATED WITH ENAGIC INC.®</strong></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
 <script>
 // Email popup functionality
@@ -1334,9 +1354,4 @@ function openEmailPopup(event) {
   const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   
   // Open email client
-  window.location.href = mailtoLink;
-}
-
-// Add event listener to the Send Me a Message button
-document.addEventListener('DOMContentLoaded', function() {
-  const contactButton = document.queryS
+  window.location.href =
