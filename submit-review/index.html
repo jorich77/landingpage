@@ -161,6 +161,9 @@ body {
   color: #ddd;
   transition: all 0.2s ease;
   transform-origin: center;
+  font-weight: 900;
+  text-shadow: 0 0 3px rgba(0,0,0,0.3);
+  -webkit-text-stroke: 1px rgba(0,0,0,0.1);
 }
 
 .star-rating label:hover {
@@ -171,6 +174,9 @@ body {
 .star-rating label:hover,
 .star-rating label:hover ~ label {
   color: var(--gold);
+  font-weight: 900;
+  text-shadow: 0 0 8px rgba(184, 147, 90, 0.5);
+  -webkit-text-stroke: 1.5px rgba(184, 147, 90, 0.3);
 }
 
 .rating-labels {
@@ -353,8 +359,8 @@ body {
       </div>
       
       <div class="form-group">
-        <label>
-          Your Rating: one star = poor, five stars = excellent <span class="required">*</span>
+        <label style="font-size: 1.3rem; font-weight: 700; color: var(--gold); margin-bottom: 1rem;">
+          ⭐ Click a Star to Rate: one star = poor, five stars = excellent <span class="required">*</span>
         </label>
         <div class="star-rating-container">
           <div class="star-rating">
@@ -485,25 +491,25 @@ function sendToGoogleSheets(data) {
   // Google Apps Script web app URL
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxR9aQKsspPl6GJudnpx4Hn--qPF_TlKsHHSKIaTgeKb8BhbJ4x4GaYqQBMo3KpIccBLw/exec';
   
-  // Prepare data for Google Sheets
-  const formData = new FormData();
-  formData.append('name', data.name);
-  formData.append('rating', data.rating);
-  formData.append('title', data.title);
-  formData.append('review', data.text);
-  formData.append('date', new Date(data.date).toLocaleString());
+  // Prepare data as URL parameters
+  const params = new URLSearchParams({
+    name: data.name,
+    rating: data.rating,
+    title: data.title,
+    review: data.text,
+    date: new Date(data.date).toLocaleString()
+  });
   
-  // Send to Google Sheets
-  fetch(scriptURL, {
+  // Send to Google Sheets using POST
+  fetch(`${scriptURL}?${params.toString()}`, {
     method: 'POST',
-    body: formData
+    mode: 'no-cors'
   })
   .then(response => {
-    console.log('Successfully sent to Google Sheets', response);
+    console.log('Successfully sent to Google Sheets');
   })
   .catch(error => {
-    console.error('Error sending to Google Sheets', error);
-    // Still save locally even if Google Sheets fails
+    console.error('Error sending to Google Sheets:', error);
   });
 }
 
