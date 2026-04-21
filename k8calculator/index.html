@@ -519,6 +519,25 @@
       </div>
     </div>
 
+    <div class="field-group" style="margin-top:20px;">
+      <div class="field">
+        <label>Shipping / Delivery Cost</label>
+        <div class="input-wrap">
+          <span class="prefix currency-prefix">$</span>
+          <input type="number" id="shippingCost" value="0" min="0" max="9999" step="1">
+        </div>
+        <span style="font-size:11px;color:var(--soft);margin-top:2px;">One-time shipping or delivery fee</span>
+      </div>
+      <div class="field">
+        <label>Other Costs</label>
+        <div class="input-wrap">
+          <span class="prefix currency-prefix">$</span>
+          <input type="number" id="otherCosts" value="0" min="0" max="9999" step="1">
+        </div>
+        <span style="font-size:11px;color:var(--soft);margin-top:2px;">Installation, accessories, etc.</span>
+      </div>
+    </div>
+
     <div class="slider-section">
       <div class="slider-header">
         <span class="slider-label">Lifespan of Machine</span>
@@ -715,6 +734,8 @@
     const years = parseInt(inputs.yearsSlider.value);
     const localTax = val('localTax');
     const financeExtra = val('financeExtra');
+    const shippingCost = val('shippingCost');
+    const otherCosts = val('otherCosts');
 
     const bottled = val('bottledWater');
     const cleaning = val('cleaningProducts');
@@ -722,7 +743,7 @@
     const other = val('otherSaving');
 
     // Machine total cost
-    const machineTotalCost = price + localTax + financeExtra + (filter * years);
+    const machineTotalCost = price + localTax + financeExtra + shippingCost + otherCosts + (filter * years);
 
     const days = years * 365;
     const weeks = years * 52;
