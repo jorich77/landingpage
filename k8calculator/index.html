@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>K8 True Cost Calculator | Enagic</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -670,6 +671,13 @@
     </div>
 
     <p class="net-note">* Calculations are estimates. Savings vary based on individual usage and local product prices.</p>
+    
+    <div style="text-align:center;margin-top:32px;">
+      <button onclick="downloadReport()" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%);color:#fff;padding:16px 40px;border:none;border-radius:30px;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 20px rgba(16,185,129,0.3);transition:all 0.3s;font-family:'DM Sans',sans-serif;">
+        📄 Download Your Results
+      </button>
+      <p style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:12px;">Get a personalized PDF report to review and share</p>
+    </div>
   </div>
 
 </div>
@@ -824,6 +832,177 @@
   // Initial calc
   updateSliderTrack(inputs.yearsSlider);
   calculate();
+
+  // --- Download Report Function ---
+  function downloadReport() {
+    // Get current values
+    const price = val('machinePrice');
+    const filter = val('filterCost');
+    const years = parseInt(inputs.yearsSlider.value);
+    const localTax = val('localTax');
+    const financeExtra = val('financeExtra');
+    const shippingCost = val('shippingCost');
+    const otherCosts = val('otherCosts');
+    const bottled = val('bottledWater');
+    const cleaning = val('cleaningProducts');
+    const skin = val('skincare');
+    const other = val('otherSaving');
+    
+    const machineTotalCost = price + localTax + financeExtra + shippingCost + otherCosts + (filter * years);
+    const months = years * 12;
+    const costPerMonth = machineTotalCost / months;
+    const replacedPerMonth = bottled + cleaning + skin + other;
+    const netPerMonth = replacedPerMonth - costPerMonth;
+    const totalSavings = (replacedPerMonth * months) - machineTotalCost;
+    const breakevenMonths = replacedPerMonth > 0 ? machineTotalCost / replacedPerMonth : Infinity;
+    const breakevenYears = breakevenMonths / 12;
+    
+    const currency = sym();
+    const today = new Date().toLocaleDateString();
+    
+    // Create report content
+    const reportHTML = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: 'Arial', sans-serif; padding: 40px; color: #1a1a2e; }
+    .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px solid #10b981; }
+    .header h1 { color: #10b981; font-size: 28px; margin: 0 0 10px 0; }
+    .header p { color: #666; font-size: 14px; margin: 5px 0; }
+    .section { margin: 30px 0; }
+    .section-title { color: #059669; font-size: 18px; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #d1fae5; padding-bottom: 8px; }
+    .data-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .data-label { color: #666; font-size: 13px; }
+    .data-value { color: #1a1a2e; font-weight: 600; font-size: 14px; }
+    .highlight-box { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 25px; border-radius: 12px; text-align: center; margin: 25px 0; }
+    .highlight-box .big-number { font-size: 36px; font-weight: 700; margin: 10px 0; }
+    .highlight-box .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+    .savings-positive { color: #10b981; font-weight: 700; }
+    .savings-negative { color: #ef4444; font-weight: 700; }
+    .footer { margin-top: 50px; padding-top: 20px; border-top: 2px solid #d1fae5; text-align: center; color: #666; font-size: 12px; }
+    .footer strong { color: #10b981; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>K8 Water Ionizer Cost Analysis</h1>
+    <p><strong>Enagic K8 True Cost Calculator</strong></p>
+    <p>Report Generated: ${today}</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">💰 Your Investment</div>
+    <div class="data-row">
+      <span class="data-label">K8 Purchase Price</span>
+      <span class="data-value">${currency}${price.toLocaleString()}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Local Tax/GST</span>
+      <span class="data-value">${currency}${localTax.toLocaleString()}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Finance/Interest</span>
+      <span class="data-value">${currency}${financeExtra.toLocaleString()}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Shipping/Delivery</span>
+      <span class="data-value">${currency}${shippingCost.toLocaleString()}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Other Costs</span>
+      <span class="data-value">${currency}${otherCosts.toLocaleString()}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Filter Replacement (${years} years)</span>
+      <span class="data-value">${currency}${(filter * years).toLocaleString()}</span>
+    </div>
+    <div class="data-row" style="border-top: 2px solid #10b981; margin-top: 10px; padding-top: 15px;">
+      <span class="data-label"><strong>Total Machine Cost (${years} years)</strong></span>
+      <span class="data-value" style="color: #10b981; font-size: 16px;">${currency}${machineTotalCost.toLocaleString()}</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🛒 Your Current Monthly Spending</div>
+    <div class="data-row">
+      <span class="data-label">Bottled Water</span>
+      <span class="data-value">${currency}${bottled.toLocaleString()}/month</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Cleaning Products</span>
+      <span class="data-value">${currency}${cleaning.toLocaleString()}/month</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Skincare/Personal Care</span>
+      <span class="data-value">${currency}${skin.toLocaleString()}/month</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Other Products</span>
+      <span class="data-value">${currency}${other.toLocaleString()}/month</span>
+    </div>
+    <div class="data-row" style="border-top: 2px solid #10b981; margin-top: 10px; padding-top: 15px;">
+      <span class="data-label"><strong>Total Replaced Spending</strong></span>
+      <span class="data-value" style="color: #10b981; font-size: 16px;">${currency}${replacedPerMonth.toLocaleString()}/month</span>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="label">Net Monthly Position</div>
+    <div class="big-number ${netPerMonth >= 0 ? 'savings-positive' : 'savings-negative'}">${netPerMonth >= 0 ? 'SAVING' : 'COST'} ${currency}${Math.abs(Math.round(netPerMonth)).toLocaleString()}/month</div>
+    <p style="margin: 15px 0 0 0; opacity: 0.9; font-size: 13px;">K8 costs you ${currency}${Math.round(costPerMonth).toLocaleString()}/month • You're replacing ${currency}${Math.round(replacedPerMonth).toLocaleString()}/month</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📊 Break-Even & Long-Term Outlook</div>
+    <div class="data-row">
+      <span class="data-label">Break-Even Timeline</span>
+      <span class="data-value">${breakevenMonths === Infinity ? 'N/A - Enter current spending above' : breakevenYears > years ? `${breakevenYears.toFixed(1)} years (beyond ${years}yr lifespan)` : `~${breakevenYears.toFixed(1)} years`}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Total Savings Over ${years} Years</span>
+      <span class="data-value ${totalSavings >= 0 ? 'savings-positive' : 'savings-negative'}">${currency}${Math.round(totalSavings).toLocaleString()}</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Total Replaced Spending Over ${years} Years</span>
+      <span class="data-value">${currency}${Math.round(replacedPerMonth * months).toLocaleString()}</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✨ What This Means For You</div>
+    <p style="line-height: 1.8; color: #666; font-size: 14px; margin: 15px 0;">
+      ${netPerMonth >= 0 
+        ? `Based on your current spending, the K8 will <strong style="color: #10b981;">save you ${currency}${Math.abs(Math.round(netPerMonth)).toLocaleString()} per month</strong> once you reach your break-even point. Over ${years} years, that's <strong style="color: #10b981;">${currency}${Math.round(totalSavings).toLocaleString()} in total savings</strong> — money that stays in your pocket instead of going to bottled water companies and product manufacturers.`
+        : `While the K8 costs slightly more per month than your current spending, you're gaining <strong>unlimited alkaline hydrogen-rich water for your entire family</strong>, plus the ability to replace cleaning products, beauty water, and more. Many families find additional savings as they discover more uses for their Kangen water.`
+      }
+    </p>
+    <p style="line-height: 1.8; color: #666; font-size: 14px; margin: 15px 0;">
+      The Enagic Leveluk K8 is designed for a long lifespan, typically lasting <strong>15 to 25+ years with proper maintenance</strong>. This calculator shows ${years} years, but your actual savings could be much higher if you keep the machine longer.
+    </p>
+  </div>
+
+  <div class="footer">
+    <p><strong>Questions about Kangen Water or ready to get started?</strong></p>
+    <p>Contact your Enagic distributor for more information</p>
+    <p style="margin-top: 20px; font-size: 11px; opacity: 0.7;">This report is for informational purposes only. Individual results may vary based on usage patterns and local pricing. The Enagic K8 is a premium water ionization system that requires regular maintenance and filter replacements.</p>
+  </div>
+</body>
+</html>
+    `;
+    
+    // Open in new window for printing/saving
+    const reportWindow = window.open('', '_blank');
+    reportWindow.document.write(reportHTML);
+    reportWindow.document.close();
+    
+    // Trigger print dialog after a brief delay
+    setTimeout(() => {
+      reportWindow.print();
+    }, 500);
+  }
+
 </script>
 </body>
 </html>
