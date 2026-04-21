@@ -313,33 +313,39 @@
   .saving-row.negative .val { color: #fcd34d; }
 
   .net-saving {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(200,168,75,0.25);
-    border-radius: 14px;
-    padding: 20px 24px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: 3px solid #34d399;
+    border-radius: 16px;
+    padding: 28px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 16px;
+    box-shadow: 0 8px 32px rgba(16,185,129,0.4);
   }
   .net-saving .net-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.60);
+    font-size: 15px;
+    color: rgba(255,255,255,0.95);
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
   .net-saving .net-label strong {
     display: block;
     font-family: 'Playfair Display', serif;
-    font-size: 18px;
+    font-size: 24px;
     color: var(--white);
     font-weight: 700;
-    margin-top: 2px;
+    margin-top: 4px;
+    text-transform: none;
+    letter-spacing: 0;
   }
   .net-saving .net-amount {
     font-family: 'Playfair Display', serif;
-    font-size: 36px;
+    font-size: 52px;
     font-weight: 700;
-    color: var(--gold-light);
+    color: #ffffff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
   }
   .net-saving .net-amount.negative-net { color: #fca5a5; }
   .net-note {
@@ -379,11 +385,12 @@
   }
   .breakeven-text {
     text-align: center;
-    margin-top: 10px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.60);
+    margin-top: 12px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.90);
+    font-weight: 600;
   }
-  .breakeven-text strong { color: var(--gold-light); }
+  .breakeven-text strong { color: var(--gold-light); font-weight: 700; font-size: 17px; }
 
   /* CURRENCY SELECTOR */
   .currency-bar {
@@ -442,9 +449,8 @@
 <body>
 
 <header>
-  <p class="header-eyebrow">Enagic K8 Kangen Water</p>
-  <h1>Your <em>True Cost</em> Calculator</h1>
-  <p class="header-sub">See how an Enagic K8 compares to your current spending on water & household products</p>
+  <p class="header-eyebrow">See the true cost of a K8 water ionizer taking account of your current spending on water & household products</p>
+  <h1>Enagic K8 <em>Water Ionizer</em></h1>
   <svg class="water-drops" viewBox="0 0 1440 32" preserveAspectRatio="none">
     <path d="M0,32 C360,0 1080,32 1440,0 L1440,32 Z"/>
   </svg>
@@ -518,10 +524,11 @@
         <span class="slider-label">Lifespan of Machine</span>
         <div class="slider-value"><span id="yearsDisplay">15</span> <span>years</span></div>
       </div>
-      <input type="range" id="yearsSlider" min="1" max="25" value="15" step="1">
+      <input type="range" id="yearsSlider" min="5" max="30" value="15" step="1">
       <div class="slider-ticks">
-        <span>1 yr</span><span>5</span><span>10</span><span>15</span><span>20</span><span>25 yrs</span>
+        <span>5 yrs</span><span>10</span><span>15</span><span>20</span><span>25</span><span>30 yrs</span>
       </div>
+      <p style="font-size:14px;color:var(--dark);margin-top:14px;line-height:1.6;font-weight:700;"><strong>The Enagic Leveluk K8 is designed for a long lifespan, typically lasting 15 to 25+ years with proper maintenance and care.</strong></p>
     </div>
 
   </div>
@@ -530,11 +537,11 @@
   <div class="card">
     <div class="card-title"><div class="icon">🛒</div> Your Current Monthly Spending</div>
     <p class="card-desc">What do you currently spend each month? Leave at $0 if not applicable.</p>
-    <p style="font-size:14px;color:var(--mid);margin-bottom:12px;font-weight:500;">Check out the 68 Uses PDF to see what products your K8 Water Ionizer can replace 👇</p>
-    <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/692a3a7e31f45_68UsesofKangenEbooks-16982839072042.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;padding:10px 16px;background:var(--teal-pale);border:1.5px solid var(--teal-light);border-radius:10px;text-decoration:none;color:var(--teal);font-size:13px;font-weight:600;transition:background 0.2s;">
-      <span style="font-size:16px;">📄</span>
-      68 Uses of Kangen Water — see what it can replace
-      <span style="font-size:11px;opacity:0.6;">↗</span>
+    <p style="font-size:14px;color:var(--mid);margin-bottom:12px;font-weight:700;"><strong>Check out the 68 Uses PDF to see what products your K8 Water Ionizer can replace 👇</strong></p>
+    <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/692a3a7e31f45_68UsesofKangenEbooks-16982839072042.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;padding:16px 24px;background:linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);border:2px solid var(--teal);border-radius:12px;text-decoration:none;color:var(--white);font-size:15px;font-weight:700;transition:all 0.2s;box-shadow:0 4px 12px rgba(10,124,124,0.3);">
+      <span style="font-size:24px;">📄</span>
+      <span>68 Uses of Kangen Water — see what it can replace</span>
+      <span style="font-size:14px;opacity:0.9;">↗</span>
     </a>
     <div class="field-group">
       <div class="field">
@@ -559,7 +566,7 @@
         </div>
       </div>
       <div class="field">
-        <label>Other Replaced Spending</label>
+        <label>Other - insert your own price here</label>
         <div class="input-wrap">
           <span class="prefix currency-prefix">$</span>
           <input type="number" id="otherSaving" value="0" min="0" max="9999" step="1">
@@ -632,14 +639,14 @@
 
     <div class="section-divider"></div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-      <div>
-        <p style="font-size:11px;color:rgba(255,255,255,0.40);text-transform:uppercase;letter-spacing:1px;">Total savings over <span id="lifeLabel">15</span> years</p>
-        <p style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#6ee7b7;margin-top:4px;" id="totalSavings">$0</p>
+    <div style="display:flex;justify-content:space-between;align-items:stretch;flex-wrap:wrap;gap:16px;">
+      <div style="flex:1;min-width:200px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);border:3px solid #34d399;border-radius:12px;padding:20px 24px;box-shadow:0 8px 32px rgba(16,185,129,0.4);">
+        <p style="font-size:11px;color:rgba(255,255,255,0.95);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Total savings over <span id="lifeLabel">15</span> years</p>
+        <p style="font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:#ffffff;text-shadow:0 2px 12px rgba(0,0,0,0.2);" id="totalSavings">$0</p>
       </div>
-      <div style="text-align:right;">
-        <p style="font-size:11px;color:rgba(255,255,255,0.40);text-transform:uppercase;letter-spacing:1px;">Total machine cost over life</p>
-        <p style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:rgba(255,255,255,0.80);margin-top:4px;" id="totalCost">$0</p>
+      <div style="flex:1;min-width:200px;background:linear-gradient(135deg, #10b981 0%, #059669 100%);border:3px solid #34d399;border-radius:12px;padding:20px 24px;text-align:right;box-shadow:0 8px 32px rgba(16,185,129,0.4);">
+        <p style="font-size:11px;color:rgba(255,255,255,0.95);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Total machine cost over life</p>
+        <p style="font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#ffffff;text-shadow:0 2px 12px rgba(0,0,0,0.2);" id="totalCost">$0</p>
       </div>
     </div>
 
