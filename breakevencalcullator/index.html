@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a5f">
+    <meta name="description" content="Track your Enagic business earnings and rank progression across USA, Australia, and Europe">
+    <title>Enagic Calculator Pro</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <style>
+        :root {
+            --navy-primary: #1e3a5f;
+            --navy-dark: #152944;
+            --navy-light: #2d4a6f;
+            --gold-primary: #d4af37;
+            --gold-light: #f4d883;
+            --gold-dark: #b8941f;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666;
+            --text-on-navy: #ffffff;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --border-color: rgba(0,0,0,0.15);
+            --green-success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .app-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%);
+            color: var(--text-on-navy);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .card {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid rgba(30, 58, 95, 0.1);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--navy-primary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        select, input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            transition: border-color 0.3s ease;
+        }
+        
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--navy-primary);
+        }
+        
+        .product-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px 0;
+        }
+        
+        .product-label {
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+            flex: 1;
+            margin: 0;
+        }
+        
+        .product-select {
+            width: 80px;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .product-select:focus {
+            outline: none;
+            border-color: var(--navy-primary);
+        }
+        
+        .product-select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f5f5f5;
+        }
+        
+        .product-note {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-style: italic;
+        }
+        
+        .rank-display {
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%);
+            color: var(--text-on-navy);
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
+        }
+        
+        .rank-label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .rank-value {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gold-primary);
+        }
+        
+        .rank-description {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 16px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .metric-value {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        
+        .earnings-summary {
+            background: linear-gradient(135deg, var(--green-success) 0%, #059669 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .earnings-label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        
+        .earnings-value {
+            font-size: 36px;
+            font-weight: 700;
+        }
+        
+        .commission-info {
+            background: var(--bg-secondary);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .info-box-title {
+            font-weight: 600;
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+        
+        .info-box-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .scenario-card {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .commission-structure {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .point-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .point-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1>💧 Enagic Break-even Calculator</h1>
+            <p>Work out your sales required to breakeven</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Scenario Name</div>
+            
+            <div class="form-group">
+                <label for="scenario-name">Name Your Calculation</label>
+                <input type="text" id="scenario-name" placeholder="e.g., Jo's figures" 
+                       style="width: 100%; padding: 12px; font-size: 14px; border: 2px solid var(--border-color); border-radius: 8px;">
+                <div class="product-note" style="margin-top: 8px;">This will appear on your PDF report</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Region Settings</div>
+
+            <div class="form-group">
+                <label for="country">Select Your Market</label>
+                <select id="country" onchange="updateAllCalculations()">
+                    <option value="usa">🇺🇸 United States</option>
+                    <option value="australia">🇦🇺 Australia</option>
+                    <option value="europe">🇪🇺 Europe</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tax-rate">Tax Rate (%)</label>
+                <input type="number" id="tax-rate" min="0" max="100" step="0.1" value="0" 
+                       placeholder="Enter tax percentage (e.g., 10 for 10%)" 
+                       oninput="updateAllCalculations()">
+                <div class="product-note" style="margin-top: 8px;">Tax will be added on top of retail prices</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Break-Even Calculator</div>
+            
+            <div class="form-group">
+                <label>Initial Inventory Purchase</label>
+                
+                <div class="product-row">
+                    <label for="breakeven-k8" class="product-label">K8</label>
+                    <select id="breakeven-k8" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-anespa" class="product-label">Anespa DX</label>
+                    <select id="breakeven-anespa" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-ukon" class="product-label">Ukon DD</label>
+                    <select id="breakeven-ukon" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-sd501" class="product-label">LeveLuk SD501</label>
+                    <select id="breakeven-sd501" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-sd501platinum" class="product-label">LeveLuk SD501 Platinum</label>
+                    <select id="breakeven-sd501platinum" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-sd501super" class="product-label">LeveLuk SD501 Super</label>
+                    <select id="breakeven-sd501super" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <div class="product-note" id="sd501super-note" style="display: none;">Not available in this region</div>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-sd501dx" class="product-label">LeveLuk SD501 DX</label>
+                    <select id="breakeven-sd501dx" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-jriv" class="product-label">JrIV</label>
+                    <select id="breakeven-jriv" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-emguarde" class="product-label">EmGuarde</label>
+                    <select id="breakeven-emguarde" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+                    <div class="product-note" id="emguarde-note" style="display: none;">EmGuarde not available in this region</div>
+                </div>
+                
+                <div class="info-box" style="margin-top: 16px; background: #e8f5e9; border-left: 4px solid #4caf50;">
+                    <div class="info-box-title" style="color: #2e7d32;">📊 Commission Assumptions</div>
+                    <div class="info-box-text" style="color: #2e7d32;">
+                        Commission figures include Special Points (SP) which assumes you are making regular direct sales. For the purposes of this calculator it is assumed that all these sales are direct. Assumes all sales made in one lane, results will differ if multiple distributor lanes.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="breakeven-summary" style="display: none;">
+            <div class="card">
+                <div class="card-title">Investment Summary</div>
+                <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">
+                    Total Initial Investment: <span style="font-size: 24px; font-weight: 700; color: var(--navy-primary); display: block; margin-top: 4px;" id="breakeven-total-investment">$0</span>
+                </div>
+                <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+                    As a 1A distributor, K8 commission: <span style="font-weight: 600; color: var(--gold-primary);" id="breakeven-commission-rate">$0</span>
+                </div>
+                <button onclick="downloadPDF()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span style="font-size: 18px;">📄</span>
+                    Download PDF Report
+                </button>
+            </div>
+        </div>
+
+        <div id="breakeven-scenarios" style="display: none;">
+            <div class="card">
+                <div class="card-title">Break-Even Scenarios</div>
+                <div id="breakeven-scenarios-list"></div>
+            </div>
+        </div>
+
+        <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 16px; border-radius: 4px; margin-top: 24px; margin-bottom: 24px;">
+            <div style="font-weight: 600; color: #856404; margin-bottom: 8px;">⚠️ Disclaimer</div>
+            <div style="font-size: 13px; color: #856404; line-height: 1.6;">
+                This is an estimating tool only and should not be used as an accurate calculator. Commission and purchase calculations are estimates based on the information provided and may not reflect actual earnings or purchase amounts. We cannot be held responsible for any inaccuracies with the data or calculations. Please consult official Enagic documentation and your upline for accurate commission information.
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const { jsPDF } = window.jspdf;
+        
+        let currentScenarios = [];
+        
+        function formatCurrency(amount, currency) {
+            const symbols = { USD: '$', AUD: 'A$', EUR: '€' };
+            const symbol = symbols[currency] || '$';
+            return symbol + amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        }
+        
+        function downloadPDF() {
+            const doc = new jsPDF();
+            const scenarioName = document.getElementById('scenario-name').value || 'Enagic Break-Even Analysis';
+            const country = document.getElementById('country').value;
+            const countryNames = { usa: 'United States', australia: 'Australia', europe: 'Europe' };
+            const currency = country === 'usa' ? 'USD' : country === 'australia' ? 'AUD' : 'EUR';
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
+            const totalInvestment = document.getElementById('breakeven-total-investment').textContent;
+            const commissionElement = document.getElementById('breakeven-commission-rate');
+            
+            // Parse commission - may include self-purchase commission
+            const commissionText = commissionElement.textContent;
+            let startingCommission = commissionText;
+            let selfPurchaseCommission = null;
+            
+            // Check if there's a self-purchase commission included
+            if (commissionText.includes('Commission earned on self-purchases:')) {
+                const parts = commissionText.split('Commission earned on self-purchases:');
+                startingCommission = parts[0].trim();
+                selfPurchaseCommission = parts[1].trim();
+            }
+            
+            // Get investment breakdown
+            const k8 = parseInt(document.getElementById('breakeven-k8').value) || 0;
+            const sd501 = parseInt(document.getElementById('breakeven-sd501').value) || 0;
+            const sd501platinum = parseInt(document.getElementById('breakeven-sd501platinum').value) || 0;
+            const sd501super = parseInt(document.getElementById('breakeven-sd501super').value) || 0;
+            const sd501dx = parseInt(document.getElementById('breakeven-sd501dx').value) || 0;
+            const anespa = parseInt(document.getElementById('breakeven-anespa').value) || 0;
+            const jriv = parseInt(document.getElementById('breakeven-jriv').value) || 0;
+            const ukon = parseInt(document.getElementById('breakeven-ukon').value) || 0;
+            const emguarde = parseInt(document.getElementById('breakeven-emguarde').value) || 0;
+            
+            // Header
+            doc.setFillColor(30, 58, 95);
+            doc.rect(0, 0, 210, 40, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(22);
+            doc.setFont(undefined, 'bold');
+            doc.text('Enagic Break-Even Calculator', 105, 18, { align: 'center' });
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'normal');
+            doc.text(scenarioName, 105, 28, { align: 'center' });
+            doc.setFontSize(10);
+            doc.text(new Date().toLocaleDateString(), 105, 35, { align: 'center' });
+            
+            // Settings
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'bold');
+            doc.text('Settings', 20, 50);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Market: ${countryNames[country]}`, 20, 58);
+            doc.text(`Tax Rate: ${taxRate}%`, 20, 64);
+            
+            // Investment Summary
+            let yPos = 75;
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'bold');
+            doc.text('Investment Summary', 20, yPos);
+            yPos += 8;
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            
+            const investments = [];
+            if (k8 > 0) investments.push({ name: 'K8', qty: k8 });
+            if (anespa > 0) investments.push({ name: 'Anespa DX', qty: anespa });
+            if (ukon > 0) investments.push({ name: 'Ukon DD', qty: ukon });
+            if (sd501 > 0) investments.push({ name: 'LeveLuk SD501', qty: sd501 });
+            if (sd501platinum > 0) investments.push({ name: 'LeveLuk SD501 Platinum', qty: sd501platinum });
+            if (sd501super > 0) investments.push({ name: 'LeveLuk SD501 Super', qty: sd501super });
+            if (sd501dx > 0) investments.push({ name: 'LeveLuk SD501 DX', qty: sd501dx });
+            if (jriv > 0) investments.push({ name: 'JrIV', qty: jriv });
+            if (emguarde > 0) investments.push({ name: 'EmGuarde', qty: emguarde });
+            
+            investments.forEach(item => {
+                doc.text(`${item.name}: ${item.qty} unit${item.qty > 1 ? 's' : ''}`, 20, yPos);
+                yPos += 6;
+            });
+            
+            yPos += 4;
+            doc.setFont(undefined, 'bold');
+            doc.text(`Total Investment: ${totalInvestment}`, 20, yPos);
+            doc.setFont(undefined, 'normal');
+            yPos += 6;
+            doc.text(`Starting Commission (1A, K8): ${startingCommission}`, 20, yPos);
+            
+            // Add self-purchase commission on new line if applicable
+            if (selfPurchaseCommission) {
+                yPos += 6;
+                doc.setTextColor(16, 185, 129);
+                doc.text(`Commission earned on self-purchases: ${selfPurchaseCommission}`, 20, yPos);
+                doc.setTextColor(0, 0, 0);
+            }
+            
+            // Scenarios
+            yPos += 15;
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'bold');
+            doc.text('Break-Even Scenarios', 20, yPos);
+            yPos += 10;
+            
+            currentScenarios.forEach((scenario, index) => {
+                if (yPos > 250) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                // Scenario box
+                doc.setFillColor(248, 249, 250);
+                doc.rect(20, yPos - 5, 170, 35, 'F');
+                doc.setDrawColor(30, 58, 95);
+                doc.rect(20, yPos - 5, 170, 35, 'S');
+                
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'bold');
+                doc.text(scenario.name, 25, yPos + 2);
+                
+                doc.setFontSize(9);
+                doc.setFont(undefined, 'normal');
+                doc.text(scenario.description, 25, yPos + 8);
+                doc.setTextColor(212, 175, 55);
+                doc.text(scenario.details, 25, yPos + 14);
+                doc.setTextColor(0, 0, 0);
+                
+                doc.text(`Total Sales: ${scenario.sales}`, 25, yPos + 22);
+                doc.setTextColor(16, 185, 129);
+                doc.text(`Total Earned: ${formatCurrency(Math.round(scenario.totalCommission), currency)}`, 100, yPos + 22);
+                doc.setTextColor(0, 0, 0);
+                
+                yPos += 45;
+            });
+            
+            // Disclaimer
+            if (yPos > 220) {
+                doc.addPage();
+                yPos = 20;
+            }
+            
+            doc.setFillColor(255, 243, 205);
+            doc.rect(20, yPos, 170, 40, 'F');
+            doc.setDrawColor(255, 193, 7);
+            doc.setLineWidth(2);
+            doc.line(20, yPos, 20, yPos + 40);
+            
+            doc.setFontSize(11);
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(133, 100, 4);
+            doc.text('Disclaimer', 25, yPos + 8);
+            
+            doc.setFontSize(8);
+            doc.setFont(undefined, 'normal');
+            const disclaimerText = 'This is an estimating tool only and should not be used as an accurate calculator. Commission and purchase calculations are estimates based on the information provided and may not reflect actual earnings or purchase amounts. We cannot be held responsible for any inaccuracies with the data or calculations. Please consult official Enagic documentation and your upline for accurate commission information.';
+            const splitDisclaimer = doc.splitTextToSize(disclaimerText, 160);
+            doc.text(splitDisclaimer, 25, yPos + 15);
+            
+            // Save
+            const fileName = scenarioName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.pdf';
+            doc.save(fileName);
+        }
+        
+        function updateAllCalculations() {
+            const country = document.getElementById('country').value;
+            const emguardeSelect = document.getElementById('breakeven-emguarde');
+            const emguardeNote = document.getElementById('emguarde-note');
+            const sd501superSelect = document.getElementById('breakeven-sd501super');
+            const sd501superNote = document.getElementById('sd501super-note');
+            
+            // Disable EmGuarde for USA only
+            if (country === 'usa') {
+                emguardeSelect.value = 0;
+                emguardeSelect.disabled = true;
+                emguardeNote.style.display = 'block';
+                emguardeNote.style.color = '#dc3545';
+                emguardeNote.style.fontWeight = '600';
+            } else {
+                emguardeSelect.disabled = false;
+                emguardeNote.style.display = 'none';
+            }
+            
+            // Disable SD501 Super for Europe only
+            if (country === 'europe') {
+                sd501superSelect.value = 0;
+                sd501superSelect.disabled = true;
+                sd501superNote.style.display = 'block';
+                sd501superNote.style.color = '#dc3545';
+                sd501superNote.style.fontWeight = '600';
+            } else {
+                sd501superSelect.disabled = false;
+                sd501superNote.style.display = 'none';
+            }
+            
+            calculateBreakeven();
+        }
+        
+        function calculateBreakeven() {
+            const country = document.getElementById('country').value;
+            const currency = country === 'usa' ? 'USD' : country === 'australia' ? 'AUD' : 'EUR';
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
+            const taxMultiplier = 1 + (taxRate / 100);
+            
+            // ALL PRODUCTS = 8 POINTS
+            // What varies is the DOLLAR VALUE per point based on product category
+            
+            // Dollar value per point by product category
+            // Using Basic+SP values from the Excel sheet
+            const valuePerPoint = {
+                usa: {
+                    ionizer: 351,    // K8 commission per point (Basic+SP)
+                    anespa: 195,     // Anespa DX
+                    ukon: 40,        // Ukon DD
+                    emguarde: 0      // Not available in USA
+                },
+                australia: {
+                    ionizer: 400,    // K8 commission per point (Basic+SP)
+                    anespa: 190,     // Anespa DX
+                    ukon: 58,        // Ukon DD
+                    emguarde: 134    // EmGuarde (Basic+SP)
+                },
+                europe: {
+                    ionizer: 295,    // K8 commission per point (Basic+SP)
+                    anespa: 170,     // Anespa DX
+                    ukon: 35,        // Ukon DD
+                    emguarde: 80     // EmGuarde (Basic+SP)
+                }
+            };
+            
+            const values = valuePerPoint[country];
+            
+            // Retail prices by country (from Excel)
+            const retailPrices = {
+                usa: {
+                    k8: 5890,
+                    sd501: 4710,
+                    sd501platinum: 4820,
+                    sd501super: 7080,
+                    sd501dx: 5360,
+                    anespa: 3420,
+                    jriv: 3530,
+                    ukon: 910,
+                    emguarde: 0      // Not available
+                },
+                australia: {
+                    k8: 6170,
+                    sd501: 4770,
+                    sd501platinum: 4770,
+                    sd501super: 6850,
+                    sd501dx: 5500,
+                    anespa: 3450,
+                    jriv: 4300,
+                    ukon: 1300,
+                    emguarde: 2250
+                },
+                europe: {
+                    k8: 4600,
+                    sd501: 3280,
+                    sd501platinum: 3500,
+                    sd501super: 0,   // Not available in Europe
+                    sd501dx: 3740,
+                    anespa: 2800,
+                    jriv: 2900,
+                    ukon: 750,
+                    emguarde: 1350
+                }
+            };
+            
+            const prices = retailPrices[country];
+            
+            // Get initial purchase quantities
+            const k8 = parseInt(document.getElementById('breakeven-k8').value) || 0;
+            const sd501 = parseInt(document.getElementById('breakeven-sd501').value) || 0;
+            const sd501platinum = parseInt(document.getElementById('breakeven-sd501platinum').value) || 0;
+            const sd501super = parseInt(document.getElementById('breakeven-sd501super').value) || 0;
+            const sd501dx = parseInt(document.getElementById('breakeven-sd501dx').value) || 0;
+            const anespa = parseInt(document.getElementById('breakeven-anespa').value) || 0;
+            const jriv = parseInt(document.getElementById('breakeven-jriv').value) || 0;
+            const ukon = parseInt(document.getElementById('breakeven-ukon').value) || 0;
+            const emguarde = parseInt(document.getElementById('breakeven-emguarde').value) || 0;
+            
+            // Calculate total investment with tax
+            let totalInvestment = 0;
+            
+            if (k8 > 0) totalInvestment += k8 * prices.k8 * taxMultiplier;
+            if (sd501 > 0) totalInvestment += sd501 * prices.sd501 * taxMultiplier;
+            if (sd501platinum > 0) totalInvestment += sd501platinum * prices.sd501platinum * taxMultiplier;
+            if (sd501super > 0) totalInvestment += sd501super * prices.sd501super * taxMultiplier;
+            if (sd501dx > 0) totalInvestment += sd501dx * prices.sd501dx * taxMultiplier;
+            if (anespa > 0) totalInvestment += anespa * prices.anespa * taxMultiplier;
+            if (jriv > 0) totalInvestment += jriv * prices.jriv * taxMultiplier;
+            if (ukon > 0) totalInvestment += ukon * prices.ukon * taxMultiplier;
+            if (emguarde > 0) totalInvestment += emguarde * prices.emguarde * taxMultiplier;
+            
+            // Rank requirements (total group sales) - Define this BEFORE using it
+            const rankRequirements = [
+                { rank: '1A', min: 0, max: 1, points: 1 },
+                { rank: '2A', min: 2, max: 10, points: 2 },
+                { rank: '3A', min: 11, max: 20, points: 3 },
+                { rank: '4A', min: 21, max: 50, points: 4 },
+                { rank: '5A', min: 51, max: 100, points: 5 },
+                { rank: '6A', min: 101, max: Infinity, points: 6 }
+            ];
+            
+            function getRankFromSales(totalSales) {
+                for (let i = rankRequirements.length - 1; i >= 0; i--) {
+                    if (totalSales >= rankRequirements[i].min) {
+                        return rankRequirements[i];
+                    }
+                }
+                return rankRequirements[0];
+            }
+            
+            // Calculate commission earned on self-purchases (3rd and 4th products onwards)
+            const selfPurchases = k8 + sd501 + sd501platinum + sd501super + sd501dx + anespa + jriv + ukon + emguarde;
+            let selfCommission = 0;
+            
+            if (selfPurchases >= 3) {
+                // Create array of products purchased for commission calculation
+                const purchasedProducts = [];
+                for (let i = 0; i < k8; i++) purchasedProducts.push({ type: 'ionizer', price: prices.k8 });
+                for (let i = 0; i < sd501; i++) purchasedProducts.push({ type: 'ionizer', price: prices.sd501 });
+                for (let i = 0; i < sd501platinum; i++) purchasedProducts.push({ type: 'ionizer', price: prices.sd501platinum });
+                for (let i = 0; i < sd501super; i++) purchasedProducts.push({ type: 'ionizer', price: prices.sd501super });
+                for (let i = 0; i < sd501dx; i++) purchasedProducts.push({ type: 'ionizer', price: prices.sd501dx });
+                for (let i = 0; i < anespa; i++) purchasedProducts.push({ type: 'anespa', price: prices.anespa });
+                for (let i = 0; i < jriv; i++) purchasedProducts.push({ type: 'ionizer', price: prices.jriv });
+                for (let i = 0; i < ukon; i++) purchasedProducts.push({ type: 'ukon', price: prices.ukon });
+                for (let i = 0; i < emguarde; i++) purchasedProducts.push({ type: 'emguarde', price: prices.emguarde });
+                
+                // Calculate commission on 3rd and 4th products onwards
+                // Starting at 1A (1 point), move to 2A (2 points) after 2nd purchase
+                for (let i = 2; i < purchasedProducts.length; i++) {
+                    const currentSaleNumber = i + 1;
+                    const rank = getRankFromSales(currentSaleNumber);
+                    selfCommission += rank.points * values[purchasedProducts[i].type];
+                }
+            }
+            
+            // Adjust total investment by subtracting self-commission
+            const netInvestment = totalInvestment - selfCommission;
+            
+            if (totalInvestment === 0) {
+                document.getElementById('breakeven-summary').style.display = 'none';
+                document.getElementById('breakeven-scenarios').style.display = 'none';
+                return;
+            }
+            
+            // Show summary
+            document.getElementById('breakeven-summary').style.display = 'block';
+            document.getElementById('breakeven-scenarios').style.display = 'block';
+            document.getElementById('breakeven-total-investment').textContent = formatCurrency(Math.round(totalInvestment), currency);
+            
+            // Calculate scenarios with rank advancement
+            const scenarios = [];
+            
+            // Scenario 1: K8 Only
+            // Start counting from products already purchased
+            let k8Sales = selfPurchases;
+            let k8Earnings = selfCommission;
+            let currentRank = getRankFromSales(k8Sales);
+            
+            while (k8Earnings < totalInvestment) {
+                k8Sales++;
+                currentRank = getRankFromSales(k8Sales);
+                const commission = currentRank.points * values.ionizer;
+                k8Earnings += commission;
+            }
+            
+            const additionalK8Sales = k8Sales - selfPurchases;
+            
+            scenarios.push({
+                name: 'K8 Only',
+                description: `${additionalK8Sales} K8's`,
+                details: `Advance to ${currentRank.rank}`,
+                sales: additionalK8Sales,
+                totalSales: k8Sales,
+                totalCommission: k8Earnings,
+                icon: '💧'
+            });
+            
+            // Scenario 2: Quads Only (1 K8 + 1 Ukon + 1 Anespa + 1 EmGuarde)
+            let quadSales = Math.floor(selfPurchases / 4);
+            let totalSalesCount = selfPurchases;
+            let quadEarnings = selfCommission;
+            currentRank = getRankFromSales(totalSalesCount);
+            
+            while (quadEarnings < totalInvestment) {
+                quadSales++;
+                totalSalesCount += 4;
+                currentRank = getRankFromSales(totalSalesCount);
+                
+                // Each quad = 1 K8 + 1 Ukon + 1 Anespa + 1 EmGuarde
+                const quadCommission = (currentRank.points * values.ionizer) +
+                                      (currentRank.points * values.ukon) +
+                                      (currentRank.points * values.anespa) +
+                                      (currentRank.points * values.emguarde);
+                quadEarnings += quadCommission;
+            }
+            
+            const additionalQuads = quadSales - Math.floor(selfPurchases / 4);
+            
+            scenarios.push({
+                name: 'Quads Only',
+                description: `${additionalQuads} Quads`,
+                details: `Advance to ${currentRank.rank}`,
+                sales: additionalQuads * 4,
+                totalSales: totalSalesCount,
+                totalCommission: quadEarnings,
+                icon: '📦'
+            });
+            
+            // Store scenarios globally for PDF export
+            currentScenarios = scenarios;
+            
+            // Display starting commission rate and self-commission if applicable
+            if (selfPurchases > 0) {
+                document.getElementById('breakeven-commission-rate').innerHTML = 
+                    `${formatCurrency(values.ionizer, currency)}<br><span style="font-size: 12px; color: var(--green-success);">Commission earned on self-purchases: ${formatCurrency(Math.round(selfCommission), currency)}</span>`;
+            } else {
+                document.getElementById('breakeven-commission-rate').textContent = formatCurrency(values.ionizer, currency);
+            }
+            
+            // Render scenarios
+            const scenariosList = document.getElementById('breakeven-scenarios-list');
+            scenariosList.innerHTML = scenarios.map(scenario => `
+                <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <span style="font-size: 24px;">${scenario.icon}</span>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; font-size: 15px; color: var(--text-primary);">${scenario.name}</div>
+                            <div style="font-size: 13px; color: var(--text-secondary);">${scenario.description}</div>
+                            <div style="font-size: 12px; color: var(--gold-primary); margin-top: 4px;">${scenario.details}</div>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px;">
+                        <div>
+                            <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Additional Sales Needed</div>
+                            <div style="font-weight: 600; color: var(--navy-primary);">${scenario.sales}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase;">Total Earned</div>
+                            <div style="font-weight: 600; color: var(--green-success);">${formatCurrency(Math.round(scenario.totalCommission), currency)}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateAllCalculations();
+        });
+    </script>
+</body>
+</html>
