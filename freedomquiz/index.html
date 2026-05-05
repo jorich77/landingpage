@@ -657,36 +657,6 @@
 
   .about-opt-e { font-size: 16px; flex-shrink: 0; width: 22px; text-align: center; }
 
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 24px;
-    text-align: left;
-  }
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 14px 18px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(245,240,232,0.2);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--cream);
-    outline: none;
-    transition: border-color 0.2s;
-    resize: none;
-  }
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder { color: rgba(245,240,232,0.4); }
-  .contact-form input:focus,
-  .contact-form textarea:focus { border-color: var(--blush); }
-  .contact-privacy {
-    font-size: 11px;
-    color: rgba(245,240,232,0.4);
-    text-align: center;
-    margin-top: 4px;
-  }
   /* error */
   .err { color: var(--coral); font-size: 12px; margin-top: 4px; display: none; }
 
@@ -822,7 +792,8 @@
     <div class="capture-form">
       <input type="text" id="input-name" placeholder="Your first name" />
       <input type="email" id="input-email" placeholder="Your best email address" />
-      <p class="err" id="capture-err">Please fill in both fields.</p>
+      <input type="text" id="input-social" placeholder="Your Instagram or Facebook username" />
+      <p class="err" id="capture-err">Please fill in all fields.</p>
       <button class="btn-primary" onclick="submitCapture()" style="width:100%;text-align:center;">Reveal My Freedom Vision →</button>
       <p class="privacy-note">🔒 No spam, ever. Just your personalised vision + occasional inspiration.</p>
     </div>
@@ -853,22 +824,7 @@
     <div class="cta-block">
       <p class="cta-eyebrow">Ready to make it real?</p>
       <h3>This life isn't a<br><em>dream</em> — it's a decision.</h3>
-      <p>I help women build high-income online businesses that fund the exact life you just described. Drop me a message and let's talk.</p>
-
-      <div class="contact-form" id="contact-form">
-        <input type="text"  id="contact-name"    placeholder="Your name"    />
-        <input type="email" id="contact-email"   placeholder="Your email"   />
-        <input type="tel"   id="contact-phone"   placeholder="Your phone number (optional)" />
-        <textarea           id="contact-message" placeholder="Tell me a little about where you are right now and what you're looking for…" rows="4"></textarea>
-        <p class="err" id="contact-err">Please fill in your name and email.</p>
-        <button class="btn-cta" onclick="submitContact()">Send My Message →</button>
-        <p class="contact-privacy">🔒 Your details are safe. No spam, ever.</p>
-      </div>
-
-      <div id="contact-success" style="display:none;text-align:center;padding:20px 0;">
-        <p style="font-size:28px;margin-bottom:12px;">🌸</p>
-        <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--cream);line-height:1.4;">Message received, <span id="success-name"></span>.<br>I'll be in touch very soon.</p>
-      </div>
+      <p>I help women build high-income online businesses that fund the exact life you just described. Let me show you how.</p>
     </div>
 
     <div class="share-row">
@@ -896,8 +852,7 @@
 
 <script>
 // ── CONFIG ──
-const SHEET_URL    = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // replace with your Apps Script URL
-const FORMSPREE_ID = 'YOUR_FORMSPREE_ID';           // replace with your Formspree form ID
+const SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // replace with your Apps Script URL
 
 // ── QUESTIONS ──
 // multi: true = select all that apply; multi: false = single select
@@ -1128,20 +1083,21 @@ function prevQuestion() {
 }
 
 function submitCapture() {
-  const name  = document.getElementById('input-name').value.trim();
-  const email = document.getElementById('input-email').value.trim();
-  const err   = document.getElementById('capture-err');
-  if (!name || !email || !email.includes('@')) {
+  const name   = document.getElementById('input-name').value.trim();
+  const email  = document.getElementById('input-email').value.trim();
+  const social = document.getElementById('input-social').value.trim();
+  const err    = document.getElementById('capture-err');
+  if (!name || !email || !email.includes('@') || !social) {
     err.style.display = 'block'; return;
   }
   err.style.display = 'none';
   userName = name;
   showScreen('screen-loading');
-  sendToSheet(name, email);
+  sendToSheet(name, email, social);
   generateVision(name, email);
 }
 
-async function sendToSheet(name, email) {
+async function sendToSheet(name, email, social) {
   if (SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL') return;
   const answerLabels = answers.map((ans, i) => ans.map(a => questions[i].opts[a].t).join('; '));
   const aboutLabels  = aboutAnswers.map((a, i) => a !== undefined ? aboutQuestions[i].opts[a] : '');
@@ -1151,7 +1107,7 @@ async function sendToSheet(name, email) {
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name, email,
+        name, email, social,
         answers: answerLabels,
         current_situation: aboutLabels[0],
         age_range: aboutLabels[1],
@@ -1256,51 +1212,6 @@ function showResult(name, vision) {
 // store vision text globally for image generation
 let currentVisionText = '';
 let currentUserName   = '';
-
-async function submitContact() {
-  const name    = document.getElementById('contact-name').value.trim();
-  const email   = document.getElementById('contact-email').value.trim();
-  const phone   = document.getElementById('contact-phone').value.trim();
-  const message = document.getElementById('contact-message').value.trim();
-  const err     = document.getElementById('contact-err');
-
-  if (!name || !email || !email.includes('@')) {
-    err.style.display = 'block'; return;
-  }
-  err.style.display = 'none';
-
-  const btn = document.querySelector('#contact-form .btn-cta');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        name, email, phone, message,
-        vision: currentVisionText,
-        source: 'freedom-life-quiz'
-      })
-    });
-
-    if (res.ok) {
-      document.getElementById('contact-form').style.display = 'none';
-      document.getElementById('success-name').textContent = name;
-      document.getElementById('contact-success').style.display = 'block';
-    } else {
-      btn.textContent = 'Send My Message →';
-      btn.disabled = false;
-      err.textContent = 'Something went wrong — please try again.';
-      err.style.display = 'block';
-    }
-  } catch(e) {
-    btn.textContent = 'Send My Message →';
-    btn.disabled = false;
-    err.textContent = 'Something went wrong — please try again.';
-    err.style.display = 'block';
-  }
-}
 
 function shareVision() {
   const firstSentence = currentVisionText.split(/[.!?]/)[0].trim();
