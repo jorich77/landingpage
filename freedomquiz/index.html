@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Your Freedom Life | Rise Beyond the 9 to 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal: #2c2c2c;
+    --blush: #e8c4b4;
+    --coral: #d4856a;
+    --cream: #faf6f2;
+    --muted: #9a8a82;
+    --deep: #1a1a1a;
+    --soft-white: #fff9f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--soft-white);
+    color: var(--charcoal);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(232,196,180,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(212,133,106,0.12) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; animation: fadeUp 0.6s ease both; }
+  .screen.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── INTRO ── */
+  #screen-intro {
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+  }
+  #screen-intro.active { display: flex; }
+
+  .brand-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 32px;
+  }
+
+  .intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+  }
+
+  .intro-title em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .intro-sub {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 440px;
+    margin: 20px auto 40px;
+  }
+
+  .intro-decoration {
+    width: 60px;
+    height: 1px;
+    background: var(--blush);
+    margin: 24px auto;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--charcoal);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  .btn-primary:hover {
+    background: var(--coral);
+    transform: translateY(-2px);
+  }
+
+  .intro-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 16px;
+    font-weight: 300;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    padding: 32px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 2px;
+    background: var(--blush);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--coral);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+  .progress-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  /* ── QUESTION ── */
+  #screen-quiz { padding-bottom: 60px; }
+
+  .question-block {
+    padding: 48px 0 32px;
+  }
+
+  .q-number {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 16px;
+  }
+
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .q-subtext {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: white;
+    border: 1.5px solid rgba(232,196,180,0.5);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--charcoal);
+    font-weight: 400;
+    line-height: 1.4;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .option-btn::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--coral);
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+  }
+
+  .option-btn:hover {
+    border-color: var(--coral);
+    background: #fff9f6;
+    transform: translateX(4px);
+  }
+  .option-btn:hover::before { transform: scaleY(1); }
+
+  .option-btn.selected {
+    border-color: var(--coral);
+    background: rgba(212,133,106,0.06);
+  }
+  .option-btn.selected::before { transform: scaleY(1); }
+
+  .option-emoji {
+    font-size: 20px;
+    flex-shrink: 0;
+    width: 28px;
+    text-align: center;
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(232,196,180,0.4);
+  }
+
+  .btn-back {
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 10px 0;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--charcoal); }
+
+  .btn-next {
+    background: var(--charcoal);
+    color: var(--cream);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .btn-next:hover:not(:disabled) {
+    background: var(--coral);
+    transform: translateY(-1px);
+  }
+  .btn-next:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  /* ── CAPTURE ── */
+  #screen-capture {
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+  }
+  #screen-capture.active { display: flex; }
+
+  .capture-icon {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+
+  .capture-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .capture-title em { font-style: italic; color: var(--coral); }
+
+  .capture-sub {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 400px;
+    margin: 0 auto 36px;
+  }
+
+  .capture-form {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .capture-form input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1.5px solid rgba(232,196,180,0.6);
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .capture-form input:focus { border-color: var(--coral); }
+  .capture-form input::placeholder { color: var(--muted); }
+
+  .privacy-note {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ── LOADING ── */
+  #screen-loading {
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+  }
+  #screen-loading.active { display: flex; }
+
+  .loading-orb {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid var(--blush);
+    border-top-color: var(--coral);
+    animation: spin 1.2s linear infinite;
+    margin-bottom: 32px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+  }
+
+  .loading-messages {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    min-height: 24px;
+    transition: opacity 0.4s;
+  }
+
+  /* ── RESULT ── */
+  #screen-result { padding: 48px 0 80px; display: none; }
+  #screen-result.active { display: block; }
+
+  .result-header { text-align: center; padding: 20px 0 40px; }
+
+  .result-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 16px;
+  }
+
+  .result-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 7vw, 58px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--charcoal);
+  }
+  .result-title em { font-style: italic; color: var(--coral); }
+
+  .result-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 300;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .result-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--coral), transparent);
+    margin: 28px auto;
+  }
+
+  .vision-card {
+    background: white;
+    border: 1px solid rgba(232,196,180,0.4);
+    padding: 40px 36px;
+    margin: 0 0 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vision-card::before {
+    content: '\201C';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    color: rgba(232,196,180,0.25);
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .vision-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 3vw, 22px);
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--charcoal);
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-block {
+    background: var(--charcoal);
+    padding: 40px 36px;
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  .cta-block .cta-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blush);
+    margin-bottom: 16px;
+  }
+
+  .cta-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .cta-block h3 em { font-style: italic; color: var(--blush); }
+
+  .cta-block p {
+    font-size: 14px;
+    color: rgba(250,246,242,0.7);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 380px;
+    margin: 0 auto 28px;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    background: var(--coral);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+  .btn-cta:hover { background: var(--blush); color: var(--charcoal); transform: translateY(-2px); }
+
+  .share-row {
+    text-align: center;
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(232,196,180,0.3);
+  }
+  .share-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .share-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-share {
+    background: none;
+    border: 1.5px solid var(--blush);
+    color: var(--charcoal);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-share:hover { border-color: var(--coral); color: var(--coral); }
+  .btn-share-image { background: var(--charcoal); color: var(--cream) !important; border-color: var(--charcoal); }
+  .btn-share-image:hover { background: var(--coral); border-color: var(--coral); }
+
+  /* ── ABOUT YOU SCREEN ── */
+  #screen-about {
+    padding: 48px 0 60px;
+  }
+
+  .about-header {
+    text-align: center;
+    padding: 20px 0 36px;
+  }
+
+  .about-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 14px;
+  }
+
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 6vw, 46px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--charcoal);
+  }
+  .about-title em { font-style: italic; color: var(--coral); }
+
+  .about-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  .about-divider {
+    width: 50px;
+    height: 1px;
+    background: var(--blush);
+    margin: 20px auto 0;
+  }
+
+  .about-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .about-q {
+    border-left: 2px solid var(--blush);
+    padding-left: 20px;
+  }
+
+  .about-q-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 8px;
+  }
+
+  .about-q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 4vw, 26px);
+    font-weight: 300;
+    color: var(--charcoal);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .about-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .about-opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 18px;
+    background: white;
+    border: 1.5px solid rgba(232,196,180,0.4);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--charcoal);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-opt::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--coral);
+    transform: scaleY(0);
+    transition: transform 0.2s ease;
+  }
+  .about-opt:hover { border-color: var(--coral); background: #fff9f6; transform: translateX(3px); }
+  .about-opt:hover::before { transform: scaleY(1); }
+  .about-opt.selected { border-color: var(--coral); background: rgba(212,133,106,0.06); }
+  .about-opt.selected::before { transform: scaleY(1); }
+
+  .about-opt-e { font-size: 16px; flex-shrink: 0; width: 22px; text-align: center; }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+    text-align: left;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(245,240,232,0.2);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: rgba(245,240,232,0.4); }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--blush); }
+  .contact-privacy {
+    font-size: 11px;
+    color: rgba(245,240,232,0.4);
+    text-align: center;
+    margin-top: 4px;
+  }
+  /* error */
+  .err { color: var(--coral); font-size: 12px; margin-top: 4px; display: none; }
+
+  @media (max-width: 480px) {
+    .vision-card { padding: 32px 24px; }
+    .cta-block { padding: 32px 24px; }
+    .nav-row { flex-direction: column-reverse; gap: 12px; }
+    .btn-next, .btn-back { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="wrap" style="width:100%">
+    <div class="brand-tag">Rise Beyond the 9 to 5</div>
+    <h1 class="intro-title">What Does Your<br><em>Freedom Life</em><br>Look Like?</h1>
+    <div class="intro-decoration"></div>
+    <p class="intro-sub">Answer 10 questions and we'll paint a vivid picture of the life waiting for you on the other side.</p>
+    <button class="btn-primary" onclick="startQuiz()">Begin Your Vision →</button>
+    <p class="intro-note">Takes 2 minutes · Completely free</p>
+  </div>
+</div>
+
+<!-- SCREEN 2: QUIZ -->
+<div id="screen-quiz" class="screen">
+  <div class="wrap">
+    <div class="progress-bar-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <span class="progress-label" id="progress-label">1 of 8</span>
+    </div>
+    <div class="question-block" id="question-block"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="prevQuestion()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="nextQuestion()" disabled>Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: ABOUT YOU -->
+<div id="screen-about" class="screen">
+  <div class="wrap">
+    <div class="about-header">
+      <p class="about-eyebrow">Almost there…</p>
+      <h2 class="about-title">Now tell us a little<br>about <em>where you are now</em></h2>
+      <p class="about-sub">This helps us make your vision — and our support — even more personal.</p>
+      <div class="about-divider"></div>
+    </div>
+
+    <div class="about-questions">
+
+      <!-- Q1: What do you do currently -->
+      <div class="about-q">
+        <p class="about-q-label">Right now</p>
+        <h3 class="about-q-text">What does your current situation look like?</h3>
+        <div class="about-opts" id="about-opts-0">
+          <button class="about-opt" onclick="selectAbout(0,0)"><span class="about-opt-e">💼</span> Employed full-time</button>
+          <button class="about-opt" onclick="selectAbout(0,1)"><span class="about-opt-e">⏰</span> Employed part-time</button>
+          <button class="about-opt" onclick="selectAbout(0,2)"><span class="about-opt-e">🌸</span> Stay at home parent</button>
+          <button class="about-opt" onclick="selectAbout(0,3)"><span class="about-opt-e">💻</span> Self-employed / freelance</button>
+          <button class="about-opt" onclick="selectAbout(0,4)"><span class="about-opt-e">🔍</span> Between jobs / career change</button>
+        </div>
+      </div>
+
+      <!-- Q2: Age range -->
+      <div class="about-q">
+        <p class="about-q-label">Your stage</p>
+        <h3 class="about-q-text">Which age range are you in?</h3>
+        <div class="about-opts" id="about-opts-1">
+          <button class="about-opt" onclick="selectAbout(1,0)"><span class="about-opt-e">🌱</span> Under 25</button>
+          <button class="about-opt" onclick="selectAbout(1,1)"><span class="about-opt-e">✨</span> 25–34</button>
+          <button class="about-opt" onclick="selectAbout(1,2)"><span class="about-opt-e">🌟</span> 35–44</button>
+          <button class="about-opt" onclick="selectAbout(1,3)"><span class="about-opt-e">💫</span> 45–54</button>
+          <button class="about-opt" onclick="selectAbout(1,4)"><span class="about-opt-e">👑</span> 55+</button>
+        </div>
+      </div>
+
+      <!-- Q3: Biggest frustration -->
+      <div class="about-q">
+        <p class="about-q-label">Your pain point</p>
+        <h3 class="about-q-text">What frustrates you most about your current situation?</h3>
+        <div class="about-opts" id="about-opts-2">
+          <button class="about-opt" onclick="selectAbout(2,0)"><span class="about-opt-e">⏳</span> No time — I'm always running on empty</button>
+          <button class="about-opt" onclick="selectAbout(2,1)"><span class="about-opt-e">💸</span> Not earning what I'm worth</button>
+          <button class="about-opt" onclick="selectAbout(2,2)"><span class="about-opt-e">📍</span> Being stuck in one place with no flexibility</button>
+          <button class="about-opt" onclick="selectAbout(2,3)"><span class="about-opt-e">😶</span> Feeling invisible — like I have so much more to give</button>
+          <button class="about-opt" onclick="selectAbout(2,4)"><span class="about-opt-e">🔁</span> Just doing the same thing on repeat with no end in sight</button>
+        </div>
+      </div>
+
+      <!-- Q4: Online business experience -->
+      <div class="about-q">
+        <p class="about-q-label">Your experience</p>
+        <h3 class="about-q-text">Have you tried building an online business before?</h3>
+        <div class="about-opts" id="about-opts-3">
+          <button class="about-opt" onclick="selectAbout(3,0)"><span class="about-opt-e">🙅</span> No — this is completely new to me</button>
+          <button class="about-opt" onclick="selectAbout(3,1)"><span class="about-opt-e">👀</span> I've looked into it but never taken the leap</button>
+          <button class="about-opt" onclick="selectAbout(3,2)"><span class="about-opt-e">🌀</span> I've tried a few things but nothing has really worked yet</button>
+          <button class="about-opt" onclick="selectAbout(3,3)"><span class="about-opt-e">🚀</span> Yes — I have something going but want to level up</button>
+        </div>
+      </div>
+
+      <!-- Q5: Family situation -->
+      <div class="about-q">
+        <p class="about-q-label">Your people</p>
+        <h3 class="about-q-text">Which best describes your family situation?</h3>
+        <div class="about-opts" id="about-opts-4">
+          <button class="about-opt" onclick="selectAbout(4,0)"><span class="about-opt-e">👶</span> I have young children at home</button>
+          <button class="about-opt" onclick="selectAbout(4,1)"><span class="about-opt-e">🧒</span> I have older children / teens</button>
+          <button class="about-opt" onclick="selectAbout(4,2)"><span class="about-opt-e">🪺</span> My kids have flown the nest</button>
+          <button class="about-opt" onclick="selectAbout(4,3)"><span class="about-opt-e">💑</span> Just me and my partner (no kids)</button>
+          <button class="about-opt" onclick="selectAbout(4,4)"><span class="about-opt-e">🌸</span> Just me (no partner)</button>
+          <button class="about-opt" onclick="selectAbout(4,5)"><span class="about-opt-e">✨</span> Single and loving my own company</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goBackFromAbout()">← Back</button>
+      <button class="btn-next" id="btn-about-next" onclick="goToCapture()" disabled>Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4: EMAIL CAPTURE -->
+<div id="screen-capture" class="screen">
+  <div class="wrap" style="width:100%">
+    <div class="capture-icon">✨</div>
+    <h2 class="capture-title">Your <em>Freedom Vision</em><br>is ready…</h2>
+    <p class="capture-sub">Tell us where to send it — and we'll reveal the life that's waiting for you.</p>
+    <div class="capture-form">
+      <input type="text" id="input-name" placeholder="Your first name" />
+      <input type="email" id="input-email" placeholder="Your best email address" />
+      <p class="err" id="capture-err">Please fill in both fields.</p>
+      <button class="btn-primary" onclick="submitCapture()" style="width:100%;text-align:center;">Reveal My Freedom Vision →</button>
+      <p class="privacy-note">🔒 No spam, ever. Just your personalised vision + occasional inspiration.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4: LOADING -->
+<div id="screen-loading" class="screen">
+  <div class="loading-orb"></div>
+  <h2 class="loading-title">Crafting your vision…</h2>
+  <p class="loading-messages" id="loading-msg">Reading your answers…</p>
+</div>
+
+<!-- SCREEN 5: RESULT -->
+<div id="screen-result" class="screen">
+  <div class="wrap">
+    <div class="result-header">
+      <p class="result-eyebrow">Your Freedom Life Vision</p>
+      <h2 class="result-title">This is your<br><em>next chapter</em></h2>
+      <p class="result-name" id="result-name"></p>
+      <div class="result-divider"></div>
+    </div>
+
+    <div class="vision-card">
+      <p class="vision-text" id="vision-text">Loading your vision…</p>
+    </div>
+
+    <div class="cta-block">
+      <p class="cta-eyebrow">Ready to make it real?</p>
+      <h3>This life isn't a<br><em>dream</em> — it's a decision.</h3>
+      <p>I help women build high-income online businesses that fund the exact life you just described. Drop me a message and let's talk.</p>
+
+      <div class="contact-form" id="contact-form">
+        <input type="text"  id="contact-name"    placeholder="Your name"    />
+        <input type="email" id="contact-email"   placeholder="Your email"   />
+        <input type="tel"   id="contact-phone"   placeholder="Your phone number (optional)" />
+        <textarea           id="contact-message" placeholder="Tell me a little about where you are right now and what you're looking for…" rows="4"></textarea>
+        <p class="err" id="contact-err">Please fill in your name and email.</p>
+        <button class="btn-cta" onclick="submitContact()">Send My Message →</button>
+        <p class="contact-privacy">🔒 Your details are safe. No spam, ever.</p>
+      </div>
+
+      <div id="contact-success" style="display:none;text-align:center;padding:20px 0;">
+        <p style="font-size:28px;margin-bottom:12px;">🌸</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--cream);line-height:1.4;">Message received, <span id="success-name"></span>.<br>I'll be in touch very soon.</p>
+      </div>
+    </div>
+
+    <div class="share-row">
+      <p class="share-label">Share your vision</p>
+      <div class="share-buttons">
+        <button class="btn-share" onclick="shareVision()">✦ Share on Instagram</button>
+        <button class="btn-share btn-share-image" onclick="saveAsImage()">⬇ Save as Image</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE CARD MODAL -->
+<div id="image-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;overflow-y:auto;padding:24px;">
+  <div style="max-width:440px;margin:0 auto;">
+    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Your Vision Card</p>
+    <canvas id="vision-canvas" style="width:100%;border-radius:2px;display:block;"></canvas>
+    <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:12px;margin-top:12px;line-height:1.6;">Press and hold (mobile) or right-click (desktop) to save the image</p>
+    <div style="display:flex;gap:12px;margin-top:20px;">
+      <button onclick="downloadImage()" style="flex:1;background:var(--coral);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">⬇ Download</button>
+      <button onclick="closeModal()" style="flex:1;background:none;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──
+const SHEET_URL    = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // replace with your Apps Script URL
+const FORMSPREE_ID = 'YOUR_FORMSPREE_ID';           // replace with your Formspree form ID
+
+// ── QUESTIONS ──
+// multi: true = select all that apply; multi: false = single select
+const questions = [
+  {
+    q: "How does your ideal morning begin?",
+    sub: "Select everything that feels like you.",
+    multi: true,
+    opts: [
+      { e: "☀️", t: "Slow wake-up, coffee in hand, watching the sunrise somewhere beautiful" },
+      { e: "🧘", t: "Movement first — yoga, a walk, or a morning swim to set the tone" },
+      { e: "👧", t: "Lazy breakfast with my kids, no rushing, no school run stress" },
+      { e: "💻", t: "A couple of hours of focused creative work before the world wakes up" },
+      { e: "📖", t: "Reading, journalling, or just sitting in beautiful silence" }
+    ]
+  },
+  {
+    q: "Where in the world are you living?",
+    sub: "Your backdrop. Your roots. Your base.",
+    multi: false,
+    opts: [
+      { e: "🌍", t: "Somewhere new every few months — I want to be fully nomadic" },
+      { e: "🏖️", t: "A warm coastal town or island, sun and sea on my doorstep" },
+      { e: "🏡", t: "A beautiful home in a location I truly chose, not where life landed me" },
+      { e: "🗺️", t: "Splitting my time — a home base plus extended travel adventures" }
+    ]
+  },
+  {
+    q: "Who fills your days?",
+    sub: "Select all the people and energy you want around you.",
+    multi: true,
+    opts: [
+      { e: "👨‍👩‍👧", t: "My family — present, unhurried, making memories daily" },
+      { e: "🌸", t: "A close circle of like-minded women who lift each other up" },
+      { e: "🌐", t: "A global community — connections from every culture and corner of the world" },
+      { e: "🤍", t: "Mostly just me — space, solitude, and peace on my own terms" }
+    ]
+  },
+  {
+    q: "What does 'work' look like in your freedom life?",
+    sub: "Select all that apply.",
+    multi: true,
+    opts: [
+      { e: "💻", t: "A few hours a day, laptop anywhere, completely location-free" },
+      { e: "🎨", t: "Creative projects that light me up — passion, not obligation" },
+      { e: "💸", t: "Income that flows in whether I'm working or not" },
+      { e: "🚫", t: "Honestly? As little as possible — I want true time freedom" },
+      { e: "🤝", t: "Helping and mentoring others — making a real difference" }
+    ]
+  },
+  {
+    q: "What does financial freedom feel like to you?",
+    sub: "Select everything that resonates.",
+    multi: true,
+    opts: [
+      { e: "🛡️", t: "Safety and security — never worrying about money again" },
+      { e: "✈️", t: "Being able to book any trip, any time, without checking the price" },
+      { e: "🎁", t: "Giving generously — to my family, to causes I love, without guilt" },
+      { e: "👑", t: "True abundance — living luxuriously and investing for the long term" },
+      { e: "🏠", t: "Owning property, building real assets, leaving a legacy" }
+    ]
+  },
+  {
+    q: "What are you leaving behind?",
+    sub: "Select everything you're done tolerating.",
+    multi: true,
+    opts: [
+      { e: "⏰", t: "Trading my hours for money — time is my most precious resource" },
+      { e: "😤", t: "Someone else deciding when I can take a holiday, or how much I earn" },
+      { e: "😔", t: "That constant low-level feeling that this can't be all there is" },
+      { e: "💔", t: "Missing the moments that matter most — school plays, lazy Sundays, all of it" },
+      { e: "😰", t: "The anxiety of financial uncertainty and never feeling ahead" }
+    ]
+  },
+  {
+    q: "How do you envisage spending your days?",
+    sub: "Paint the full picture — select as many as feel true.",
+    multi: true,
+    opts: [
+      { e: "🌿", t: "Long lunches, slow afternoons, time that belongs to me" },
+      { e: "🏋️", t: "Prioritising my health — proper workouts, good food, real rest" },
+      { e: "✈️", t: "Exploring new places, cultures, and experiences regularly" },
+      { e: "🎓", t: "Learning, growing, investing in myself without guilt" },
+      { e: "👩‍💻", t: "Building something meaningful — a business, a brand, a movement" },
+      { e: "🌅", t: "Being genuinely present — not distracted, not drained, just here" },
+      { e: "💃", t: "Fun — actual joy, spontaneity, and things that make me feel alive" }
+    ]
+  },
+  {
+    q: "How do you feel every single day in this life?",
+    sub: "Select all that ring true.",
+    multi: true,
+    opts: [
+      { e: "🌟", t: "Alive — genuinely excited to wake up and see what the day brings" },
+      { e: "😌", t: "At peace — calm, grounded, no low-level anxiety humming in the background" },
+      { e: "💪", t: "Powerful — like I'm finally living on my own terms" },
+      { e: "🥰", t: "Grateful — pinching myself that this is actually my real life" }
+    ]
+  },
+  {
+    q: "What would make this life possible?",
+    sub: "Select everything that resonates.",
+    multi: true,
+    opts: [
+      { e: "💰", t: "An income that replaces my salary — and then keeps growing" },
+      { e: "🧠", t: "The knowledge and skills to build something online that actually works" },
+      { e: "🤝", t: "The right mentor or community who's already done what I want to do" },
+      { e: "🚀", t: "Just the courage to start — I'm closer than I think" }
+    ]
+  },
+  {
+    q: "What does your ideal evening look like?",
+    sub: "How does your perfect day end? Select all that feel true.",
+    multi: true,
+    opts: [
+      { e: "🌙", t: "Long, unhurried dinners — good food, good wine, great conversation" },
+      { e: "🛁", t: "A slow wind-down — bath, candles, total peace and restoration" },
+      { e: "👨‍👩‍👧", t: "Quality time with my family — present, connected, nowhere else to be" },
+      { e: "🎬", t: "Cosy nights in — a film, a book, just pure guilt-free downtime" },
+      { e: "🌟", t: "Socialising — dinner with friends, laughter, making memories" },
+      { e: "✍️", t: "Reflecting on the day, journalling, planning the next adventure" }
+    ]
+  }
+];
+
+let current = 0;
+// answers is now an array of arrays (multi) or single index (single)
+let answers  = Array(10).fill(null).map(() => []);
+let aboutAnswers = [undefined, undefined, undefined, undefined, undefined];
+let userName = '';
+
+const aboutQuestions = [
+  { q: "What does your current situation look like?", opts: ["Employed full-time","Employed part-time","Stay at home parent","Self-employed / freelance","Between jobs / career change"] },
+  { q: "Which age range are you in?", opts: ["Under 25","25–34","35–44","45–54","55+"] },
+  { q: "What frustrates you most about your current situation?", opts: ["No time — I'm always running on empty","Not earning what I'm worth","Being stuck in one place with no flexibility","Feeling invisible — like I have so much more to give","Just doing the same thing on repeat with no end in sight"] },
+  { q: "Have you tried building an online business before?", opts: ["No — this is completely new to me","I've looked into it but never taken the leap","I've tried a few things but nothing has really worked yet","Yes — I have something going but want to level up"] },
+  { q: "Which best describes your family situation?", opts: ["I have young children at home","I have older children / teens","My kids have flown the nest","Just me and my partner (no kids)","Just me (no partner)","Single and loving my own company"] }
+];
+
+function isAnswered(idx) {
+  if (questions[idx].multi) return answers[idx].length > 0;
+  return answers[idx].length === 1;
+}
+
+function selectAbout(qIdx, optIdx) {
+  aboutAnswers[qIdx] = optIdx;
+  const container = document.getElementById(`about-opts-${qIdx}`);
+  container.querySelectorAll('.about-opt').forEach((b,j) => b.classList.toggle('selected', j === optIdx));
+  const allAnswered = aboutAnswers.every(a => a !== undefined);
+  document.getElementById('btn-about-next').disabled = !allAnswered;
+}
+
+function goBackFromAbout() {
+  current = questions.length - 1;
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+function goToCapture() {
+  showScreen('screen-capture');
+}
+
+function startQuiz() {
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  el.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  const pct = (current / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = `${current + 1} of ${questions.length}`;
+  document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+  document.getElementById('btn-next').disabled = !isAnswered(current);
+
+  const multiHint = q.multi ? `<span style="font-size:11px;color:var(--coral);letter-spacing:0.08em;"> · Select all that apply</span>` : '';
+
+  document.getElementById('question-block').innerHTML = `
+    <p class="q-number">Question ${current + 1}${multiHint}</p>
+    <h2 class="q-text">${q.q}</h2>
+    <p class="q-subtext">${q.sub}</p>
+    <div class="options-grid">
+      ${q.opts.map((o, i) => `
+        <button class="option-btn ${answers[current].includes(i) ? 'selected' : ''}" onclick="selectOption(${i})">
+          <span class="option-emoji">${o.e}</span>
+          <span>${o.t}</span>
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function selectOption(i) {
+  const q = questions[current];
+  if (q.multi) {
+    const idx = answers[current].indexOf(i);
+    if (idx > -1) answers[current].splice(idx, 1);
+    else answers[current].push(i);
+  } else {
+    answers[current] = [i];
+  }
+  // re-render just the buttons
+  document.querySelectorAll('.option-btn').forEach((b, j) => {
+    b.classList.toggle('selected', answers[current].includes(j));
+  });
+  document.getElementById('btn-next').disabled = !isAnswered(current);
+}
+
+function nextQuestion() {
+  if (!isAnswered(current)) return;
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showScreen('screen-about');
+  }
+}
+
+function prevQuestion() {
+  if (current > 0) { current--; renderQuestion(); }
+}
+
+function submitCapture() {
+  const name  = document.getElementById('input-name').value.trim();
+  const email = document.getElementById('input-email').value.trim();
+  const err   = document.getElementById('capture-err');
+  if (!name || !email || !email.includes('@')) {
+    err.style.display = 'block'; return;
+  }
+  err.style.display = 'none';
+  userName = name;
+  showScreen('screen-loading');
+  sendToSheet(name, email);
+  generateVision(name, email);
+}
+
+async function sendToSheet(name, email) {
+  if (SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL') return;
+  const answerLabels = answers.map((ans, i) => ans.map(a => questions[i].opts[a].t).join('; '));
+  const aboutLabels  = aboutAnswers.map((a, i) => a !== undefined ? aboutQuestions[i].opts[a] : '');
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, email,
+        answers: answerLabels,
+        current_situation: aboutLabels[0],
+        age_range: aboutLabels[1],
+        biggest_frustration: aboutLabels[2],
+        online_business_experience: aboutLabels[3],
+        family_situation: aboutLabels[4],
+        source: 'freedom-life-quiz',
+        date: new Date().toISOString()
+      })
+    });
+  } catch(e) { console.log('Sheet error', e); }
+}
+
+const loadingMsgs = [
+  "Reading your answers…",
+  "Painting your freedom picture…",
+  "Weaving your vision together…",
+  "Almost ready…"
+];
+
+async function generateVision(name, email) {
+  let msgIdx = 0;
+  const msgEl = document.getElementById('loading-msg');
+  const interval = setInterval(() => {
+    msgIdx = (msgIdx + 1) % loadingMsgs.length;
+    msgEl.textContent = loadingMsgs[msgIdx];
+  }, 1800);
+
+  const answerLabels = answers.map((ans, i) => ans.map(a => questions[i].opts[a].t).join(', '));
+  const aboutLabels  = aboutAnswers.map((a, i) => a !== undefined ? aboutQuestions[i].opts[a] : '');
+  const prompt = `You are writing a short, beautiful, personalised Freedom Life Vision for someone called ${name}.
+
+Their current situation: ${aboutLabels[0]} | Age: ${aboutLabels[1]} | Family situation: ${aboutLabels[4]} | Biggest frustration: ${aboutLabels[2]} | Online business experience: ${aboutLabels[3]}
+
+Write exactly 3 short paragraphs — each 3 sentences max. Total around 160–190 words.
+
+Paragraph 1 — THEIR DAY: Walk through their day from morning to evening. Be SPECIFIC about:
+- Who they are with — draw directly from their "who fills your days" answer AND their family situation. If they have young children, paint specific moments: slow breakfast together, school pickup without the stress, evening cuddles with nowhere to be. If they have teens, paint that differently. If no kids, paint their partner, friends, or beautiful solitude. Make it feel real and personal to THEIR situation.
+- What they actually DO — draw from "how do you envisage spending your days". If they said slow living, paint that slowness. If travel, paint that. If building something, paint that energy.
+- How the day ENDS — draw from their evening answer.
+Make it feel like one real, flowing day — not a list of highlights.
+
+Paragraph 2 — THE FEELING: How does this life feel emotionally and financially? Draw from their "leaving behind" answers to name what's gone, and their "financial freedom" answers to name what's arrived. Warm and forward-facing.
+
+Paragraph 3 — THE CLOSE: 2 sentences only. Make this feel inevitable and close. Hint at online income freedom — never name a company or product.
+
+Tone: intimate, warm, second-person. Like a wise friend writing their future.
+
+Their answers:
+${questions.map((q, i) => `${q.q}\n→ ${answerLabels[i]}`).join('\n\n')}
+
+Write ONLY the 3 paragraphs. No headers, no intro, no quotation marks. Blank line between paragraphs.`;
+
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 400,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await res.json();
+    const vision = data.content?.[0]?.text || fallbackVision(name);
+    clearInterval(interval);
+    showResult(name, vision);
+  } catch(e) {
+    clearInterval(interval);
+    showResult(name, fallbackVision(name));
+  }
+}
+
+function fallbackVision(name) {
+  const familySit = aboutAnswers[4] !== undefined ? aboutQuestions[4].opts[aboutAnswers[4]] : '';
+  const hasYoungKids = familySit.includes('young children');
+  const hasTeens = familySit.includes('teens');
+  const hasPartner = familySit.includes('partner');
+  const solo = familySit.includes('Just me (no partner)') || familySit.includes('Single');
+
+  const peopleScene = hasYoungKids
+    ? "The kids are there too — slow breakfast, no school run panic, just the morning unfolding as it should."
+    : hasTeens
+    ? "Your teens are around, but differently now — present, unhurried, actually talking to each other."
+    : hasPartner
+    ? "Your partner is there — and you finally have the time and ease to actually enjoy each other."
+    : solo
+    ? "The morning is entirely yours — peaceful, unhurried, exactly as you designed it."
+    : "The people who matter most are close, and you have real time for them.";
+
+  return `${name}, picture this: you wake without an alarm, the morning light soft through the window of wherever you've chosen to be. ${peopleScene} Your work, when you get to it, is a few focused hours you actually enjoy — and then the afternoon stretches out like a gift.\n\nThe financial anxiety that used to hum in the background? Gone. Replaced by a quiet steadiness — the ability to say yes to the trip, give generously, invest in your future without guilt. You've left behind the ceiling, the clock-watching, the slow drain of a life lived for someone else's schedule.\n\nThis life is closer than you think, ${name}. It was built by women who found the right path, took one step, and never looked back.`;
+}
+
+function showResult(name, vision) {
+  currentVisionText = vision;
+  currentUserName   = name;
+  document.getElementById('result-name').textContent = name + "'s Vision";
+  document.getElementById('vision-text').innerHTML = vision.split('\n\n').map(p => `<p style="margin-bottom:1.2em">${p}</p>`).join('');
+  showScreen('screen-result');
+}
+
+// store vision text globally for image generation
+let currentVisionText = '';
+let currentUserName   = '';
+
+async function submitContact() {
+  const name    = document.getElementById('contact-name').value.trim();
+  const email   = document.getElementById('contact-email').value.trim();
+  const phone   = document.getElementById('contact-phone').value.trim();
+  const message = document.getElementById('contact-message').value.trim();
+  const err     = document.getElementById('contact-err');
+
+  if (!name || !email || !email.includes('@')) {
+    err.style.display = 'block'; return;
+  }
+  err.style.display = 'none';
+
+  const btn = document.querySelector('#contact-form .btn-cta');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name, email, phone, message,
+        vision: currentVisionText,
+        source: 'freedom-life-quiz'
+      })
+    });
+
+    if (res.ok) {
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('success-name').textContent = name;
+      document.getElementById('contact-success').style.display = 'block';
+    } else {
+      btn.textContent = 'Send My Message →';
+      btn.disabled = false;
+      err.textContent = 'Something went wrong — please try again.';
+      err.style.display = 'block';
+    }
+  } catch(e) {
+    btn.textContent = 'Send My Message →';
+    btn.disabled = false;
+    err.textContent = 'Something went wrong — please try again.';
+    err.style.display = 'block';
+  }
+}
+
+function shareVision() {
+  const firstSentence = currentVisionText.split(/[.!?]/)[0].trim();
+  const shareText = `✨ My Freedom Life Vision:\n\n"${firstSentence}…"\n\nWhat does YOUR freedom life look like? Take the quiz 👇`;
+  if (navigator.share) {
+    navigator.share({
+      title: 'My Freedom Life Vision',
+      text: shareText,
+      url: window.location.href
+    });
+  } else {
+    const combined = `${shareText}\n\n${window.location.href}`;
+    navigator.clipboard.writeText(combined).then(() => {
+      alert('Copied to clipboard! Paste it into your Instagram caption 🌸');
+    });
+  }
+}
+
+function saveAsImage() {
+  const modal  = document.getElementById('image-modal');
+  const canvas = document.getElementById('vision-canvas');
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  drawVisionCard(canvas, currentUserName, currentVisionText);
+}
+
+function closeModal() {
+  document.getElementById('image-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function downloadImage() {
+  const canvas = document.getElementById('vision-canvas');
+  const link   = document.createElement('a');
+  link.download = 'my-freedom-life-vision.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function drawVisionCard(canvas, name, visionText) {
+  // Instagram Stories ratio 9:16
+  // A4 at 96dpi: 794 x 1123px
+  const W = 794;
+  const PADDING = 64;
+  const maxTextW = W - (PADDING * 2);
+  const ctx = canvas.getContext('2d');
+
+  // ── MEASURE TEXT FIRST ──
+  canvas.width  = W;
+  canvas.height = 100;
+  ctx.font = '300 22px Georgia, serif';
+
+  const paragraphs = visionText.split('\n\n').filter(p => p.trim());
+  const lineH  = 38;
+  const paraGap = 28;
+
+  let totalTextH = 0;
+  const paraLines = paragraphs.map(para => {
+    const lines = measureWrap(ctx, para, maxTextW);
+    totalTextH += lines.length * lineH;
+    return lines;
+  });
+  totalTextH += (paragraphs.length - 1) * paraGap;
+
+  // Fixed zones
+  const headerH = 390;
+  const footerH = 140;
+  const vPad    = 48;
+  const H = Math.max(1123, headerH + vPad + totalTextH + vPad + footerH);
+
+  canvas.width  = W;
+  canvas.height = H;
+
+  // ── BACKGROUND — warm cream ──
+  ctx.fillStyle = '#f5f0e8';
+  ctx.fillRect(0, 0, W, H);
+
+  // ── SUBTLE BLUSH INNER BORDER ──
+  ctx.strokeStyle = 'rgba(180,140,120,0.2)';
+  ctx.lineWidth = 1;
+  const bm = 20;
+  ctx.strokeRect(bm, bm, W - bm*2, H - bm*2);
+
+  // ── CORNER DETAILS ──
+  ctx.strokeStyle = 'rgba(180,140,120,0.35)';
+  ctx.lineWidth = 1;
+  const cm = 28, cl = 40;
+  ctx.beginPath(); ctx.moveTo(cm, cm+cl); ctx.lineTo(cm, cm); ctx.lineTo(cm+cl, cm); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(W-cm-cl, cm); ctx.lineTo(W-cm, cm); ctx.lineTo(W-cm, cm+cl); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cm, H-cm-cl); ctx.lineTo(cm, H-cm); ctx.lineTo(cm+cl, H-cm); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(W-cm-cl, H-cm); ctx.lineTo(W-cm, H-cm); ctx.lineTo(W-cm, H-cm-cl); ctx.stroke();
+
+  // ── SUNBURST (logo-inspired) ──
+  const cx = W/2, sunY = 72, rays = 16, innerR = 22, outerR = 48;
+  ctx.strokeStyle = 'rgba(43,34,24,0.55)';
+  ctx.lineWidth = 1.2;
+  for (let i = 0; i < rays; i++) {
+    const angle = (Math.PI / (rays - 1)) * i - Math.PI;
+    const x1 = cx + Math.cos(angle) * innerR;
+    const y1 = sunY + Math.sin(angle) * innerR;
+    const x2 = cx + Math.cos(angle) * outerR;
+    const y2 = sunY + Math.sin(angle) * outerR;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  }
+
+  // ── BRAND TAG ──
+  ctx.fillStyle = '#2b2218';
+  ctx.font = '600 13px DM Sans, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('RISE BEYOND THE 9 TO 5', W/2, 134);
+
+  // ── TOP LINE ──
+  const tg = ctx.createLinearGradient(PADDING, 0, W-PADDING, 0);
+  tg.addColorStop(0, 'transparent');
+  tg.addColorStop(0.5, 'rgba(180,140,120,0.5)');
+  tg.addColorStop(1, 'transparent');
+  ctx.strokeStyle = tg;
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(PADDING, 148); ctx.lineTo(W-PADDING, 148); ctx.stroke();
+
+  // ── EYEBROW ──
+  ctx.fillStyle = 'rgba(43,34,24,0.45)';
+  ctx.font = '300 11px DM Sans, sans-serif';
+  ctx.fillText('YOUR FREEDOM LIFE VISION', W/2, 174);
+
+  // ── TITLE ──
+  ctx.fillStyle = '#2b2218';
+  ctx.font = '300 58px Georgia, serif';
+  ctx.fillText('This is your', W/2, 240);
+  ctx.fillStyle = '#b8935a';
+  ctx.font = 'italic 300 66px Georgia, serif';
+  ctx.fillText('next chapter', W/2, 310);
+
+  // ── NAME ──
+  ctx.fillStyle = 'rgba(43,34,24,0.5)';
+  ctx.font = 'italic 300 24px Georgia, serif';
+  ctx.fillText(name + "'s Vision", W/2, 348);
+
+  // ── DIVIDER ──
+  const gd = ctx.createLinearGradient(W/2-80, 0, W/2+80, 0);
+  gd.addColorStop(0, 'transparent');
+  gd.addColorStop(0.5, '#b8935a');
+  gd.addColorStop(1, 'transparent');
+  ctx.strokeStyle = gd;
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(W/2-80, 374); ctx.lineTo(W/2+80, 374); ctx.stroke();
+
+  // ── OPENING QUOTE ──
+  ctx.fillStyle = 'rgba(184,147,90,0.12)';
+  ctx.font = 'italic 300 140px Georgia, serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('\u201C', PADDING - 10, headerH + 20);
+
+  // ── VISION TEXT — all paragraphs ──
+  ctx.fillStyle = '#2b2218';
+  ctx.font = '300 22px Georgia, serif';
+  ctx.textAlign = 'center';
+
+  let y = headerH + vPad;
+  paraLines.forEach((lines, pIdx) => {
+    lines.forEach(line => {
+      ctx.fillText(line, W/2, y);
+      y += lineH;
+    });
+    if (pIdx < paraLines.length - 1) {
+      y += paraGap * 0.4;
+      ctx.fillStyle = 'rgba(184,147,90,0.6)';
+      ctx.font = '12px sans-serif';
+      ctx.fillText('✦', W/2, y);
+      ctx.fillStyle = '#2b2218';
+      ctx.font = '300 22px Georgia, serif';
+      y += paraGap * 0.6;
+    }
+  });
+
+  y += vPad;
+
+  // ── FOOTER LINE ──
+  const fg = ctx.createLinearGradient(PADDING, 0, W-PADDING, 0);
+  fg.addColorStop(0, 'transparent');
+  fg.addColorStop(0.5, 'rgba(180,140,120,0.4)');
+  fg.addColorStop(1, 'transparent');
+  ctx.strokeStyle = fg;
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(PADDING, y); ctx.lineTo(W-PADDING, y); ctx.stroke();
+  y += 32;
+
+  // ── CTA ──
+  ctx.fillStyle = '#b8935a';
+  ctx.font = '500 11px DM Sans, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('WHAT DOES YOUR FREEDOM LIFE LOOK LIKE?', W/2, y);
+  y += 26;
+
+  ctx.fillStyle = 'rgba(43,34,24,0.4)';
+  ctx.font = '300 11px DM Sans, sans-serif';
+  ctx.fillText('Take the quiz · risebeyondthe9to5.com', W/2, y);
+  y += 32;
+
+  // ── STARS ──
+  ctx.fillStyle = 'rgba(184,147,90,0.5)';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('✦  ✦  ✦', W/2, y);
+}
+
+// Measures wrapped lines without drawing — returns array of line strings
+function measureWrap(ctx, text, maxWidth) {
+  const words = text.split(' ');
+  const lines = [];
+  let line = '';
+  for (let i = 0; i < words.length; i++) {
+    const test = line + words[i] + ' ';
+    if (ctx.measureText(test).width > maxWidth && i > 0) {
+      lines.push(line.trim());
+      line = words[i] + ' ';
+    } else {
+      line = test;
+    }
+  }
+  if (line.trim()) lines.push(line.trim());
+  return lines;
+}
+</script>
+</body>
+</html>
