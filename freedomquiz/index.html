@@ -1098,7 +1098,7 @@ function submitCapture() {
 }
 
 async function sendToSheet(name, email, social) {
-  if (SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL') return;
+  if (SHEET_URL === 'const SHEET_URL = 'https://script.google.com/macros/s/AKfycbx6tFxJxVN-0Zj8yICudNX1p9lhQwrd6aq5iTfqU2WpuDmfzwEGodW0ACptWn7Yk-TK/exec';') return;
   const answerLabels = answers.map((ans, i) => ans.map(a => questions[i].opts[a].t).join('; '));
   const aboutLabels  = aboutAnswers.map((a, i) => a !== undefined ? aboutQuestions[i].opts[a] : '');
   try {
