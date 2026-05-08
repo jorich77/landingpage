@@ -845,24 +845,13 @@
   <div style="max-width:440px;margin:0 auto;">
     <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Your Vision Card — 2 Pages</p>
     <canvas id="vision-canvas" style="width:100%;border-radius:2px;display:block;"></canvas>
-    <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:12px;margin-top:12px;line-height:1.6;">Your vision flows across 2 A4 pages · Download below</p>
-    <div style="display:flex;gap:12px;margin-top:20px;">
-      <button onclick="downloadImage()" style="flex:1;background:var(--coral);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">⬇ Download</button>
+    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;margin-top:12px;line-height:1.7;">
+      <span id="save-instructions">📱 <strong style="color:white;">Press and hold the image above to save it to your camera roll</strong><br>
+      <span style="color:rgba(255,255,255,0.4);">Works inside Instagram — no browser switch needed</span></span>
+    </p>
+    <div style="display:flex;gap:12px;margin-top:16px;">
+      <button onclick="downloadImage()" id="download-btn" style="flex:1;background:var(--coral);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">⬇ Download (desktop)</button>
       <button onclick="closeModal()" style="flex:1;background:none;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">Close</button>
-    </div>
-    <div id="open-in-browser-hint" style="display:none;margin-top:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:16px;text-align:center;">
-      <p style="color:rgba(255,255,255,0.9);font-size:13px;font-weight:500;margin-bottom:8px;">Instagram blocks downloads</p>
-      <p style="color:rgba(255,255,255,0.6);font-size:12px;line-height:1.7;margin-bottom:14px;">To save your vision, open this page in Safari or Chrome:</p>
-      <p style="color:rgba(255,255,255,0.5);font-size:12px;line-height:1.8;margin-bottom:14px;">
-        1. Tap the <strong style="color:white;">⋯</strong> or <strong style="color:white;">⋮</strong> menu in the top corner of your browser<br>
-        2. Tap <strong style="color:white;">"Open in Safari"</strong> or <strong style="color:white;">"Open in Chrome"</strong><br>
-        3. Come back to the result page and tap Download
-      </p>
-      <button onclick="openInBrowser()" style="background:white;color:#2b2218;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:12px 24px;cursor:pointer;width:100%;margin-bottom:10px;">Copy Link to Open Manually</button>
-      <div id="browser-url-hint" style="display:none;">
-        <p style="color:rgba(255,255,255,0.5);font-size:11px;margin-bottom:6px;">Link copied! Paste into Safari or Chrome:</p>
-        <p id="browser-url-display" style="color:var(--coral);font-size:10px;word-break:break-all;background:rgba(0,0,0,0.3);padding:8px;border-radius:2px;"></p>
-      </div>
     </div>
   </div>
 </div>
@@ -1274,36 +1263,42 @@ function saveAsImage() {
 function closeModal() {
   document.getElementById('image-modal').style.display = 'none';
   document.body.style.overflow = '';
+  const canvas = document.getElementById('vision-canvas');
+  canvas.style.display = 'block';
+  const img = document.getElementById('vision-img-display');
+  if (img) img.remove();
 }
 
-function isInstagramBrowser() {
-  return /Instagram/.test(navigator.userAgent);
+function saveAsImage() {
+  const modal  = document.getElementById('image-modal');
+  const canvas = document.getElementById('vision-canvas');
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  drawVisionCard(canvas, currentUserName, currentVisionText);
+
+  // Convert canvas to img so long-press save works on mobile/Instagram
+  setTimeout(() => {
+    const dataUrl = canvas.toDataURL('image/png');
+    // Replace canvas with img for mobile long-press
+    const existing = document.getElementById('vision-img-display');
+    if (existing) existing.remove();
+    const img = document.createElement('img');
+    img.id = 'vision-img-display';
+    img.src = dataUrl;
+    img.style.cssText = 'width:100%;display:block;border-radius:2px;margin-top:8px;';
+    img.setAttribute('alt', 'Your Freedom Life Vision');
+    canvas.style.display = 'none';
+    canvas.parentNode.insertBefore(img, canvas);
+  }, 100);
 }
 
 function downloadImage() {
-  if (isInstagramBrowser()) {
-    document.getElementById('open-in-browser-hint').style.display = 'block';
-    return;
-  }
+  // On desktop — trigger file download
   const canvas = document.getElementById('vision-canvas');
   const link   = document.createElement('a');
   link.download = 'my-freedom-life-vision.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
-}
-
-function openInBrowser() {
-  const url = window.location.href;
-  // Show a clear message with the URL to copy
-  const hint = document.getElementById('browser-url-hint');
-  const urlDisplay = document.getElementById('browser-url-display');
-  urlDisplay.textContent = url;
-  hint.style.display = 'block';
-
-  // Try to copy automatically too
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).catch(() => {});
-  }
 }
 
 function drawVisionCard(canvas, name, visionText) {
@@ -1527,3 +1522,4 @@ function measureWrap(ctx, text, maxWidth) {
 </script>
 </body>
 </html>
+
