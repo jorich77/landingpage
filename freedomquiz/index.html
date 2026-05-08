@@ -845,10 +845,14 @@
   <div style="max-width:440px;margin:0 auto;">
     <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Your Vision Card — 2 Pages</p>
     <canvas id="vision-canvas" style="width:100%;border-radius:2px;display:block;"></canvas>
-    <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:12px;margin-top:12px;line-height:1.6;">Your vision flows across 2 A4 pages · Download or print below</p>
+    <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:12px;margin-top:12px;line-height:1.6;">Your vision flows across 2 A4 pages · Download below</p>
     <div style="display:flex;gap:12px;margin-top:20px;">
       <button onclick="downloadImage()" style="flex:1;background:var(--coral);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">⬇ Download</button>
       <button onclick="closeModal()" style="flex:1;background:none;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">Close</button>
+    </div>
+    <div id="open-in-browser-hint" style="display:none;margin-top:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:16px;text-align:center;">
+      <p style="color:rgba(255,255,255,0.8);font-size:13px;line-height:1.6;margin-bottom:12px;">Instagram's browser blocks downloads.<br>Open this page in Safari or Chrome to save your vision.</p>
+      <button onclick="openInBrowser()" style="background:white;color:#2b2218;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.08em;padding:12px 24px;cursor:pointer;width:100%;">Open in Browser</button>
     </div>
   </div>
 </div>
@@ -1262,12 +1266,33 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
+function isInstagramBrowser() {
+  return /Instagram/.test(navigator.userAgent);
+}
+
 function downloadImage() {
+  if (isInstagramBrowser()) {
+    document.getElementById('open-in-browser-hint').style.display = 'block';
+    return;
+  }
   const canvas = document.getElementById('vision-canvas');
   const link   = document.createElement('a');
   link.download = 'my-freedom-life-vision.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
+}
+
+function openInBrowser() {
+  // Works on iOS (Safari) and Android (Chrome)
+  window.location.href = window.location.href;
+  // Fallback — copy URL and prompt user
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('Link copied! Paste it into Safari or Chrome to open the quiz and download your vision.');
+    });
+  } else {
+    alert('Copy this link and open it in Safari or Chrome:\n\n' + window.location.href);
+  }
 }
 
 function drawVisionCard(canvas, name, visionText) {
