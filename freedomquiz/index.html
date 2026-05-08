@@ -333,6 +333,8 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .capture-form input {
@@ -811,7 +813,6 @@
 <div id="screen-result" class="screen">
   <div class="wrap">
     <div class="result-header">
-      <p class="result-eyebrow">Your Freedom Life Vision</p>
       <h2 class="result-title">This is your<br><em>next chapter</em></h2>
       <p class="result-name" id="result-name"></p>
       <div class="result-divider"></div>
@@ -825,12 +826,14 @@
       <p class="cta-eyebrow">Ready to make it real?</p>
       <h3>This life isn't a<br><em>dream</em> — it's a decision.</h3>
       <p>I help women build high-income online businesses that fund the exact life you just described. Let me show you how.</p>
+      <a href="https://ig.me/m/risebeyondthe9to5" target="_blank" class="btn-cta">📩 &nbsp;Message me on Instagram</a>
+      <p style="font-size:11px;color:rgba(245,240,232,0.4);margin-top:10px;">@risebeyondthe9to5</p>
     </div>
 
     <div class="share-row">
       <p class="share-label">Share your vision</p>
       <div class="share-buttons">
-        <button class="btn-share" onclick="shareVision()">✦ Share on Instagram</button>
+        <button class="btn-share" onclick="shareVision()">✦ Share my vision</button>
         <button class="btn-share btn-share-image" onclick="saveAsImage()">⬇ Save as Image</button>
       </div>
     </div>
@@ -840,9 +843,9 @@
 <!-- IMAGE CARD MODAL -->
 <div id="image-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;overflow-y:auto;padding:24px;">
   <div style="max-width:440px;margin:0 auto;">
-    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Your Vision Card</p>
+    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Your Vision Card — 2 Pages</p>
     <canvas id="vision-canvas" style="width:100%;border-radius:2px;display:block;"></canvas>
-    <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:12px;margin-top:12px;line-height:1.6;">Press and hold (mobile) or right-click (desktop) to save the image</p>
+    <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:12px;margin-top:12px;line-height:1.6;">Your vision flows across 2 A4 pages · Download or print below</p>
     <div style="display:flex;gap:12px;margin-top:20px;">
       <button onclick="downloadImage()" style="flex:1;background:var(--coral);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">⬇ Download</button>
       <button onclick="closeModal()" style="flex:1;background:none;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">Close</button>
@@ -852,7 +855,7 @@
 
 <script>
 // ── CONFIG ──
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbx6tFxJxVN-0Zj8yICudNX1p9lhQwrd6aq5iTfqU2WpuDmfzwEGodW0ACptWn7Yk-TK/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwa0EQtSnx2slioza-yUzIqQ_2UFhFtkSPCUEkRnTJbhJO5jwVqmd-otx5NoLsvUZjXHQ/exec';
 
 // ── QUESTIONS ──
 // multi: true = select all that apply; multi: false = single select
@@ -933,12 +936,27 @@ const questions = [
     multi: true,
     opts: [
       { e: "🌿", t: "Long lunches, slow afternoons, time that belongs to me" },
+      { e: "👨‍👩‍👧", t: "Truly present with my kids, partner or family — no rushing, no guilt" },
       { e: "🏋️", t: "Prioritising my health — proper workouts, good food, real rest" },
       { e: "✈️", t: "Exploring new places, cultures, and experiences regularly" },
       { e: "🎓", t: "Learning, growing, investing in myself without guilt" },
       { e: "👩‍💻", t: "Building something meaningful — a business, a brand, a movement" },
       { e: "🌅", t: "Being genuinely present — not distracted, not drained, just here" },
       { e: "💃", t: "Fun — actual joy, spontaneity, and things that make me feel alive" }
+    ]
+  },
+  {
+    q: "What does your ideal evening look like?",
+    sub: "How does your perfect day end? Select all that feel true.",
+    multi: true,
+    opts: [
+      { e: "🌙", t: "Long, unhurried dinners — good food, good wine, great conversation" },
+      { e: "🛁", t: "A slow wind-down — bath, candles, total peace and restoration" },
+      { e: "👨‍👩‍👧", t: "Relaxed family time — kids, partner, everyone together with nowhere to be" },
+      { e: "💑", t: "Quality time with my partner — connected, present, no distractions" },
+      { e: "🎬", t: "Cosy nights in — a film, a book, just pure guilt-free downtime" },
+      { e: "🌟", t: "Socialising — dinner with friends, laughter, making memories" },
+      { e: "✍️", t: "Reflecting on the day, journalling, planning the next adventure" }
     ]
   },
   {
@@ -961,19 +979,6 @@ const questions = [
       { e: "🧠", t: "The knowledge and skills to build something online that actually works" },
       { e: "🤝", t: "The right mentor or community who's already done what I want to do" },
       { e: "🚀", t: "Just the courage to start — I'm closer than I think" }
-    ]
-  },
-  {
-    q: "What does your ideal evening look like?",
-    sub: "How does your perfect day end? Select all that feel true.",
-    multi: true,
-    opts: [
-      { e: "🌙", t: "Long, unhurried dinners — good food, good wine, great conversation" },
-      { e: "🛁", t: "A slow wind-down — bath, candles, total peace and restoration" },
-      { e: "👨‍👩‍👧", t: "Quality time with my family — present, connected, nowhere else to be" },
-      { e: "🎬", t: "Cosy nights in — a film, a book, just pure guilt-free downtime" },
-      { e: "🌟", t: "Socialising — dinner with friends, laughter, making memories" },
-      { e: "✍️", t: "Reflecting on the day, journalling, planning the next adventure" }
     ]
   }
 ];
@@ -1138,28 +1143,30 @@ async function generateVision(name, email) {
 
   const answerLabels = answers.map((ans, i) => ans.map(a => questions[i].opts[a].t).join(', '));
   const aboutLabels  = aboutAnswers.map((a, i) => a !== undefined ? aboutQuestions[i].opts[a] : '');
-  const prompt = `You are writing a short, beautiful, personalised Freedom Life Vision for someone called ${name}.
+  const prompt = `You are writing a rich, immersive, personalised Freedom Life Vision for someone called ${name}.
 
 Their current situation: ${aboutLabels[0]} | Age: ${aboutLabels[1]} | Family situation: ${aboutLabels[4]} | Biggest frustration: ${aboutLabels[2]} | Online business experience: ${aboutLabels[3]}
 
-Write exactly 3 short paragraphs — each 3 sentences max. Total around 160–190 words.
+Write exactly 6 paragraphs. Each paragraph MUST be 5–7 sentences long. Total response MUST be 550–700 words — rich and detailed enough to fill two full printed A4 pages.
 
-Paragraph 1 — THEIR DAY: Walk through their day from morning to evening. Be SPECIFIC about:
-- Who they are with — draw directly from their "who fills your days" answer AND their family situation. If they have young children, paint specific moments: slow breakfast together, school pickup without the stress, evening cuddles with nowhere to be. If they have teens, paint that differently. If no kids, paint their partner, friends, or beautiful solitude. Make it feel real and personal to THEIR situation.
-- What they actually DO — draw from "how do you envisage spending your days". If they said slow living, paint that slowness. If travel, paint that. If building something, paint that energy.
-- How the day ENDS — draw from their evening answer.
-Make it feel like one real, flowing day — not a list of highlights.
+Paragraph 1 — THEIR MORNING: Open with a deeply sensory, cinematic scene. Where are they, what do they see, smell, hear? How does the morning feel in their body compared to before? Draw from their morning answers and location. Linger here — slow it down. Make the reader feel they are living it.
 
-Paragraph 2 — THE FEELING: How does this life feel emotionally and financially? Draw from their "leaving behind" answers to name what's gone, and their "financial freedom" answers to name what's arrived. Warm and forward-facing.
+Paragraph 2 — THEIR PEOPLE: Who is around them in this life? Draw specifically from their "who fills your days" answer AND their family situation. If young kids — paint real moments: unhurried breakfast, present pickups, bedtime without exhaustion. If partner — paint that connection restored. If community — paint that warmth and belonging. If solitude — paint that peace as a gift, not loneliness. Be specific and tender.
 
-Paragraph 3 — THE CLOSE: 2 sentences only. Make this feel inevitable and close. Hint at online income freedom — never name a company or product.
+Paragraph 3 — THEIR DAY: How do they move through their hours? Draw from their "spending your days" answers in detail. If they chose health — describe what that looks like, how their body feels. If travel — what are they doing, where are they going? If building — what does that creative energy feel like? Mix 2–3 of their chosen answers into one flowing day.
 
-Tone: intimate, warm, second-person. Like a wise friend writing their future.
+Paragraph 4 — THEIR EVENING: Paint the end of the day in full. Draw from their evening answers. Contrast it gently with the exhausted collapses of before — without dwelling. Show restoration, connection, presence. End the paragraph on a feeling of deep contentment.
+
+Paragraph 5 — THE FEELING: Zoom out to the emotional and financial landscape of this life. Draw from their "leaving behind" answers — name 2–3 things specifically. Draw from their "financial freedom" answers — name what's now possible. Make the reader feel the weight of what they've put down and the lightness of what they've stepped into.
+
+Paragraph 6 — THE CLOSE: 4–5 sentences. Speak directly to ${name}. Acknowledge where she is right now — gently, without dwelling. Make this vision feel close, not distant. Build to one final powerful sentence that opens a door — hinting at building an online income on her own terms, without naming any company, product, or brand.
+
+Tone: intimate, warm, literary, second-person. Like a wise, loving friend who can already see the version of you that's coming — and wants you to see her too.
 
 Their answers:
 ${questions.map((q, i) => `${q.q}\n→ ${answerLabels[i]}`).join('\n\n')}
 
-Write ONLY the 3 paragraphs. No headers, no intro, no quotation marks. Blank line between paragraphs.`;
+Write ONLY the 6 paragraphs. No headers, no labels, no intro, no quotation marks. Blank line between each paragraph.`;
 
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
@@ -1167,7 +1174,7 @@ Write ONLY the 3 paragraphs. No headers, no intro, no quotation marks. Blank lin
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
-        max_tokens: 400,
+        max_tokens: 1200,
         messages: [{ role: "user", content: prompt }]
       })
     });
@@ -1184,27 +1191,39 @@ Write ONLY the 3 paragraphs. No headers, no intro, no quotation marks. Blank lin
 function fallbackVision(name) {
   const familySit = aboutAnswers[4] !== undefined ? aboutQuestions[4].opts[aboutAnswers[4]] : '';
   const hasYoungKids = familySit.includes('young children');
-  const hasTeens = familySit.includes('teens');
-  const hasPartner = familySit.includes('partner');
-  const solo = familySit.includes('Just me (no partner)') || familySit.includes('Single');
+  const hasTeens     = familySit.includes('teens');
+  const hasPartner   = familySit.includes('partner');
+  const solo         = familySit.includes('Just me (no partner)') || familySit.includes('Single');
+
+  const morningScene = hasYoungKids
+    ? "The kids wander in sleepy-eyed and unhurried, and you realise there is nowhere to be — no alarm that dragged you from sleep, no school run that turned the morning into a sprint. You pour their breakfast slowly, listen to what they're saying, actually hear it. This is what you wanted. This is what it was always supposed to feel like."
+    : hasPartner
+    ? "Your partner is beside you, and the morning feels spacious in a way that used to feel like something you only got on holiday. You talk without looking at your phones. You drink your coffee while it's still hot. There is no rushing, no performance — just two people choosing how their day begins."
+    : "The morning is entirely yours — the kind of quiet that used to feel impossible. You sit with your coffee and watch the world come to life at its own pace. There is no urgency pulling at you, no dread sitting in your chest. Just you, the morning, and the life you built around it.";
 
   const peopleScene = hasYoungKids
-    ? "The kids are there too — slow breakfast, no school run panic, just the morning unfolding as it should."
+    ? `The kids are the thread running through your days now — not as something to manage around your schedule, but as the actual fabric of your life. You're at pickup without the clock-watching. You're at the school play without calculating what work you're missing. You're present for the small moments — the ones that used to slip past in the blur — and it turns out those are the ones that matter most.`
     : hasTeens
-    ? "Your teens are around, but differently now — present, unhurried, actually talking to each other."
+    ? `Your teenagers are different now that you are. They talk to you — actually talk — because you have the time and the ease to show up for them without the distraction of exhaustion. You catch the moments that used to vanish in the rush. They notice that you're lighter, and you notice that they are too.`
     : hasPartner
-    ? "Your partner is there — and you finally have the time and ease to actually enjoy each other."
-    : solo
-    ? "The morning is entirely yours — peaceful, unhurried, exactly as you designed it."
-    : "The people who matter most are close, and you have real time for them.";
+    ? `Your relationship has room to breathe again. The small frictions of before — the tiredness, the resentment, the ships-in-the-night feeling — have dissolved, replaced by something that feels like partnership in the truest sense. You travel together, dream together, build something together. The life you share finally reflects the love you've always had for each other.`
+    : `Your days are filled with the people and connections you chose — women who are building something, thinking deeply, living fully. There is a community around you now that didn't exist before, forged through shared values and real conversation. And there is also, beautifully, space for yourself — for the solitude that restores you, the quiet that lets you hear your own thoughts again.`;
 
-  return `${name}, picture this: you wake without an alarm, the morning light soft through the window of wherever you've chosen to be. ${peopleScene} Your work, when you get to it, is a few focused hours you actually enjoy — and then the afternoon stretches out like a gift.\n\nThe financial anxiety that used to hum in the background? Gone. Replaced by a quiet steadiness — the ability to say yes to the trip, give generously, invest in your future without guilt. You've left behind the ceiling, the clock-watching, the slow drain of a life lived for someone else's schedule.\n\nThis life is closer than you think, ${name}. It was built by women who found the right path, took one step, and never looked back.`;
+  const dayScene = `Your days have a rhythm that's entirely your own. Some mornings you move your body first — a long walk, a swim, a yoga class taken at the right pace because you're not watching the clock. Some afternoons you sit with your laptop and build — a few focused, creative hours on something that actually matters to you. Some days you barely open it at all, because the income runs whether you're watching it or not. You've stopped confusing busyness with productivity, and the difference has changed everything.`;
+
+  const eveningScene = `By the time evening comes, you are not depleted. That's the thing nobody tells you about this life — the evenings are different when the days aren't draining you. There is a long dinner, real food, conversation that goes somewhere. There is laughter that doesn't feel rationed. You wind down slowly, properly, because your body isn't running on fumes. You go to bed with a full feeling — not just tired, but satisfied. Grateful. At home in your own life.`;
+
+  const feelingScene = `The financial anxiety that used to follow you everywhere — that low hum of never quite feeling ahead — it's gone. Replaced by something steadier, something you didn't know was possible until it arrived. You can say yes to the trip without checking the balance first. You can give to the people and causes you love without guilt. You've left behind the ceiling, the clock-watching, the slow suffocation of a life lived on someone else's terms. What you've stepped into instead is something harder to name — ease, maybe, or agency, or simply the feeling of being exactly where you're meant to be.`;
+
+  const closeScene = `This life is not as far away as it feels right now, ${name}. The distance between where you are and where you want to be is smaller than you think — it's measured not in years but in decisions. The women living this version of their life started exactly where you are, asking the same questions, feeling the same pull. They just found the right way to build an income that worked around their life, not the other way around. The door is open. All that's left is the decision to walk through it.`;
+
+  return `${morningScene}\n\n${peopleScene}\n\n${dayScene}\n\n${eveningScene}\n\n${feelingScene}\n\n${closeScene}`;
 }
 
 function showResult(name, vision) {
   currentVisionText = vision;
   currentUserName   = name;
-  document.getElementById('result-name').textContent = name + "'s Vision";
+  document.getElementById('result-name').textContent = name;
   document.getElementById('vision-text').innerHTML = vision.split('\n\n').map(p => `<p style="margin-bottom:1.2em">${p}</p>`).join('');
   showScreen('screen-result');
 }
@@ -1252,170 +1271,205 @@ function downloadImage() {
 }
 
 function drawVisionCard(canvas, name, visionText) {
-  // Instagram Stories ratio 9:16
-  // A4 at 96dpi: 794 x 1123px
-  const W = 794;
-  const PADDING = 64;
-  const maxTextW = W - (PADDING * 2);
+  const W   = 794;
+  const H   = 1123; // A4 at 96dpi
+  const PAD = 68;
+  const maxTextW = W - (PAD * 2);
+
+  // ── measure text at target font size first ──
+  canvas.width = W; canvas.height = 100;
   const ctx = canvas.getContext('2d');
+  const fontSize = 17;
+  const lineH    = 28;
+  const paraGap  = 22;
+  ctx.font = `300 ${fontSize}px Georgia, serif`;
 
-  // ── MEASURE TEXT FIRST ──
+  const paragraphs  = visionText.split('\n\n').filter(p => p.trim());
+  const allParaLines = paragraphs.map(para => measureWrap(ctx, para, maxTextW));
+
+  // total lines across all paragraphs
+  const totalLines = allParaLines.reduce((s, l) => s + l.length, 0);
+  const totalSeps  = paragraphs.length - 1; // ✦ separators
+
+  // ── set canvas to exactly 2 A4 pages ──
   canvas.width  = W;
-  canvas.height = 100;
-  ctx.font = '300 22px Georgia, serif';
+  canvas.height = H * 2 + 24; // 24px gap between pages
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const paragraphs = visionText.split('\n\n').filter(p => p.trim());
-  const lineH  = 38;
-  const paraGap = 28;
-
-  let totalTextH = 0;
-  const paraLines = paragraphs.map(para => {
-    const lines = measureWrap(ctx, para, maxTextW);
-    totalTextH += lines.length * lineH;
-    return lines;
-  });
-  totalTextH += (paragraphs.length - 1) * paraGap;
-
-  // Fixed zones
-  const headerH = 390;
-  const footerH = 140;
-  const vPad    = 48;
-  const H = Math.max(1123, headerH + vPad + totalTextH + vPad + footerH);
-
-  canvas.width  = W;
-  canvas.height = H;
-
-  // ── BACKGROUND — warm cream ──
-  ctx.fillStyle = '#f5f0e8';
-  ctx.fillRect(0, 0, W, H);
-
-  // ── SUBTLE BLUSH INNER BORDER ──
-  ctx.strokeStyle = 'rgba(180,140,120,0.2)';
-  ctx.lineWidth = 1;
-  const bm = 20;
-  ctx.strokeRect(bm, bm, W - bm*2, H - bm*2);
-
-  // ── CORNER DETAILS ──
-  ctx.strokeStyle = 'rgba(180,140,120,0.35)';
-  ctx.lineWidth = 1;
-  const cm = 28, cl = 40;
-  ctx.beginPath(); ctx.moveTo(cm, cm+cl); ctx.lineTo(cm, cm); ctx.lineTo(cm+cl, cm); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(W-cm-cl, cm); ctx.lineTo(W-cm, cm); ctx.lineTo(W-cm, cm+cl); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cm, H-cm-cl); ctx.lineTo(cm, H-cm); ctx.lineTo(cm+cl, H-cm); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(W-cm-cl, H-cm); ctx.lineTo(W-cm, H-cm); ctx.lineTo(W-cm, H-cm-cl); ctx.stroke();
-
-  // ── SUNBURST (logo-inspired) ──
-  const cx = W/2, sunY = 72, rays = 16, innerR = 22, outerR = 48;
-  ctx.strokeStyle = 'rgba(43,34,24,0.55)';
-  ctx.lineWidth = 1.2;
-  for (let i = 0; i < rays; i++) {
-    const angle = (Math.PI / (rays - 1)) * i - Math.PI;
-    const x1 = cx + Math.cos(angle) * innerR;
-    const y1 = sunY + Math.sin(angle) * innerR;
-    const x2 = cx + Math.cos(angle) * outerR;
-    const y2 = sunY + Math.sin(angle) * outerR;
-    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  // ═══════════════════════════════
+  // HELPER — draw one page base
+  // ═══════════════════════════════
+  function drawBase(oY) {
+    ctx.fillStyle = '#f5f0e8';
+    ctx.fillRect(0, oY, W, H);
+    // inner border
+    ctx.strokeStyle = 'rgba(180,140,120,0.2)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(22, oY+22, W-44, H-44);
+    // corners
+    ctx.strokeStyle = 'rgba(180,140,120,0.4)';
+    const cm=30, cl=36;
+    const corners = [
+      [[cm,oY+cm+cl],[cm,oY+cm],[cm+cl,oY+cm]],
+      [[W-cm-cl,oY+cm],[W-cm,oY+cm],[W-cm,oY+cm+cl]],
+      [[cm,oY+H-cm-cl],[cm,oY+H-cm],[cm+cl,oY+H-cm]],
+      [[W-cm-cl,oY+H-cm],[W-cm,oY+H-cm],[W-cm,oY+H-cm-cl]]
+    ];
+    corners.forEach(pts => {
+      ctx.beginPath();
+      ctx.moveTo(pts[0][0],pts[0][1]);
+      ctx.lineTo(pts[1][0],pts[1][1]);
+      ctx.lineTo(pts[2][0],pts[2][1]);
+      ctx.stroke();
+    });
   }
 
-  // ── BRAND TAG ──
+  // ═══════════════════════════════
+  // HELPER — sunburst
+  // ═══════════════════════════════
+  function drawSunburst(oY) {
+    const cx = W/2, sy = oY+70, rays=16, ir=20, or=44;
+    ctx.strokeStyle = 'rgba(43,34,24,0.5)';
+    ctx.lineWidth = 1;
+    for (let i=0; i<rays; i++) {
+      const a = (Math.PI/(rays-1))*i - Math.PI;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(a)*ir, sy+Math.sin(a)*ir);
+      ctx.lineTo(cx+Math.cos(a)*or, sy+Math.sin(a)*or);
+      ctx.stroke();
+    }
+  }
+
+  // ═══════════════════════════════
+  // HELPER — page header (brand + rule + eyebrow)
+  // ═══════════════════════════════
+  function drawHeader(oY) {
+    drawSunburst(oY);
+    ctx.fillStyle = '#2b2218';
+    ctx.font = '600 12px DM Sans, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('RISE BEYOND THE 9 TO 5', W/2, oY+128);
+    const g = ctx.createLinearGradient(PAD,0,W-PAD,0);
+    g.addColorStop(0,'transparent'); g.addColorStop(0.5,'rgba(180,140,120,0.45)'); g.addColorStop(1,'transparent');
+    ctx.strokeStyle=g; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(PAD,oY+144); ctx.lineTo(W-PAD,oY+144); ctx.stroke();
+    ctx.fillStyle='rgba(43,34,24,0.4)';
+    ctx.font='300 10px DM Sans, sans-serif';
+    ctx.fillText('YOUR FREEDOM LIFE VISION', W/2, oY+166);
+  }
+
+  // ═══════════════════════════════
+  // HELPER — page footer
+  // ═══════════════════════════════
+  function drawFooter(oY, pageNum) {
+    const g = ctx.createLinearGradient(PAD,0,W-PAD,0);
+    g.addColorStop(0,'transparent'); g.addColorStop(0.5,'rgba(180,140,120,0.3)'); g.addColorStop(1,'transparent');
+    ctx.strokeStyle=g; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(PAD, oY+H-58); ctx.lineTo(W-PAD, oY+H-58); ctx.stroke();
+    ctx.fillStyle='rgba(184,147,90,0.4)';
+    ctx.font='10px sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText('✦  ✦  ✦', W/2, oY+H-38);
+    ctx.fillStyle='rgba(43,34,24,0.3)';
+    ctx.font='300 9px DM Sans, sans-serif';
+    ctx.fillText(`risebeyondthe9to5.com  ·  page ${pageNum} of 2`, W/2, oY+H-20);
+  }
+
+  // ════════════════════════════════════════
+  // PAGE 1
+  // ════════════════════════════════════════
+  const p1 = 0;
+  drawBase(p1);
+  drawHeader(p1);
+
+  // title block
   ctx.fillStyle = '#2b2218';
-  ctx.font = '600 13px DM Sans, sans-serif';
+  ctx.font = '300 42px Georgia, serif';
   ctx.textAlign = 'center';
-  ctx.fillText('RISE BEYOND THE 9 TO 5', W/2, 134);
-
-  // ── TOP LINE ──
-  const tg = ctx.createLinearGradient(PADDING, 0, W-PADDING, 0);
-  tg.addColorStop(0, 'transparent');
-  tg.addColorStop(0.5, 'rgba(180,140,120,0.5)');
-  tg.addColorStop(1, 'transparent');
-  ctx.strokeStyle = tg;
-  ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(PADDING, 148); ctx.lineTo(W-PADDING, 148); ctx.stroke();
-
-  // ── EYEBROW ──
-  ctx.fillStyle = 'rgba(43,34,24,0.45)';
-  ctx.font = '300 11px DM Sans, sans-serif';
-  ctx.fillText('YOUR FREEDOM LIFE VISION', W/2, 174);
-
-  // ── TITLE ──
-  ctx.fillStyle = '#2b2218';
-  ctx.font = '300 58px Georgia, serif';
-  ctx.fillText('This is your', W/2, 240);
+  ctx.fillText('This is your', W/2, p1+210);
   ctx.fillStyle = '#b8935a';
-  ctx.font = 'italic 300 66px Georgia, serif';
-  ctx.fillText('next chapter', W/2, 310);
-
-  // ── NAME ──
-  ctx.fillStyle = 'rgba(43,34,24,0.5)';
-  ctx.font = 'italic 300 24px Georgia, serif';
-  ctx.fillText(name + "'s Vision", W/2, 348);
-
-  // ── DIVIDER ──
-  const gd = ctx.createLinearGradient(W/2-80, 0, W/2+80, 0);
-  gd.addColorStop(0, 'transparent');
-  gd.addColorStop(0.5, '#b8935a');
-  gd.addColorStop(1, 'transparent');
-  ctx.strokeStyle = gd;
-  ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(W/2-80, 374); ctx.lineTo(W/2+80, 374); ctx.stroke();
-
-  // ── OPENING QUOTE ──
-  ctx.fillStyle = 'rgba(184,147,90,0.12)';
-  ctx.font = 'italic 300 140px Georgia, serif';
-  ctx.textAlign = 'left';
-  ctx.fillText('\u201C', PADDING - 10, headerH + 20);
-
-  // ── VISION TEXT — all paragraphs ──
+  ctx.font = 'italic 300 50px Georgia, serif';
+  ctx.fillText('next chapter', W/2, p1+266);
   ctx.fillStyle = '#2b2218';
-  ctx.font = '300 22px Georgia, serif';
-  ctx.textAlign = 'center';
+  ctx.font = '300 28px Georgia, serif';
+  ctx.fillText(name, W/2, p1+306);
 
-  let y = headerH + vPad;
-  paraLines.forEach((lines, pIdx) => {
+  const gd = ctx.createLinearGradient(W/2-80,0,W/2+80,0);
+  gd.addColorStop(0,'transparent'); gd.addColorStop(0.5,'#b8935a'); gd.addColorStop(1,'transparent');
+  ctx.strokeStyle=gd; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(W/2-80,p1+326); ctx.lineTo(W/2+80,p1+326); ctx.stroke();
+
+  // decorative quote mark
+  ctx.fillStyle='rgba(184,147,90,0.09)';
+  ctx.font='italic 300 90px Georgia, serif';
+  ctx.textAlign='left';
+  ctx.fillText('\u201C', PAD-6, p1+370);
+
+  // text starts here on page 1
+  const p1TextStart = p1 + 358;
+
+  // IMPORTANT: draw page 2 base BEFORE rendering text so overflow lands on cream background
+  const p2 = H + 24;
+  drawBase(p2);
+  drawHeader(p2);
+  drawFooter(p2, 2);
+
+  // Now draw text across both pages
+  ctx.fillStyle='#2b2218';
+  ctx.font=`300 ${fontSize}px Georgia, serif`;
+  ctx.textAlign='center';
+
+  const p1TextEnd   = p1 + H - 80;
+  const p2TextStart = p2 + 190;
+  const p2TextEnd   = p2 + H - 80;
+
+  let y = p1TextStart;
+  let onPage2 = false;
+
+  function advanceY(amount) {
+    y += amount;
+    // switch to page 2 when page 1 text area is full
+    if (!onPage2 && y > p1TextEnd) {
+      onPage2 = true;
+      y = p2TextStart;
+    }
+  }
+
+  allParaLines.forEach((lines, pIdx) => {
     lines.forEach(line => {
-      ctx.fillText(line, W/2, y);
-      y += lineH;
+      // check before drawing each line
+      if (!onPage2 && y > p1TextEnd) {
+        onPage2 = true;
+        y = p2TextStart;
+      }
+      // only draw if within page 2 bounds too
+      if (y < p2TextEnd) {
+        ctx.fillText(line, W/2, y);
+      }
+      advanceY(lineH);
     });
-    if (pIdx < paraLines.length - 1) {
-      y += paraGap * 0.4;
-      ctx.fillStyle = 'rgba(184,147,90,0.6)';
-      ctx.font = '12px sans-serif';
-      ctx.fillText('✦', W/2, y);
-      ctx.fillStyle = '#2b2218';
-      ctx.font = '300 22px Georgia, serif';
-      y += paraGap * 0.6;
+
+    // separator ✦ between paragraphs
+    if (pIdx < allParaLines.length - 1) {
+      if (!onPage2 && y > p1TextEnd) {
+        onPage2 = true;
+        y = p2TextStart;
+      }
+      advanceY(paraGap * 0.3);
+      if (y < p2TextEnd) {
+        ctx.fillStyle='rgba(184,147,90,0.55)';
+        ctx.font='10px sans-serif';
+        ctx.fillText('✦', W/2, y);
+        ctx.fillStyle='#2b2218';
+        ctx.font=`300 ${fontSize}px Georgia, serif`;
+      }
+      advanceY(paraGap * 0.7);
     }
   });
 
-  y += vPad;
-
-  // ── FOOTER LINE ──
-  const fg = ctx.createLinearGradient(PADDING, 0, W-PADDING, 0);
-  fg.addColorStop(0, 'transparent');
-  fg.addColorStop(0.5, 'rgba(180,140,120,0.4)');
-  fg.addColorStop(1, 'transparent');
-  ctx.strokeStyle = fg;
-  ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(PADDING, y); ctx.lineTo(W-PADDING, y); ctx.stroke();
-  y += 32;
-
-  // ── CTA ──
-  ctx.fillStyle = '#b8935a';
-  ctx.font = '500 11px DM Sans, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('WHAT DOES YOUR FREEDOM LIFE LOOK LIKE?', W/2, y);
-  y += 26;
-
-  ctx.fillStyle = 'rgba(43,34,24,0.4)';
-  ctx.font = '300 11px DM Sans, sans-serif';
-  ctx.fillText('Take the quiz · risebeyondthe9to5.com', W/2, y);
-  y += 32;
-
-  // ── STARS ──
-  ctx.fillStyle = 'rgba(184,147,90,0.5)';
-  ctx.font = '12px sans-serif';
-  ctx.fillText('✦  ✦  ✦', W/2, y);
+  drawFooter(p1, 1);
 }
+
 
 // Measures wrapped lines without drawing — returns array of line strings
 function measureWrap(ctx, text, maxWidth) {
