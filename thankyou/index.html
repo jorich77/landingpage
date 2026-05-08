@@ -424,7 +424,7 @@ document.getElementById('customizationForm').addEventListener('submit', async fu
     notes: document.getElementById('notes').value
   };
   
-  // Send to BOTH Google Apps Script AND Systeme.io in parallel
+  // Send to Google Apps Script
   try {
     // Send to Google Apps Script
     const response = await fetch('https://script.google.com/macros/s/AKfycbyRVdgYb210QiLLC69o5g4IdcmJBafSFyQScjOjUhC7GNYTNiOK6pQFtWlYST2vktcgHQ/exec', {
