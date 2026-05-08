@@ -408,8 +408,7 @@ textarea:focus {
 
 <script>
 // ===== SYSTEME.IO INTEGRATION =====
-const SYSTEME_API_KEY = 'koplby4e4bws77rmyail9sof6cmmxy9l8dev44uil4475izfmcekb3m8vfvdfyuz';
-const SYSTEME_API_URL = 'https://systeme.io/api/contacts';
+// API calls now go through Vercel serverless function to avoid CORS issues
 
 async function sendToSystemeIO(formData) {
   // Split name into first and last
@@ -451,11 +450,11 @@ async function sendToSystemeIO(formData) {
   };
   
   try {
-    const response = await fetch(SYSTEME_API_URL, {
+    // Call YOUR Vercel serverless function instead of Systeme.io directly
+    const response = await fetch('/api/systeme-contact', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-API-Key': SYSTEME_API_KEY
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(contactData)
     });
@@ -495,7 +494,7 @@ document.getElementById('customizationForm').addEventListener('submit', async fu
   // Send to BOTH Google Apps Script AND Systeme.io in parallel
   try {
     // Send to Google Apps Script (existing)
-    const googleScriptPromise = fetch('https://script.google.com/macros/s/AKfycbzMKXTTeO-wWKmhlDWNuHlkbB0CUI7fL_kM1Co_YH54ulGPDtP_knaIRisjzVWoT0Os1A/exec', {
+    const googleScriptPromise = fetch('https://script.google.com/macros/s/AKfycbyRVdgYb210QiLLC69o5g4IdcmJBafSFyQScjOjUhC7GNYTNiOK6pQFtWlYST2vktcgHQ/exec', {
       method: 'POST',
       mode: 'no-cors',
       headers: {
