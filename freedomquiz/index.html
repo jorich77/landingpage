@@ -851,8 +851,18 @@
       <button onclick="closeModal()" style="flex:1;background:none;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">Close</button>
     </div>
     <div id="open-in-browser-hint" style="display:none;margin-top:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:16px;text-align:center;">
-      <p style="color:rgba(255,255,255,0.8);font-size:13px;line-height:1.6;margin-bottom:12px;">Instagram's browser blocks downloads.<br>Open this page in Safari or Chrome to save your vision.</p>
-      <button onclick="openInBrowser()" style="background:white;color:#2b2218;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.08em;padding:12px 24px;cursor:pointer;width:100%;">Open in Browser</button>
+      <p style="color:rgba(255,255,255,0.9);font-size:13px;font-weight:500;margin-bottom:8px;">Instagram blocks downloads</p>
+      <p style="color:rgba(255,255,255,0.6);font-size:12px;line-height:1.7;margin-bottom:14px;">To save your vision, open this page in Safari or Chrome:</p>
+      <p style="color:rgba(255,255,255,0.5);font-size:12px;line-height:1.8;margin-bottom:14px;">
+        1. Tap the <strong style="color:white;">⋯</strong> or <strong style="color:white;">⋮</strong> menu in the top corner of your browser<br>
+        2. Tap <strong style="color:white;">"Open in Safari"</strong> or <strong style="color:white;">"Open in Chrome"</strong><br>
+        3. Come back to the result page and tap Download
+      </p>
+      <button onclick="openInBrowser()" style="background:white;color:#2b2218;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;padding:12px 24px;cursor:pointer;width:100%;margin-bottom:10px;">Copy Link to Open Manually</button>
+      <div id="browser-url-hint" style="display:none;">
+        <p style="color:rgba(255,255,255,0.5);font-size:11px;margin-bottom:6px;">Link copied! Paste into Safari or Chrome:</p>
+        <p id="browser-url-display" style="color:var(--coral);font-size:10px;word-break:break-all;background:rgba(0,0,0,0.3);padding:8px;border-radius:2px;"></p>
+      </div>
     </div>
   </div>
 </div>
@@ -1283,15 +1293,16 @@ function downloadImage() {
 }
 
 function openInBrowser() {
-  // Works on iOS (Safari) and Android (Chrome)
-  window.location.href = window.location.href;
-  // Fallback — copy URL and prompt user
+  const url = window.location.href;
+  // Show a clear message with the URL to copy
+  const hint = document.getElementById('browser-url-hint');
+  const urlDisplay = document.getElementById('browser-url-display');
+  urlDisplay.textContent = url;
+  hint.style.display = 'block';
+
+  // Try to copy automatically too
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      alert('Link copied! Paste it into Safari or Chrome to open the quiz and download your vision.');
-    });
-  } else {
-    alert('Copy this link and open it in Safari or Chrome:\n\n' + window.location.href);
+    navigator.clipboard.writeText(url).catch(() => {});
   }
 }
 
