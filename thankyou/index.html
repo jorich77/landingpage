@@ -394,15 +394,15 @@ textarea:focus {
       <h3>All Set!</h3>
       <p>
         Thank you! We've received your customization details.<br><br>
-        We'll start building your page right away and email you at the address provided within 24-48 hours with your personalized prospect page URL.<br><br>
-        <strong>Questions?</strong> Email us at risebeyondthe9to5@gmail.com
+        We'll start building your page right away and email you at the address provided within 24-48 hours to confirm the details for your page.<br><br>
+        <strong>Questions?</strong> Email us at hello@risebeyondthe9to5.com
       </p>
     </div>
   </div>
 
   <!-- Footer -->
   <div class="footer">
-    <p>Need help? Contact us at risebeyondthe9to5@gmail.com</p>
+    <p>Need help? Contact us at hello@risebeyondthe9to5.com</p>
   </div>
 </div>
 
@@ -422,7 +422,6 @@ async function sendToSystemeIO(formData) {
     first_name: firstName,
     last_name: lastName,
     phone: formData.phone,
-    tags: ['MyProspectPage-Purchase'],
     fields: [
       {
         slug: 'contact_method',
@@ -519,7 +518,7 @@ document.getElementById('customizationForm').addEventListener('submit', async fu
     
   } catch (error) {
     console.error('Error:', error);
-    alert('There was an error submitting your details. Please email us directly at risebeyondthe9to5@gmail.com');
+    alert('There was an error submitting your details. Please email us directly at hello@risebeyondthe9to5.com');
     submitBtn.disabled = false;
     submitBtn.textContent = 'Submit Details';
   }
