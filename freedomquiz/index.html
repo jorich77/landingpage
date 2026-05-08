@@ -821,7 +821,7 @@
     <div class="vision-card">
       <p class="vision-text" id="vision-text">Loading your vision…</p>
     </div>
-    <p style="text-align:center;font-size:12px;color:var(--muted);margin:-16px 0 24px;font-weight:300;">✉ A copy of your vision has been sent to your email</p>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin:-16px 0 24px;font-weight:300;">✉ A copy of your vision has been sent to your email<br><span style="font-size:11px;">Please check your spam folder if you don't see it</span></p>
 
     <div class="cta-block">
       <p class="cta-eyebrow">Ready to make it real?</p>
@@ -846,11 +846,7 @@
   <div style="max-width:440px;margin:0 auto;">
     <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Your Vision Card — 2 Pages</p>
     <canvas id="vision-canvas" style="width:100%;border-radius:2px;display:block;"></canvas>
-    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;margin-top:12px;line-height:1.8;">
-      🤖 <strong style="color:white;">Android:</strong> tap Save & Share → save to Photos or send to yourself<br>
-      📱 <strong style="color:white;">iPhone:</strong> press & hold the image above → "Save to Photos"<br>
-      💻 <strong style="color:white;">Desktop:</strong> tap Save & Share to download the file
-    </p>
+    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;margin-top:12px;line-height:1.8;" id="modal-instructions"></p>
     <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
       <button onclick="downloadImage()" id="download-btn" style="flex:1;min-width:120px;background:var(--coral);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">⬇ Save &amp; Share</button>
       <button onclick="closeModal()" style="flex:1;min-width:120px;background:none;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">Close</button>
@@ -860,7 +856,7 @@
 
 <script>
 // ── CONFIG ──
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbw_zqLUbztNEJR0E-OvCWwEeznLPQut2_ZYvcuwYced6MUdHp9891g98RpH4H8oAOfA/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycby05XCLC8QqYfY5uplTkS3LnDBL59dZ1niRfZUJ9blP1j2ld58rWtFtsbZKWBAjuSRB/exec';
 
 // ── QUESTIONS ──
 // multi: true = select all that apply; multi: false = single select
@@ -1296,10 +1292,21 @@ function saveAsImage() {
   document.body.style.overflow = 'hidden';
   drawVisionCard(canvas, currentUserName, currentVisionText);
 
+  // Set instructions based on device
+  const instructions = document.getElementById('modal-instructions');
+  const isAndroid = /Android/.test(navigator.userAgent);
+  const isIOS = /iPhone|iPad/.test(navigator.userAgent);
+  if (isAndroid) {
+    instructions.innerHTML = '✉ <strong style="color:white;">Your vision has been emailed to you</strong> — check your inbox!<br><span style="color:rgba(255,255,255,0.4);">Or tap Save & Share to share the image directly</span>';
+  } else if (isIOS) {
+    instructions.innerHTML = '📱 <strong style="color:white;">Press and hold the image</strong> → "Save to Photos"<br>✉ <span style="color:rgba(255,255,255,0.5);">Your vision has also been emailed to you</span>';
+  } else {
+    instructions.innerHTML = '💻 <strong style="color:white;">Click Save & Share</strong> to download your vision as an image<br>✉ <span style="color:rgba(255,255,255,0.5);">A copy has also been sent to your email</span>';
+  }
+
   // Convert canvas to img so long-press save works on mobile/Instagram
   setTimeout(() => {
     const dataUrl = canvas.toDataURL('image/png');
-    // Replace canvas with img for mobile long-press
     const existing = document.getElementById('vision-img-display');
     if (existing) existing.remove();
     const img = document.createElement('img');
