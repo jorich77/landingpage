@@ -845,13 +845,14 @@
   <div style="max-width:440px;margin:0 auto;">
     <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Your Vision Card — 2 Pages</p>
     <canvas id="vision-canvas" style="width:100%;border-radius:2px;display:block;"></canvas>
-    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;margin-top:12px;line-height:1.7;">
-      <span id="save-instructions">📱 <strong style="color:white;">Press and hold the image above to save it to your camera roll</strong><br>
-      <span style="color:rgba(255,255,255,0.4);">Works inside Instagram — no browser switch needed</span></span>
+    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:12px;margin-top:12px;line-height:1.8;">
+      🤖 <strong style="color:white;">Android:</strong> tap Save & Share → save to Photos or send to yourself<br>
+      📱 <strong style="color:white;">iPhone:</strong> press & hold the image above → "Save to Photos"<br>
+      💻 <strong style="color:white;">Desktop:</strong> tap Save & Share to download the file
     </p>
-    <div style="display:flex;gap:12px;margin-top:16px;">
-      <button onclick="downloadImage()" id="download-btn" style="flex:1;background:var(--coral);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">⬇ Download (desktop)</button>
-      <button onclick="closeModal()" style="flex:1;background:none;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">Close</button>
+    <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
+      <button onclick="downloadImage()" id="download-btn" style="flex:1;min-width:120px;background:var(--coral);color:white;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">⬇ Save &amp; Share</button>
+      <button onclick="closeModal()" style="flex:1;min-width:120px;background:none;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:14px;cursor:pointer;">Close</button>
     </div>
   </div>
 </div>
@@ -1293,12 +1294,37 @@ function saveAsImage() {
 }
 
 function downloadImage() {
-  // On desktop — trigger file download
   const canvas = document.getElementById('vision-canvas');
-  const link   = document.createElement('a');
-  link.download = 'my-freedom-life-vision.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
+
+  // Try Web Share API first (works on Android inside Instagram)
+  if (navigator.share && navigator.canShare) {
+    canvas.toBlob(async (blob) => {
+      const file = new File([blob], 'my-freedom-life-vision.png', { type: 'image/png' });
+      if (navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: 'My Freedom Life Vision',
+            text: 'My personalised freedom life vision ✨'
+          });
+          return;
+        } catch(e) {
+          // User cancelled or share failed — fall through to download
+        }
+      }
+    });
+    return;
+  }
+
+  // Fallback — blob URL download (works on desktop)
+  canvas.toBlob((blob) => {
+    const url  = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'my-freedom-life-vision.png';
+    link.href = url;
+    link.click();
+    URL.revokeObjectURL(url);
+  });
 }
 
 function drawVisionCard(canvas, name, visionText) {
