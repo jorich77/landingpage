@@ -205,11 +205,11 @@ textarea:focus {
 }
 
 .navy-preview {
-  background: linear-gradient(135deg, #3d5a80 0%, #2d4866 100%);
+  background: linear-gradient(135deg, #3d5a80 0%, #d4af6a 100%);
 }
 
 .rose-preview {
-  background: linear-gradient(135deg, #d4a5a5 0%, #b88888 100%);
+  background: linear-gradient(135deg, #d4a5a5 0%, #e8c9c9 100%);
 }
 
 /* Submit Button */
@@ -373,6 +373,9 @@ textarea:focus {
               </div>
             </label>
           </div>
+          <p style="font-size: 0.9rem; color: var(--charcoal); opacity: 0.7; margin-top: 1rem; font-weight: 400;">
+            We can match the colour scheme to a specific logo or branding colour - if this is a requirement please note this below.
+          </p>
         </div>
 
         <div class="form-group">
@@ -404,6 +407,76 @@ textarea:focus {
 </div>
 
 <script>
+// ===== SYSTEME.IO INTEGRATION =====
+const SYSTEME_API_KEY = 'koplby4e4bws77rmyail9sof6cmmxy9l8dev44uil4475izfmcekb3m8vfvdfyuz';
+const SYSTEME_API_URL = 'https://systeme.io/api/contacts';
+
+async function sendToSystemeIO(formData) {
+  // Split name into first and last
+  const nameParts = formData.name.trim().split(' ');
+  const firstName = nameParts[0] || '';
+  const lastName = nameParts.slice(1).join(' ') || '';
+  
+  const contactData = {
+    email: formData.email,
+    first_name: firstName,
+    last_name: lastName,
+    phone: formData.phone,
+    tags: ['MyProspectPage-Purchase'],
+    fields: [
+      {
+        slug: 'contact_method',
+        value: formData.contact
+      },
+      {
+        slug: 'color_scheme',
+        value: formData.colour
+      },
+      {
+        slug: 'purchase_notes',
+        value: formData.notes
+      },
+      {
+        slug: 'purchase_date',
+        value: new Date().toISOString()
+      },
+      {
+        slug: 'product',
+        value: 'My Prospect Page'
+      },
+      {
+        slug: 'purchase_amount',
+        value: 'USD 247'
+      }
+    ]
+  };
+  
+  try {
+    const response = await fetch(SYSTEME_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': SYSTEME_API_KEY
+      },
+      body: JSON.stringify(contactData)
+    });
+    
+    if (response.ok) {
+      const result = await response.json();
+      console.log('✅ Contact added to Systeme.io:', result);
+      return { success: true, data: result };
+    } else {
+      const error = await response.text();
+      console.error('❌ Systeme.io API Error:', error);
+      return { success: false, error: error };
+    }
+  } catch (error) {
+    console.error('❌ Systeme.io Network Error:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// ===== FORM SUBMISSION HANDLER =====
 document.getElementById('customizationForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   
@@ -420,8 +493,10 @@ document.getElementById('customizationForm').addEventListener('submit', async fu
     notes: document.getElementById('notes').value
   };
   
+  // Send to BOTH Google Apps Script AND Systeme.io in parallel
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzMKXTTeO-wWKmhlDWNuHlkbB0CUI7fL_kM1Co_YH54ulGPDtP_knaIRisjzVWoT0Os1A/exec', {
+    // Send to Google Apps Script (existing)
+    const googleScriptPromise = fetch('https://script.google.com/macros/s/AKfycbzMKXTTeO-wWKmhlDWNuHlkbB0CUI7fL_kM1Co_YH54ulGPDtP_knaIRisjzVWoT0Os1A/exec', {
       method: 'POST',
       mode: 'no-cors',
       headers: {
@@ -429,6 +504,14 @@ document.getElementById('customizationForm').addEventListener('submit', async fu
       },
       body: JSON.stringify(formData)
     });
+    
+    // Send to Systeme.io (new)
+    const systemePromise = sendToSystemeIO(formData);
+    
+    // Wait for both to complete
+    await Promise.all([googleScriptPromise, systemePromise]);
+    
+    console.log('✅ Data sent to both Google Sheet and Systeme.io');
     
     // Show success message
     document.getElementById('form-content').style.display = 'none';
