@@ -668,6 +668,22 @@
 
 </div>
 
+<!-- COMMISSION NOTICE - PROMINENT -->
+<div style="max-width:900px;margin:0 auto 20px;">
+  <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 3px solid #f59e0b; border-radius: 12px; padding: 24px; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+      <span style="font-size: 32px;">💰</span>
+      <div style="font-size: 20px; font-weight: 800; color: #92400e; letter-spacing: 0.5px;">BUSINESS OPPORTUNITY NOTE</div>
+    </div>
+    <p style="font-size: 16px; font-weight: 700; color: #78350f; line-height: 1.6; margin: 0;">
+      These figures represent <span style="background: #fbbf24; padding: 2px 6px; border-radius: 4px;">COST OF OWNERSHIP ONLY</span> and do NOT include any commission earnings from business sales.
+    </p>
+    <p style="font-size: 15px; font-weight: 600; color: #78350f; line-height: 1.6; margin: 12px 0 0 0;">
+      As an Enagic distributor, you can earn commission on both <strong>direct and indirect sales</strong>, which will significantly offset these costs and potentially turn the K8 into a profitable investment.
+    </p>
+  </div>
+</div>
+
 <!-- SCENARIO NAME & DOWNLOAD -->
 <div class="card" style="max-width:900px;margin:0 auto 40px;background: linear-gradient(135deg, var(--teal-pale) 0%, var(--white) 100%);">
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
@@ -676,6 +692,7 @@
       <input type="text" id="scenarioName" placeholder="e.g. Jo's K8 Purchase" value="" style="width:100%;padding:14px 18px;border:2px solid var(--teal-light);border-radius:12px;font-size:18px;font-family:'Playfair Display',serif;font-weight:600;color:var(--dark);background:var(--white);transition:all 0.2s;">
       <p style="font-size:11px;color:var(--soft);margin-top:6px;">Give this calculation a name — it will appear on your PDF download</p>
     </div>
+    
     <button id="downloadPdfBtn" onclick="downloadPDF()" style="padding:16px 32px;background:linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);border:3px solid var(--teal);border-radius:12px;color:var(--white);font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:0 4px 16px rgba(10,124,124,0.3);transition:all 0.2s;height:fit-content;">
       <span style="font-size:20px;">📄</span>
       <span>Download PDF</span>
@@ -683,7 +700,9 @@
   </div>
 </div>
 
-<p class="disclaimer">This calculator is provided as an informational tool to help you understand the long-term value of an Enagic K8 Kangen Water Ionizer.<br>Individual results may vary.</p>
+<p class="disclaimer">
+    <strong>Disclaimer:</strong> This is an estimating tool only and based on a number of assumptions. We cannot be held responsible for any inaccuracies with the data or calculations.
+</p>
 <br>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1001,10 +1020,48 @@
     doc.text(`Total Machine Cost: ${symbol}${machineTotalCost.toLocaleString()}`, 105, y, { align: 'center' });
     y += 10;
     
-    // Footer
+    // Commission Notice - PROMINENT
+    if (y > 220) {
+      doc.addPage();
+      y = 20;
+    } else {
+      y += 10;
+    }
+    
+    // Yellow box background
+    doc.setFillColor(254, 243, 199);
+    doc.rect(20, y, 170, 45, 'F');
+    doc.setDrawColor(245, 158, 11);
+    doc.setLineWidth(2);
+    doc.rect(20, y, 170, 45, 'S');
+    
+    // Header
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(146, 64, 14);
+    doc.text('BUSINESS OPPORTUNITY NOTE', 105, y + 10, { align: 'center' });
+    
+    // Main text
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'bold');
+    doc.setTextColor(120, 53, 15);
+    const noticeText1 = 'These figures represent COST OF OWNERSHIP ONLY and do NOT include any commission earnings from business sales.';
+    const splitNotice1 = doc.splitTextToSize(noticeText1, 160);
+    doc.text(splitNotice1, 105, y + 20, { align: 'center' });
+    
+    doc.setFontSize(9);
+    doc.setFont(undefined, 'normal');
+    const noticeText2 = 'As an Enagic distributor, you can earn commission on both direct and indirect sales, which will significantly offset these costs and potentially turn the K8 into a profitable investment.';
+    const splitNotice2 = doc.splitTextToSize(noticeText2, 160);
+    doc.text(splitNotice2, 105, y + 32, { align: 'center' });
+    
+    y += 50;
+    
+    // Footer with disclaimer
     doc.setFontSize(8);
     doc.setTextColor(107, 114, 128);
-    doc.text('This calculator is provided as an informational tool. Individual results may vary.', 105, 285, { align: 'center' });
+    doc.text('Disclaimer: This is an estimating tool only and based on a number of assumptions.', 105, y + 5, { align: 'center' });
+    doc.text('We cannot be held responsible for any inaccuracies with the data or calculations.', 105, y + 10, { align: 'center' });
     
     // Save
     const filename = scenarioName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_k8_analysis.pdf';
