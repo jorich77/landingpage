@@ -408,12 +408,6 @@
             <p>Track your business earnings and rank progression</p>
         </div>
         
-        <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 16px; margin-bottom: 20px; color: #856404;">
-            <p style="margin: 0; font-size: 13px; line-height: 1.5;">
-                <strong>⚠️ Disclaimer:</strong> This is an estimating tool only and should not be used as an accurate commission calculator. Commission calculations are estimates based on a number of assumptions and may not reflect actual earnings. We cannot be held responsible for any inaccuracies with the data or calculations. Please consult official Enagic documentation and your upline for accurate commission information.
-            </p>
-        </div>
-        
         <div id="income-tab">
             <div class="info-box">
                 <p><strong>Income Tracker:</strong> Model your monthly income based on direct sales (you) and indirect sales (your team). Note this calculator assumes you have a single lane in your business, you can run multiple scenarios to calculate commission due if you have multiple lanes.</p>
@@ -446,7 +440,6 @@
             
             <div class="card">
                 <div class="card-title">Monthly Direct Sales (You)</div>
-                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Commission figures include Special Points (SP) which assumes you are making regular direct sales or have an active Ukon.</p>
                 
                 <div class="product-row">
                     <span class="product-name">K8</span>
@@ -892,14 +885,16 @@
                     </div>
                 </div>
                 
-                <div class="metrics-grid">
-                    <div class="metric-card highlight">
-                        <div class="metric-label">Monthly Total</div>
-                        <div class="metric-value" id="income-monthly">$0</div>
+                <!-- BIG RESULTS CARDS -->
+                <div style="display: grid; grid-template-columns: 1fr; gap: 16px; margin: 20px 0;">
+                    <div style="background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%); padding: 28px; border-radius: 12px; text-align: center; box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4);">
+                        <div style="font-size: 14px; color: var(--gold-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">💰 Monthly Income</div>
+                        <div style="font-size: 48px; font-weight: 700; color: var(--gold-primary); line-height: 1.1;" id="income-monthly">$0</div>
                     </div>
-                    <div class="metric-card highlight">
-                        <div class="metric-label">Annual Total</div>
-                        <div class="metric-value" id="income-annual">$0</div>
+                    
+                    <div style="background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%); padding: 28px; border-radius: 12px; text-align: center; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);">
+                        <div style="font-size: 14px; color: var(--navy-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">🎯 Annual Income</div>
+                        <div style="font-size: 48px; font-weight: 700; color: var(--navy-primary); line-height: 1.1;" id="income-annual">$0</div>
                     </div>
                 </div>
                 
@@ -944,6 +939,47 @@
                 <button onclick="downloadPDF()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
                     📄 Download as PDF
                 </button>
+            </div>
+            
+            <div style="background: #fff3cd; border-left: 4px solid var(--gold-primary); padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <div style="font-weight: 700; font-size: 16px; color: var(--text-primary); margin-bottom: 30px;">📋 Calculator Assumptions</div>
+                
+                <div style="margin-bottom: 4px; padding: 16px; background: rgba(248, 249, 250, 0.5); border-radius: 6px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold-light);">Rank-Based Commission:</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 2;">
+                        Commission per sale = Your Rank × Base Commission Rate. For example, a 3A distributor earns 3 points per sale (3 × $351 = $1,053 for K8 in USA). This applies equally to both direct and indirect sales.
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 4px; padding: 16px; background: white; border-radius: 6px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold-light);">Rank Advancement:</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 2;">
+                        Ranks are based on <strong>total sales count</strong> (direct + indirect combined). All products count as 1 sale each.
+                        <br><br>
+                        1A = 1-2 sales, 2A = 3-10 sales, 3A = 11-20 sales, 4A = 21-50 sales, 5A = 51-100 sales, 6A = 101+ sales.
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 4px; padding: 16px; background: rgba(248, 249, 250, 0.5); border-radius: 6px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold-light);">Commission Rates:</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 2;">
+                        All commission rates include Special Points (SP) and assume regular direct sales activity. Rates shown are "Basic + SP" combined values. <strong>Important:</strong> Figures do NOT include the 2% Enagic Business Support Fee (effective May 1, 2026) which will be deducted from actual commissions paid.
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px; padding: 16px; background: white; border-radius: 6px;">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold-light);">Projection Model:</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 2;">
+                        This calculator projects monthly income based on consistent sales volumes. It does not account for rank advancement timing during the month, commission payment schedules, or variable growth patterns.
+                    </div>
+                </div>
+                
+                <div style="padding: 16px; background: rgba(255, 243, 205, 0.3); border-radius: 6px; border-left: 3px solid var(--gold-primary);">
+                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px;">Disclaimer:</div>
+                    <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.8;">
+                        This is an estimating tool only and should not be used as an accurate calculator. Commission and income calculations are estimates based on the information provided and may not reflect actual earnings. We cannot be held responsible for any inaccuracies with the data or calculations. Please consult official Enagic documentation and your upline for accurate commission information.
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -995,26 +1031,30 @@ const commissionRates = {
             }
         };
 
-const productPoints = {
-            k8: 8,
-            anespa: 4,
-            ukondd: 1,
-            sd501: 6,
-            sd501platinum: 6,
-            sd501super: 8,
-            sd501dx: 7,
-            jriv: 5,
-            emguarde: 3
-        };
 
 const rankThresholds = [
-            { rank: '1A', minPoints: 1, maxPoints: 2, description: 'Agent' },
-            { rank: '2A', minPoints: 3, maxPoints: 10, description: 'Senior Agent' },
-            { rank: '3A', minPoints: 11, maxPoints: 20, description: 'Bronze' },
-            { rank: '4A', minPoints: 21, maxPoints: 50, description: 'Silver' },
-            { rank: '5A', minPoints: 51, maxPoints: 100, description: 'Gold' },
-            { rank: '6A', minPoints: 101, maxPoints: null, description: 'Platinum' }
+            { rank: '1A', minSales: 1, maxSales: 2, points: 1, description: 'Agent' },
+            { rank: '2A', minSales: 3, maxSales: 10, points: 2, description: 'Senior Agent' },
+            { rank: '3A', minSales: 11, maxSales: 20, points: 3, description: 'Bronze' },
+            { rank: '4A', minSales: 21, maxSales: 50, points: 4, description: 'Silver' },
+            { rank: '5A', minSales: 51, maxSales: 100, points: 5, description: 'Gold' },
+            { rank: '6A', minSales: 101, maxSales: null, points: 6, description: 'Platinum' }
         ];
+
+        function getRankFromSales(totalSales) {
+            for (let i = rankThresholds.length - 1; i >= 0; i--) {
+                const threshold = rankThresholds[i];
+                if (threshold.maxSales === null) {
+                    if (totalSales >= threshold.minSales) {
+                        return threshold;
+                    }
+                } else if (totalSales >= threshold.minSales && totalSales <= threshold.maxSales) {
+                    return threshold;
+                }
+            }
+            return rankThresholds[0]; // Default to 1A
+        }
+
 
 
 
@@ -1252,7 +1292,10 @@ const rankThresholds = [
         }
         
         function updateRankProgression() {
-            // Calculate total points from BOTH direct and indirect sales
+            // Get current rank and calculate sales needed for NEXT rank
+            const currentRank = parseInt(document.getElementById('income-rank').value);
+            
+            // Calculate total SALES from entered quantities
             const k8 = parseInt(document.getElementById('income-k8').value) || 0;
             const anespa = parseInt(document.getElementById('income-anespa').value) || 0;
             const ukondd = parseInt(document.getElementById('income-ukondd').value) || 0;
@@ -1263,7 +1306,6 @@ const rankThresholds = [
             const jriv = parseInt(document.getElementById('income-jriv').value) || 0;
             const emguarde = parseInt(document.getElementById('income-emguarde').value) || 0;
             
-            // Add indirect sales
             const indirectK8 = parseInt(document.getElementById('income-indirect-k8').value) || 0;
             const indirectAnespa = parseInt(document.getElementById('income-indirect-anespa').value) || 0;
             const indirectUkondd = parseInt(document.getElementById('income-indirect-ukondd').value) || 0;
@@ -1274,121 +1316,50 @@ const rankThresholds = [
             const indirectJriv = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
             const indirectEmguarde = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
             
-            const totalPoints = (k8 * productPoints.k8) +
-                               (anespa * productPoints.anespa) +
-                               (ukondd * productPoints.ukondd) +
-                               (sd501 * productPoints.sd501) +
-                               (sd501platinum * productPoints.sd501platinum) +
-                               (sd501super * productPoints.sd501super) +
-                               (sd501dx * productPoints.sd501dx) +
-                               (jriv * productPoints.jriv) +
-                               (emguarde * productPoints.emguarde) +
-                               // Add indirect sales points
-                               (indirectK8 * productPoints.k8) +
-                               (indirectAnespa * productPoints.anespa) +
-                               (indirectUkondd * productPoints.ukondd) +
-                               (indirectSd501 * productPoints.sd501) +
-                               (indirectSd501platinum * productPoints.sd501platinum) +
-                               (indirectSd501super * productPoints.sd501super) +
-                               (indirectSd501dx * productPoints.sd501dx) +
-                               (indirectJriv * productPoints.jriv) +
-                               (indirectEmguarde * productPoints.emguarde);
+            // Total monthly sales entered
+            const monthlySales = k8 + anespa + ukondd + sd501 + sd501platinum + sd501super + sd501dx + jriv + emguarde +
+                              indirectK8 + indirectAnespa + indirectUkondd + indirectSd501 + indirectSd501platinum + 
+                              indirectSd501super + indirectSd501dx + indirectJriv + indirectEmguarde;
             
-            const currentRank = parseInt(document.getElementById('income-rank').value);
             const progressContent = document.getElementById('rank-progression-content');
             
-            if (totalPoints === 0) {
-                progressContent.innerHTML = '<p style="font-size: 13px; color: var(--text-secondary); text-align: center; padding: 20px 0;">Enter sales quantities to see rank progression</p>';
+            if (monthlySales === 0) {
+                progressContent.innerHTML = '<p style="font-size: 13px; color: var(--text-secondary); text-align: center; padding: 20px 0;">📊 Enter your monthly sales above to see rank progression and income projections</p>';
                 return;
             }
             
-            // Find new rank based on points
-            let newRank = null;
-            for (const threshold of rankThresholds) {
-                if (threshold.maxPoints === null) {
-                    if (totalPoints >= threshold.minPoints) {
-                        newRank = threshold;
-                    }
-                } else if (totalPoints >= threshold.minPoints && totalPoints <= threshold.maxPoints) {
-                    newRank = threshold;
-                    break;
-                }
-            }
-            
-            if (!newRank) {
-                newRank = rankThresholds[0]; // Default to 1A
-            }
-            
-            const newRankNumber = parseInt(newRank.rank.replace('A', ''));
-            const isRankUp = newRankNumber > currentRank;
-            const isAtNewRank = newRankNumber === currentRank;
-            
             // Find next rank
-            const currentRankIndex = rankThresholds.findIndex(r => parseInt(r.rank.replace('A', '')) === newRankNumber);
+            const currentRankIndex = rankThresholds.findIndex(r => parseInt(r.rank.replace('A', '')) === currentRank);
             const nextRank = currentRankIndex < rankThresholds.length - 1 ? rankThresholds[currentRankIndex + 1] : null;
             
-            let html = '';
-            
-            if (isRankUp) {
-                html = `
-                    <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%); border-radius: 8px; margin-bottom: 16px;">
-                        <div style="font-size: 14px; color: var(--navy-dark); margin-bottom: 8px; font-weight: 600;">RANK UP!</div>
-                        <div style="font-size: 24px; font-weight: 700; color: var(--navy-primary); margin-bottom: 4px;">${newRank.rank}</div>
-                        <div style="font-size: 13px; color: var(--navy-dark);">From ${currentRank}A → ${newRank.rank}</div>
-                    </div>
-                `;
-            } else if (isAtNewRank) {
-                html = `
-                    <div style="text-align: center; padding: 20px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 16px;">
-                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Current Rank</div>
-                        <div style="font-size: 24px; font-weight: 700; color: var(--navy-primary); margin-bottom: 4px;">${newRank.rank}</div>
-                    </div>
-                `;
-            } else {
-                html = `
-                    <div style="text-align: center; padding: 20px; background: #fff3cd; border-radius: 8px; margin-bottom: 16px;">
-                        <div style="font-size: 14px; color: #856404; margin-bottom: 8px;">Not Enough Points</div>
-                        <div style="font-size: 20px; font-weight: 700; color: var(--navy-primary); margin-bottom: 4px;">${newRank.rank}</div>
-                        <div style="font-size: 13px; color: #856404;">These sales only qualify for ${newRank.rank} (need rank ${currentRank}A+ for current commission)</div>
-                    </div>
-                `;
-            }
-            
-            // Points breakdown
-            html += `
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
-                    <div style="text-align: center; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-                        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Total Points</div>
-                        <div style="font-size: 24px; font-weight: 700; color: var(--gold-primary);">${totalPoints}</div>
-                    </div>
-                    <div style="text-align: center; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-                        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">New Rank</div>
-                        <div style="font-size: 24px; font-weight: 700; color: var(--navy-primary);">${newRank.rank}</div>
-                    </div>
+            let html = `
+                <div style="text-align: center; padding: 16px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 16px;">
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">Monthly Projection at Current Rank</div>
+                    <div style="font-size: 28px; font-weight: 700; color: var(--navy-primary);">${currentRank}A</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">${monthlySales} sales/month</div>
                 </div>
             `;
             
-            // Progress to next rank
+            // Show progress to next rank if applicable
             if (nextRank) {
-                const pointsToNext = nextRank.minPoints - totalPoints;
-                const progressPercent = Math.min(100, (totalPoints / nextRank.minPoints) * 100);
-                
                 html += `
                     <div style="margin-bottom: 12px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                            <span style="font-size: 13px; color: var(--text-secondary);">Progress to ${nextRank.rank}</span>
-                            <span style="font-size: 13px; font-weight: 600; color: var(--navy-primary);">${totalPoints} / ${nextRank.minPoints} points</span>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--navy-primary); margin-bottom: 8px;">Progress to ${nextRank.rank}</div>
+                        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
+                            You need <strong>${nextRank.minSales} total sales</strong> to reach ${nextRank.rank}. Based on ${monthlySales} sales/month:
                         </div>
-                        <div style="height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
-                            <div style="height: 100%; background: linear-gradient(90deg, var(--gold-primary) 0%, var(--gold-light) 100%); width: ${progressPercent}%; transition: width 0.3s ease;"></div>
+                        <div style="text-align: center; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
+                            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Months to ${nextRank.rank}</div>
+                            <div style="font-size: 20px; font-weight: 700; color: var(--gold-primary);">${Math.ceil(nextRank.minSales / monthlySales)} months</div>
+                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">at current sales pace</div>
                         </div>
-                        ${pointsToNext > 0 ? `<div style="font-size: 12px; color: var(--text-secondary); margin-top: 6px; text-align: center;">${pointsToNext} more points needed</div>` : ''}
                     </div>
                 `;
             } else {
                 html += `
-                    <div style="text-align: center; padding: 16px; background: var(--bg-secondary); border-radius: 8px;">
-                        <div style="font-size: 14px; color: var(--gold-primary); font-weight: 600;">Maximum Rank Achieved!</div>
+                    <div style="text-align: center; padding: 16px; background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%); border-radius: 8px;">
+                        <div style="font-size: 14px; color: var(--navy-dark); font-weight: 600;">🏆 Maximum Rank Achieved!</div>
+                        <div style="font-size: 13px; color: var(--navy-dark); margin-top: 4px;">You're at ${currentRank}A - the highest rank</div>
                     </div>
                 `;
             }
@@ -1411,9 +1382,30 @@ const rankThresholds = [
             
             // Get current data
             const country = document.getElementById('income-country').value;
-            const rank = document.getElementById('income-rank').value;
+            const rank = parseInt(document.getElementById('income-rank').value);
             const rates = commissionRates[country];
             const currency = rates.currency;
+            
+            // Get all product values for detailed breakdown
+            const k8Val = parseInt(document.getElementById('income-k8').value) || 0;
+            const anespaVal = parseInt(document.getElementById('income-anespa').value) || 0;
+            const ukonddVal = parseInt(document.getElementById('income-ukondd').value) || 0;
+            const sd501Val = parseInt(document.getElementById('income-sd501').value) || 0;
+            const sd501platinumVal = parseInt(document.getElementById('income-sd501platinum').value) || 0;
+            const sd501superVal = parseInt(document.getElementById('income-sd501super').value) || 0;
+            const sd501dxVal = parseInt(document.getElementById('income-sd501dx').value) || 0;
+            const jrivVal = parseInt(document.getElementById('income-jriv').value) || 0;
+            const emguardeVal = parseInt(document.getElementById('income-emguarde').value) || 0;
+            
+            const indirectK8Val = parseInt(document.getElementById('income-indirect-k8').value) || 0;
+            const indirectAnespaVal = parseInt(document.getElementById('income-indirect-anespa').value) || 0;
+            const indirectUkonddVal = parseInt(document.getElementById('income-indirect-ukondd').value) || 0;
+            const indirectSd501Val = parseInt(document.getElementById('income-indirect-sd501').value) || 0;
+            const indirectSd501platinumVal = parseInt(document.getElementById('income-indirect-sd501platinum').value) || 0;
+            const indirectSd501superVal = parseInt(document.getElementById('income-indirect-sd501super').value) || 0;
+            const indirectSd501dxVal = parseInt(document.getElementById('income-indirect-sd501dx').value) || 0;
+            const indirectJrivVal = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
+            const indirectEmguardeVal = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
             
             const countryNames = {
                 'usa': 'USA',
@@ -1493,67 +1485,22 @@ const rankThresholds = [
             doc.text(`Average Per Sale: ${avgPerSale}`, 20, y);
             
             // Rank Progression
-            y += 15;
+            // Check if we need a new page
+            if (y > 200) {
+                doc.addPage();
+                y = 20;
+            } else {
+                y += 20;
+            }
             
-            // Calculate rank progression for PDF - include BOTH direct and indirect
-            const k8Val = parseInt(document.getElementById('income-k8').value) || 0;
-            const anespaVal = parseInt(document.getElementById('income-anespa').value) || 0;
-            const ukonddVal = parseInt(document.getElementById('income-ukondd').value) || 0;
-            const sd501Val = parseInt(document.getElementById('income-sd501').value) || 0;
-            const sd501platinumVal = parseInt(document.getElementById('income-sd501platinum').value) || 0;
-            const sd501superVal = parseInt(document.getElementById('income-sd501super').value) || 0;
-            const sd501dxVal = parseInt(document.getElementById('income-sd501dx').value) || 0;
-            const jrivVal = parseInt(document.getElementById('income-jriv').value) || 0;
-            const emguardeVal = parseInt(document.getElementById('income-emguarde').value) || 0;
+            // Calculate total sales for rank progression (already have all product values from top of function)
+            const totalSalesPDF = k8Val + anespaVal + ukonddVal + sd501Val + sd501platinumVal + sd501superVal + sd501dxVal + jrivVal + emguardeVal +
+                               indirectK8Val + indirectAnespaVal + indirectUkonddVal + indirectSd501Val + indirectSd501platinumVal + 
+                               indirectSd501superVal + indirectSd501dxVal + indirectJrivVal + indirectEmguardeVal;
             
-            // Add indirect sales
-            const indirectK8Val = parseInt(document.getElementById('income-indirect-k8').value) || 0;
-            const indirectAnespaVal = parseInt(document.getElementById('income-indirect-anespa').value) || 0;
-            const indirectUkonddVal = parseInt(document.getElementById('income-indirect-ukondd').value) || 0;
-            const indirectSd501Val = parseInt(document.getElementById('income-indirect-sd501').value) || 0;
-            const indirectSd501platinumVal = parseInt(document.getElementById('income-indirect-sd501platinum').value) || 0;
-            const indirectSd501superVal = parseInt(document.getElementById('income-indirect-sd501super').value) || 0;
-            const indirectSd501dxVal = parseInt(document.getElementById('income-indirect-sd501dx').value) || 0;
-            const indirectJrivVal = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
-            const indirectEmguardeVal = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
-            
-            const totalPointsPDF = (k8Val * productPoints.k8) +
-                               (anespaVal * productPoints.anespa) +
-                               (ukonddVal * productPoints.ukondd) +
-                               (sd501Val * productPoints.sd501) +
-                               (sd501platinumVal * productPoints.sd501platinum) +
-                               (sd501superVal * productPoints.sd501super) +
-                               (sd501dxVal * productPoints.sd501dx) +
-                               (jrivVal * productPoints.jriv) +
-                               (emguardeVal * productPoints.emguarde) +
-                               // Add indirect sales points
-                               (indirectK8Val * productPoints.k8) +
-                               (indirectAnespaVal * productPoints.anespa) +
-                               (indirectUkonddVal * productPoints.ukondd) +
-                               (indirectSd501Val * productPoints.sd501) +
-                               (indirectSd501platinumVal * productPoints.sd501platinum) +
-                               (indirectSd501superVal * productPoints.sd501super) +
-                               (indirectSd501dxVal * productPoints.sd501dx) +
-                               (indirectJrivVal * productPoints.jriv) +
-                               (indirectEmguardeVal * productPoints.emguarde);
-            
-            if (totalPointsPDF > 0) {
-                // Find new rank based on points
-                let newRankPDF = null;
-                for (const threshold of rankThresholds) {
-                    if (threshold.maxPoints === null) {
-                        if (totalPointsPDF >= threshold.minPoints) {
-                            newRankPDF = threshold;
-                        }
-                    } else if (totalPointsPDF >= threshold.minPoints && totalPointsPDF <= threshold.maxPoints) {
-                        newRankPDF = threshold;
-                        break;
-                    }
-                }
-                
-                if (!newRankPDF) {
-                    newRankPDF = rankThresholds[0];
-                }
+            if (totalSalesPDF > 0) {
+                // Find new rank based on total sales
+                const newRankPDF = getRankFromSales(totalSalesPDF);
                 
                 const newRankNumberPDF = parseInt(newRankPDF.rank.replace('A', ''));
                 const currentRankNumberPDF = parseInt(rank);
@@ -1566,7 +1513,7 @@ const rankThresholds = [
                 doc.setFontSize(11);
                 doc.setFont(undefined, 'normal');
                 
-                doc.text(`Total Points Earned: ${totalPointsPDF}`, 20, y);
+                doc.text(`Total Sales: ${totalSalesPDF}`, 20, y);
                 doc.text(`Rank Achieved: ${newRankPDF.rank}`, 110, y);
                 y += 7;
                 
@@ -1585,19 +1532,27 @@ const rankThresholds = [
                 y += 10;
             }
             
-            // Income Breakdown
-            y += 15;
+            // Product Sales Breakdown
+            // Check if we need a new page
+            if (y > 200) {
+                doc.addPage();
+                y = 20;
+            } else {
+                y += 20;
+            }
+            
             doc.setFontSize(14);
             doc.setFont(undefined, 'bold');
-            doc.text('Income Breakdown', 20, y);
+            doc.text('Product Sales Breakdown', 20, y);
             
             y += 8;
             doc.setFontSize(10);
             doc.setFont(undefined, 'bold');
             doc.text('Product', 20, y);
-            doc.text('Qty', 110, y, { align: 'center' });
-            doc.text('Per Sale', 140, y, { align: 'right' });
-            doc.text('Monthly', 180, y, { align: 'right' });
+            doc.text('Direct', 85, y, { align: 'center' });
+            doc.text('Team', 115, y, { align: 'center' });
+            doc.text('Total', 145, y, { align: 'center' });
+            doc.text('Income', 180, y, { align: 'right' });
             
             doc.setLineWidth(0.5);
             doc.line(20, y + 2, 190, y + 2);
@@ -1605,20 +1560,43 @@ const rankThresholds = [
             y += 8;
             doc.setFont(undefined, 'normal');
             
-            // Get breakdown data
-            const breakdownRows = document.querySelectorAll('#income-breakdown tr');
-            breakdownRows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                if (cells.length === 4) {
-                    const product = cells[0].textContent;
-                    const qty = cells[1].textContent;
-                    const perSale = cells[2].textContent;
-                    const monthly = cells[3].textContent;
+            // Build product breakdown from inputs
+            const products = [
+                { name: 'K8', direct: k8Val, indirect: indirectK8Val },
+                { name: 'Anespa DX', direct: anespaVal, indirect: indirectAnespaVal },
+                { name: 'Ukon DD', direct: ukonddVal, indirect: indirectUkonddVal },
+                { name: 'SD501', direct: sd501Val, indirect: indirectSd501Val },
+                { name: 'SD501 Platinum', direct: sd501platinumVal, indirect: indirectSd501platinumVal },
+                { name: 'SD501 Super', direct: sd501superVal, indirect: indirectSd501superVal },
+                { name: 'SD501 DX', direct: sd501dxVal, indirect: indirectSd501dxVal },
+                { name: 'JrIV', direct: jrivVal, indirect: indirectJrivVal },
+                { name: 'EmGuarde', direct: emguardeVal, indirect: indirectEmguardeVal }
+            ];
+            
+            products.forEach(product => {
+                const total = product.direct + product.indirect;
+                if (total > 0) {
+                    // Calculate income for this product (need to get the rate)
+                    let productRate = 0;
+                    const productKey = product.name.toLowerCase().replace(/ /g, '').replace('dx', 'dx').replace('platinum', 'platinum');
                     
-                    doc.text(product, 20, y);
-                    doc.text(qty, 110, y, { align: 'center' });
-                    doc.text(perSale, 140, y, { align: 'right' });
-                    doc.text(monthly, 180, y, { align: 'right' });
+                    if (product.name === 'K8') productRate = rates.products.k8;
+                    else if (product.name === 'Anespa DX') productRate = rates.products.anespa;
+                    else if (product.name === 'Ukon DD') productRate = rates.products.ukondd;
+                    else if (product.name === 'SD501') productRate = rates.products.sd501;
+                    else if (product.name === 'SD501 Platinum') productRate = rates.products.sd501platinum;
+                    else if (product.name === 'SD501 Super') productRate = rates.products.sd501super;
+                    else if (product.name === 'SD501 DX') productRate = rates.products.sd501dx;
+                    else if (product.name === 'JrIV') productRate = rates.products.jriv;
+                    else if (product.name === 'EmGuarde') productRate = rates.products.emguarde;
+                    
+                    const income = total * (rank * productRate);
+                    
+                    doc.text(product.name, 20, y);
+                    doc.text(product.direct.toString(), 85, y, { align: 'center' });
+                    doc.text(product.indirect.toString(), 115, y, { align: 'center' });
+                    doc.text(total.toString(), 145, y, { align: 'center' });
+                    doc.text(formatCurrency(Math.round(income), currency), 180, y, { align: 'right' });
                     y += 6;
                     
                     if (y > 270) {
@@ -1634,11 +1612,51 @@ const rankThresholds = [
                 y = 20;
             }
             
-            y = 280;
+            // Calculator Assumptions (add new page if needed)
+            if (y > 200) {
+                doc.addPage();
+                y = 20;
+            } else {
+                y += 15;
+            }
+            
+            doc.setFillColor(255, 243, 205);
+            doc.rect(20, y, 170, 75, 'F');
+            doc.setDrawColor(212, 175, 55);
+            doc.setLineWidth(2);
+            doc.line(20, y, 20, y + 75);
+            
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(133, 100, 4);
+            doc.text('Calculator Assumptions', 25, y + 8);
+            
             doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            doc.text('This is an estimating tool only. Commission calculations are estimates based on assumptions and may not reflect actual earnings.', 105, y, { align: 'center', maxWidth: 170 });
-            doc.text('Please consult official Enagic documentation and your upline for accurate commission information.', 105, y + 4, { align: 'center', maxWidth: 170 });
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(60, 60, 60);
+            const rankText = 'Commission per sale = Your Rank × Base Commission Rate. This applies equally to both direct and indirect sales. Ranks based on total sales count (direct + indirect). All products = 1 sale each. 1A = 1-2, 2A = 3-10, 3A = 11-20, 4A = 21-50, 5A = 51-100, 6A = 101+ sales.';
+            const splitRank = doc.splitTextToSize(rankText, 160);
+            doc.text(splitRank, 25, y + 16);
+            
+            y += 26;
+            const ratesText = 'All rates include Special Points (SP) and assume regular direct sales activity. IMPORTANT: Figures do NOT include the 2% Enagic Business Support Fee (effective May 1, 2026) which will be deducted from actual commissions paid.';
+            const splitRates = doc.splitTextToSize(ratesText, 160);
+            doc.text(splitRates, 25, y);
+            
+            y += 20;
+            doc.setDrawColor(200, 200, 200);
+            doc.setLineWidth(0.5);
+            doc.line(25, y, 185, y);
+            
+            y += 5;
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(133, 100, 4);
+            doc.text('Disclaimer:', 25, y);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(80, 80, 80);
+            const disclaimerText = 'This is an estimating tool only. Commission and income calculations are estimates and may not reflect actual earnings. We cannot be held responsible for any inaccuracies. Please consult official Enagic documentation and your upline for accurate commission information.';
+            const splitDisclaimer = doc.splitTextToSize(disclaimerText, 160);
+            doc.text(splitDisclaimer, 25, y + 5);
             
             // Save PDF
             const filename = scenarioName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.pdf';
