@@ -500,17 +500,6 @@
                     As a 1A distributor, K8 commission: <span style="font-weight: 600; color: var(--gold-primary);" id="breakeven-commission-rate">$0</span>
                 </div>
                 
-                <div style="margin-bottom: 16px;">
-                    <label for="scenario-name" style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase;">Scenario Name</label>
-                    <input type="text" id="scenario-name" placeholder="e.g., Jo's figures" 
-                           style="width: 100%; padding: 12px; font-size: 14px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary);">
-                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 6px; font-style: italic;">This will appear on your PDF report</div>
-                </div>
-                
-                <button onclick="downloadPDF()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <span style="font-size: 18px;">📄</span>
-                    Download PDF Report
-                </button>
             </div>
         </div>
 
@@ -715,11 +704,11 @@
             doc.setFont(undefined, 'bold');
             doc.text('Commission Structure:', 25, yPos);
             doc.setFont(undefined, 'normal');
-            const commText = 'Commission figures include Special Points (SP) which assumes you are making regular direct sales. All sales are assumed to be direct sales in one distributor lane. Results will differ if working multiple lanes.';
+            const commText = 'Commission figures include Special Points (SP) which assumes you are making regular direct sales. All sales are assumed to be direct sales in one distributor lane. Results will differ if working multiple lanes. IMPORTANT: Figures do NOT include the 2% Enagic Business Support Fee (effective May 1, 2026) which will be deducted from actual commissions paid.';
             const splitComm = doc.splitTextToSize(commText, 160);
             doc.text(splitComm, 25, yPos + 5);
             
-            yPos += 24;
+            yPos += 30;
             doc.setDrawColor(200, 200, 200);
             doc.setLineWidth(0.5);
             doc.line(25, yPos, 185, yPos);
@@ -1059,6 +1048,21 @@
                 </div>
             `).join('');
             
+            // Add scenario name input and PDF download button before assumptions
+            scenariosList.innerHTML += `
+                <div style="margin: 24px 0;">
+                    <label for="scenario-name" style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase;">Scenario Name</label>
+                    <input type="text" id="scenario-name" placeholder="e.g., Jo's figures" 
+                           style="width: 100%; padding: 12px; font-size: 14px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; font-style: italic;">This will appear on your PDF report</div>
+                    
+                    <button onclick="downloadPDF()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <span style="font-size: 18px;">📄</span>
+                        <span>Download PDF Report</span>
+                    </button>
+                </div>
+            `;
+            
             // Add disclaimer after scenarios
             scenariosList.innerHTML += `
                 <div style="background: #fff3cd; border-left: 4px solid var(--gold-primary); padding: 20px; border-radius: 8px; margin-top: 24px;">
@@ -1091,7 +1095,7 @@
                     <div style="margin-bottom: 14px;">
                         <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Commission Structure:</div>
                         <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
-                            Commission figures include Special Points (SP) which assumes you are making regular direct sales. All sales are assumed to be direct sales in one distributor lane. Results will differ if working multiple lanes.
+                            Commission figures include Special Points (SP) which assumes you are making regular direct sales. All sales are assumed to be direct sales in one distributor lane. Results will differ if working multiple lanes. <strong>Important:</strong> Figures do NOT include the 2% Enagic Business Support Fee (effective May 1, 2026) which will be deducted from actual commissions paid.
                         </div>
                     </div>
                     
@@ -1113,3 +1117,4 @@
     </script>
 </body>
 </html>
+
