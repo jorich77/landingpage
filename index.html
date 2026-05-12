@@ -837,6 +837,127 @@ body {
   max-width: 800px;
 }
 
+/* Contact Modal */
+.contact-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-modal-content {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.contact-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--charcoal);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.contact-modal-close:hover {
+  color: var(--gold);
+}
+
+.contact-modal h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.contact-modal p {
+  color: var(--charcoal);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-submit {
+  background: linear-gradient(135deg, var(--gold), var(--light-gold));
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(184, 147, 90, 0.4);
+}
+
+.contact-success {
+  display: none;
+  background: #d4edda;
+  color: #155724;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .features-grid,
@@ -975,7 +1096,7 @@ body {
     <div class="customization-list">
       <div class="customization-item">Add your headline, story & image</div>
       <div class="customization-item">Enable contacts to message you</div>
-      <div class="customization-item">Choose from 3 colour palettes</div>
+      <div class="customization-item">Choose from 3 colour palettes or match to your custom branding/logo</div>
       <div class="customization-item">Send to concrete leads only</div>
       <div class="customization-item">Link to your own domain name or we host for you</div>
       <div class="customization-item">Optimized for mobile + desktop</div>
@@ -1100,6 +1221,12 @@ body {
       <div class="price-note">One-time payment. 12 months hosting.</div>
       <a href="https://www.myprospectpage.com/order" class="cta-button">Get Your Page Now</a>
     </div>
+    
+    <div style="text-align: center; margin-top: 3rem;">
+      <button onclick="openContactModal()" class="cta-button" style="background: var(--navy);">
+        Contact
+      </button>
+    </div>
   </div>
 </section>
 
@@ -1108,6 +1235,33 @@ body {
   <span class="lightbox-close">&times;</span>
   <img class="lightbox-content" id="lightbox-img">
   <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="contact-modal">
+  <div class="contact-modal-content">
+    <span class="contact-modal-close" onclick="closeContactModal()">&times;</span>
+    <h3>Get In Touch</h3>
+    <p>Have questions about My Prospect Page? I'd love to hear from you!</p>
+    <form class="contact-form" id="contactForm">
+      <div class="form-group">
+        <label for="contactName">Name *</label>
+        <input type="text" id="contactName" required>
+      </div>
+      <div class="form-group">
+        <label for="contactEmail">Email *</label>
+        <input type="email" id="contactEmail" required>
+      </div>
+      <div class="form-group">
+        <label for="contactMessage">Message *</label>
+        <textarea id="contactMessage" required></textarea>
+      </div>
+      <button type="submit" class="contact-submit">Send Message</button>
+    </form>
+    <div id="contactSuccess" class="contact-success">
+      Thank you! Your message has been sent successfully.
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1160,25 +1314,19 @@ class ReviewManager {
       return JSON.parse(stored);
     }
     
-    // Sample reviews to show how it looks (you can remove these later)
+    // Real customer reviews
     return [
       {
-        name: "Sarah",
+        name: "Jules",
         rating: 5,
-        text: "This landing page has transformed my business! My prospects love having everything in one place.",
-        date: "10/04/2026"
+        text: "Jo understood my page very well and kept in contact with the progress. I love the page as everything required for future prospects are all there and will definitely save time for myself and my prospect. I'm already receiving impressive responses. Thanks Jo",
+        date: "14/04/2026"
       },
       {
-        name: "Michael",
+        name: "Pamela",
         rating: 5,
-        text: "Professional, easy to share. Best investment I've made for my Enagic business. Highly recommend to all distributors!",
-        date: "05/04/2026"
-      },
-      {
-        name: "Emma",
-        rating: 5,
-        text: "Finally, a solution that makes me look professional! No more scrambling to send different links. My prospects take me more seriously now, and it shows in my sales.",
-        date: "28/03/2026"
+        text: "Jo has created something that's actually really useful, especially if you've got an Enagic business and you're trying to share all the information without overwhelming people. It gives you one simple place to send people, rather than trying to explain everything yourself or send loads of different links. Jo was great to work with, really easy, quick to make changes, and happy to tweak things so it felt right for me and not generic. From start to finish, she had everything ready to launch within a couple of weeks, which was amazing. I'm really pleased with how it's turned out and I can see how helpful this is going to be going forward. Thank you Jo, I really appreciate it.",
+        date: "20/04/2026"
       }
     ];
   }
@@ -1229,6 +1377,59 @@ class ReviewManager {
 
 // Initialize review manager
 const reviewManager = new ReviewManager();
+
+// Contact Modal Functions
+function openContactModal() {
+  const modal = document.getElementById('contactModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeContactModal() {
+  const modal = document.getElementById('contactModal');
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+  // Reset form
+  document.getElementById('contactForm').reset();
+  document.getElementById('contactSuccess').style.display = 'none';
+}
+
+// Close modal when clicking outside
+document.getElementById('contactModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeContactModal();
+  }
+});
+
+// Handle contact form submission
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('contactName').value;
+  const email = document.getElementById('contactEmail').value;
+  const message = document.getElementById('contactMessage').value;
+  
+  // Create mailto link
+  const subject = encodeURIComponent('My Prospect Page Inquiry from ' + name);
+  const body = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'Email: ' + email + '\n\n' +
+    'Message:\n' + message
+  );
+  
+  const mailtoLink = 'mailto:hello@risebeyondthe9to5.com?subject=' + subject + '&body=' + body;
+  
+  // Open email client
+  window.location.href = mailtoLink;
+  
+  // Show success message
+  document.getElementById('contactSuccess').style.display = 'block';
+  
+  // Reset form after a delay
+  setTimeout(() => {
+    closeContactModal();
+  }, 2000);
+});
 </script>
 
 </body>
