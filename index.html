@@ -1309,12 +1309,10 @@ class ReviewManager {
   }
   
   loadReviews() {
-    const stored = localStorage.getItem('myProspectPageReviews');
-    if (stored) {
-      return JSON.parse(stored);
-    }
+    // Clear any old stored reviews and use fresh data
+    localStorage.removeItem('myProspectPageReviews');
     
-    // Real customer reviews
+    // Current reviews
     return [
       {
         name: "Jules",
