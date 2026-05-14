@@ -708,7 +708,17 @@
             const splitComm = doc.splitTextToSize(commText, 160);
             doc.text(splitComm, 25, yPos + 5);
             
-            yPos += 30;
+            yPos += 25;
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(184, 148, 31); // Gold color
+            doc.text('6A Bonuses Not Included:', 25, yPos);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(0, 0, 0);
+            const bonus6AText = 'Calculations include only the standard 8-point commission structure. Additional 6A+ bonuses (Title Incentive, 6A Group Awards, Step-Up Bonus, Educational Allowance, Monthly/Quarterly Incentives, and 6A2+ lifetime bonuses) are NOT included. Actual earnings for 6A+ distributors will be significantly higher.';
+            const split6A = doc.splitTextToSize(bonus6AText, 160);
+            doc.text(split6A, 25, yPos + 5);
+            
+            yPos += 25;
             doc.setDrawColor(200, 200, 200);
             doc.setLineWidth(0.5);
             doc.line(25, yPos, 185, yPos);
@@ -1099,6 +1109,13 @@
                         </div>
                     </div>
                     
+                    <div style="margin-bottom: 14px;">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--gold-dark); margin-bottom: 4px;">⚠️ 6A Bonuses Not Included:</div>
+                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                            Calculations include only the standard 8-point commission structure. Additional 6A+ bonuses (Title Incentive, 6A Group Awards, Step-Up Bonus, Educational Allowance, Monthly/Quarterly Incentives, and 6A2+ lifetime bonuses) are <strong>NOT</strong> included. Actual earnings for 6A+ distributors will be significantly higher.
+                        </div>
+                    </div>
+                    
                     <div style="padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.1);">
                         <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Disclaimer:</div>
                         <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
@@ -1117,4 +1134,3 @@
     </script>
 </body>
 </html>
-
