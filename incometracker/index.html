@@ -981,6 +981,16 @@
                     </div>
                 </div>
                 
+                <div style="margin-top: 20px; padding: 16px; background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); border-radius: 8px; border: 3px solid #dc3545; box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);">
+                    <div style="font-size: 14px; font-weight: bold; color: #dc3545; margin-bottom: 8px; display: flex; align-items: center;">
+                        <span style="font-size: 18px; margin-right: 8px;">⚠️</span>
+                        EmGuarde-Only Start Limitation
+                    </div>
+                    <div style="font-size: 12px; color: #721c24; line-height: 1.7;">
+                        If you started your business with <strong>ONLY EmGuarde purchases</strong>, you will earn approximately <strong>77% commission on ALL sales</strong> (direct and indirect) until you purchase an ionizer product. This calculator assumes 100% commission rates, so your actual income will be lower if you started with EmGuarde only. <strong>Recommendation:</strong> Purchase at least one ionizer (K8, SD501, etc.) to qualify for full commission rates.
+                    </div>
+                </div>
+                
                 <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.5; text-align: center; margin-top: 16px;">
                     <strong>Disclaimer:</strong> This is an estimating tool only and should not be used as an accurate calculator. Commission and income calculations are estimates based on the information provided and may not reflect actual earnings. We cannot be held responsible for any inaccuracies with the data or calculations. Please consult official Enagic documentation and your upline for accurate commission information.
                 </div>
@@ -1616,19 +1626,15 @@ const rankThresholds = [
                 y = 20;
             }
             
-            // Calculator Assumptions (add new page if needed)
-            if (y > 200) {
-                doc.addPage();
-                y = 20;
-            } else {
-                y += 15;
-            }
+            // Calculator Assumptions (always on page 2)
+            doc.addPage();
+            y = 20;
             
             doc.setFillColor(255, 243, 205);
-            doc.rect(20, y, 170, 75, 'F');
+            doc.rect(20, y, 170, 110, 'F');
             doc.setDrawColor(212, 175, 55);
             doc.setLineWidth(2);
-            doc.line(20, y, 20, y + 75);
+            doc.line(20, y, 20, y + 110);
             
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
@@ -1647,7 +1653,17 @@ const rankThresholds = [
             const splitRates = doc.splitTextToSize(ratesText, 160);
             doc.text(splitRates, 25, y);
             
-            y += 12;
+            y += 20;
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(220, 53, 69); // Red color
+            doc.text('EmGuarde-Only Start Limitation:', 25, y);
+            doc.setFont(undefined, 'normal');
+            doc.setTextColor(0, 0, 0);
+            const emguardeWarningText = 'If you started your business with ONLY EmGuarde purchases, you will earn approximately 77% commission on ALL sales (direct and indirect) until you purchase an ionizer product. This calculator assumes 100% commission rates, so your actual income will be lower if you started with EmGuarde only. Recommendation: Purchase at least one ionizer (K8, SD501, etc.) to qualify for full commission rates.';
+            const splitEmGuardeWarning = doc.splitTextToSize(emguardeWarningText, 160);
+            doc.text(splitEmGuardeWarning, 25, y + 5);
+            
+            y += 25;
             doc.setFont(undefined, 'bold');
             doc.setTextColor(184, 148, 31); // Gold color
             doc.text('6A Bonuses Not Included:', 25, y);
