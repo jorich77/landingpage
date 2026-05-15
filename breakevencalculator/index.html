@@ -6,7 +6,8 @@
     <meta name="theme-color" content="#1e3a5f">
     <meta name="description" content="Track your Enagic business earnings and rank progression across USA, Australia, and Europe">
     <title>Enagic Calculator Pro</title>
-    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <style>
         :root {
             --navy-primary: #1e3a5f;
@@ -108,17 +109,41 @@
         }
         
         .product-row {
-            display: grid;
-            grid-template-columns: 1fr 120px;
-            gap: 12px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
+            padding: 8px 0;
         }
         
-        .product-name {
+        .product-label {
             font-size: 14px;
             color: var(--text-primary);
             font-weight: 500;
+            flex: 1;
+            margin: 0;
+        }
+        
+        .product-select {
+            width: 80px;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            transition: border-color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .product-select:focus {
+            outline: none;
+            border-color: var(--navy-primary);
+        }
+        
+        .product-select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f5f5f5;
         }
         
         .product-note {
@@ -126,7 +151,6 @@
             color: var(--text-secondary);
             margin-top: 4px;
             font-style: italic;
-            grid-column: 1 / -1;
         }
         
         .rank-display {
@@ -161,420 +185,154 @@
         
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
         }
         
-        .metric-card {
-            background: var(--bg-secondary);
+        .metric {
+            text-align: center;
             padding: 16px;
+            background: rgba(255,255,255,0.1);
             border-radius: 8px;
-            border: 1px solid rgba(30, 58, 95, 0.1);
-        }
-        
-        .metric-card.highlight {
-            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
-            color: var(--navy-primary);
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-        }
-        
-        .metric-card.highlight .metric-label {
-            color: var(--navy-primary);
-            opacity: 0.8;
-        }
-        
-        .metric-card.highlight .metric-value {
-            color: var(--navy-primary);
         }
         
         .metric-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-weight: 500;
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .metric-value {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
-            color: var(--text-primary);
+            margin-top: 4px;
         }
         
-        .progress-section {
-            margin-bottom: 20px;
-        }
-        
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        
-        .progress-label {
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .progress-value {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--gold-primary);
-        }
-        
-        .progress-bar-container {
-            width: 100%;
-            height: 12px;
-            background: #e0e0e0;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold-primary) 0%, var(--gold-light) 100%);
-            transition: width 0.3s ease;
-            border-radius: 6px;
-        }
-        
-        .tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 24px;
-            border-bottom: 2px solid #e0e0e0;
-            overflow-x: auto;
-        }
-        
-        .tab {
-            padding: 12px 20px;
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-        
-        .tab:hover {
-            color: var(--navy-primary);
-        }
-        
-        .tab.active {
-            color: var(--navy-primary);
-            border-bottom-color: var(--gold-primary);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            background: var(--navy-primary);
+        .earnings-summary {
+            background: linear-gradient(135deg, var(--green-success) 0%, #059669 100%);
             color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
         
-        .btn:hover {
-            background: var(--navy-dark);
-        }
-        
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 12px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th {
-            text-align: left;
-            padding: 8px 0;
-            border-bottom: 2px solid var(--navy-primary);
+        .earnings-label {
             font-size: 13px;
-            color: var(--navy-primary);
-            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 4px;
         }
         
-        td {
-            padding: 8px 0;
-            font-size: 14px;
+        .earnings-value {
+            font-size: 36px;
+            font-weight: 700;
         }
         
-        .scenario-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
+        .commission-info {
             background: var(--bg-secondary);
+            padding: 12px;
             border-radius: 8px;
-            margin-bottom: 8px;
-        }
-        
-        .scenario-name {
-            font-weight: 500;
-            color: var(--navy-primary);
-        }
-        
-        .scenario-actions {
-            display: flex;
-            gap: 8px;
+            margin-top: 12px;
+            font-size: 13px;
         }
         
         .info-box {
-            background: #e6f0ff;
-            border-left: 4px solid var(--navy-primary);
-            padding: 12px 16px;
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 16px;
             border-radius: 4px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         
-        .info-box p {
-            font-size: 13px;
-            color: var(--navy-primary);
-            margin: 0;
+        .info-box-title {
+            font-weight: 600;
+            color: #1976d2;
+            margin-bottom: 8px;
         }
         
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .feature-list li {
-            padding: 8px 0;
-            padding-left: 24px;
-            position: relative;
+        .info-box-text {
             font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
         
-        .feature-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--gold-primary);
-            font-weight: bold;
+        .scenario-card {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
         }
         
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(30, 58, 95, 0.4);
+        .commission-structure {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
         
-        button:active {
-            transform: translateY(0);
+        .point-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
         }
         
-        @media (max-width: 600px) {
-            .app-container {
-                padding: 12px;
-            }
-            
-            .header h1 {
-                font-size: 24px;
-            }
-            
-            .rank-value {
-                font-size: 36px;
-            }
-            
-            .tabs {
-                gap: 4px;
-            }
-            
-            .tab {
-                padding: 10px 12px;
-                font-size: 13px;
-            }
+        .point-row:last-child {
+            border-bottom: none;
         }
     </style>
 </head>
+<body>
     <div class="app-container">
         <div class="header">
-            <h1>Enagic Income Tracker</h1>
-            <p>Track your business earnings and rank progression</p>
+            <h1>💧 Enagic Break-even Calculator</h1>
+            <p>Work out your sales required to breakeven</p>
         </div>
-        
-        <div id="income-tab">
-            <div class="info-box">
-                <p><strong>Income Tracker:</strong> Model your monthly income based on direct sales (you) and indirect sales (your team). Note this calculator assumes you have a single lane in your business, you can run multiple scenarios to calculate commission due if you have multiple lanes.</p>
+
+        <div class="card">
+            <div class="card-title">Region Settings</div>
+
+            <div class="form-group">
+                <label for="country">Select Your Market</label>
+                <select id="country" onchange="updateAllCalculations()">
+                    <option value="usa">🇺🇸 United States</option>
+                    <option value="australia">🇦🇺 Australia</option>
+                    <option value="europe">🇪🇺 Europe</option>
+                </select>
             </div>
-            
-            <div class="card">
-                <div class="card-title">Settings</div>
-                
-                <div class="form-group">
-                    <label for="income-country">Country/Region</label>
-                    <select id="income-country" onchange="calculateIncome()">
-                        <option value="usa">USA</option>
-                        <option value="australia">Australia</option>
-                        <option value="europe">Europe</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="income-rank">Your Current Rank</label>
-                    <select id="income-rank" onchange="calculateIncome()">
-                        <option value="1">1A (1 point)</option>
-                        <option value="2">2A (2 points)</option>
-                        <option value="3">3A (3 points)</option>
-                        <option value="4">4A (4 points)</option>
-                        <option value="5">5A (5 points)</option>
-                        <option value="6">6A (6 points)</option>
-                    </select>
-                </div>
+
+            <div class="form-group">
+                <label for="tax-rate">Tax Rate (%)</label>
+                <input type="number" id="tax-rate" min="0" max="100" step="0.1" value="0" 
+                       placeholder="Enter tax percentage (e.g., 10 for 10%)" 
+                       oninput="updateAllCalculations()">
+                <div class="product-note" style="margin-top: 8px;">Tax will be added on top of retail prices</div>
             </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Break-Even Calculator</div>
             
-            <div class="card">
-                <div class="card-title">Monthly Direct Sales (You)</div>
+            <div class="form-group">
+                <label>Initial Inventory Purchase</label>
                 
                 <div class="product-row">
-                    <span class="product-name">K8</span>
-                    <select id="income-k8" onchange="calculateIncome()">
+                    <label for="breakeven-k8" class="product-label">K8</label>
+                    <select id="breakeven-k8" class="product-select" onchange="calculateBreakeven()">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
                     </select>
                 </div>
-                
+
                 <div class="product-row">
-                    <span class="product-name">Anespa DX</span>
-                    <select id="income-anespa" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">Ukon DD</span>
-                    <select id="income-ukondd" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">LeveLuk SD501</span>
-                    <select id="income-sd501" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">LeveLuk SD501 Platinum</span>
-                    <select id="income-sd501platinum" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">LeveLuk SD501 Super</span>
-                    <select id="income-sd501super" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">LeveLuk SD501 DX</span>
-                    <select id="income-sd501dx" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">JrIV</span>
-                    <select id="income-jriv" onchange="calculateIncome()">
+                    <label for="breakeven-anespa" class="product-label">Anespa DX</label>
+                    <select id="breakeven-anespa" class="product-select" onchange="calculateBreakeven()">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -588,33 +346,10 @@
                         <option value="10">10</option>
                     </select>
                 </div>
-                
+
                 <div class="product-row">
-                    <span class="product-name">EmGuarde</span>
-                    <select id="income-emguarde" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                    <p class="product-note" id="emguarde-note" style="display: none; color: #dc3545;">EmGuarde not available in this region</p>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Monthly Team Sales (Indirect)</div>
-                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;"><strong>Note:</strong> This calculator assumes you get all remaining points from an indirect sale, but this may not be correct if you have an indirect sale from someone who is high rank, as there are only 8 points total to be shared.</p>
-                
-                <div class="product-row">
-                    <span class="product-name">K8 (team)</span>
-                    <select id="income-indirect-k8" onchange="calculateIncome()">
+                    <label for="breakeven-ukon" class="product-label">Ukon DD</label>
+                    <select id="breakeven-ukon" class="product-select" onchange="calculateBreakeven()">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -638,10 +373,96 @@
                         <option value="20">20</option>
                     </select>
                 </div>
-                
+
                 <div class="product-row">
-                    <span class="product-name">Anespa DX (team)</span>
-                    <select id="income-indirect-anespa" onchange="calculateIncome()">
+                    <label for="breakeven-sd501" class="product-label">LeveLuk SD501</label>
+                    <select id="breakeven-sd501" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-sd501platinum" class="product-label">LeveLuk SD501 Platinum</label>
+                    <select id="breakeven-sd501platinum" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-sd501super" class="product-label">LeveLuk SD501 Super</label>
+                    <select id="breakeven-sd501super" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <div class="product-note" id="sd501super-note" style="display: none;">Not available in this region</div>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-sd501dx" class="product-label">LeveLuk SD501 DX</label>
+                    <select id="breakeven-sd501dx" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-jriv" class="product-label">JrIV</label>
+                    <select id="breakeven-jriv" class="product-select" onchange="calculateBreakeven()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-row">
+                    <label for="breakeven-emguarde" class="product-label">EmGuarde</label>
+                    <select id="breakeven-emguarde" class="product-select" onchange="calculateBreakeven()">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -664,1018 +485,699 @@
                         <option value="19">19</option>
                         <option value="20">20</option>
                     </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">Ukon DD (team)</span>
-                    <select id="income-indirect-ukondd" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">LeveLuk SD501 (team)</span>
-                    <select id="income-indirect-sd501" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">LeveLuk SD501 Platinum (team)</span>
-                    <select id="income-indirect-sd501platinum" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">LeveLuk SD501 Super (team)</span>
-                    <select id="income-indirect-sd501super" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">LeveLuk SD501 DX (team)</span>
-                    <select id="income-indirect-sd501dx" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">JrIV (team)</span>
-                    <select id="income-indirect-jriv" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                
-                <div class="product-row">
-                    <span class="product-name">EmGuarde (team)</span>
-                    <select id="income-indirect-emguarde" onchange="calculateIncome()">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                    </select>
-                    <p class="product-note" id="indirect-emguarde-note" style="display: none; color: #dc3545;">EmGuarde not available in this region</p>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Projected Income</div>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-label">Direct Sales</div>
-                        <div class="metric-value" id="income-direct-sales">0</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">Team Sales</div>
-                        <div class="metric-value" id="income-indirect-sales">0</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">Total Sales</div>
-                        <div class="metric-value" id="income-total-sales">0</div>
-                    </div>
-                </div>
-                
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-label">Direct Income</div>
-                        <div class="metric-value" id="income-direct-monthly">$0</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-label">Team Income</div>
-                        <div class="metric-value" id="income-indirect-monthly">$0</div>
-                    </div>
-                </div>
-                
-                <!-- BIG RESULTS CARDS -->
-                <div style="display: grid; grid-template-columns: 1fr; gap: 16px; margin: 20px 0;">
-                    <div style="background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%); padding: 28px; border-radius: 12px; text-align: center; box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4);">
-                        <div style="font-size: 14px; color: var(--gold-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">💰 Monthly Income</div>
-                        <div style="font-size: 48px; font-weight: 700; color: var(--gold-primary); line-height: 1.1;" id="income-monthly">$0</div>
-                    </div>
-                    
-                    <div style="background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%); padding: 28px; border-radius: 12px; text-align: center; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);">
-                        <div style="font-size: 14px; color: var(--navy-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">🎯 Annual Income</div>
-                        <div style="font-size: 48px; font-weight: 700; color: var(--navy-primary); line-height: 1.1;" id="income-annual">$0</div>
-                    </div>
-                </div>
-                
-                <div class="metric-card" style="margin-top: 12px;">
-                    <div class="metric-label">Avg Per Sale</div>
-                    <div class="metric-value" id="income-per-sale">$0</div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Rank Progression</div>
-                <div id="rank-progression-content">
-                    <p style="font-size: 13px; color: var(--text-secondary); text-align: center; padding: 20px 0;">Enter sales quantities to see rank progression</p>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Income Breakdown</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th style="text-align: center;">Qty</th>
-                            <th style="text-align: right;">Per Sale</th>
-                            <th style="text-align: right;">Monthly</th>
-                        </tr>
-                    </thead>
-                    <tbody id="income-breakdown">
-                        <tr>
-                            <td colspan="4" style="padding: 16px 0; text-align: center; color: var(--text-secondary);">Adjust quantities above to see breakdown</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Download Projection</div>
-                <div class="form-group">
-                    <label for="scenario-name">Scenario Name</label>
-                    <input type="text" id="scenario-name" placeholder="e.g. Jo's Income Projection" style="width: 100%; padding: 12px; font-size: 14px; border: 2px solid var(--border-color); border-radius: 8px;">
-                </div>
-                <button onclick="downloadPDF()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
-                    📄 Download as PDF
-                </button>
-            </div>
-            
-            <div style="background: #fff3cd; border-left: 4px solid var(--gold-primary); padding: 20px; border-radius: 8px; margin-top: 20px;">
-                <div style="font-weight: 700; font-size: 16px; color: var(--text-primary); margin-bottom: 30px;">📋 Calculator Assumptions</div>
-                
-                <div style="margin-bottom: 4px; padding: 16px; background: rgba(248, 249, 250, 0.5); border-radius: 6px;">
-                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold-light);">Rank-Based Commission:</div>
-                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 2;">
-                        Commission per sale = Your Rank × Base Commission Rate. For example, a 3A distributor earns 3 points per sale (3 × $351 = $1,053 for K8 in USA). This applies equally to both direct and indirect sales.
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 4px; padding: 16px; background: white; border-radius: 6px;">
-                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold-light);">Rank Advancement:</div>
-                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 2;">
-                        Ranks are based on <strong>total sales count</strong> (direct + indirect combined). All products count as 1 sale each.
-                        <br><br>
-                        1A = 1-2 sales, 2A = 3-10 sales, 3A = 11-20 sales, 4A = 21-50 sales, 5A = 51-100 sales, 6A = 101+ sales.
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 4px; padding: 16px; background: rgba(248, 249, 250, 0.5); border-radius: 6px;">
-                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold-light);">Commission Rates:</div>
-                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 2;">
-                        All commission rates include Special Points (SP) and assume regular direct sales activity. Rates shown are "Basic + SP" combined values. <strong>Important:</strong> Figures do NOT include the 2% Enagic Business Support Fee (effective May 1, 2026) which will be deducted from actual commissions paid.
-                    </div>
-                </div>
-                
-                <div style="padding: 16px; background: rgba(212, 175, 55, 0.1); border-radius: 6px; border-left: 3px solid var(--gold-dark); margin-bottom: 16px;">
-                    <div style="font-size: 13px; font-weight: 600; color: var(--gold-dark); margin-bottom: 8px;">⚠️ 6A Bonuses Not Included:</div>
-                    <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.6;">
-                        Calculations include only the standard 8-point commission structure. Additional 6A+ bonuses (Title Incentive, 6A Group Awards, Step-Up Bonus, Educational Allowance, Monthly/Quarterly Incentives, and 6A2+ lifetime bonuses) are <strong>NOT</strong> included. Actual earnings for 6A+ distributors will be significantly higher.
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 20px; padding: 16px; background: white; border-radius: 6px;">
-                    <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--gold-light);">Projection Model:</div>
-                    <div style="font-size: 13px; color: var(--text-secondary); line-height: 2;">
-                        This calculator projects monthly income based on consistent sales volumes. It does not account for rank advancement timing during the month, commission payment schedules, or variable growth patterns.
-                    </div>
-                </div>
-                
-                <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.5; text-align: center; margin-top: 16px;">
-                    <strong>Disclaimer:</strong> This is an estimating tool only and should not be used as an accurate calculator. Commission and income calculations are estimates based on the information provided and may not reflect actual earnings. We cannot be held responsible for any inaccuracies with the data or calculations. Please consult official Enagic documentation and your upline for accurate commission information.
+                    <div class="product-note" id="emguarde-note" style="display: none;">EmGuarde not available in this region</div>
                 </div>
             </div>
         </div>
-        
-        <!-- Break-Even Calculator Tab -->
+
+        <div id="breakeven-summary" style="display: none;">
+            <div class="card">
+                <div class="card-title">Investment Summary</div>
+                <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">
+                    Total Initial Investment: <span style="font-size: 24px; font-weight: 700; color: var(--navy-primary); display: block; margin-top: 4px;" id="breakeven-total-investment">$0</span>
+                </div>
+                <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+                    As a 1A distributor, K8 commission: <span style="font-weight: 600; color: var(--gold-primary);" id="breakeven-commission-rate">$0</span>
+                </div>
+                
+            </div>
         </div>
+
+        <div id="breakeven-scenarios" style="display: none;">
+            <div class="card">
+                <div class="card-title">Break-Even Scenarios</div>
+                
+                <!-- EmGuarde-Only Warning (Static, shows/hides dynamically) -->
+                <div id="emguarde-only-warning" style="display: none; margin-bottom: 20px; padding: 16px; background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); border-radius: 8px; border: 3px solid #dc3545; box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);">
+                    <div style="font-size: 15px; font-weight: bold; color: #dc3545; margin-bottom: 8px; display: flex; align-items: center;">
+                        <span style="font-size: 20px; margin-right: 8px;">⚠️</span>
+                        CRITICAL: EmGuarde-Only Start Limitation
+                    </div>
+                    <div style="font-size: 13px; color: #721c24; line-height: 1.7; margin-bottom: 8px;">
+                        Starting your business with <strong>ONLY EmGuarde purchases</strong> results in approximately <strong style="font-size: 15px;">77% commission on ALL sales</strong> (direct and indirect) until you purchase an ionizer product.
+                    </div>
+                    <div style="font-size: 13px; color: #721c24; line-height: 1.7; margin-bottom: 8px;">
+                        <strong>The calculations shown assume 100% commission rates.</strong> Your actual break-even point will be significantly higher if you start with EmGuarde only.
+                    </div>
+                    <div style="font-size: 13px; color: #721c24; line-height: 1.7; padding: 8px; background: rgba(255,255,255,0.5); border-radius: 4px;">
+                        <strong>Recommendation:</strong> Purchase at least one ionizer (K8, SD501, etc.) alongside EmGuarde to qualify for full commission rates.
+                    </div>
+                </div>
+                
+                <div id="breakeven-scenarios-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-const commissionRates = {
-            usa: {
-                products: {
-                    k8: 351,
-                    anespa: 195,
-                    ukondd: 40,
-                    sd501: 290,
-                    sd501platinum: 290,
-                    sd501super: 420,
-                    sd501dx: 311,
-                    jriv: 200,
-                    emguarde: 0  // Not available in USA
-                },
-                currency: 'USD'
-            },
-            australia: {
-                products: {
-                    k8: 400,
-                    anespa: 190,
-                    ukondd: 58,
-                    sd501: 310,
-                    sd501platinum: 310,
-                    sd501super: 440,
-                    sd501dx: 344,
-                    jriv: 265,
-                    emguarde: 134
-                },
-                currency: 'AUD'
-            },
-            europe: {
-                products: {
-                    k8: 295,
-                    anespa: 170,
-                    ukondd: 35,
-                    sd501: 205,
-                    sd501platinum: 205,
-                    sd501super: 0,  // Not available in Europe
-                    sd501dx: 233,
-                    jriv: 180,
-                    emguarde: 80
-                },
-                currency: 'EUR'
-            }
-        };
-
-
-const rankThresholds = [
-            { rank: '1A', minSales: 1, maxSales: 2, points: 1, description: 'Agent' },
-            { rank: '2A', minSales: 3, maxSales: 10, points: 2, description: 'Senior Agent' },
-            { rank: '3A', minSales: 11, maxSales: 20, points: 3, description: 'Bronze' },
-            { rank: '4A', minSales: 21, maxSales: 50, points: 4, description: 'Silver' },
-            { rank: '5A', minSales: 51, maxSales: 100, points: 5, description: 'Gold' },
-            { rank: '6A', minSales: 101, maxSales: null, points: 6, description: 'Platinum' }
-        ];
-
-        function getRankFromSales(totalSales) {
-            for (let i = rankThresholds.length - 1; i >= 0; i--) {
-                const threshold = rankThresholds[i];
-                if (threshold.maxSales === null) {
-                    if (totalSales >= threshold.minSales) {
-                        return threshold;
-                    }
-                } else if (totalSales >= threshold.minSales && totalSales <= threshold.maxSales) {
-                    return threshold;
-                }
-            }
-            return rankThresholds[0]; // Default to 1A
-        }
-
-
-
-
+        const { jsPDF } = window.jspdf;
+        
+        let currentScenarios = [];
+        
         function formatCurrency(amount, currency) {
-            const symbols = {
-                'USD': '$',
-                'AUD': 'A$',
-                'EUR': '€'
-            };
+            const symbols = { USD: '$', AUD: 'A$', EUR: '€' };
             const symbol = symbols[currency] || '$';
-            return symbol + amount.toLocaleString();
+            return symbol + amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
         }
         
-        function calculateIncome() {
-            const country = document.getElementById('income-country').value;
-            const rank = parseInt(document.getElementById('income-rank').value);
-            
-            const rates = commissionRates[country];
-            const currency = rates.currency;
-            
-            // Show/hide EmGuarde note based on region
-            const emguardeNote = document.getElementById('emguarde-note');
-            const indirectEmguardeNote = document.getElementById('indirect-emguarde-note');
-            if (rates.products.emguarde === 0) {
-                if (emguardeNote) emguardeNote.style.display = 'block';
-                if (indirectEmguardeNote) indirectEmguardeNote.style.display = 'block';
-            } else {
-                if (emguardeNote) emguardeNote.style.display = 'none';
-                if (indirectEmguardeNote) indirectEmguardeNote.style.display = 'none';
-            }
-            
-            // Direct sales
-            const k8 = parseInt(document.getElementById('income-k8').value) || 0;
-            const anespa = parseInt(document.getElementById('income-anespa').value) || 0;
-            const ukondd = parseInt(document.getElementById('income-ukondd').value) || 0;
-            const sd501 = parseInt(document.getElementById('income-sd501').value) || 0;
-            const sd501platinum = parseInt(document.getElementById('income-sd501platinum').value) || 0;
-            const sd501super = parseInt(document.getElementById('income-sd501super').value) || 0;
-            const sd501dx = parseInt(document.getElementById('income-sd501dx').value) || 0;
-            const jriv = parseInt(document.getElementById('income-jriv').value) || 0;
-            const emguarde = parseInt(document.getElementById('income-emguarde').value) || 0;
-            
-            // Indirect sales
-            const indirectK8 = parseInt(document.getElementById('income-indirect-k8').value) || 0;
-            const indirectAnespa = parseInt(document.getElementById('income-indirect-anespa').value) || 0;
-            const indirectUkondd = parseInt(document.getElementById('income-indirect-ukondd').value) || 0;
-            const indirectSd501 = parseInt(document.getElementById('income-indirect-sd501').value) || 0;
-            const indirectSd501platinum = parseInt(document.getElementById('income-indirect-sd501platinum').value) || 0;
-            const indirectSd501super = parseInt(document.getElementById('income-indirect-sd501super').value) || 0;
-            const indirectSd501dx = parseInt(document.getElementById('income-indirect-sd501dx').value) || 0;
-            const indirectJriv = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
-            const indirectEmguarde = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
-            
-            // Calculate direct income (Rank × Commission Value)
-            let directMonthlyIncome = 0;
-            const directBreakdown = [];
-            
-            if (k8 > 0) {
-                const perSale = rank * rates.products.k8;
-                const monthly = k8 * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'K8', qty: k8, perSale: perSale, monthly: monthly });
-            }
-            
-            if (anespa > 0) {
-                const perSale = rank * rates.products.anespa;
-                const monthly = anespa * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'Anespa DX', qty: anespa, perSale: perSale, monthly: monthly });
-            }
-            
-            if (ukondd > 0) {
-                const perSale = rank * rates.products.ukondd;
-                const monthly = ukondd * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'Ukon DD', qty: ukondd, perSale: perSale, monthly: monthly });
-            }
-            
-            if (sd501 > 0) {
-                const perSale = rank * rates.products.sd501;
-                const monthly = sd501 * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'LeveLuk SD501', qty: sd501, perSale: perSale, monthly: monthly });
-            }
-            
-            if (sd501platinum > 0) {
-                const perSale = rank * rates.products.sd501platinum;
-                const monthly = sd501platinum * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'LeveLuk SD501 Platinum', qty: sd501platinum, perSale: perSale, monthly: monthly });
-            }
-            
-            if (sd501super > 0 && rates.products.sd501super > 0) {
-                const perSale = rank * rates.products.sd501super;
-                const monthly = sd501super * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'LeveLuk SD501 Super', qty: sd501super, perSale: perSale, monthly: monthly });
-            }
-            
-            if (sd501dx > 0) {
-                const perSale = rank * rates.products.sd501dx;
-                const monthly = sd501dx * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'LeveLuk SD501 DX', qty: sd501dx, perSale: perSale, monthly: monthly });
-            }
-            
-            if (jriv > 0) {
-                const perSale = rank * rates.products.jriv;
-                const monthly = jriv * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'JrIV', qty: jriv, perSale: perSale, monthly: monthly });
-            }
-            
-            if (emguarde > 0 && rates.products.emguarde > 0) {
-                const perSale = rank * rates.products.emguarde;
-                const monthly = emguarde * perSale;
-                directMonthlyIncome += monthly;
-                directBreakdown.push({ name: 'EmGuarde', qty: emguarde, perSale: perSale, monthly: monthly });
-            }
-            
-            // Calculate indirect income (same formula - Rank × Commission Value)
-            let indirectMonthlyIncome = 0;
-            const indirectBreakdown = [];
-            
-            if (indirectK8 > 0) {
-                const perSale = rank * rates.products.k8;
-                const monthly = indirectK8 * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'K8 (team)', qty: indirectK8, perSale: perSale, monthly: monthly });
-            }
-            
-            if (indirectAnespa > 0) {
-                const perSale = rank * rates.products.anespa;
-                const monthly = indirectAnespa * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'Anespa DX (team)', qty: indirectAnespa, perSale: perSale, monthly: monthly });
-            }
-            
-            if (indirectUkondd > 0) {
-                const perSale = rank * rates.products.ukondd;
-                const monthly = indirectUkondd * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'Ukon DD (team)', qty: indirectUkondd, perSale: perSale, monthly: monthly });
-            }
-            
-            if (indirectSd501 > 0) {
-                const perSale = rank * rates.products.sd501;
-                const monthly = indirectSd501 * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'LeveLuk SD501 (team)', qty: indirectSd501, perSale: perSale, monthly: monthly });
-            }
-            
-            if (indirectSd501platinum > 0) {
-                const perSale = rank * rates.products.sd501platinum;
-                const monthly = indirectSd501platinum * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'LeveLuk SD501 Platinum (team)', qty: indirectSd501platinum, perSale: perSale, monthly: monthly });
-            }
-            
-            if (indirectSd501super > 0 && rates.products.sd501super > 0) {
-                const perSale = rank * rates.products.sd501super;
-                const monthly = indirectSd501super * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'LeveLuk SD501 Super (team)', qty: indirectSd501super, perSale: perSale, monthly: monthly });
-            }
-            
-            if (indirectSd501dx > 0) {
-                const perSale = rank * rates.products.sd501dx;
-                const monthly = indirectSd501dx * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'LeveLuk SD501 DX (team)', qty: indirectSd501dx, perSale: perSale, monthly: monthly });
-            }
-            
-            if (indirectJriv > 0) {
-                const perSale = rank * rates.products.jriv;
-                const monthly = indirectJriv * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'JrIV (team)', qty: indirectJriv, perSale: perSale, monthly: monthly });
-            }
-            
-            if (indirectEmguarde > 0 && rates.products.emguarde > 0) {
-                const perSale = rank * rates.products.emguarde;
-                const monthly = indirectEmguarde * perSale;
-                indirectMonthlyIncome += monthly;
-                indirectBreakdown.push({ name: 'EmGuarde (team)', qty: indirectEmguarde, perSale: perSale, monthly: monthly });
-            }
-            
-            const directSalesTotal = k8 + anespa + ukondd + sd501 + sd501platinum + sd501super + sd501dx + jriv + emguarde;
-            const indirectSalesTotal = indirectK8 + indirectAnespa + indirectUkondd + indirectSd501 + indirectSd501platinum + 
-                                      indirectSd501super + indirectSd501dx + indirectJriv + indirectEmguarde;
-            const totalSales = directSalesTotal + indirectSalesTotal;
-            const totalMonthlyIncome = directMonthlyIncome + indirectMonthlyIncome;
-            const annualIncome = totalMonthlyIncome * 12;
-            
-            // Update UI
-            document.getElementById('income-direct-sales').textContent = directSalesTotal;
-            document.getElementById('income-indirect-sales').textContent = indirectSalesTotal;
-            document.getElementById('income-total-sales').textContent = totalSales;
-            document.getElementById('income-direct-monthly').textContent = formatCurrency(Math.round(directMonthlyIncome), currency);
-            document.getElementById('income-indirect-monthly').textContent = formatCurrency(Math.round(indirectMonthlyIncome), currency);
-            document.getElementById('income-monthly').textContent = formatCurrency(Math.round(totalMonthlyIncome), currency);
-            document.getElementById('income-annual').textContent = formatCurrency(Math.round(annualIncome), currency);
-            
-            // Show average commission per sale if any products selected
-            if (totalSales > 0) {
-                const avgPerSale = Math.round(totalMonthlyIncome / totalSales);
-                document.getElementById('income-per-sale').textContent = formatCurrency(avgPerSale, currency);
-            } else {
-                document.getElementById('income-per-sale').textContent = formatCurrency(0, currency);
-            }
-            
-            // Update breakdown table - combine direct and indirect
-            const tbody = document.getElementById('income-breakdown');
-            tbody.innerHTML = '';
-            
-            const allBreakdown = [...directBreakdown, ...indirectBreakdown];
-            
-            if (allBreakdown.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" style="padding: 16px 0; text-align: center; color: var(--text-secondary);">Adjust quantities above to see breakdown</td></tr>';
-            } else {
-                allBreakdown.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td style="padding: 8px 0;">${item.name}</td>
-                        <td style="padding: 8px 0; text-align: center; font-weight: 500;">${item.qty}</td>
-                        <td style="padding: 8px 0; text-align: right;">${formatCurrency(Math.round(item.perSale), currency)}</td>
-                        <td style="padding: 8px 0; text-align: right; font-weight: 500;">${formatCurrency(Math.round(item.monthly), currency)}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            }
-            
-            // Calculate rank progression
-            updateRankProgression();
-        }
-        
-        function updateRankProgression() {
-            // Get current rank and calculate sales needed for NEXT rank
-            const currentRank = parseInt(document.getElementById('income-rank').value);
-            
-            // Calculate total SALES from entered quantities
-            const k8 = parseInt(document.getElementById('income-k8').value) || 0;
-            const anespa = parseInt(document.getElementById('income-anespa').value) || 0;
-            const ukondd = parseInt(document.getElementById('income-ukondd').value) || 0;
-            const sd501 = parseInt(document.getElementById('income-sd501').value) || 0;
-            const sd501platinum = parseInt(document.getElementById('income-sd501platinum').value) || 0;
-            const sd501super = parseInt(document.getElementById('income-sd501super').value) || 0;
-            const sd501dx = parseInt(document.getElementById('income-sd501dx').value) || 0;
-            const jriv = parseInt(document.getElementById('income-jriv').value) || 0;
-            const emguarde = parseInt(document.getElementById('income-emguarde').value) || 0;
-            
-            const indirectK8 = parseInt(document.getElementById('income-indirect-k8').value) || 0;
-            const indirectAnespa = parseInt(document.getElementById('income-indirect-anespa').value) || 0;
-            const indirectUkondd = parseInt(document.getElementById('income-indirect-ukondd').value) || 0;
-            const indirectSd501 = parseInt(document.getElementById('income-indirect-sd501').value) || 0;
-            const indirectSd501platinum = parseInt(document.getElementById('income-indirect-sd501platinum').value) || 0;
-            const indirectSd501super = parseInt(document.getElementById('income-indirect-sd501super').value) || 0;
-            const indirectSd501dx = parseInt(document.getElementById('income-indirect-sd501dx').value) || 0;
-            const indirectJriv = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
-            const indirectEmguarde = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
-            
-            // Total monthly sales entered
-            const monthlySales = k8 + anespa + ukondd + sd501 + sd501platinum + sd501super + sd501dx + jriv + emguarde +
-                              indirectK8 + indirectAnespa + indirectUkondd + indirectSd501 + indirectSd501platinum + 
-                              indirectSd501super + indirectSd501dx + indirectJriv + indirectEmguarde;
-            
-            const progressContent = document.getElementById('rank-progression-content');
-            
-            if (monthlySales === 0) {
-                progressContent.innerHTML = '<p style="font-size: 13px; color: var(--text-secondary); text-align: center; padding: 20px 0;">📊 Enter your monthly sales above to see rank progression and income projections</p>';
-                return;
-            }
-            
-            // Find next rank
-            const currentRankIndex = rankThresholds.findIndex(r => parseInt(r.rank.replace('A', '')) === currentRank);
-            const nextRank = currentRankIndex < rankThresholds.length - 1 ? rankThresholds[currentRankIndex + 1] : null;
-            
-            let html = `
-                <div style="text-align: center; padding: 16px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 16px;">
-                    <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">Monthly Projection at Current Rank</div>
-                    <div style="font-size: 28px; font-weight: 700; color: var(--navy-primary);">${currentRank}A</div>
-                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">${monthlySales} sales/month</div>
-                </div>
-            `;
-            
-            // Show progress to next rank if applicable
-            if (nextRank) {
-                html += `
-                    <div style="margin-bottom: 12px;">
-                        <div style="font-size: 14px; font-weight: 600; color: var(--navy-primary); margin-bottom: 8px;">Progress to ${nextRank.rank}</div>
-                        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
-                            You need <strong>${nextRank.minSales} total sales</strong> to reach ${nextRank.rank}. Based on ${monthlySales} sales/month:
-                        </div>
-                        <div style="text-align: center; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-                            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Months to ${nextRank.rank}</div>
-                            <div style="font-size: 20px; font-weight: 700; color: var(--gold-primary);">${Math.ceil(nextRank.minSales / monthlySales)} months</div>
-                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">at current sales pace</div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                html += `
-                    <div style="text-align: center; padding: 16px; background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%); border-radius: 8px;">
-                        <div style="font-size: 14px; color: var(--navy-dark); font-weight: 600;">🏆 Maximum Rank Achieved!</div>
-                        <div style="font-size: 13px; color: var(--navy-dark); margin-top: 4px;">You're at ${currentRank}A - the highest rank</div>
-                    </div>
-                `;
-            }
-            
-            progressContent.innerHTML = html;
-        }
-
-        // Initialize on page load
-        window.addEventListener('DOMContentLoaded', () => {
-            calculateIncome();
-        });
-
-        // Download PDF function
         function downloadPDF() {
-            const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+            const scenarioName = document.getElementById('scenario-name').value || 'Enagic Break-Even Analysis';
+            const country = document.getElementById('country').value;
+            const countryNames = { usa: 'United States', australia: 'Australia', europe: 'Europe' };
+            const currency = country === 'usa' ? 'USD' : country === 'australia' ? 'AUD' : 'EUR';
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
+            const totalInvestment = document.getElementById('breakeven-total-investment').textContent;
+            const commissionElement = document.getElementById('breakeven-commission-rate');
             
-            // Get scenario name
-            const scenarioName = document.getElementById('scenario-name').value || 'Income Projection';
+            // Parse commission - may include self-purchase commission
+            const commissionText = commissionElement.textContent;
+            let startingCommission = commissionText;
+            let selfPurchaseCommission = null;
             
-            // Get current data
-            const country = document.getElementById('income-country').value;
-            const rank = parseInt(document.getElementById('income-rank').value);
-            const rates = commissionRates[country];
-            const currency = rates.currency;
+            // Check if there's a self-purchase commission included
+            if (commissionText.includes('Commission earned on self-purchases:')) {
+                const parts = commissionText.split('Commission earned on self-purchases:');
+                startingCommission = parts[0].trim();
+                selfPurchaseCommission = parts[1].trim();
+            }
             
-            // Get all product values for detailed breakdown
-            const k8Val = parseInt(document.getElementById('income-k8').value) || 0;
-            const anespaVal = parseInt(document.getElementById('income-anespa').value) || 0;
-            const ukonddVal = parseInt(document.getElementById('income-ukondd').value) || 0;
-            const sd501Val = parseInt(document.getElementById('income-sd501').value) || 0;
-            const sd501platinumVal = parseInt(document.getElementById('income-sd501platinum').value) || 0;
-            const sd501superVal = parseInt(document.getElementById('income-sd501super').value) || 0;
-            const sd501dxVal = parseInt(document.getElementById('income-sd501dx').value) || 0;
-            const jrivVal = parseInt(document.getElementById('income-jriv').value) || 0;
-            const emguardeVal = parseInt(document.getElementById('income-emguarde').value) || 0;
+            // Get investment breakdown
+            const k8 = parseInt(document.getElementById('breakeven-k8').value) || 0;
+            const sd501 = parseInt(document.getElementById('breakeven-sd501').value) || 0;
+            const sd501platinum = parseInt(document.getElementById('breakeven-sd501platinum').value) || 0;
+            const sd501super = parseInt(document.getElementById('breakeven-sd501super').value) || 0;
+            const sd501dx = parseInt(document.getElementById('breakeven-sd501dx').value) || 0;
+            const anespa = parseInt(document.getElementById('breakeven-anespa').value) || 0;
+            const jriv = parseInt(document.getElementById('breakeven-jriv').value) || 0;
+            const ukon = parseInt(document.getElementById('breakeven-ukon').value) || 0;
+            const emguarde = parseInt(document.getElementById('breakeven-emguarde').value) || 0;
             
-            const indirectK8Val = parseInt(document.getElementById('income-indirect-k8').value) || 0;
-            const indirectAnespaVal = parseInt(document.getElementById('income-indirect-anespa').value) || 0;
-            const indirectUkonddVal = parseInt(document.getElementById('income-indirect-ukondd').value) || 0;
-            const indirectSd501Val = parseInt(document.getElementById('income-indirect-sd501').value) || 0;
-            const indirectSd501platinumVal = parseInt(document.getElementById('income-indirect-sd501platinum').value) || 0;
-            const indirectSd501superVal = parseInt(document.getElementById('income-indirect-sd501super').value) || 0;
-            const indirectSd501dxVal = parseInt(document.getElementById('income-indirect-sd501dx').value) || 0;
-            const indirectJrivVal = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
-            const indirectEmguardeVal = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
-            
-            const countryNames = {
-                'usa': 'USA',
-                'australia': 'Australia',
-                'europe': 'Europe'
-            };
-            
-            // Navy and gold colors
-            const navyColor = [30, 58, 95];
-            const goldColor = [212, 175, 55];
+            // Check for EmGuarde-only purchase
+            const hasIonizer = k8 > 0 || sd501 > 0 || sd501platinum > 0 || sd501super > 0 || sd501dx > 0 || jriv > 0;
+            const isEmGuardeOnly = emguarde > 0 && !hasIonizer && anespa === 0 && ukon === 0;
             
             // Header
-            doc.setFillColor(...navyColor);
+            doc.setFillColor(30, 58, 95);
             doc.rect(0, 0, 210, 40, 'F');
-            
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(22);
             doc.setFont(undefined, 'bold');
-            doc.text('Enagic Income Projection', 105, 15, { align: 'center' });
-            
-            doc.setFontSize(16);
+            doc.text('Enagic Break-Even Calculator', 105, 18, { align: 'center' });
+            doc.setFontSize(12);
             doc.setFont(undefined, 'normal');
-            doc.text(scenarioName, 105, 27, { align: 'center' });
-            
+            doc.text(scenarioName, 105, 28, { align: 'center' });
             doc.setFontSize(10);
-            doc.text(`Generated: ${new Date().toLocaleDateString()}`, 105, 35, { align: 'center' });
+            doc.text(new Date().toLocaleDateString(), 105, 35, { align: 'center' });
             
             // Settings
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(14);
             doc.setFont(undefined, 'bold');
-            doc.text('Settings', 20, 52);
-            
-            doc.setFontSize(11);
-            doc.setFont(undefined, 'normal');
-            doc.text(`Region: ${countryNames[country]}`, 20, 60);
-            doc.text(`Current Rank: ${rank}A`, 20, 67);
-            
-            // Income Summary
-            doc.setFontSize(14);
-            doc.setFont(undefined, 'bold');
-            doc.text('Income Summary', 20, 82);
-            
-            const directSales = document.getElementById('income-direct-sales').textContent;
-            const teamSales = document.getElementById('income-indirect-sales').textContent;
-            const totalSales = document.getElementById('income-total-sales').textContent;
-            const directIncome = document.getElementById('income-direct-monthly').textContent;
-            const teamIncome = document.getElementById('income-indirect-monthly').textContent;
-            const monthlyTotal = document.getElementById('income-monthly').textContent;
-            const annualTotal = document.getElementById('income-annual').textContent;
-            const avgPerSale = document.getElementById('income-per-sale').textContent;
-            
-            doc.setFontSize(11);
-            doc.setFont(undefined, 'normal');
-            let y = 90;
-            
-            doc.text(`Direct Sales: ${directSales}`, 20, y);
-            doc.text(`Team Sales: ${teamSales}`, 110, y);
-            y += 7;
-            doc.text(`Total Sales: ${totalSales}`, 20, y);
-            y += 10;
-            
-            doc.text(`Direct Income: ${directIncome}`, 20, y);
-            doc.text(`Team Income: ${teamIncome}`, 110, y);
-            y += 10;
-            
-            doc.setFont(undefined, 'bold');
-            doc.setTextColor(...goldColor);
-            doc.setFontSize(12);
-            doc.text(`Monthly Total: ${monthlyTotal}`, 20, y);
-            doc.text(`Annual Total: ${annualTotal}`, 110, y);
-            y += 10;
-            
-            doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(11);
-            doc.text(`Average Per Sale: ${avgPerSale}`, 20, y);
-            
-            // Rank Progression
-            // Check if we need a new page
-            if (y > 200) {
-                doc.addPage();
-                y = 20;
-            } else {
-                y += 20;
-            }
-            
-            // Calculate total sales for rank progression (already have all product values from top of function)
-            const totalSalesPDF = k8Val + anespaVal + ukonddVal + sd501Val + sd501platinumVal + sd501superVal + sd501dxVal + jrivVal + emguardeVal +
-                               indirectK8Val + indirectAnespaVal + indirectUkonddVal + indirectSd501Val + indirectSd501platinumVal + 
-                               indirectSd501superVal + indirectSd501dxVal + indirectJrivVal + indirectEmguardeVal;
-            
-            if (totalSalesPDF > 0) {
-                // Find new rank based on total sales
-                const newRankPDF = getRankFromSales(totalSalesPDF);
-                
-                const newRankNumberPDF = parseInt(newRankPDF.rank.replace('A', ''));
-                const currentRankNumberPDF = parseInt(rank);
-                
-                doc.setFontSize(14);
-                doc.setFont(undefined, 'bold');
-                doc.text('Rank Progression', 20, y);
-                
-                y += 8;
-                doc.setFontSize(11);
-                doc.setFont(undefined, 'normal');
-                
-                doc.text(`Total Sales: ${totalSalesPDF}`, 20, y);
-                doc.text(`Rank Achieved: ${newRankPDF.rank}`, 110, y);
-                y += 7;
-                
-                if (newRankNumberPDF > currentRankNumberPDF) {
-                    doc.setTextColor(...goldColor);
-                    doc.setFont(undefined, 'bold');
-                    doc.text(`RANK UP! From ${currentRankNumberPDF}A to ${newRankPDF.rank}`, 20, y);
-                    doc.setTextColor(0, 0, 0);
-                    doc.setFont(undefined, 'normal');
-                } else if (newRankNumberPDF === currentRankNumberPDF) {
-                    doc.text(`Maintains current rank: ${newRankPDF.rank}`, 20, y);
-                } else {
-                    doc.text(`Sales qualify for ${newRankPDF.rank} (current: ${currentRankNumberPDF}A)`, 20, y);
-                }
-                
-                y += 10;
-            }
-            
-            // Product Sales Breakdown
-            // Check if we need a new page
-            if (y > 200) {
-                doc.addPage();
-                y = 20;
-            } else {
-                y += 20;
-            }
-            
-            doc.setFontSize(14);
-            doc.setFont(undefined, 'bold');
-            doc.text('Product Sales Breakdown', 20, y);
-            
-            y += 8;
+            doc.text('Settings', 20, 50);
             doc.setFontSize(10);
+            doc.setFont(undefined, 'normal');
+            doc.text(`Market: ${countryNames[country]}`, 20, 58);
+            doc.text(`Tax Rate: ${taxRate}%`, 20, 64);
+            
+            // Investment Summary
+            let yPos = 75;
+            doc.setFontSize(14);
             doc.setFont(undefined, 'bold');
-            doc.text('Product', 20, y);
-            doc.text('Direct', 85, y, { align: 'center' });
-            doc.text('Team', 115, y, { align: 'center' });
-            doc.text('Total', 145, y, { align: 'center' });
-            doc.text('Income', 180, y, { align: 'right' });
-            
-            doc.setLineWidth(0.5);
-            doc.line(20, y + 2, 190, y + 2);
-            
-            y += 8;
+            doc.text('Investment Summary', 20, yPos);
+            yPos += 8;
+            doc.setFontSize(10);
             doc.setFont(undefined, 'normal');
             
-            // Build product breakdown from inputs
-            const products = [
-                { name: 'K8', direct: k8Val, indirect: indirectK8Val },
-                { name: 'Anespa DX', direct: anespaVal, indirect: indirectAnespaVal },
-                { name: 'Ukon DD', direct: ukonddVal, indirect: indirectUkonddVal },
-                { name: 'SD501', direct: sd501Val, indirect: indirectSd501Val },
-                { name: 'SD501 Platinum', direct: sd501platinumVal, indirect: indirectSd501platinumVal },
-                { name: 'SD501 Super', direct: sd501superVal, indirect: indirectSd501superVal },
-                { name: 'SD501 DX', direct: sd501dxVal, indirect: indirectSd501dxVal },
-                { name: 'JrIV', direct: jrivVal, indirect: indirectJrivVal },
-                { name: 'EmGuarde', direct: emguardeVal, indirect: indirectEmguardeVal }
-            ];
+            const investments = [];
+            if (k8 > 0) investments.push({ name: 'K8', qty: k8 });
+            if (anespa > 0) investments.push({ name: 'Anespa DX', qty: anespa });
+            if (ukon > 0) investments.push({ name: 'Ukon DD', qty: ukon });
+            if (sd501 > 0) investments.push({ name: 'LeveLuk SD501', qty: sd501 });
+            if (sd501platinum > 0) investments.push({ name: 'LeveLuk SD501 Platinum', qty: sd501platinum });
+            if (sd501super > 0) investments.push({ name: 'LeveLuk SD501 Super', qty: sd501super });
+            if (sd501dx > 0) investments.push({ name: 'LeveLuk SD501 DX', qty: sd501dx });
+            if (jriv > 0) investments.push({ name: 'JrIV', qty: jriv });
+            if (emguarde > 0) investments.push({ name: 'EmGuarde', qty: emguarde });
             
-            products.forEach(product => {
-                const total = product.direct + product.indirect;
-                if (total > 0) {
-                    // Calculate income for this product (need to get the rate)
-                    let productRate = 0;
-                    const productKey = product.name.toLowerCase().replace(/ /g, '').replace('dx', 'dx').replace('platinum', 'platinum');
-                    
-                    if (product.name === 'K8') productRate = rates.products.k8;
-                    else if (product.name === 'Anespa DX') productRate = rates.products.anespa;
-                    else if (product.name === 'Ukon DD') productRate = rates.products.ukondd;
-                    else if (product.name === 'SD501') productRate = rates.products.sd501;
-                    else if (product.name === 'SD501 Platinum') productRate = rates.products.sd501platinum;
-                    else if (product.name === 'SD501 Super') productRate = rates.products.sd501super;
-                    else if (product.name === 'SD501 DX') productRate = rates.products.sd501dx;
-                    else if (product.name === 'JrIV') productRate = rates.products.jriv;
-                    else if (product.name === 'EmGuarde') productRate = rates.products.emguarde;
-                    
-                    const income = total * (rank * productRate);
-                    
-                    doc.text(product.name, 20, y);
-                    doc.text(product.direct.toString(), 85, y, { align: 'center' });
-                    doc.text(product.indirect.toString(), 115, y, { align: 'center' });
-                    doc.text(total.toString(), 145, y, { align: 'center' });
-                    doc.text(formatCurrency(Math.round(income), currency), 180, y, { align: 'right' });
-                    y += 6;
-                    
-                    if (y > 270) {
-                        doc.addPage();
-                        y = 20;
-                    }
-                }
+            investments.forEach(item => {
+                doc.text(`${item.name}: ${item.qty} unit${item.qty > 1 ? 's' : ''}`, 20, yPos);
+                yPos += 6;
             });
             
-            // Footer disclaimer
-            if (y > 240) {
-                doc.addPage();
-                y = 20;
+            yPos += 4;
+            doc.setFont(undefined, 'bold');
+            doc.text(`Total Investment: ${totalInvestment}`, 20, yPos);
+            doc.setFont(undefined, 'normal');
+            yPos += 6;
+            doc.text(`Starting Commission (1A, K8): ${startingCommission}`, 20, yPos);
+            
+            // Add self-purchase commission on new line if applicable
+            if (selfPurchaseCommission) {
+                yPos += 6;
+                doc.setTextColor(16, 185, 129);
+                doc.text(`Commission earned on self-purchases: ${selfPurchaseCommission}`, 20, yPos);
+                doc.setTextColor(0, 0, 0);
             }
             
-            // Calculator Assumptions (add new page if needed)
-            if (y > 200) {
+            // Scenarios
+            yPos += 15;
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'bold');
+            doc.text('Break-Even Scenarios', 20, yPos);
+            yPos += 10;
+            
+            currentScenarios.forEach((scenario, index) => {
+                if (yPos > 250) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                // Scenario box
+                doc.setFillColor(248, 249, 250);
+                doc.rect(20, yPos - 5, 170, 35, 'F');
+                doc.setDrawColor(30, 58, 95);
+                doc.rect(20, yPos - 5, 170, 35, 'S');
+                
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'bold');
+                doc.text(scenario.name, 25, yPos + 2);
+                
+                doc.setFontSize(9);
+                doc.setFont(undefined, 'normal');
+                doc.text(scenario.description, 25, yPos + 8);
+                doc.setTextColor(212, 175, 55);
+                doc.text(scenario.details, 25, yPos + 14);
+                doc.setTextColor(0, 0, 0);
+                
+                doc.text(`Total Sales: ${scenario.sales}`, 25, yPos + 22);
+                doc.setTextColor(16, 185, 129);
+                doc.text(`Total Earned: ${formatCurrency(Math.round(scenario.totalCommission), currency)}`, 100, yPos + 22);
+                doc.setTextColor(0, 0, 0);
+                
+                yPos += 45;
+            });
+            
+            // Calculator Assumptions
+            if (yPos > 180) {
                 doc.addPage();
-                y = 20;
-            } else {
-                y += 15;
+                yPos = 20;
             }
             
+            yPos += 5;
             doc.setFillColor(255, 243, 205);
-            doc.rect(20, y, 170, 75, 'F');
+            doc.rect(20, yPos, 170, 109, 'F');
             doc.setDrawColor(212, 175, 55);
             doc.setLineWidth(2);
-            doc.line(20, y, 20, y + 75);
+            doc.line(20, yPos, 20, yPos + 109);
             
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
             doc.setTextColor(133, 100, 4);
-            doc.text('Calculator Assumptions', 25, y + 8);
+            doc.text('Calculator Assumptions', 25, yPos + 8);
             
             doc.setFontSize(8);
-            doc.setFont(undefined, 'normal');
+            doc.setFont(undefined, 'bold');
             doc.setTextColor(60, 60, 60);
-            const rankText = 'Commission per sale = Your Rank × Base Commission Rate. This applies equally to both direct and indirect sales. Ranks based on total sales count (direct + indirect). All products = 1 sale each. 1A = 1-2, 2A = 3-10, 3A = 11-20, 4A = 21-50, 5A = 51-100, 6A = 101+ sales.';
-            const splitRank = doc.splitTextToSize(rankText, 160);
-            doc.text(splitRank, 25, y + 16);
+            doc.text('Product Bundles:', 25, yPos + 16);
+            doc.setFont(undefined, 'normal');
+            const bundleText = 'A Trifecta = 1 K8 + 1 Ukon DD + 1 Anespa DX (3 products). A Quad = 1 K8 + 1 Ukon DD + 1 Anespa DX + 1 EmGuarde (4 products, non-US markets only).';
+            const splitBundle = doc.splitTextToSize(bundleText, 160);
+            doc.text(splitBundle, 25, yPos + 21);
             
-            y += 26;
-            const ratesText = 'All rates include Special Points (SP) and assume regular direct sales activity. IMPORTANT: Figures do NOT include the 2% Enagic Business Support Fee (effective May 1, 2026) which will be deducted from actual commissions paid.';
-            const splitRates = doc.splitTextToSize(ratesText, 160);
-            doc.text(splitRates, 25, y);
+            yPos += 32;
+            doc.setFont(undefined, 'bold');
+            doc.text('New Distributor Calculation:', 25, yPos);
+            doc.setFont(undefined, 'normal');
+            const newDistText = 'This calculator assumes you are a new distributor with no existing team sales. These scenarios represent a worst-case estimate based on personal sales only.';
+            const splitNewDist = doc.splitTextToSize(newDistText, 160);
+            doc.text(splitNewDist, 25, yPos + 5);
             
-            y += 12;
+            yPos += 20;
+            doc.setFont(undefined, 'bold');
+            doc.text('Indirect Sales Impact:', 25, yPos);
+            doc.setFont(undefined, 'normal');
+            const indirectText = 'In practice, your break-even will be achieved faster because indirect sales from your team also count toward rank advancement under Enagic\'s 8-Point Compensation System.';
+            const splitIndirect = doc.splitTextToSize(indirectText, 160);
+            doc.text(splitIndirect, 25, yPos + 5);
+            
+            yPos += 20;
+            doc.setFont(undefined, 'bold');
+            doc.text('Commission Structure:', 25, yPos);
+            doc.setFont(undefined, 'normal');
+            const commText = 'Commission figures include Special Points (SP) which assumes you are making regular direct sales. All sales are assumed to be direct sales in one distributor lane. Results will differ if working multiple lanes. IMPORTANT: Figures do NOT include the 2% Enagic Business Support Fee (effective May 1, 2026) which will be deducted from actual commissions paid.';
+            const splitComm = doc.splitTextToSize(commText, 160);
+            doc.text(splitComm, 25, yPos + 5);
+            
+            yPos += 25;
             doc.setFont(undefined, 'bold');
             doc.setTextColor(184, 148, 31); // Gold color
-            doc.text('6A Bonuses Not Included:', 25, y);
+            doc.text('6A Bonuses Not Included:', 25, yPos);
             doc.setFont(undefined, 'normal');
             doc.setTextColor(0, 0, 0);
             const bonus6AText = 'Calculations include only the standard 8-point commission structure. Additional 6A+ bonuses (Title Incentive, 6A Group Awards, Step-Up Bonus, Educational Allowance, Monthly/Quarterly Incentives, and 6A2+ lifetime bonuses) are NOT included. Actual earnings for 6A+ distributors will be significantly higher.';
             const split6A = doc.splitTextToSize(bonus6AText, 160);
-            doc.text(split6A, 25, y + 5);
+            doc.text(split6A, 25, yPos + 5);
             
-            y += 20;
+            // Add EmGuarde-only warning if applicable
+            if (isEmGuardeOnly) {
+                yPos += 30;
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(220, 53, 69); // Red color
+                doc.text('CRITICAL: EmGuarde-Only Start Limitation', 25, yPos);
+                doc.setFont(undefined, 'normal');
+                doc.setTextColor(0, 0, 0);
+                const emguardeWarningText = 'Starting your business with ONLY EmGuarde purchases results in approximately 77% commission on ALL sales (direct and indirect) until you purchase an ionizer product. The calculations shown assume 100% commission rates. Your actual break-even point will be SIGNIFICANTLY HIGHER if you start with EmGuarde only. Recommendation: Purchase at least one ionizer (K8, SD501, etc.) alongside EmGuarde to qualify for full commission rates.';
+                const splitEmGuardeWarning = doc.splitTextToSize(emguardeWarningText, 160);
+                doc.text(splitEmGuardeWarning, 25, yPos + 5);
+                yPos += 30;
+            } else {
+                yPos += 25;
+            }
+            
             doc.setDrawColor(200, 200, 200);
             doc.setLineWidth(0.5);
-            doc.line(25, y, 185, y);
+            doc.line(25, yPos, 185, yPos);
             
-            y += 5;
+            yPos += 5;
             doc.setFont(undefined, 'bold');
             doc.setTextColor(133, 100, 4);
-            doc.text('Disclaimer:', 25, y);
+            doc.text('Disclaimer:', 25, yPos);
             doc.setFont(undefined, 'normal');
             doc.setTextColor(80, 80, 80);
-            const disclaimerText = 'This is an estimating tool only. Commission and income calculations are estimates and may not reflect actual earnings. We cannot be held responsible for any inaccuracies. Please consult official Enagic documentation and your upline for accurate commission information.';
+            const disclaimerText = 'This is an estimating tool only and should not be used as an accurate calculator. Commission and purchase calculations are estimates based on the information provided and may not reflect actual earnings or purchase amounts. We cannot be held responsible for any inaccuracies with the data or calculations. Please consult official Enagic documentation and your upline for accurate commission information.';
             const splitDisclaimer = doc.splitTextToSize(disclaimerText, 160);
-            doc.text(splitDisclaimer, 25, y + 5);
+            doc.text(splitDisclaimer, 25, yPos + 5);
             
-            // Save PDF
-            const filename = scenarioName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.pdf';
-            doc.save(filename);
+            // Save
+            const fileName = scenarioName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.pdf';
+            doc.save(fileName);
         }
+        
+        function updateAllCalculations() {
+            const country = document.getElementById('country').value;
+            const emguardeSelect = document.getElementById('breakeven-emguarde');
+            const emguardeNote = document.getElementById('emguarde-note');
+            const sd501superSelect = document.getElementById('breakeven-sd501super');
+            const sd501superNote = document.getElementById('sd501super-note');
+            
+            // Disable EmGuarde for USA only
+            if (country === 'usa') {
+                emguardeSelect.value = 0;
+                emguardeSelect.disabled = true;
+                emguardeNote.style.display = 'block';
+                emguardeNote.style.color = '#dc3545';
+                emguardeNote.style.fontWeight = '600';
+            } else {
+                emguardeSelect.disabled = false;
+                emguardeNote.style.display = 'none';
+            }
+            
+            // Disable SD501 Super for Europe only
+            if (country === 'europe') {
+                sd501superSelect.value = 0;
+                sd501superSelect.disabled = true;
+                sd501superNote.style.display = 'block';
+                sd501superNote.style.color = '#dc3545';
+                sd501superNote.style.fontWeight = '600';
+            } else {
+                sd501superSelect.disabled = false;
+                sd501superNote.style.display = 'none';
+            }
+            
+            calculateBreakeven();
+        }
+        
+        function calculateBreakeven() {
+            const country = document.getElementById('country').value;
+            const currency = country === 'usa' ? 'USD' : country === 'australia' ? 'AUD' : 'EUR';
+            const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
+            const taxMultiplier = 1 + (taxRate / 100);
+            
+            // ALL PRODUCTS = 8 POINTS
+            // What varies is the DOLLAR VALUE per point based on product category
+            
+            // Dollar value per point by product category
+            // Using Basic+SP values from the Excel sheet
+            const valuePerPoint = {
+                usa: {
+                    ionizer: 351,    // K8 commission per point (Basic+SP)
+                    anespa: 195,     // Anespa DX
+                    ukon: 40,        // Ukon DD
+                    emguarde: 0      // Not available in USA
+                },
+                australia: {
+                    ionizer: 400,    // K8 commission per point (Basic+SP)
+                    anespa: 190,     // Anespa DX
+                    ukon: 58,        // Ukon DD
+                    emguarde: 134    // EmGuarde (Basic+SP)
+                },
+                europe: {
+                    ionizer: 295,    // K8 commission per point (Basic+SP)
+                    anespa: 170,     // Anespa DX
+                    ukon: 35,        // Ukon DD
+                    emguarde: 80     // EmGuarde (Basic+SP)
+                }
+            };
+            
+            const values = valuePerPoint[country];
+            
+            // Retail prices by country (from Excel)
+            const retailPrices = {
+                usa: {
+                    k8: 5890,
+                    sd501: 4710,
+                    sd501platinum: 4820,
+                    sd501super: 7080,
+                    sd501dx: 5360,
+                    anespa: 3420,
+                    jriv: 3530,
+                    ukon: 910,
+                    emguarde: 0      // Not available
+                },
+                australia: {
+                    k8: 6170,
+                    sd501: 4770,
+                    sd501platinum: 4770,
+                    sd501super: 6850,
+                    sd501dx: 5500,
+                    anespa: 3450,
+                    jriv: 4300,
+                    ukon: 1300,
+                    emguarde: 2250
+                },
+                europe: {
+                    k8: 4600,
+                    sd501: 3280,
+                    sd501platinum: 3500,
+                    sd501super: 0,   // Not available in Europe
+                    sd501dx: 3740,
+                    anespa: 2800,
+                    jriv: 2900,
+                    ukon: 750,
+                    emguarde: 1350
+                }
+            };
+            
+            const prices = retailPrices[country];
+            
+            // Get initial purchase quantities
+            const k8 = parseInt(document.getElementById('breakeven-k8').value) || 0;
+            const sd501 = parseInt(document.getElementById('breakeven-sd501').value) || 0;
+            const sd501platinum = parseInt(document.getElementById('breakeven-sd501platinum').value) || 0;
+            const sd501super = parseInt(document.getElementById('breakeven-sd501super').value) || 0;
+            const sd501dx = parseInt(document.getElementById('breakeven-sd501dx').value) || 0;
+            const anespa = parseInt(document.getElementById('breakeven-anespa').value) || 0;
+            const jriv = parseInt(document.getElementById('breakeven-jriv').value) || 0;
+            const ukon = parseInt(document.getElementById('breakeven-ukon').value) || 0;
+            const emguarde = parseInt(document.getElementById('breakeven-emguarde').value) || 0;
+            
+            // Check for EmGuarde-only purchase (no ionizer products)
+            const hasIonizer = k8 > 0 || sd501 > 0 || sd501platinum > 0 || sd501super > 0 || sd501dx > 0 || jriv > 0;
+            const isEmGuardeOnly = emguarde > 0 && !hasIonizer && anespa === 0 && ukon === 0;
+            
+            // Show/hide EmGuarde-only warning
+            const emguardeWarning = document.getElementById('emguarde-only-warning');
+            
+            if (emguardeWarning) {
+                emguardeWarning.style.display = isEmGuardeOnly ? 'block' : 'none';
+            }
+            
+            // Calculate total investment with tax
+            let totalInvestment = 0;
+            
+            if (k8 > 0) totalInvestment += k8 * prices.k8 * taxMultiplier;
+            if (sd501 > 0) totalInvestment += sd501 * prices.sd501 * taxMultiplier;
+            if (sd501platinum > 0) totalInvestment += sd501platinum * prices.sd501platinum * taxMultiplier;
+            if (sd501super > 0) totalInvestment += sd501super * prices.sd501super * taxMultiplier;
+            if (sd501dx > 0) totalInvestment += sd501dx * prices.sd501dx * taxMultiplier;
+            if (anespa > 0) totalInvestment += anespa * prices.anespa * taxMultiplier;
+            if (jriv > 0) totalInvestment += jriv * prices.jriv * taxMultiplier;
+            if (ukon > 0) totalInvestment += ukon * prices.ukon * taxMultiplier;
+            if (emguarde > 0) totalInvestment += emguarde * prices.emguarde * taxMultiplier;
+            
+            // Rank requirements (total group sales) - Define this BEFORE using it
+            const rankRequirements = [
+                { rank: '1A', min: 0, max: 1, points: 1 },
+                { rank: '2A', min: 2, max: 10, points: 2 },
+                { rank: '3A', min: 11, max: 20, points: 3 },
+                { rank: '4A', min: 21, max: 50, points: 4 },
+                { rank: '5A', min: 51, max: 100, points: 5 },
+                { rank: '6A', min: 101, max: Infinity, points: 6 }
+            ];
+            
+            function getRankFromSales(totalSales) {
+                for (let i = rankRequirements.length - 1; i >= 0; i--) {
+                    if (totalSales >= rankRequirements[i].min) {
+                        return rankRequirements[i];
+                    }
+                }
+                return rankRequirements[0];
+            }
+            
+            // Calculate commission earned on self-purchases (3rd and 4th products onwards)
+            const selfPurchases = k8 + sd501 + sd501platinum + sd501super + sd501dx + anespa + jriv + ukon + emguarde;
+            let selfCommission = 0;
+            
+            if (selfPurchases >= 3) {
+                // Create array of products purchased for commission calculation
+                const purchasedProducts = [];
+                for (let i = 0; i < k8; i++) purchasedProducts.push({ type: 'ionizer', price: prices.k8 });
+                for (let i = 0; i < sd501; i++) purchasedProducts.push({ type: 'ionizer', price: prices.sd501 });
+                for (let i = 0; i < sd501platinum; i++) purchasedProducts.push({ type: 'ionizer', price: prices.sd501platinum });
+                for (let i = 0; i < sd501super; i++) purchasedProducts.push({ type: 'ionizer', price: prices.sd501super });
+                for (let i = 0; i < sd501dx; i++) purchasedProducts.push({ type: 'ionizer', price: prices.sd501dx });
+                for (let i = 0; i < anespa; i++) purchasedProducts.push({ type: 'anespa', price: prices.anespa });
+                for (let i = 0; i < jriv; i++) purchasedProducts.push({ type: 'ionizer', price: prices.jriv });
+                for (let i = 0; i < ukon; i++) purchasedProducts.push({ type: 'ukon', price: prices.ukon });
+                for (let i = 0; i < emguarde; i++) purchasedProducts.push({ type: 'emguarde', price: prices.emguarde });
+                
+                // Calculate commission on 3rd and 4th products onwards
+                // Starting at 1A (1 point), move to 2A (2 points) after 2nd purchase
+                for (let i = 2; i < purchasedProducts.length; i++) {
+                    const currentSaleNumber = i + 1;
+                    const rank = getRankFromSales(currentSaleNumber);
+                    selfCommission += rank.points * values[purchasedProducts[i].type];
+                }
+            }
+            
+            // Adjust total investment by subtracting self-commission
+            const netInvestment = totalInvestment - selfCommission;
+            
+            if (totalInvestment === 0) {
+                document.getElementById('breakeven-summary').style.display = 'none';
+                document.getElementById('breakeven-scenarios').style.display = 'none';
+                return;
+            }
+            
+            // Show summary
+            document.getElementById('breakeven-summary').style.display = 'block';
+            document.getElementById('breakeven-scenarios').style.display = 'block';
+            document.getElementById('breakeven-total-investment').textContent = formatCurrency(Math.round(totalInvestment), currency);
+            
+            // Calculate scenarios with rank advancement
+            const scenarios = [];
+            
+            // Scenario 1: K8 Only
+            // Start counting from products already purchased
+            let k8Sales = selfPurchases;
+            let k8Earnings = selfCommission;
+            let currentRank = getRankFromSales(k8Sales);
+            
+            while (k8Earnings < totalInvestment) {
+                k8Sales++;
+                currentRank = getRankFromSales(k8Sales);
+                const commission = currentRank.points * values.ionizer;
+                k8Earnings += commission;
+            }
+            
+            const additionalK8Sales = k8Sales - selfPurchases;
+            
+            scenarios.push({
+                name: 'K8 Only',
+                description: `${additionalK8Sales} K8's`,
+                details: `Advance to ${currentRank.rank}`,
+                sales: additionalK8Sales,
+                totalSales: k8Sales,
+                totalCommission: k8Earnings,
+                icon: '💧'
+            });
+            
+            // Scenario 2: Trifectas Only (1 K8 + 1 Ukon DD + 1 Anespa DX)
+            let trifectaSales = Math.floor(selfPurchases / 3);
+            let trifectaTotalSalesCount = selfPurchases;
+            let trifectaEarnings = selfCommission;
+            currentRank = getRankFromSales(trifectaTotalSalesCount);
+            
+            while (trifectaEarnings < totalInvestment) {
+                trifectaSales++;
+                trifectaTotalSalesCount += 3;
+                currentRank = getRankFromSales(trifectaTotalSalesCount);
+                
+                // Each trifecta = 1 K8 + 1 Ukon DD + 1 Anespa DX
+                const trifectaCommission = (currentRank.points * values.ionizer) +
+                                      (currentRank.points * values.ukon) +
+                                      (currentRank.points * values.anespa);
+                trifectaEarnings += trifectaCommission;
+            }
+            
+            const additionalTrifectas = trifectaSales - Math.floor(selfPurchases / 3);
+            
+            scenarios.push({
+                name: 'Trifectas Only',
+                description: `${additionalTrifectas} Trifectas (K8 + Ukon DD + Anespa)`,
+                details: `Advance to ${currentRank.rank}`,
+                sales: additionalTrifectas * 3,
+                totalSales: trifectaTotalSalesCount,
+                totalCommission: trifectaEarnings,
+                icon: '🎯'
+            });
+            
+            // Scenario 3: Quads Only (1 K8 + 1 Ukon DD + 1 Anespa DX + 1 EmGuarde) - Only for non-US markets
+            if (country !== 'usa') {
+                let quadSales = Math.floor(selfPurchases / 4);
+                let totalSalesCount = selfPurchases;
+                let quadEarnings = selfCommission;
+                currentRank = getRankFromSales(totalSalesCount);
+                
+                while (quadEarnings < totalInvestment) {
+                    quadSales++;
+                    totalSalesCount += 4;
+                    currentRank = getRankFromSales(totalSalesCount);
+                    
+                    // Each quad = 1 K8 + 1 Ukon DD + 1 Anespa DX + 1 EmGuarde
+                    const quadCommission = (currentRank.points * values.ionizer) +
+                                          (currentRank.points * values.ukon) +
+                                          (currentRank.points * values.anespa) +
+                                          (currentRank.points * values.emguarde);
+                    quadEarnings += quadCommission;
+                }
+                
+                const additionalQuads = quadSales - Math.floor(selfPurchases / 4);
+                
+                scenarios.push({
+                    name: 'Quads Only',
+                    description: `${additionalQuads} Quads (K8 + Ukon DD + Anespa + EmGuarde)`,
+                    details: `Advance to ${currentRank.rank}`,
+                    sales: additionalQuads * 4,
+                    totalSales: totalSalesCount,
+                    totalCommission: quadEarnings,
+                    icon: '📦'
+                });
+            }
+            
+            // Store scenarios globally for PDF export
+            currentScenarios = scenarios;
+            
+            // Display starting commission rate and self-commission if applicable
+            if (selfPurchases > 0) {
+                document.getElementById('breakeven-commission-rate').innerHTML = 
+                    `${formatCurrency(values.ionizer, currency)}<br><span style="font-size: 12px; color: var(--green-success);">Commission earned on self-purchases: ${formatCurrency(Math.round(selfCommission), currency)}</span>`;
+            } else {
+                document.getElementById('breakeven-commission-rate').textContent = formatCurrency(values.ionizer, currency);
+            }
+            
+            // Render scenarios
+            const scenariosList = document.getElementById('breakeven-scenarios-list');
+            scenariosList.innerHTML = scenarios.map(scenario => `
+                <div style="background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-light) 100%); padding: 20px; border-radius: 12px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(30, 58, 95, 0.2); border: 2px solid var(--gold-primary);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <span style="font-size: 32px;">${scenario.icon}</span>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 18px; color: var(--text-on-navy);">${scenario.name}</div>
+                            <div style="font-size: 14px; color: rgba(255,255,255,0.9);">${scenario.description}</div>
+                        </div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                        <div style="font-size: 12px; color: var(--gold-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Final Rank Achieved</div>
+                        <div style="font-size: 28px; font-weight: 700; color: var(--gold-primary);">${scenario.totalSales >= 101 ? '6A' : scenario.totalSales >= 51 ? '5A' : scenario.totalSales >= 21 ? '4A' : scenario.totalSales >= 11 ? '3A' : scenario.totalSales >= 2 ? '2A' : '1A'}</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                            <div style="font-size: 11px; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-bottom: 4px;">Additional Sales Needed</div>
+                            <div style="font-weight: 700; font-size: 20px; color: var(--text-on-navy);">${scenario.sales}</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;">
+                            <div style="font-size: 11px; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-bottom: 4px;">Total Earned</div>
+                            <div style="font-weight: 700; font-size: 20px; color: var(--gold-light);">${formatCurrency(Math.round(scenario.totalCommission), currency)}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Add scenario name input and PDF download button before assumptions
+            scenariosList.innerHTML += `
+                <div style="margin: 24px 0;">
+                    <label for="scenario-name" style="display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase;">Scenario Name</label>
+                    <input type="text" id="scenario-name" placeholder="e.g., Jo's figures" 
+                           style="width: 100%; padding: 12px; font-size: 14px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-primary); margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; font-style: italic;">This will appear on your PDF report</div>
+                    
+                    <button onclick="downloadPDF()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-dark) 100%); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <span style="font-size: 18px;">📄</span>
+                        <span>Download PDF Report</span>
+                    </button>
+                </div>
+            `;
+            
+            // Add disclaimer after scenarios
+            scenariosList.innerHTML += `
+                <div style="background: #fff3cd; border-left: 4px solid var(--gold-primary); padding: 20px; border-radius: 8px; margin-top: 24px;">
+                    <div style="font-weight: 700; font-size: 16px; color: var(--text-primary); margin-bottom: 16px;">📋 Calculator Assumptions</div>
+                    
+                    <div style="margin-bottom: 14px;">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Product Bundles:</div>
+                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                            <strong>Trifecta</strong> = 1 K8 + 1 Ukon DD + 1 Anespa DX (3 products).
+                        </div>
+                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                            <strong>Quad</strong> = 1 K8 + 1 Ukon DD + 1 Anespa DX + 1 EmGuarde (4 products, non-US markets only).
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 14px;">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">New Distributor Calculation:</div>
+                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                            This calculator assumes you are a <strong>new distributor</strong> with no existing team sales. These scenarios represent a <strong>worst-case estimate</strong> based on personal sales only.
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 14px;">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Indirect Sales Impact:</div>
+                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                            In practice, your break-even will be achieved faster because <strong>indirect sales from your team also count toward rank advancement</strong> under Enagic's 8-Point Compensation System.
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 14px;">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Commission Structure:</div>
+                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                            Commission figures include Special Points (SP) which assumes you are making regular direct sales. All sales are assumed to be direct sales in one distributor lane. Results will differ if working multiple lanes. <strong>Important:</strong> Figures do NOT include the 2% Enagic Business Support Fee (effective May 1, 2026) which will be deducted from actual commissions paid.
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 14px;">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--gold-dark); margin-bottom: 4px;">⚠️ 6A Bonuses Not Included:</div>
+                        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+                            Calculations include only the standard 8-point commission structure. Additional 6A+ bonuses (Title Incentive, 6A Group Awards, Step-Up Bonus, Educational Allowance, Monthly/Quarterly Incentives, and 6A2+ lifetime bonuses) are <strong>NOT</strong> included. Actual earnings for 6A+ distributors will be significantly higher.
+                        </div>
+                    </div>
+                    
+                    <div style="padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.1);">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Disclaimer:</div>
+                        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
+                            This is an estimating tool only and should not be used as an accurate calculator. Commission and purchase calculations are estimates based on the information provided and may not reflect actual earnings or purchase amounts. We cannot be held responsible for any inaccuracies with the data or calculations. Please consult official Enagic documentation and your upline for accurate commission information.
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateAllCalculations();
+        });
     </script>
 </body>
 </html>
