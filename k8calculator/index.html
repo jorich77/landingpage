@@ -501,7 +501,7 @@
           <span class="prefix" id="currencySymbol">$</span>
           <input type="number" id="machinePrice" value="4980" min="100" max="99999" step="1">
         </div>
-        <span style="font-size:12px;color:var(--soft);margin-top:2px;display:block;" id="priceNote">⚠️ Price excludes tax — enter your tax amount in the field below</span>
+        <span style="font-size:12px;color:var(--soft);margin-top:2px;display:block;" id="priceNote">⚠️ Price excludes tax — enter your tax rate % in the field below</span>
       </div>
       <div class="field">
         <label>Filter Replacement (per year)</label>
@@ -515,12 +515,12 @@
 
     <div class="field-group" style="margin-top:20px;">
       <div class="field">
-        <label>Local Tax / GST on Machine</label>
+        <label>Local Tax / GST Rate (%)</label>
         <div class="input-wrap">
-          <span class="prefix currency-prefix">$</span>
-          <input type="number" id="localTax" value="0" min="0" max="99999" step="1">
+          <span class="prefix currency-prefix">%</span>
+          <input type="number" id="localTax" value="0" min="0" max="100" step="0.1">
         </div>
-        <span style="font-size:11px;color:var(--soft);margin-top:2px;">Add your state/local tax amount here</span>
+        <span style="font-size:11px;color:var(--soft);margin-top:2px;">Enter your local tax rate (e.g., 10 for 10%)</span>
       </div>
       <div class="field">
         <label>Finance / Interest Total</label>
@@ -709,11 +709,11 @@
 <script>
   // --- Currency ---
   const CURRENCIES = {
-    USD: { symbol: '$', code: 'USD', machinePrice: 5890, filterCost: 130, note: '⚠️ Price excludes tax — enter your tax amount in the field below' },
-    EUR: { symbol: '€', code: 'EUR', machinePrice: 4600, filterCost: 120, note: '⚠️ Price excludes VAT — enter your VAT amount in the field below' },
-    AUD: { symbol: '$', code: 'AUD', machinePrice: 6787, filterCost: 180, note: '✅ Price includes GST (10%) — no extra tax to add' },
-    NZD: { symbol: '$', code: 'NZD', machinePrice: 7490, filterCost: 190, note: '✅ Price includes GST (15%) — no extra tax to add' },
-    OTHER: { symbol: '$', code: '', machinePrice: 4980, filterCost: 130, note: 'Enter your local price — check whether it includes tax' },
+    USD: { symbol: '$', code: 'USD', machinePrice: 5890, filterCost: 130, note: '⚠️ Price excludes tax — enter your tax rate % in the field below' },
+    EUR: { symbol: '€', code: 'EUR', machinePrice: 4600, filterCost: 120, note: '⚠️ Price excludes VAT — enter your VAT rate % in the field below' },
+    AUD: { symbol: '$', code: 'AUD', machinePrice: 6787, filterCost: 180, note: '✅ Price includes GST (10%) — set tax rate to 0%' },
+    NZD: { symbol: '$', code: 'NZD', machinePrice: 7490, filterCost: 190, note: '✅ Price includes GST (15%) — set tax rate to 0%' },
+    OTHER: { symbol: '$', code: '', machinePrice: 4980, filterCost: 130, note: 'Enter your local price — add tax rate % if needed' },
   };
   let activeCurrency = 'USD';
 
@@ -760,7 +760,7 @@
     const price = val('machinePrice');
     const filter = val('filterCost');
     const years = parseInt(inputs.yearsSlider.value);
-    const localTax = val('localTax');
+    const localTaxRate = val('localTax');
     const financeExtra = val('financeExtra');
 
     const bottled = val('bottledWater');
@@ -768,8 +768,11 @@
     const skin = val('skincare');
     const other = val('otherSaving');
 
+    // Calculate tax amount from percentage
+    const localTaxAmount = price * (localTaxRate / 100);
+    
     // Machine total cost
-    const machineTotalCost = price + localTax + financeExtra + (filter * years);
+    const machineTotalCost = price + localTaxAmount + financeExtra + (filter * years);
 
     const days = years * 365;
     const weeks = years * 52;
@@ -861,14 +864,17 @@
     const years = parseInt(inputs.yearsSlider.value);
     const price = val('machinePrice');
     const filter = val('filterCost');
-    const localTax = val('localTax');
+    const localTaxRate = val('localTax');
     const financeExtra = val('financeExtra');
     const bottled = val('bottledWater');
     const cleaning = val('cleaningProducts');
     const skin = val('skincare');
     const other = val('otherSaving');
     
-    const machineTotalCost = price + localTax + financeExtra + (filter * years);
+    // Calculate tax amount from percentage
+    const localTaxAmount = price * (localTaxRate / 100);
+    
+    const machineTotalCost = price + localTaxAmount + financeExtra + (filter * years);
     const months = years * 12;
     const costPerMonth = machineTotalCost / months;
     const replacedPerMonth = bottled + cleaning + skin + other;
@@ -911,7 +917,7 @@
     y += 6;
     doc.text(`Filter Replacement (per year): ${symbol}${filter.toLocaleString()}`, 25, y);
     y += 6;
-    doc.text(`Local Tax/GST: ${symbol}${localTax.toLocaleString()}`, 25, y);
+    doc.text(`Local Tax/GST: ${localTaxRate}% (${symbol}${localTaxAmount.toLocaleString()})`, 25, y);
     y += 6;
     doc.text(`Finance/Interest: ${symbol}${financeExtra.toLocaleString()}`, 25, y);
     y += 6;
