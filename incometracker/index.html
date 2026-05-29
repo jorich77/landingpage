@@ -422,6 +422,7 @@
                         <option value="usa">USA</option>
                         <option value="australia">Australia</option>
                         <option value="europe">Europe</option>
+                        <option value="canada">🇨🇦 Canada</option>
                     </select>
                 </div>
                 
@@ -1042,6 +1043,20 @@ const commissionRates = {
                     emguarde: 80
                 },
                 currency: 'EUR'
+            },
+            canada: {
+                products: {
+                    k8: 410,
+                    anespa: 230,
+                    ukondd: 50,
+                    sd501: 0,       // Not available in Canada
+                    sd501platinum: 0, // Not available in Canada
+                    sd501super: 0,  // Not available in Canada
+                    sd501dx: 355,
+                    jriv: 260,
+                    emguarde: 0     // Not available in Canada
+                },
+                currency: 'CAD'
             }
         };
 
@@ -1076,7 +1091,8 @@ const rankThresholds = [
             const symbols = {
                 'USD': '$',
                 'AUD': 'A$',
-                'EUR': '€'
+                'EUR': '€',
+                'CAD': 'C$'
             };
             const symbol = symbols[currency] || '$';
             return symbol + amount.toLocaleString();
@@ -1424,7 +1440,8 @@ const rankThresholds = [
             const countryNames = {
                 'usa': 'USA',
                 'australia': 'Australia',
-                'europe': 'Europe'
+                'europe': 'Europe',
+                'canada': 'Canada'
             };
             
             // Navy and gold colors
