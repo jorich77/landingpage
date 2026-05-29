@@ -489,6 +489,9 @@
       <button class="currency-btn" data-currency="NZD" onclick="setCurrency('NZD', this)">
         <span class="flag">🇳🇿</span> NZD $
       </button>
+      <button class="currency-btn" data-currency="CAD" onclick="setCurrency('CAD', this)">
+        <span class="flag">🇨🇦</span> CAD $
+      </button>
       <button class="currency-btn" data-currency="OTHER" onclick="setCurrency('OTHER', this)">
         ✏️ Other
       </button>
@@ -713,6 +716,7 @@
     EUR: { symbol: '€', code: 'EUR', machinePrice: 4600, filterCost: 120, note: '⚠️ Price excludes VAT — enter your VAT rate % in the field below' },
     AUD: { symbol: '$', code: 'AUD', machinePrice: 6787, filterCost: 180, note: '✅ Price includes GST (10%) — set tax rate to 0%' },
     NZD: { symbol: '$', code: 'NZD', machinePrice: 7490, filterCost: 190, note: '✅ Price includes GST (15%) — set tax rate to 0%' },
+    CAD: { symbol: '$', code: 'CAD', machinePrice: 6380, filterCost: 150, note: '⚠️ Price excludes tax — enter your tax rate % in the field below' },
     OTHER: { symbol: '$', code: '', machinePrice: 4980, filterCost: 130, note: 'Enter your local price — add tax rate % if needed' },
   };
   let activeCurrency = 'USD';
