@@ -300,6 +300,7 @@
                     <option value="usa">🇺🇸 United States</option>
                     <option value="australia">🇦🇺 Australia</option>
                     <option value="europe">🇪🇺 Europe</option>
+                    <option value="canada">🇨🇦 Canada</option>
                 </select>
             </div>
 
@@ -536,7 +537,7 @@
         let currentScenarios = [];
         
         function formatCurrency(amount, currency) {
-            const symbols = { USD: '$', AUD: 'A$', EUR: '€' };
+            const symbols = { USD: '$', AUD: 'A$', EUR: '€', CAD: 'C$' };
             const symbol = symbols[currency] || '$';
             return symbol + amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
         }
@@ -545,8 +546,8 @@
             const doc = new jsPDF();
             const scenarioName = document.getElementById('scenario-name').value || 'Enagic Break-Even Analysis';
             const country = document.getElementById('country').value;
-            const countryNames = { usa: 'United States', australia: 'Australia', europe: 'Europe' };
-            const currency = country === 'usa' ? 'USD' : country === 'australia' ? 'AUD' : 'EUR';
+            const countryNames = { usa: 'United States', australia: 'Australia', europe: 'Europe', canada: 'Canada' };
+            const currency = country === 'usa' ? 'USD' : country === 'australia' ? 'AUD' : country === 'canada' ? 'CAD' : 'EUR';
             const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
             const totalInvestment = document.getElementById('breakeven-total-investment').textContent;
             const commissionElement = document.getElementById('breakeven-commission-rate');
@@ -782,8 +783,8 @@
             const sd501superSelect = document.getElementById('breakeven-sd501super');
             const sd501superNote = document.getElementById('sd501super-note');
             
-            // Disable EmGuarde for USA only
-            if (country === 'usa') {
+            // Disable EmGuarde for USA and Canada
+            if (country === 'usa' || country === 'canada') {
                 emguardeSelect.value = 0;
                 emguardeSelect.disabled = true;
                 emguardeNote.style.display = 'block';
@@ -794,8 +795,8 @@
                 emguardeNote.style.display = 'none';
             }
             
-            // Disable SD501 Super for Europe only
-            if (country === 'europe') {
+            // Disable SD501 Super for Europe and Canada
+            if (country === 'europe' || country === 'canada') {
                 sd501superSelect.value = 0;
                 sd501superSelect.disabled = true;
                 sd501superNote.style.display = 'block';
@@ -806,12 +807,31 @@
                 sd501superNote.style.display = 'none';
             }
             
+            // Disable SD501 and SD501 Platinum for Canada (not in their price list)
+            const sd501Select = document.getElementById('breakeven-sd501');
+            const sd501PlatinumSelect = document.getElementById('breakeven-sd501platinum');
+            const sd501Note = sd501Select.nextElementSibling;
+            const sd501PlatinumNote = sd501PlatinumSelect.nextElementSibling;
+            if (country === 'canada') {
+                sd501Select.value = 0;
+                sd501Select.disabled = true;
+                sd501PlatinumSelect.value = 0;
+                sd501PlatinumSelect.disabled = true;
+                if (sd501Note) { sd501Note.style.display = 'block'; sd501Note.style.color = '#dc3545'; sd501Note.style.fontWeight = '600'; }
+                if (sd501PlatinumNote) { sd501PlatinumNote.style.display = 'block'; sd501PlatinumNote.style.color = '#dc3545'; sd501PlatinumNote.style.fontWeight = '600'; }
+            } else {
+                sd501Select.disabled = false;
+                sd501PlatinumSelect.disabled = false;
+                if (sd501Note) sd501Note.style.display = 'none';
+                if (sd501PlatinumNote) sd501PlatinumNote.style.display = 'none';
+            }
+            
             calculateBreakeven();
         }
         
         function calculateBreakeven() {
             const country = document.getElementById('country').value;
-            const currency = country === 'usa' ? 'USD' : country === 'australia' ? 'AUD' : 'EUR';
+            const currency = country === 'usa' ? 'USD' : country === 'australia' ? 'AUD' : country === 'canada' ? 'CAD' : 'EUR';
             const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
             const taxMultiplier = 1 + (taxRate / 100);
             
@@ -838,6 +858,12 @@
                     anespa: 170,     // Anespa DX
                     ukon: 35,        // Ukon DD
                     emguarde: 80     // EmGuarde (Basic+SP)
+                },
+                canada: {
+                    ionizer: 410,    // K8 commission per point (Basic+SP)
+                    anespa: 230,     // Anespa DX
+                    ukon: 50,        // Ukon Tea DD
+                    emguarde: 0      // Not available in Canada
                 }
             };
             
@@ -877,6 +903,17 @@
                     jriv: 2900,
                     ukon: 750,
                     emguarde: 1350
+                },
+                canada: {
+                    k8: 6380,
+                    sd501: 0,        // Not listed for Canada
+                    sd501platinum: 0, // Not listed for Canada
+                    sd501super: 0,   // Not listed for Canada
+                    sd501dx: 5820,
+                    anespa: 3850,
+                    jriv: 4240,
+                    ukon: 1050,
+                    emguarde: 0      // Not listed for Canada
                 }
             };
             
@@ -1034,8 +1071,8 @@
                 icon: '🎯'
             });
             
-            // Scenario 3: Quads Only (1 K8 + 1 Ukon DD + 1 Anespa DX + 1 EmGuarde) - Only for non-US markets
-            if (country !== 'usa') {
+            // Scenario 3: Quads Only - Only for markets with EmGuarde (non-US, non-Canada)
+            if (country !== 'usa' && country !== 'canada') {
                 let quadSales = Math.floor(selfPurchases / 4);
                 let totalSalesCount = selfPurchases;
                 let quadEarnings = selfCommission;
