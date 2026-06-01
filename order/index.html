@@ -346,9 +346,18 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+  * {
+    max-width: 100%;
+  }
+
+  body {
+    padding: 1rem 0.75rem;
+  }
+
   .checkout-wrapper {
     grid-template-columns: 1fr;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem;
+    gap: 0;
   }
   
   .order-summary {
@@ -365,6 +374,35 @@ body {
   
   .features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .product-price {
+    font-size: 1.6rem;
+  }
+
+  .price-row.total .amount {
+    font-size: 1.6rem;
+  }
+
+  .trust-badges {
+    gap: 1rem;
+  }
+
+  .coupon-section {
+    padding: 1rem;
+  }
+
+  .paypal-button-container {
+    padding: 1rem;
+  }
+
+  .checkout-button {
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
   }
 }
 </style>
