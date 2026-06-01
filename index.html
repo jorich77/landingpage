@@ -960,6 +960,22 @@ body {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+
+  /* Prevent any element from overflowing the screen */
+  * {
+    max-width: 100%;
+  }
+
+  .section {
+    padding: 2.5rem 1rem;
+  }
+
+  .section-content {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Grids → single column */
   .features-grid,
   .preview-grid {
     grid-template-columns: 1fr;
@@ -968,7 +984,71 @@ body {
   .customization-list {
     grid-template-columns: 1fr;
   }
-  
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sticky CTA — smaller, sits at bottom full-width instead of floating right */
+  .sticky-cta {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    animation: none;
+    border-radius: 0;
+  }
+
+  .sticky-cta .cta-button {
+    display: block;
+    width: 100%;
+    border-radius: 0;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  /* Add bottom padding to body so sticky bar doesn't cover content */
+  body {
+    padding-bottom: 60px;
+  }
+
+  /* General CTA buttons */
+  .cta-button {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.95rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  /* Benefits box */
+  .benefits-box {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Problem impact quote */
+  .impact {
+    padding: 1.2rem 1rem;
+    font-size: 1.2rem;
+  }
+
+  /* Review form */
+  .review-form-container {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Price box */
+  .price-box {
+    padding: 2rem 1.2rem;
+  }
+
+  /* Stat highlight */
+  .stat-highlight {
+    padding: 1.5rem 1rem;
+    margin: 2rem auto 0;
+  }
+
+  /* Lightbox */
   .lightbox-close {
     top: 20px;
     right: 20px;
@@ -979,18 +1059,36 @@ body {
     max-width: 95%;
     max-height: 80%;
   }
-  
-  .sticky-cta {
-    bottom: 1rem;
-    right: 1rem;
+
+  /* Contact modal */
+  .contact-modal-content {
+    padding: 2rem 1.2rem;
+    width: 95%;
   }
-  
-  .review-form-container {
-    padding: 2rem 1.5rem;
-  }
-  
-  .reviews-grid {
+
+  /* Color schemes grid */
+  .color-schemes-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Preview items — ensure images don't overflow */
+  .preview-item {
+    padding: 0.8rem;
+  }
+
+  .preview-item img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Feature cards */
+  .feature-card {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Hero mockup */
+  .hero-mockup {
+    max-width: 100%;
   }
 }
 </style>
