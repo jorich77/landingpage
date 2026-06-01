@@ -8,10 +8,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-* {
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 :root {
@@ -23,38 +23,41 @@
   --soft-white: #ffffff;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, var(--cream) 0%, #f0ede8 100%);
   color: var(--charcoal);
   min-height: 100vh;
-  padding: 2rem 1rem;
   overflow-x: hidden;
+  /* Mobile first: minimal padding */
+  padding: 1rem 0.75rem;
 }
 
 .container {
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  overflow-x: hidden;
 }
 
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .logo {
   font-family: 'DM Serif Display', serif;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: var(--navy);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   font-weight: 400;
 }
 
-.logo .gold {
-  color: var(--gold);
-}
+.logo .gold { color: var(--gold); }
 
 .tagline {
   color: var(--charcoal);
@@ -62,77 +65,92 @@ body {
   opacity: 0.7;
 }
 
-/* Main Layout */
+/* Checkout card */
 .checkout-wrapper {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 2rem;
   background: var(--soft-white);
   border-radius: 16px;
-  padding: 3rem;
   box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  /* Mobile: single column, tight padding */
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
+  gap: 0;
 }
 
-/* Left Column - Order Summary */
+/* Order Summary */
 .order-summary {
-  border-right: 1px solid rgba(61, 90, 128, 0.1);
-  padding-right: 2rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(61, 90, 128, 0.15);
 }
 
 .section-title {
   font-family: 'DM Serif Display', serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--navy);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   font-weight: 400;
 }
 
-.product-card {
-  background: linear-gradient(135deg, rgba(61, 90, 128, 0.03) 0%, rgba(184, 147, 90, 0.03) 100%);
+.mockup-img {
+  width: 100%;
+  height: auto;
   border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid rgba(184, 147, 90, 0.2);
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+.product-card {
+  background: linear-gradient(135deg, rgba(61,90,128,0.03), rgba(184,147,90,0.03));
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(184,147,90,0.2);
 }
 
 .product-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.3rem;
   margin-bottom: 1rem;
 }
 
 .product-title {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--navy);
-  margin-bottom: 0.3rem;
 }
 
-.product-subtitle {
-  font-size: 0.9rem;
-  color: var(--gold);
-  font-weight: 500;
+.product-pricing {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 1rem;
 }
 
 .product-price {
   font-family: 'DM Serif Display', serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--gold);
   font-weight: 400;
 }
 
 .includes-list {
   list-style: none;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .includes-list li {
-  padding: 0.4rem 0;
-  padding-left: 1.5rem;
+  padding: 0.35rem 0 0.35rem 1.5rem;
   position: relative;
   font-size: 0.9rem;
   color: var(--charcoal);
+  line-height: 1.4;
 }
 
 .includes-list li::before {
@@ -143,88 +161,75 @@ body {
   font-weight: 700;
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
-  margin-top: 1.5rem;
-}
-
 .feature-badge {
-  background: rgba(184, 147, 90, 0.1);
-  padding: 0.6rem 1rem;
+  background: rgba(184,147,90,0.1);
+  padding: 0.7rem 1rem;
   border-radius: 8px;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--navy);
-  font-weight: 500;
+  font-weight: 700;
   text-align: center;
 }
 
+/* Price breakdown */
 .price-breakdown {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 2px solid rgba(61, 90, 128, 0.1);
+  border-top: 2px solid rgba(61,90,128,0.1);
+  padding-top: 1rem;
 }
 
 .price-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.6rem 0;
+  padding: 0.5rem 0;
   font-size: 0.95rem;
 }
 
 .price-row.total {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--navy);
-  padding-top: 1rem;
+  padding-top: 0.8rem;
   border-top: 2px solid var(--gold);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .price-row.total .amount {
   font-family: 'DM Serif Display', serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--gold);
 }
 
-/* Right Column - Payment */
+/* Payment section */
 .payment-section {
-  padding-left: 2rem;
-}
-
-.payment-methods {
-  margin-bottom: 2rem;
+  width: 100%;
 }
 
 .payment-option {
-  background: linear-gradient(135deg, rgba(61, 90, 128, 0.05) 0%, rgba(184, 147, 90, 0.05) 100%);
-  border: 2px solid rgba(61, 90, 128, 0.2);
+  background: linear-gradient(135deg, rgba(61,90,128,0.05), rgba(184,147,90,0.05));
+  border: 2px solid rgba(61,90,128,0.2);
   border-radius: 12px;
-  padding: 1.2rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
   cursor: pointer;
   transition: all 0.3s;
   display: flex;
   align-items: center;
   gap: 1rem;
+  width: 100%;
 }
 
-.payment-option:hover {
-  border-color: var(--gold);
-  background: linear-gradient(135deg, rgba(184, 147, 90, 0.08) 0%, rgba(61, 90, 128, 0.08) 100%);
-}
-
+.payment-option:hover,
 .payment-option.active {
   border-color: var(--gold);
-  background: linear-gradient(135deg, rgba(184, 147, 90, 0.1) 0%, rgba(61, 90, 128, 0.1) 100%);
-  box-shadow: 0 4px 15px rgba(184, 147, 90, 0.2);
+  background: linear-gradient(135deg, rgba(184,147,90,0.1), rgba(61,90,128,0.1));
+  box-shadow: 0 4px 15px rgba(184,147,90,0.2);
 }
 
 .radio {
   width: 20px;
   height: 20px;
+  min-width: 20px;
   border: 2px solid var(--navy);
   border-radius: 50%;
   position: relative;
@@ -233,17 +238,11 @@ body {
 .payment-option.active .radio::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 10px;
-  height: 10px;
+  width: 10px; height: 10px;
   background: var(--gold);
   border-radius: 50%;
-}
-
-.payment-info {
-  flex: 1;
 }
 
 .payment-name {
@@ -258,81 +257,93 @@ body {
   opacity: 0.7;
 }
 
+/* Coupon */
+.coupon-section {
+  margin: 1.2rem 0;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(184,147,90,0.05), rgba(61,90,128,0.05));
+  border-radius: 12px;
+  border: 1px dashed rgba(184,147,90,0.3);
+}
+
+.coupon-label {
+  display: block;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.coupon-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.coupon-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.75rem 0.8rem;
+  border: 2px solid rgba(61,90,128,0.2);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.coupon-btn {
+  padding: 0.75rem 1.2rem;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* PayPal area */
 .paypal-button-container {
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(61, 90, 128, 0.03) 0%, rgba(184, 147, 90, 0.03) 100%);
+  margin-top: 1.2rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(61,90,128,0.03), rgba(184,147,90,0.03));
   border-radius: 12px;
   text-align: center;
 }
 
 .checkout-button {
   width: 100%;
-  background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+  background: linear-gradient(135deg, var(--gold), var(--light-gold));
   color: white;
   border: none;
-  padding: 1.2rem 2rem;
+  padding: 1rem 1.5rem;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 20px rgba(184, 147, 90, 0.3);
-  margin-bottom: 1rem;
-}
-
-.checkout-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(184, 147, 90, 0.4);
+  box-shadow: 0 4px 20px rgba(184,147,90,0.3);
+  margin-bottom: 0.8rem;
 }
 
 .security-note {
   font-size: 0.85rem;
   color: var(--charcoal);
   opacity: 0.6;
-  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
-.guarantee-box {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, var(--navy) 0%, #2d4866 100%);
-  color: white;
-  border-radius: 12px;
-  text-align: center;
-}
-
-.guarantee-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.guarantee-text {
-  font-size: 0.9rem;
-  opacity: 0.9;
-}
-
-.coupon-section {
-  margin-bottom: 1.5rem;
-  padding: 1.2rem;
-  background: linear-gradient(135deg, rgba(184, 147, 90, 0.05) 0%, rgba(61, 90, 128, 0.05) 100%);
-  border-radius: 12px;
-  border: 1px dashed rgba(184, 147, 90, 0.3);
-}
-
-/* Trust Badges */
+/* Trust badges */
 .trust-badges {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(61, 90, 128, 0.1);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(61,90,128,0.1);
+  flex-wrap: wrap;
 }
 
 .badge {
@@ -346,106 +357,55 @@ body {
   margin-bottom: 0.3rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
+/* Desktop: side-by-side layout */
+@media (min-width: 640px) {
   body {
-    padding: 0.75rem 0.5rem !important;
-  }
-
-  .container {
-    padding: 0 !important;
-    width: 100% !important;
-  }
-
-  .checkout-wrapper {
-    grid-template-columns: 1fr !important;
-    padding: 1rem 0.9rem !important;
-    gap: 0 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    border-radius: 12px !important;
-  }
-
-  .order-summary {
-    border-right: none;
-    padding-right: 0;
-    border-bottom: 1px solid rgba(61, 90, 128, 0.1);
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-
-  .payment-section {
-    padding-left: 0;
-    width: 100%;
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;
+    padding: 2rem 1rem;
   }
 
   .logo {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
   }
 
-  .product-card {
-    padding: 1rem;
+  .header {
+    margin-bottom: 2.5rem;
+  }
+
+  .checkout-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 3rem;
+    gap: 2rem;
+  }
+
+  .order-summary {
+    flex: 1.2;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    border-right: 1px solid rgba(61,90,128,0.1);
+    padding-right: 2rem;
+  }
+
+  .payment-section {
+    flex: 1;
+    padding-left: 0;
   }
 
   .product-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .product-pricing {
     flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .product-price {
-    font-size: 1.6rem;
-  }
-
-  .price-breakdown {
-    padding-top: 1rem;
-  }
-
-  .price-row {
-    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0;
   }
 
   .price-row.total .amount {
-    font-size: 1.5rem;
-  }
-
-  .payment-option {
-    padding: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .coupon-section {
-    padding: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .paypal-button-container {
-    padding: 1rem;
-  }
-
-  .checkout-button {
-    font-size: 1rem;
-    padding: 1rem 1.5rem;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .trust-badges {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    font-size: 2rem;
   }
 }
 </style>
@@ -453,35 +413,28 @@ body {
 <body>
 
 <div class="container">
-  <!-- Header -->
   <div class="header">
     <h1 class="logo">My Prospect <span class="gold">Page</span></h1>
     <p class="tagline">Complete Your Order</p>
   </div>
 
-  <!-- Checkout Wrapper -->
   <div class="checkout-wrapper">
-    
-    <!-- Left: Order Summary -->
+
+    <!-- Order Summary -->
     <div class="order-summary">
       <h2 class="section-title">Order Summary</h2>
-      
-      <!-- Device Mockup Image -->
-      <div style="text-align: center; margin-bottom: 1.5rem; overflow: hidden; width: 100%;">
-        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c5343cec6ed9.41888297_Beige_and_Brown_Simple_Clean_Professional_Personal_Brand_Informational_Tips_Instagram_Carousel_Post-removebg-preview.png" style="width: 100%; max-width: 100%; height: auto; border-radius: 12px; display: block;" alt="myprospectpage Preview">
-      </div>
-      
+
+      <img class="mockup-img" src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c5343cec6ed9.41888297_Beige_and_Brown_Simple_Clean_Professional_Personal_Brand_Informational_Tips_Instagram_Carousel_Post-removebg-preview.png" alt="myprospectpage Preview">
+
       <div class="product-card">
         <div class="product-header">
-          <div>
-            <h3 class="product-title">Professional Landing Page</h3>
-          </div>
-          <div>
-            <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 0.2rem;">$499</div>
-            <div class="product-price">$247</div>
+          <h3 class="product-title">Professional Landing Page</h3>
+          <div class="product-pricing">
+            <span class="original-price">$499</span>
+            <span class="product-price">$247</span>
           </div>
         </div>
-        
+
         <ul class="includes-list">
           <li>Custom prospect page with your branding</li>
           <li>3 professional colour schemes to choose from</li>
@@ -489,24 +442,22 @@ body {
           <li>Mobile optimized</li>
           <li>SEO optimized</li>
         </ul>
-        
-        <div class="features-grid" style="grid-template-columns: 1fr;">
-          <div class="feature-badge" style="font-size: 1rem; font-weight: 700; padding: 0.8rem 1rem;">No Monthly Fees - One Simple Payment</div>
-        </div>
+
+        <div class="feature-badge">No Monthly Fees — One Simple Payment</div>
       </div>
-      
+
       <div class="price-breakdown">
         <div class="price-row">
           <span>Subtotal</span>
-          <span class="amount">$499.00</span>
+          <span>$499.00</span>
         </div>
         <div class="price-row">
           <span>Discount</span>
-          <span class="amount" style="color: #b8935a;">-$252.00</span>
+          <span style="color: var(--gold);">-$252.00</span>
         </div>
         <div class="price-row" id="coupon-discount" style="display: none;">
           <span>Coupon (VAULT26)</span>
-          <span class="amount" style="color: #b8935a;">-$50.00</span>
+          <span style="color: var(--gold);">-$50.00</span>
         </div>
         <div class="price-row total">
           <span>Total</span>
@@ -514,54 +465,37 @@ body {
         </div>
       </div>
     </div>
-    
-    <!-- Right: Payment -->
+
+    <!-- Payment -->
     <div class="payment-section">
       <h2 class="section-title">Payment Method</h2>
-      
-      <div class="payment-methods">
-        <div class="payment-option active" onclick="selectPayment(this)">
-          <div class="radio"></div>
-          <div class="payment-info">
-            <div class="payment-name">PayPal</div>
-            <div class="payment-desc">Safe & secure payment</div>
-          </div>
-        </div>
-        
-        <div class="payment-option" onclick="selectPayment(this)">
-          <div class="radio"></div>
-          <div class="payment-info">
-            <div class="payment-name">Credit/Debit Card</div>
-            <div class="payment-desc">Via PayPal (no account needed)</div>
-          </div>
+
+      <div class="payment-option active" onclick="selectPayment(this)">
+        <div class="radio"></div>
+        <div>
+          <div class="payment-name">PayPal</div>
+          <div class="payment-desc">Safe &amp; secure payment</div>
         </div>
       </div>
-      
-      <!-- Coupon Code Section -->
+
+      <div class="payment-option" onclick="selectPayment(this)">
+        <div class="radio"></div>
+        <div>
+          <div class="payment-name">Credit/Debit Card</div>
+          <div class="payment-desc">Via PayPal (no account needed)</div>
+        </div>
+      </div>
+
       <div class="coupon-section">
-        <label for="coupon-input" style="display: block; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem;">Have a coupon code?</label>
-        <div style="display: flex; gap: 0.5rem;">
-          <input 
-            type="text" 
-            id="coupon-input" 
-            placeholder="Enter code"
-            style="flex: 1; padding: 0.8rem 1rem; border: 2px solid rgba(61, 90, 128, 0.2); border-radius: 8px; font-size: 0.95rem; font-family: 'Inter', sans-serif;"
-          >
-          <button 
-            type="button" 
-            onclick="applyCoupon()"
-            style="padding: 0.8rem 1.5rem; background: var(--navy); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;"
-            onmouseover="this.style.background='#2d4866'"
-            onmouseout="this.style.background='var(--navy)'"
-          >
-            Apply
-          </button>
+        <label class="coupon-label" for="coupon-input">Have a coupon code?</label>
+        <div class="coupon-row">
+          <input type="text" id="coupon-input" class="coupon-input" placeholder="Enter code">
+          <button type="button" class="coupon-btn" onclick="applyCoupon()">Apply</button>
         </div>
         <div id="coupon-message" style="margin-top: 0.5rem; font-size: 0.85rem;"></div>
       </div>
-      
+
       <div class="paypal-button-container">
-        <!-- PayPal Form -->
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="paypal-form">
           <input type="hidden" name="cmd" value="_xclick">
           <input type="hidden" name="business" value="risebeyondthe9to5@gmail.com">
@@ -571,29 +505,16 @@ body {
           <input type="hidden" name="return" value="https://yourwebsite.com/thank-you">
           <input type="hidden" name="cancel_return" value="https://yourwebsite.com/checkout">
           <input type="hidden" name="no_shipping" value="1">
-          
-          <button type="submit" class="checkout-button" id="checkout-btn">
-            Complete Payment - $247
-          </button>
+          <button type="submit" class="checkout-button" id="checkout-btn">Complete Payment — $247</button>
         </form>
-        
-        <p class="security-note">
-          🔒 Secure payment via PayPal
-        </p>
+        <p class="security-note">🔒 Secure payment via PayPal</p>
       </div>
     </div>
   </div>
-  
-  <!-- Trust Badges -->
+
   <div class="trust-badges">
-    <div class="badge">
-      <div class="badge-icon">🔒</div>
-      <div>Secure<br>Payment</div>
-    </div>
-    <div class="badge">
-      <div class="badge-icon">⚡</div>
-      <div>Quick<br>Delivery</div>
-    </div>
+    <div class="badge"><div class="badge-icon">🔒</div><div>Secure<br>Payment</div></div>
+    <div class="badge"><div class="badge-icon">⚡</div><div>Quick<br>Delivery</div></div>
   </div>
 </div>
 
@@ -601,63 +522,43 @@ body {
 let couponApplied = false;
 
 function selectPayment(element) {
-  // Remove active from all
-  document.querySelectorAll('.payment-option').forEach(option => {
-    option.classList.remove('active');
-  });
-  
-  // Add active to clicked
+  document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('active'));
   element.classList.add('active');
 }
 
 function applyCoupon() {
   const input = document.getElementById('coupon-input');
   const code = input.value.trim().toUpperCase();
-  const messageDiv = document.getElementById('coupon-message');
-  
+  const msg = document.getElementById('coupon-message');
+
   if (couponApplied) {
-    messageDiv.style.color = '#d97706';
-    messageDiv.textContent = '✓ Coupon already applied';
+    msg.style.color = '#d97706';
+    msg.textContent = '✓ Coupon already applied';
     return;
   }
-  
+
   if (code === 'VAULT26') {
-    // Show success message
-    messageDiv.style.color = '#16a34a';
-    messageDiv.textContent = '✓ Coupon applied! You saved $50';
-    
-    // Show coupon discount line
+    msg.style.color = '#16a34a';
+    msg.textContent = '✓ Coupon applied! You saved $50';
     document.getElementById('coupon-discount').style.display = 'flex';
-    
-    // Update total
     document.getElementById('total-amount').textContent = '$197';
-    
-    // Update PayPal amount
     document.getElementById('paypal-amount').value = '197.00';
-    
-    // Update button text
-    document.getElementById('checkout-btn').textContent = 'Complete Payment - $197';
-    
-    // Disable input
+    document.getElementById('checkout-btn').textContent = 'Complete Payment — $197';
     input.disabled = true;
     input.style.opacity = '0.6';
-    
     couponApplied = true;
   } else if (code === '') {
-    messageDiv.style.color = '#dc2626';
-    messageDiv.textContent = 'Please enter a coupon code';
+    msg.style.color = '#dc2626';
+    msg.textContent = 'Please enter a coupon code';
   } else {
-    messageDiv.style.color = '#dc2626';
-    messageDiv.textContent = 'Invalid coupon code';
+    msg.style.color = '#dc2626';
+    msg.textContent = 'Invalid coupon code';
   }
 }
 
-// Allow Enter key to apply coupon
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('coupon-input').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      applyCoupon();
-    }
+    if (e.key === 'Enter') applyCoupon();
   });
 });
 </script>
