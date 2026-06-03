@@ -514,6 +514,48 @@ body {
   display: block;
 }
 
+/* Video Section */
+.video-section {
+  background: white;
+}
+
+.video-section h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--navy);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+.video-section .subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+}
+
+.video-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+  position: relative;
+  padding-bottom: 50.625%; /* 16:9 ratio for 900px max-width */
+  height: 0;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 /* Reviews Section */
 .reviews {
   background: white;
@@ -1275,6 +1317,23 @@ body {
         <div class="preview-label">Business Section - The Opportunity</div>
         <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/69c3a9b777b001.10738484_businesssection.png" alt="Business Section Example">
       </div>
+    </div>
+  </div>
+  <div class="section-arrow"></div>
+</section>
+
+<!-- Video Walkthrough Section -->
+<section class="section video-section">
+  <div class="section-content">
+    <h2>Watch the Walkthrough</h2>
+    <p class="subtitle">See exactly what you get — inside and out</p>
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/f_gqWAkIOME"
+        title="My Prospect Page Walkthrough"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
   <div class="section-arrow"></div>
