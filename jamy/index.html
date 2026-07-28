@@ -89,17 +89,21 @@
   }
 
   .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
     line-height: 1.15;
-    color: var(--charcoal);
+    color: var(--warm-grey);
     margin-bottom: 0.5rem;
     font-weight: 300;
+    letter-spacing: 0.02em;
   }
   .hero h1 em {
-    color: var(--dark-green);
-    font-style: italic;
-    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--green);
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
   .hero-tagline {
     font-family: 'Cormorant Garamond', serif;
@@ -392,7 +396,20 @@
     border-left: 3px solid var(--teal);
     border-radius: 0 16px 16px 0;
     padding: 2rem 2.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
   }
+  .enagic-highlight-icon {
+    flex-shrink: 0;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .enagic-highlight-icon svg { width: 28px; height: 28px; }
   .enagic-highlight h4 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem;
@@ -711,10 +728,12 @@
 ═══════════════════════════════════════ -->
 <section class="hero">
   <div class="hero-inner">
-    <h1>Welcome to <em>JAMY</em></h1>
-    <p class="hero-tagline">Make Your Spaces Green</p>
+    <div style="margin-bottom:2rem;">
+      <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a676081ab8ca1.76827386_4becf504-5151-4933-ab2a-7a55782cea21-removebg-preview.png" alt="JAMY Logo" style="max-height:160px;max-width:400px;object-fit:contain;display:block;margin:0 auto;">
+    </div>
+    <h1>Welcome to <em>JAMY</em> — Making Spaces Green</h1>
 
-    <p class="hero-body">At JAMY, we are dedicated to transforming all types of spaces into healthier, more sustainable environments through innovative wellness solutions. As the focus on health and eco-conscious living grows, our products provide meaningful value to your spaces — whether at home, work, or anywhere in between.</p>
+    <p class="hero-body">Our mission is to transform every environment into a sanctuary of health and sustainability through innovative wellness solutions. As the world increasingly prioritizes well-being and eco-conscious living, the products we promote deliver meaningful value — whether at home, work, or anywhere in between.</p>
 
     <p class="hero-body" style="margin-bottom:0.5rem;">Discover our comprehensive range of wellness-enhancing products, including:</p>
 
@@ -748,21 +767,33 @@
 ═══════════════════════════════════════ -->
 <section id="about">
   <p class="section-label">About Us</p>
-  <h2 class="section-title">Three Countries. One <em>Mission.</em></h2>
+  <h2 class="section-title">Different Paths. One <em>Purpose.</em></h2>
   <div class="divider"></div>
-  <p class="section-body">We are a team spread across the USA, the UK, and the Caribbean — united by a shared belief that everyone deserves to live and work in a space that supports a healthier, greener way of living.</p>
+  <p class="section-body">From homelessness and eviction to securing multiple jobs, facing divorce, becoming a single mother, and battling illness — three women from different backgrounds share one common goal: to transform your space into a green haven with eco-friendly products. People often see only your success and overlook the hidden struggles — your hard work, quiet tears, and long, lonely hours.</p>
 
   <div class="team-grid">
+
+    <!-- JULIA -->
+    <div class="team-card">
+      <div class="team-card-photo">
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a636fab1e8c10.05894427_4e87dac4-812d-4497-868a-e130c9814785.jfif" alt="Julia Williams" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+      <div class="team-card-info">
+        <h3 class="team-card-name">Julia Williams</h3>
+        <p style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:0.3rem;">Founder</p>
+        <div class="team-card-divider"></div>
+        <p class="team-card-bio">Julia is the founder of JAMY Make Your Spaces Green, a company dedicated to transforming environments into healthier, eco-friendly spaces through innovative wellness solutions. Passionate about health, wellness, and sustainability, she offers a curated selection of eco-conscious products that promote well-being and environmental responsibility. With over 30 years of experience in accounting and finance, Julia has built a versatile career across the private and public sectors. She has held key roles at Deloitte &amp; Touche and has worked across diverse industries including manufacturing, retail, hospitality, and technology. Her unique blend of entrepreneurial spirit and extensive professional expertise positions her as a dedicated leader committed to inspiring positive change.</p>
+      </div>
+    </div>
 
     <!-- JORDAN -->
     <div class="team-card">
       <div class="team-card-photo">
         <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a63691c58c578.48235890_2d4886bb-c0b9-4b4d-b7d1-991891cedc76.jfif" alt="Jordan Williams" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        <div class="team-flag">🇺🇸</div>
       </div>
       <div class="team-card-info">
         <h3 class="team-card-name">Jordan Williams</h3>
-        <p class="team-card-location">📍 United States of America</p>
+        <p style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:0.3rem;">Co-Founder</p>
         <div class="team-card-divider"></div>
         <p class="team-card-bio">Jordan Williams is the co-founder of JAMY Make Your Spaces Green, a passionate advocate for eco-friendly living and holistic wellness. Based in the Chicago area, Jordan is a dynamic leader with expertise in Sales, Marketing, and Customer Service, driven by her commitment to creating healthier environments for her family and community. As a new mom, she prioritizes health, wellness, and organic products, striving to provide the best for her child. With her unique blend of experience and dedication to natural and holistic products, she is a trusted voice in advocating for sustainable, toxin-free living. She is focused on empowering other new moms to make their spaces greener and healthier for their little ones.</p>
       </div>
@@ -771,28 +802,13 @@
     <!-- REBECCA -->
     <div class="team-card">
       <div class="team-card-photo">
-        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a63691c6869a5.84655192_396c88e9-7e63-43dd-88d0-899b76a4b30b.jfif" alt="Rebecca Hauser" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        <div class="team-flag">🇬🇧</div>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a65fc475e64e7.82916636_614a8aee-cda5-482c-857a-ad84498e3ed9.jfif" alt="Rebecca Hauser" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
       <div class="team-card-info">
         <h3 class="team-card-name">Rebecca Hauser</h3>
-        <p class="team-card-location">📍 United Kingdom</p>
+        <p style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:0.3rem;">Vice President of Sales</p>
         <div class="team-card-divider"></div>
-        <p class="team-card-bio">[Rebecca's bio — your story, what drew you to Kangen Water and JAMY, your background, and why you're passionate about helping people create greener, healthier spaces across the UK.]</p>
-      </div>
-    </div>
-
-    <!-- JULES -->
-    <div class="team-card">
-      <div class="team-card-photo">
-        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a636fab1e8c10.05894427_4e87dac4-812d-4497-868a-e130c9814785.jfif" alt="Jules" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        <div class="team-flag">🌴</div>
-      </div>
-      <div class="team-card-info">
-        <h3 class="team-card-name">Julia Williams</h3>
-        <p class="team-card-location">📍 The Caribbean</p>
-        <div class="team-card-divider"></div>
-        <p class="team-card-bio">Julia is the founder of JAMY Make Your Spaces Green, a company dedicated to transforming environments into healthier, eco-friendly spaces through innovative wellness solutions. Passionate about health, wellness, and sustainability, she offers a curated selection of eco-conscious products that promote well-being and environmental responsibility. With over 30 years of experience in accounting and finance, Julia has built a versatile career across the private and public sectors. She has held key roles at Deloitte &amp; Touche and has worked across diverse industries including manufacturing, retail, hospitality, and technology. Her unique blend of entrepreneurial spirit and extensive professional expertise positions her as a dedicated leader committed to inspiring positive change.</p>
+        <p class="team-card-bio">With her diverse background in sales, marketing, and entrepreneurship, Rebecca's unwavering dedication and strong sense of leadership drive our commitment to creating spaces that promote well-being and sustainability. A strong, independent woman, she is passionate about life, health, art, and music. Having faced and overcome significant challenges, she embodies resilience and gratitude, inspiring others to become the best versions of themselves. Her vision and drive help JAMY Make Your Spaces Green deliver meaningful value, fostering environments where wellness and eco-consciousness thrive. Rebecca's commitment to making a positive impact every day underscores her belief that healthier spaces lead to healthier lives.</p>
       </div>
     </div>
 
@@ -854,8 +870,26 @@
   </div>
 
   <div class="enagic-highlight">
-    <h4>A 400-Year Business Plan</h4>
-    <p>Enagic is a privately owned, multi-generational Japanese family business — reinvesting in schools, elderly care homes, sports teams and a university. Built to last, not chase a trend.</p>
+    <div class="enagic-highlight-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <!-- trunk -->
+        <line x1="12" y1="22" x2="12" y2="13"/>
+        <!-- main branches -->
+        <path d="M12 13 C12 13 8 11 6 8"/>
+        <path d="M12 13 C12 13 16 11 18 8"/>
+        <!-- upper canopy -->
+        <path d="M6 8 C6 8 4 5 6 3 C8 1 11 3 12 5"/>
+        <path d="M18 8 C18 8 20 5 18 3 C16 1 13 3 12 5"/>
+        <path d="M12 5 C12 5 12 2 12 1"/>
+        <!-- roots -->
+        <path d="M12 22 C12 22 9 21 8 22"/>
+        <path d="M12 22 C12 22 15 21 16 22"/>
+      </svg>
+    </div>
+    <div>
+      <h4>A 400-Year Business Plan</h4>
+      <p>Enagic is a privately owned, multi-generational Japanese family business — reinvesting in schools, elderly care homes, sports teams and a university. Built to last, not chase a trend.</p>
+    </div>
   </div>
 </section>
 
@@ -906,19 +940,36 @@
       </video>
     </div>
 
-    <div style="margin-top:2.5rem;">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#fff;margin-bottom:1.2rem;font-weight:300;">Why Kangen Water?</h3>
-      <div style="max-width:240px;border-radius:15px;overflow:hidden;aspect-ratio:9/16;">
-        <video controls style="width:100%;height:100%;display:block;border-radius:15px;" poster="">
+    <!-- Two storycards: why kangen video (left) + savings graphics (right) -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2.5rem;width:100%;">
+
+      <!-- Card 1: Why Kangen Water video (LEFT) -->
+      <div style="display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:16px;padding:1.6rem;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;font-weight:400;margin-bottom:0.5rem;line-height:1.4;text-align:center;">Why Kangen Water?</p>
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.6;margin-bottom:1.2rem;text-align:center;">A quick intro for anyone new to ionised water and what makes it different.</p>
+        <video controls style="width:50%;aspect-ratio:9/16;border-radius:10px;display:block;object-fit:cover;" poster="">
           <source src="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a64a0206bbb90.22984986_0f4ff873-b887-4670-a040-300d28b8461a.mp4" type="video/mp4">
         </video>
       </div>
+
+      <!-- Card 2: Savings graphics (RIGHT) -->
+      <div style="display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:16px;padding:1.6rem;">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;font-weight:400;margin-bottom:0.4rem;line-height:1.4;text-align:center;">See how much you could save in money and plastic waste</p>
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);font-weight:300;line-height:1.6;margin-bottom:1rem;text-align:center;">Bottled water vs. Kangen Water — the numbers speak for themselves.</p>
+        <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a66001e79d2b3.90292519_Kangengraphics.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:0.6rem;background:#1BB849;border-radius:30px;padding:0.85rem 1.8rem;text-decoration:none;box-shadow:0 4px 18px rgba(27,184,73,0.4);margin-bottom:1.2rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="15"/><polyline points="6 9 12 15 18 9"/><path d="M3 20h18"/></svg>
+          <span style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:#fff;font-weight:600;">Download Graphics</span>
+        </a>
+        <img src="https://d1yei2z3i6k35z.cloudfront.net/5678010/6a68a1192bdaf6.50695575_K8_v_bottled_water_graphic-removebg-preview.png" alt="Kangen Water Savings" style="width:75%;border-radius:10px;display:block;margin:0 auto;">
+      </div>
+
     </div>
 
     <!-- Resources -->
     <div style="margin-top:3rem;">
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#fff;margin-bottom:0.5rem;font-weight:300;">Resources</h3>
       <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);font-weight:300;margin-bottom:1.8rem;">Guides, research, and testimonials to help you make an informed decision.</p>
+
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
         <a href="https://d1yei2z3i6k35z.cloudfront.net/5678010/692a3a7e31f45_68UsesofKangenEbooks-16982839072042.pdf" target="_blank" class="resource-card">
           <div class="resource-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1BB849" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></div>
@@ -1025,6 +1076,87 @@
 
 
 <!-- ══════════════════════════════════════
+     SUSTAINABILITY
+═══════════════════════════════════════ -->
+<section id="sustainability" style="background:var(--soft-white);">
+  <p class="section-label" style="color:var(--dark-green);">Sustainability</p>
+  <h2 class="section-title">A Commitment to <em>Sustainability</em></h2>
+  <div class="divider"></div>
+  <p class="section-body" style="max-width:780px;">Enagic empowers homes, businesses, and industries to reduce their environmental footprint. By eliminating the need for bottled water, chemical-laden cleaning products, and single-use plastics, our products promote cleaner environments, healthier living, and long-term savings. Kangen Water and our range of solutions are the answer to a greener, more sustainable future.</p>
+
+  <div style="max-width:780px;margin:2.5rem 0 0;background:var(--light-green);border-left:4px solid var(--green);border-radius:0 12px 12px 0;padding:2rem 2.2rem;">
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--dark-green);font-weight:400;margin-bottom:1rem;">A Greener Lifestyle with Kangen Water</h3>
+    <p style="font-size:0.95rem;color:var(--warm-grey);line-height:1.8;font-weight:300;margin-bottom:1.8rem;">Make Kangen Water an integral part of your daily routine through the multiple uses available, helping you achieve the cleaner, greener life you deserve.</p>
+
+    <div style="display:flex;justify-content:flex-start;gap:2rem;flex-wrap:wrap;">
+
+      <!-- Pets -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#fff;border:1.5px solid var(--pale-green);display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark-green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5"/><path d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.96-1.45-2.344-2.5"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75z"/><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444c0-1.061-.162-2.2-.493-3.309m-9.243-6.082A8.801 8.801 0 0 1 12 5c.78 0 1.5.108 2.161.306"/></svg>
+        </div>
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--dark-green);">Pets</span>
+      </div>
+
+      <!-- Cooking -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#fff;border:1.5px solid var(--pale-green);display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark-green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><line x1="6" y1="17" x2="18" y2="17"/></svg>
+        </div>
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--dark-green);">Cooking</span>
+      </div>
+
+      <!-- Cleaning -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#fff;border:1.5px solid var(--pale-green);display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark-green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 14.5 3 21"/><path d="M14 6l-8.5 8.5"/><path d="m20 12-6.5 6.5"/><path d="M12.5 5.5 19 12"/><path d="M15 3a2 2 0 0 1 2 2"/><path d="M17 5a2 2 0 0 1 2-2"/><path d="M19 3a2 2 0 0 1-2 2"/><path d="M17 5a2 2 0 0 1-2-2"/></svg>
+        </div>
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--dark-green);">Cleaning</span>
+      </div>
+
+      <!-- Gardening -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#fff;border:1.5px solid var(--pale-green);display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark-green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M5 12C5 7 7.5 4 12 2c4.5 2 7 5 7 10-2.5 2-5 3-7 3s-4.5-1-7-3z"/></svg>
+        </div>
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--dark-green);">Gardening</span>
+      </div>
+
+      <!-- Beauty -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#fff;border:1.5px solid var(--pale-green);display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark-green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c1-4 4-6 4-10a4 4 0 0 0-8 0c0 4 3 6 4 10z"/><path d="M12 22v-7"/></svg>
+        </div>
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--dark-green);">Beauty</span>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div style="border-top:1px solid var(--pale-green);margin:2rem 0;"></div>
+
+    <!-- Ebook download -->
+    <a href="https://drive.google.com/file/d/1MO7NfjGVy9YRoVzhRPUiAdZdI8ppsM7B/view?usp=sharing" target="_blank" style="display:flex;align-items:center;gap:2rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+      <div style="width:60px;height:60px;border-radius:50%;background:#fff;border:2px solid var(--pale-green);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--dark-green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <div style="flex:1;">
+        <div style="display:inline-block;background:var(--green);color:#fff;font-size:0.72rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;padding:0.35rem 1rem;border-radius:30px;margin-bottom:0.6rem;">★ Free Download</div>
+        <p style="font-size:0.75rem;color:var(--warm-grey);font-weight:400;margin-bottom:0.2rem;letter-spacing:0.05em;text-transform:uppercase;">Discover more in our free ebook</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--dark-green);font-weight:400;margin-bottom:0.3rem;line-height:1.3;">Get Your Free Eco-Living Ebook!</p>
+        <p style="font-size:0.82rem;color:var(--warm-grey);font-weight:300;line-height:1.6;margin-bottom:1rem;">29 pages of daily tips for a greener and healthier lifestyle with Kangen Water.</p>
+        <div style="display:inline-flex;align-items:center;gap:0.6rem;background:var(--green);border-radius:30px;padding:0.75rem 1.6rem;box-shadow:0 4px 16px rgba(27,184,73,0.35);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="15"/><polyline points="6 9 12 15 18 9"/><path d="M3 20h18"/></svg>
+          <span style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:#fff;font-weight:600;">Download Free Ebook</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════
      CONTACT
 ═══════════════════════════════════════ -->
 <section id="contact">
@@ -1037,8 +1169,7 @@
 
     <div class="contact-member">
       <p class="contact-member-name">Jordan Williams</p>
-      <p class="contact-member-loc">🇺🇸 USA</p>
-      <a href="https://wa.me/1XXXXXXXXXX" target="_blank" class="btn-whatsapp">
+      <a href="https://wa.me/13129070385" target="_blank" class="btn-whatsapp">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp Jordan
       </a>
@@ -1046,19 +1177,25 @@
 
     <div class="contact-member">
       <p class="contact-member-name">Rebecca Hauser</p>
-      <p class="contact-member-loc">🇬🇧 UK</p>
-      <a href="https://wa.me/44XXXXXXXXXX" target="_blank" class="btn-whatsapp">
+      <a href="https://wa.me/5213221895326" target="_blank" class="btn-whatsapp">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp Rebecca
+      </a>
+      <a href="mailto:rebecca@jamymakeyourspacesgreen.com" class="btn-whatsapp" style="background:transparent;border-color:var(--dark-green);color:var(--dark-green);box-shadow:none;margin-top:0.6rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--dark-green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        Email Rebecca
       </a>
     </div>
 
     <div class="contact-member">
       <p class="contact-member-name">Julia Williams</p>
-      <p class="contact-member-loc">🌴 Caribbean</p>
-      <a href="https://wa.me/1XXXXXXXXXX" target="_blank" class="btn-whatsapp">
+      <a href="https://wa.me/12462329470" target="_blank" class="btn-whatsapp">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp Julia
+      </a>
+      <a href="mailto:julia@jamymakeyourspacesgreen.com" class="btn-whatsapp" style="background:transparent;border-color:var(--dark-green);color:var(--dark-green);box-shadow:none;margin-top:0.6rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--dark-green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        Email Julia
       </a>
     </div>
 
@@ -1070,7 +1207,7 @@
      FOOTER
 ═══════════════════════════════════════ -->
 <footer>
-  <p>© 2026 JAMY &nbsp;·&nbsp; Jordan · Ola · Jules &nbsp;·&nbsp; Independent Enagic Distributors</p>
+  <p>© 2026 JAMY &nbsp;·&nbsp; Independent Enagic Distributors</p>
   <p style="margin-top:0.5rem;font-size:0.72rem;opacity:0.5;">Enagic® and Kangen Water® are registered trademarks of Enagic Co., Ltd.</p>
   <p style="margin-top:1.2rem;font-size:0.68rem;opacity:0.45;max-width:860px;margin-left:auto;margin-right:auto;line-height:1.7;"><strong>DISCLAIMER:</strong> The information provided here is for educational and informational purposes only. It is not intended to diagnose, treat, cure, or prevent any disease or medical condition and is not a substitute for professional medical advice. Always seek the advice of your physician or other qualified health provider with any questions you may have. Individual results may vary.</p>
   <p style="margin-top:0.8rem;font-size:0.68rem;opacity:0.45;letter-spacing:0.05em;"><strong>THIS WEBPAGE IS NOT AFFILIATED WITH ENAGIC INC.®</strong></p>
