@@ -502,7 +502,7 @@
         <label>K8 Purchase Price</label>
         <div class="input-wrap">
           <span class="prefix" id="currencySymbol">$</span>
-          <input type="number" id="machinePrice" value="4980" min="100" max="99999" step="1">
+          <input type="number" id="machinePrice" value="5890" min="100" max="99999" step="1">
         </div>
         <span style="font-size:12px;color:var(--soft);margin-top:2px;display:block;" id="priceNote">⚠️ Price excludes tax — enter your tax rate % in the field below</span>
       </div>
@@ -860,6 +860,11 @@
 
   // --- PDF Download Function ---
   function downloadPDF() {
+    if (!window.jspdf) {
+      alert('PDF library failed to load. Please check your internet connection and try refreshing the page.');
+      return;
+    }
+    try {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     
@@ -1076,6 +1081,10 @@
     // Save
     const filename = scenarioName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_k8_analysis.pdf';
     doc.save(filename);
+    } catch(e) {
+      alert('Error generating PDF: ' + e.message);
+      console.error(e);
+    }
   }
 </script>
 </body>
