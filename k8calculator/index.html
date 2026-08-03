@@ -535,6 +535,25 @@
       </div>
     </div>
 
+    <div class="field-group" style="margin-top:20px;">
+      <div class="field">
+        <label>Set-Up Cost (Installation &amp; Pre-filters)</label>
+        <div class="input-wrap">
+          <span class="prefix currency-prefix">$</span>
+          <input type="number" id="setupCost" value="0" min="0" max="99999" step="1">
+        </div>
+        <span style="font-size:11px;color:var(--soft);margin-top:2px;">One-off cost — installation and initial pre-filters</span>
+      </div>
+      <div class="field">
+        <label>Annual Service &amp; Pre-filter Replacement</label>
+        <div class="input-wrap">
+          <span class="prefix currency-prefix">$</span>
+          <input type="number" id="annualService" value="0" min="0" max="99999" step="1">
+        </div>
+        <span style="font-size:11px;color:var(--soft);margin-top:2px;">Yearly cost — service visits and pre-filter changes</span>
+      </div>
+    </div>
+
     <div class="slider-section">
       <div class="slider-header">
         <span class="slider-label">Lifespan of Machine</span>
@@ -766,6 +785,8 @@
     const years = parseInt(inputs.yearsSlider.value);
     const localTaxRate = val('localTax');
     const financeExtra = val('financeExtra');
+    const setupCost = val('setupCost');
+    const annualService = val('annualService');
 
     const bottled = val('bottledWater');
     const cleaning = val('cleaningProducts');
@@ -774,9 +795,9 @@
 
     // Calculate tax amount from percentage
     const localTaxAmount = price * (localTaxRate / 100);
-    
+
     // Machine total cost
-    const machineTotalCost = price + localTaxAmount + financeExtra + (filter * years);
+    const machineTotalCost = price + localTaxAmount + financeExtra + setupCost + (filter * years) + (annualService * years);
 
     const days = years * 365;
     const weeks = years * 52;
@@ -875,6 +896,8 @@
     const filter = val('filterCost');
     const localTaxRate = val('localTax');
     const financeExtra = val('financeExtra');
+    const setupCost = val('setupCost');
+    const annualService = val('annualService');
     const bottled = val('bottledWater');
     const cleaning = val('cleaningProducts');
     const skin = val('skincare');
@@ -883,7 +906,7 @@
     // Calculate tax amount from percentage
     const localTaxAmount = price * (localTaxRate / 100);
     
-    const machineTotalCost = price + localTaxAmount + financeExtra + (filter * years);
+    const machineTotalCost = price + localTaxAmount + financeExtra + setupCost + (filter * years) + (annualService * years);
     const months = years * 12;
     const costPerMonth = machineTotalCost / months;
     const replacedPerMonth = bottled + cleaning + skin + other;
@@ -929,6 +952,10 @@
     doc.text(`Local Tax/GST: ${localTaxRate}% (${symbol}${localTaxAmount.toLocaleString()})`, 25, y);
     y += 6;
     doc.text(`Finance/Interest: ${symbol}${financeExtra.toLocaleString()}`, 25, y);
+    y += 6;
+    doc.text(`Set-Up Cost (Installation & Pre-filters): ${symbol}${setupCost.toLocaleString()}`, 25, y);
+    y += 6;
+    doc.text(`Annual Service & Pre-filter Replacement: ${symbol}${annualService.toLocaleString()}/yr`, 25, y);
     y += 6;
     doc.setFont(undefined, 'bold');
     doc.text(`Machine Lifespan: ${years} years`, 25, y);
@@ -1079,7 +1106,7 @@
     doc.text('We cannot be held responsible for any inaccuracies with the data or calculations.', 105, y + 10, { align: 'center' });
     
     // Save
-    const filename = scenarioName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_k8_analysis.pdf';
+    const filename = scenarioName ? scenarioName + '.pdf' : 'K8 cost analysis.pdf';
     doc.save(filename);
     } catch(e) {
       alert('Error generating PDF: ' + e.message);
