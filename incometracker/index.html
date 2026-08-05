@@ -422,7 +422,7 @@
                         <option value="usa">USA</option>
                         <option value="australia">Australia</option>
                         <option value="europe">Europe</option>
-                        <option value="canada">🇨🇦 Canada</option>
+
                     </select>
                 </div>
                 
@@ -436,6 +436,13 @@
                         <option value="5">5A (5 points)</option>
                         <option value="6">6A (6 points)</option>
                     </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sales-to-date">Total Sales to Date</label>
+                    <input type="number" id="sales-to-date" min="0" placeholder="e.g. 15" oninput="calculateIncome()" style="width: 100%; padding: 12px; font-size: 14px; border: 2px solid var(--border-color); border-radius: 8px;">
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Your cumulative sales since joining — used to calculate progress to your next rank.</div>
+                    <div id="sales-rank-warning" style="display: none; margin-top: 8px; padding: 8px 12px; background: #fff3cd; border-left: 3px solid #dc3545; border-radius: 4px; font-size: 12px; color: #721c24;"></div>
                 </div>
             </div>
             
@@ -606,6 +613,24 @@
                         <option value="10">10</option>
                     </select>
                     <p class="product-note" id="emguarde-note" style="display: none; color: #dc3545;">EmGuarde not available in this region</p>
+                </div>
+                
+                <div class="product-row">
+                    <span class="product-name">EmGuarde Go</span>
+                    <select id="income-emguardego" onchange="calculateIncome()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <p class="product-note" id="emguardego-note" style="display: none; color: #dc3545;">EmGuarde Go not available in this region</p>
                 </div>
             </div>
             
@@ -856,6 +881,34 @@
                     </select>
                     <p class="product-note" id="indirect-emguarde-note" style="display: none; color: #dc3545;">EmGuarde not available in this region</p>
                 </div>
+                
+                <div class="product-row">
+                    <span class="product-name">EmGuarde Go (team)</span>
+                    <select id="income-indirect-emguardego" onchange="calculateIncome()">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+                    <p class="product-note" id="indirect-emguardego-note" style="display: none; color: #dc3545;">EmGuarde Go not available in this region</p>
+                </div>
             </div>
             
             <div class="card">
@@ -929,6 +982,13 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">Reset</div>
+                <button onclick="resetAll()" style="width: 100%; padding: 14px; background: #6c757d; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: transform 0.2s ease;">
+                    🔄 Reset All
+                </button>
             </div>
             
             <div class="card">
@@ -1012,7 +1072,8 @@ const commissionRates = {
                     sd501super: 420,
                     sd501dx: 311,
                     jriv: 200,
-                    emguarde: 0  // Not available in USA
+                    emguarde: 0,   // Not available in USA
+                    emguardego: 150
                 },
                 currency: 'USD'
             },
@@ -1026,7 +1087,8 @@ const commissionRates = {
                     sd501super: 440,
                     sd501dx: 344,
                     jriv: 265,
-                    emguarde: 134
+                    emguarde: 134,
+                    emguardego: 0  // Not available in Australia
                 },
                 currency: 'AUD'
             },
@@ -1040,7 +1102,8 @@ const commissionRates = {
                     sd501super: 0,  // Not available in Europe
                     sd501dx: 233,
                     jriv: 180,
-                    emguarde: 80
+                    emguarde: 0,   // Not available in Europe
+                    emguardego: 125
                 },
                 currency: 'EUR'
             },
@@ -1054,7 +1117,8 @@ const commissionRates = {
                     sd501super: 0,  // Not available in Canada
                     sd501dx: 355,
                     jriv: 260,
-                    emguarde: 0     // Not available in Canada
+                    emguarde: 0,    // Not available in Canada
+                    emguardego: 0   // Not available in Canada
                 },
                 currency: 'CAD'
             }
@@ -1102,6 +1166,8 @@ const rankThresholds = [
             const country = document.getElementById('income-country').value;
             const rank = parseInt(document.getElementById('income-rank').value);
             
+            validateSalesRank();
+            
             const rates = commissionRates[country];
             const currency = rates.currency;
             
@@ -1115,6 +1181,16 @@ const rankThresholds = [
                 if (emguardeNote) emguardeNote.style.display = 'none';
                 if (indirectEmguardeNote) indirectEmguardeNote.style.display = 'none';
             }
+            // Show/hide EmGuarde Go note based on region
+            const emguardegoNote = document.getElementById('emguardego-note');
+            const indirectEmguardegoNote = document.getElementById('indirect-emguardego-note');
+            if (rates.products.emguardego === 0) {
+                if (emguardegoNote) emguardegoNote.style.display = 'block';
+                if (indirectEmguardegoNote) indirectEmguardegoNote.style.display = 'block';
+            } else {
+                if (emguardegoNote) emguardegoNote.style.display = 'none';
+                if (indirectEmguardegoNote) indirectEmguardegoNote.style.display = 'none';
+            }
             
             // Direct sales
             const k8 = parseInt(document.getElementById('income-k8').value) || 0;
@@ -1126,6 +1202,7 @@ const rankThresholds = [
             const sd501dx = parseInt(document.getElementById('income-sd501dx').value) || 0;
             const jriv = parseInt(document.getElementById('income-jriv').value) || 0;
             const emguarde = parseInt(document.getElementById('income-emguarde').value) || 0;
+            const emguardego = parseInt(document.getElementById('income-emguardego').value) || 0;
             
             // Indirect sales
             const indirectK8 = parseInt(document.getElementById('income-indirect-k8').value) || 0;
@@ -1137,6 +1214,7 @@ const rankThresholds = [
             const indirectSd501dx = parseInt(document.getElementById('income-indirect-sd501dx').value) || 0;
             const indirectJriv = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
             const indirectEmguarde = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
+            const indirectEmguardego = parseInt(document.getElementById('income-indirect-emguardego').value) || 0;
             
             // Calculate direct income (Rank × Commission Value)
             let directMonthlyIncome = 0;
@@ -1203,6 +1281,13 @@ const rankThresholds = [
                 const monthly = emguarde * perSale;
                 directMonthlyIncome += monthly;
                 directBreakdown.push({ name: 'EmGuarde', qty: emguarde, perSale: perSale, monthly: monthly });
+            }
+            
+            if (emguardego > 0 && rates.products.emguardego > 0) {
+                const perSale = rank * rates.products.emguardego;
+                const monthly = emguardego * perSale;
+                directMonthlyIncome += monthly;
+                directBreakdown.push({ name: 'EmGuarde Go', qty: emguardego, perSale: perSale, monthly: monthly });
             }
             
             // Calculate indirect income (same formula - Rank × Commission Value)
@@ -1272,9 +1357,16 @@ const rankThresholds = [
                 indirectBreakdown.push({ name: 'EmGuarde (team)', qty: indirectEmguarde, perSale: perSale, monthly: monthly });
             }
             
-            const directSalesTotal = k8 + anespa + ukondd + sd501 + sd501platinum + sd501super + sd501dx + jriv + emguarde;
+            if (indirectEmguardego > 0 && rates.products.emguardego > 0) {
+                const perSale = rank * rates.products.emguardego;
+                const monthly = indirectEmguardego * perSale;
+                indirectMonthlyIncome += monthly;
+                indirectBreakdown.push({ name: 'EmGuarde Go (team)', qty: indirectEmguardego, perSale: perSale, monthly: monthly });
+            }
+            
+            const directSalesTotal = k8 + anespa + ukondd + sd501 + sd501platinum + sd501super + sd501dx + jriv + emguarde + emguardego;
             const indirectSalesTotal = indirectK8 + indirectAnespa + indirectUkondd + indirectSd501 + indirectSd501platinum + 
-                                      indirectSd501super + indirectSd501dx + indirectJriv + indirectEmguarde;
+                                      indirectSd501super + indirectSd501dx + indirectJriv + indirectEmguarde + indirectEmguardego;
             const totalSales = directSalesTotal + indirectSalesTotal;
             const totalMonthlyIncome = directMonthlyIncome + indirectMonthlyIncome;
             const annualIncome = totalMonthlyIncome * 12;
@@ -1324,6 +1416,7 @@ const rankThresholds = [
         function updateRankProgression() {
             // Get current rank and calculate sales needed for NEXT rank
             const currentRank = parseInt(document.getElementById('income-rank').value);
+            const salesToDate = parseInt(document.getElementById('sales-to-date').value) || 0;
             
             // Calculate total SALES from entered quantities
             const k8 = parseInt(document.getElementById('income-k8').value) || 0;
@@ -1335,6 +1428,7 @@ const rankThresholds = [
             const sd501dx = parseInt(document.getElementById('income-sd501dx').value) || 0;
             const jriv = parseInt(document.getElementById('income-jriv').value) || 0;
             const emguarde = parseInt(document.getElementById('income-emguarde').value) || 0;
+            const emguardego = parseInt(document.getElementById('income-emguardego').value) || 0;
             
             const indirectK8 = parseInt(document.getElementById('income-indirect-k8').value) || 0;
             const indirectAnespa = parseInt(document.getElementById('income-indirect-anespa').value) || 0;
@@ -1345,15 +1439,16 @@ const rankThresholds = [
             const indirectSd501dx = parseInt(document.getElementById('income-indirect-sd501dx').value) || 0;
             const indirectJriv = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
             const indirectEmguarde = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
+            const indirectEmguardego = parseInt(document.getElementById('income-indirect-emguardego').value) || 0;
             
             // Total monthly sales entered
-            const monthlySales = k8 + anespa + ukondd + sd501 + sd501platinum + sd501super + sd501dx + jriv + emguarde +
+            const monthlySales = k8 + anespa + ukondd + sd501 + sd501platinum + sd501super + sd501dx + jriv + emguarde + emguardego +
                               indirectK8 + indirectAnespa + indirectUkondd + indirectSd501 + indirectSd501platinum + 
-                              indirectSd501super + indirectSd501dx + indirectJriv + indirectEmguarde;
+                              indirectSd501super + indirectSd501dx + indirectJriv + indirectEmguarde + indirectEmguardego;
             
             const progressContent = document.getElementById('rank-progression-content');
             
-            if (monthlySales === 0) {
+            if (monthlySales === 0 && salesToDate === 0) {
                 progressContent.innerHTML = '<p style="font-size: 13px; color: var(--text-secondary); text-align: center; padding: 20px 0;">📊 Enter your monthly sales above to see rank progression and income projections</p>';
                 return;
             }
@@ -1364,27 +1459,47 @@ const rankThresholds = [
             
             let html = `
                 <div style="text-align: center; padding: 16px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 16px;">
-                    <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">Monthly Projection at Current Rank</div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 4px;">Current Rank</div>
                     <div style="font-size: 28px; font-weight: 700; color: var(--navy-primary);">${currentRank}A</div>
-                    <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">${monthlySales} sales/month</div>
+                    ${salesToDate > 0 ? `<div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">${salesToDate} historical + ${monthlySales} this month = ${salesToDate + monthlySales} total</div>` : (monthlySales > 0 ? `<div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">${monthlySales} sales/month projected</div>` : '')}
                 </div>
             `;
             
             // Show progress to next rank if applicable
             if (nextRank) {
-                html += `
-                    <div style="margin-bottom: 12px;">
-                        <div style="font-size: 14px; font-weight: 600; color: var(--navy-primary); margin-bottom: 8px;">Progress to ${nextRank.rank}</div>
-                        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
-                            You need <strong>${nextRank.minSales} total sales</strong> to reach ${nextRank.rank}. Based on ${monthlySales} sales/month:
-                        </div>
-                        <div style="text-align: center; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-                            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Months to ${nextRank.rank}</div>
-                            <div style="font-size: 20px; font-weight: 700; color: var(--gold-primary);">${Math.ceil(nextRank.minSales / monthlySales)} months</div>
-                            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">at current sales pace</div>
-                        </div>
+                const totalSalesNow = salesToDate + monthlySales;
+                const salesNeeded = nextRank.minSales;
+                const remaining = Math.max(0, salesNeeded - totalSalesNow);
+                const progressPct = totalSalesNow > 0 ? Math.min(100, Math.round((totalSalesNow / salesNeeded) * 100)) : 0;
+                
+                html += `<div style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                        <div style="font-size: 14px; font-weight: 600; color: var(--navy-primary);">Progress to ${nextRank.rank}</div>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--gold-primary);">${progressPct}%</div>
                     </div>
-                `;
+                    <div style="width: 100%; height: 12px; background: #e0e0e0; border-radius: 6px; overflow: hidden; margin-bottom: 8px;">
+                        <div style="height: 100%; width: ${progressPct}%; background: linear-gradient(90deg, var(--gold-primary) 0%, var(--gold-light) 100%); border-radius: 6px; transition: width 0.3s ease;"></div>
+                    </div>
+                    <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
+                        <strong>${totalSalesNow}</strong> of <strong>${salesNeeded}</strong> total sales to reach ${nextRank.rank}
+                        ${salesToDate > 0 ? ` (${salesToDate} historical + ${monthlySales} this month)` : ''}
+                        ${remaining > 0 ? ` — <strong>${remaining}</strong> still needed` : ''}
+                    </div>`;
+                
+                if (monthlySales > 0 && remaining > 0) {
+                    const months = Math.ceil(remaining / monthlySales);
+                    html += `<div style="text-align: center; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 4px;">Estimated months to ${nextRank.rank}</div>
+                        <div style="font-size: 20px; font-weight: 700; color: var(--gold-primary);">${months} month${months === 1 ? '' : 's'}</div>
+                        <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">at ${monthlySales} sales/month</div>
+                    </div>`;
+                } else if (remaining === 0) {
+                    html += `<div style="text-align: center; padding: 12px; background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%); border-radius: 8px;">
+                        <div style="font-size: 14px; color: var(--navy-dark); font-weight: 600;">🎉 You've already qualified for ${nextRank.rank}!</div>
+                    </div>`;
+                }
+                
+                html += `</div>`;
             } else {
                 html += `
                     <div style="text-align: center; padding: 16px; background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%); border-radius: 8px;">
@@ -1395,6 +1510,60 @@ const rankThresholds = [
             }
             
             progressContent.innerHTML = html;
+        }
+
+        function validateSalesRank() {
+            const rank = parseInt(document.getElementById('income-rank').value);
+            const salesToDate = parseInt(document.getElementById('sales-to-date').value);
+            const warning = document.getElementById('sales-rank-warning');
+            
+            if (!salesToDate || isNaN(salesToDate)) {
+                warning.style.display = 'none';
+                return;
+            }
+            
+            const rankRanges = {
+                1: { min: 1,   max: 2,    label: '1A' },
+                2: { min: 3,   max: 10,   label: '2A' },
+                3: { min: 11,  max: 20,   label: '3A' },
+                4: { min: 21,  max: 50,   label: '4A' },
+                5: { min: 51,  max: 100,  label: '5A' },
+                6: { min: 101, max: null, label: '6A' }
+            };
+            
+            const range = rankRanges[rank];
+            const inRange = range.max === null ? salesToDate >= range.min : (salesToDate >= range.min && salesToDate <= range.max);
+            
+            if (!inRange) {
+                // Work out which rank their sales actually correspond to
+                let expectedRank = '1A';
+                for (const [r, rng] of Object.entries(rankRanges)) {
+                    const fits = rng.max === null ? salesToDate >= rng.min : (salesToDate >= rng.min && salesToDate <= rng.max);
+                    if (fits) { expectedRank = rng.label; break; }
+                }
+                if (salesToDate < 1) {
+                    warning.textContent = `⚠️ Sales to date should be at least 1.`;
+                } else {
+                    warning.textContent = `⚠️ ${salesToDate} sales matches rank ${expectedRank}, not ${range.label}. Please check your entries.`;
+                }
+                warning.style.display = 'block';
+            } else {
+                warning.style.display = 'none';
+            }
+        }
+
+        function resetAll() {
+            // Reset all selects to 0
+            const selects = document.querySelectorAll('select[id^="income-"]');
+            selects.forEach(s => s.value = '0');
+            // Reset country and rank to defaults
+            document.getElementById('income-country').value = 'usa';
+            document.getElementById('income-rank').value = '1';
+            // Reset sales to date
+            document.getElementById('sales-to-date').value = '';
+            // Reset scenario name
+            document.getElementById('scenario-name').value = '';
+            calculateIncome();
         }
 
         // Initialize on page load
@@ -1426,6 +1595,7 @@ const rankThresholds = [
             const sd501dxVal = parseInt(document.getElementById('income-sd501dx').value) || 0;
             const jrivVal = parseInt(document.getElementById('income-jriv').value) || 0;
             const emguardeVal = parseInt(document.getElementById('income-emguarde').value) || 0;
+            const emguardegoVal = parseInt(document.getElementById('income-emguardego').value) || 0;
             
             const indirectK8Val = parseInt(document.getElementById('income-indirect-k8').value) || 0;
             const indirectAnespaVal = parseInt(document.getElementById('income-indirect-anespa').value) || 0;
@@ -1436,6 +1606,7 @@ const rankThresholds = [
             const indirectSd501dxVal = parseInt(document.getElementById('income-indirect-sd501dx').value) || 0;
             const indirectJrivVal = parseInt(document.getElementById('income-indirect-jriv').value) || 0;
             const indirectEmguardeVal = parseInt(document.getElementById('income-indirect-emguarde').value) || 0;
+            const indirectEmguardegoVal = parseInt(document.getElementById('income-indirect-emguardego').value) || 0;
             
             const countryNames = {
                 'usa': 'USA',
@@ -1525,9 +1696,9 @@ const rankThresholds = [
             }
             
             // Calculate total sales for rank progression (already have all product values from top of function)
-            const totalSalesPDF = k8Val + anespaVal + ukonddVal + sd501Val + sd501platinumVal + sd501superVal + sd501dxVal + jrivVal + emguardeVal +
+            const totalSalesPDF = k8Val + anespaVal + ukonddVal + sd501Val + sd501platinumVal + sd501superVal + sd501dxVal + jrivVal + emguardeVal + emguardegoVal +
                                indirectK8Val + indirectAnespaVal + indirectUkonddVal + indirectSd501Val + indirectSd501platinumVal + 
-                               indirectSd501superVal + indirectSd501dxVal + indirectJrivVal + indirectEmguardeVal;
+                               indirectSd501superVal + indirectSd501dxVal + indirectJrivVal + indirectEmguardeVal + indirectEmguardegoVal;
             
             if (totalSalesPDF > 0) {
                 // Find new rank based on total sales
@@ -1601,7 +1772,8 @@ const rankThresholds = [
                 { name: 'SD501 Super', direct: sd501superVal, indirect: indirectSd501superVal },
                 { name: 'SD501 DX', direct: sd501dxVal, indirect: indirectSd501dxVal },
                 { name: 'JrIV', direct: jrivVal, indirect: indirectJrivVal },
-                { name: 'EmGuarde', direct: emguardeVal, indirect: indirectEmguardeVal }
+                { name: 'EmGuarde', direct: emguardeVal, indirect: indirectEmguardeVal },
+                { name: 'EmGuarde Go', direct: emguardegoVal, indirect: indirectEmguardegoVal }
             ];
             
             products.forEach(product => {
@@ -1620,6 +1792,7 @@ const rankThresholds = [
                     else if (product.name === 'SD501 DX') productRate = rates.products.sd501dx;
                     else if (product.name === 'JrIV') productRate = rates.products.jriv;
                     else if (product.name === 'EmGuarde') productRate = rates.products.emguarde;
+                    else if (product.name === 'EmGuarde Go') productRate = rates.products.emguardego;
                     
                     const income = total * (rank * productRate);
                     
