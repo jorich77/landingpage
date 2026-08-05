@@ -507,12 +507,39 @@
         <span style="font-size:12px;color:var(--soft);margin-top:2px;display:block;" id="priceNote">⚠️ Price excludes tax — enter your tax rate % in the field below</span>
       </div>
       <div class="field">
+        <label>Set-Up Cost (Installation &amp; Pre-filters)</label>
+        <div class="input-wrap">
+          <span class="prefix currency-prefix">$</span>
+          <input type="number" id="setupCost" value="0" min="0" max="99999" step="1">
+        </div>
+        <span style="font-size:11px;color:var(--soft);margin-top:2px;">One-off cost — installation and initial pre-filters</span>
+      </div>
+      <div class="field">
+        <label>Delivery Cost</label>
+        <div class="input-wrap">
+          <span class="prefix currency-prefix">$</span>
+          <input type="number" id="deliveryCost" value="0" min="0" max="99999" step="1">
+        </div>
+        <span style="font-size:11px;color:var(--soft);margin-top:2px;">One-off delivery cost</span>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top:20px;">
+      <div class="field">
         <label>Filter Replacement (per year)</label>
         <div class="input-wrap">
           <span class="prefix" id="currencySymbol2">$</span>
           <input type="number" id="filterCost" value="130" min="0" max="9999" step="1">
         </div>
         <span style="font-size:11px;color:var(--soft);margin-top:2px;">F8/FC1 filter · ~1 per year</span>
+      </div>
+      <div class="field">
+        <label>Annual Service &amp; Pre-filter Replacement</label>
+        <div class="input-wrap">
+          <span class="prefix currency-prefix">$</span>
+          <input type="number" id="annualService" value="0" min="0" max="99999" step="1">
+        </div>
+        <span style="font-size:11px;color:var(--soft);margin-top:2px;">Yearly cost — service visits and pre-filter changes</span>
       </div>
     </div>
 
@@ -532,25 +559,6 @@
           <input type="number" id="financeExtra" value="0" min="0" max="99999" step="1">
         </div>
         <span style="font-size:11px;color:var(--soft);margin-top:2px;">Total interest paid over finance term</span>
-      </div>
-    </div>
-
-    <div class="field-group" style="margin-top:20px;">
-      <div class="field">
-        <label>Set-Up Cost (Installation &amp; Pre-filters)</label>
-        <div class="input-wrap">
-          <span class="prefix currency-prefix">$</span>
-          <input type="number" id="setupCost" value="0" min="0" max="99999" step="1">
-        </div>
-        <span style="font-size:11px;color:var(--soft);margin-top:2px;">One-off cost — installation and initial pre-filters</span>
-      </div>
-      <div class="field">
-        <label>Annual Service &amp; Pre-filter Replacement</label>
-        <div class="input-wrap">
-          <span class="prefix currency-prefix">$</span>
-          <input type="number" id="annualService" value="0" min="0" max="99999" step="1">
-        </div>
-        <span style="font-size:11px;color:var(--soft);margin-top:2px;">Yearly cost — service visits and pre-filter changes</span>
       </div>
     </div>
 
@@ -690,6 +698,14 @@
 
 </div>
 
+<!-- RESET BUTTON -->
+<div style="max-width:900px;margin:0 auto 20px;text-align:center;">
+  <button onclick="resetAll()" style="padding:20px 48px;background:var(--white);border:3px solid #e2e8f0;border-radius:16px;color:var(--mid);font-size:18px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:12px;box-shadow:0 4px 16px rgba(0,0,0,0.08);transition:all 0.2s;width:100%;max-width:900px;justify-content:center;" onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)';this.style.boxShadow='0 6px 24px rgba(10,124,124,0.2)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.color='var(--mid)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)'">
+    <span style="font-size:24px;">↺</span>
+    <span>Reset All Fields</span>
+  </button>
+</div>
+
 <!-- COMMISSION NOTICE - PROMINENT -->
 <div style="max-width:900px;margin:0 auto 20px;">
   <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 3px solid #f59e0b; border-radius: 12px; padding: 24px; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);">
@@ -727,7 +743,8 @@
 </p>
 <br>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+</script>
 <script>
   // --- Currency ---
   const CURRENCIES = {
@@ -787,6 +804,7 @@
     const financeExtra = val('financeExtra');
     const setupCost = val('setupCost');
     const annualService = val('annualService');
+    const deliveryCost = val('deliveryCost');
 
     const bottled = val('bottledWater');
     const cleaning = val('cleaningProducts');
@@ -797,7 +815,7 @@
     const localTaxAmount = price * (localTaxRate / 100);
 
     // Machine total cost
-    const machineTotalCost = price + localTaxAmount + financeExtra + setupCost + (filter * years) + (annualService * years);
+    const machineTotalCost = price + localTaxAmount + financeExtra + setupCost + deliveryCost + (filter * years) + (annualService * years);
 
     const days = years * 365;
     const weeks = years * 52;
@@ -898,6 +916,7 @@
     const financeExtra = val('financeExtra');
     const setupCost = val('setupCost');
     const annualService = val('annualService');
+    const deliveryCost = val('deliveryCost');
     const bottled = val('bottledWater');
     const cleaning = val('cleaningProducts');
     const skin = val('skincare');
@@ -906,7 +925,7 @@
     // Calculate tax amount from percentage
     const localTaxAmount = price * (localTaxRate / 100);
     
-    const machineTotalCost = price + localTaxAmount + financeExtra + setupCost + (filter * years) + (annualService * years);
+    const machineTotalCost = price + localTaxAmount + financeExtra + setupCost + deliveryCost + (filter * years) + (annualService * years);
     const months = years * 12;
     const costPerMonth = machineTotalCost / months;
     const replacedPerMonth = bottled + cleaning + skin + other;
@@ -954,6 +973,8 @@
     doc.text(`Finance/Interest: ${symbol}${financeExtra.toLocaleString()}`, 25, y);
     y += 6;
     doc.text(`Set-Up Cost (Installation & Pre-filters): ${symbol}${setupCost.toLocaleString()}`, 25, y);
+    y += 6;
+    doc.text(`Delivery Cost: ${symbol}${deliveryCost.toLocaleString()}`, 25, y);
     y += 6;
     doc.text(`Annual Service & Pre-filter Replacement: ${symbol}${annualService.toLocaleString()}/yr`, 25, y);
     y += 6;
@@ -1112,6 +1133,23 @@
       alert('Error generating PDF: ' + e.message);
       console.error(e);
     }
+  }
+
+  function resetAll() {
+    if (!confirm('Reset all fields?')) return;
+    document.getElementById('filterCost').value = 0;
+    document.getElementById('localTax').value = 0;
+    document.getElementById('financeExtra').value = 0;
+    document.getElementById('setupCost').value = 0;
+    document.getElementById('deliveryCost').value = 0;
+    document.getElementById('annualService').value = 0;
+    document.getElementById('bottledWater').value = 0;
+    document.getElementById('cleaningProducts').value = 0;
+    document.getElementById('skincare').value = 0;
+    document.getElementById('otherSaving').value = 0;
+    document.getElementById('yearsSlider').value = 15;
+    document.getElementById('scenarioName').value = '';
+    calculate();
   }
 </script>
 </body>
